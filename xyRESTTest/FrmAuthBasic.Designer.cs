@@ -101,6 +101,7 @@
             Controls.Add(txtUsername);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FrmAuthBasic";
             Text = "FrmAuthBasic";
             ResumeLayout(false);

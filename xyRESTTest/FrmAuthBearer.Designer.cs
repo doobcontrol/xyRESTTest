@@ -67,9 +67,11 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            ControlBox = false;
             Controls.Add(btnOk);
             Controls.Add(btnCancel);
             Controls.Add(txtToken);
+            MaximizeBox = false;
             Name = "FrmAuthBearer";
             Text = "Token";
             ResumeLayout(false);
