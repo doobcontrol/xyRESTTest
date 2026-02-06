@@ -25,7 +25,7 @@ namespace xyRESTTest
         };
         private async void button1_Click(object sender, EventArgs e)
         {
-            var contextPars = new Dictionary<string, string>();
+            var testTaskList = new List<TestTask>();
             TaskRequest taskRequest = new TaskRequest()
             {
                 url = "http://192.168.168.130:8080/auth/login",
@@ -58,8 +58,7 @@ namespace xyRESTTest
                     getAuthToken
                 }
             };
-
-            await xyTest.oneTestAsync(testTask, contextPars);
+            testTaskList.Add(testTask);
 
             taskRequest = new TaskRequest()
             {
@@ -94,8 +93,9 @@ namespace xyRESTTest
                     Task<Dictionary<string, string>>>>()
                 {}
             };
+            testTaskList.Add(testTask);
 
-            await xyTest.oneTestAsync(testTask, contextPars);
+            await xyTest.batchTestAsync(testTaskList);
         }
 
 

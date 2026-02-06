@@ -86,6 +86,19 @@
 
             return true;
         }
+
+        public static async Task<bool> batchTestAsync(List<TestTask> tasks)
+        {
+            var contextPars = new Dictionary<string, string>();
+            foreach (var task in tasks)
+            {
+                if (!await oneTestAsync(task, contextPars))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
     public struct TaskRequest
     {
