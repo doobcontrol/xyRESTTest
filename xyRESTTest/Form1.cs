@@ -26,6 +26,7 @@ namespace xyRESTTest
         private async void button1_Click(object sender, EventArgs e)
         {
             var testTaskList = new List<TestTask>();
+
             TaskRequest taskRequest = new TaskRequest()
             {
                 url = "http://192.168.168.130:8080/auth/login",
@@ -33,6 +34,7 @@ namespace xyRESTTest
             };
             TestTask testTask = new TestTask()
             {
+                name = "Login Test",
                 request = taskRequest,
                 headerCreaters = new Dictionary<
                     Func<List<object>, 
@@ -67,6 +69,7 @@ namespace xyRESTTest
             };
             testTask = new TestTask()
             {
+                name = "Add User Test",
                 request = taskRequest,
                 headerCreaters = new Dictionary<
                     Func<List<object>,

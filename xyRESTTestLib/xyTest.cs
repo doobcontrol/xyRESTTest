@@ -1,4 +1,6 @@
-﻿namespace xyRESTTestLib
+﻿using System.Threading.Tasks;
+
+namespace xyRESTTestLib
 {
     public class xyTest
     {
@@ -35,7 +37,9 @@
         }
 
         public static async Task<bool> oneTestAsync(
-            TestTask testTask, Dictionary<string, string> contextPars
+            TestTask testTask, 
+            Dictionary<string, string> contextPars,
+            StreamWriter sw
             )
         {
             // Prepare request
@@ -70,6 +74,7 @@
             {
                 if (!await assert(response, contextPars))
                 {
+                    sw.WriteLine("HTTP status code: " + response.StatusCode);
                     return false;
                 }
             }
@@ -87,15 +92,28 @@
             return true;
         }
 
-        public static async Task<bool> batchTestAsync(List<TestTask> tasks)
+        public static async Task<bool> batchTestAsync(
+            List<TestTask> tasks, string reportFile = "testReport.txt"
+            )
         {
-            var contextPars = new Dictionary<string, string>();
-            foreach (var task in tasks)
+            using (StreamWriter sw = new StreamWriter(reportFile, true))
             {
-                if (!await oneTestAsync(task, contextPars))
+                sw.WriteLine("Start test...");
+                sw.WriteLine();
+                var contextPars = new Dictionary<string, string>();
+                foreach (var task in tasks)
                 {
-                    return false;
+                    sw.WriteLine("Test: " + task.name);
+                    sw.WriteLine("API: " + task.request.url);
+                    if (!await oneTestAsync(task, contextPars, sw))
+                    {
+                        sw.WriteLine("Test: " + task.name + "... Failed");
+                        return false;
+                    }
+                    sw.WriteLine("Test: " + task.name + "... succeed");
+                    sw.WriteLine();
                 }
+                sw.WriteLine("All test finished succeed");
             }
             return true;
         }
@@ -109,6 +127,7 @@
     }
     public struct TestTask
     {
+        public string name;
         public TaskRequest request;
         public Dictionary<
             Func<List<Object>, Dictionary<string, string>, 
