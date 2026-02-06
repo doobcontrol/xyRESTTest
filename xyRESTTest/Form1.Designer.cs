@@ -179,20 +179,20 @@
             // 
             authorizationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { basicToolStripMenuItem, bearerToolStripMenuItem });
             authorizationToolStripMenuItem.Name = "authorizationToolStripMenuItem";
-            authorizationToolStripMenuItem.Size = new Size(224, 26);
+            authorizationToolStripMenuItem.Size = new Size(182, 26);
             authorizationToolStripMenuItem.Text = "Authorization";
             // 
             // basicToolStripMenuItem
             // 
             basicToolStripMenuItem.Name = "basicToolStripMenuItem";
-            basicToolStripMenuItem.Size = new Size(224, 26);
+            basicToolStripMenuItem.Size = new Size(135, 26);
             basicToolStripMenuItem.Text = "Basic";
             basicToolStripMenuItem.Click += basicToolStripMenuItem_Click;
             // 
             // bearerToolStripMenuItem
             // 
             bearerToolStripMenuItem.Name = "bearerToolStripMenuItem";
-            bearerToolStripMenuItem.Size = new Size(224, 26);
+            bearerToolStripMenuItem.Size = new Size(135, 26);
             bearerToolStripMenuItem.Text = "Bearer";
             bearerToolStripMenuItem.Click += bearerToolStripMenuItem_Click;
             // 

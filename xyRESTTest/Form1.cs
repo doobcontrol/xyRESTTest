@@ -1,4 +1,5 @@
 using System.Net;
+using xyRESTTestLib;
 
 namespace xyRESTTest
 {
@@ -22,45 +23,83 @@ namespace xyRESTTest
             {"OPTIONS", HttpMethod.Options },
             {"TRACE", HttpMethod.Trace }
         };
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            var hcontent = new StringContent(
-                textBox3.Text,
-                System.Text.Encoding.UTF8,
-                "application/json"
-                );
-            var rMsg = tools.makeHttpRequestMessage(
-                textBox2.Text,
-                methodMap[comboBox1.Text],
-                headers,
-                hcontent
-                );
-
-            sharedClient.SendAsync(rMsg)
-                .ContinueWith((requestTask) =>
+            var contextPars = new Dictionary<string, string>();
+            TaskRequest taskRequest = new TaskRequest()
             {
-                var response = requestTask.Result;
-                response.Content.ReadAsStringAsync().ContinueWith((readTask) =>
+                url = "http://192.168.168.130:8080/auth/login",
+                method = HttpMethod.Get
+            };
+            TestTask testTask = new TestTask()
+            {
+                request = taskRequest,
+                headerCreaters = new Dictionary<
+                    Func<List<object>, 
+                    Dictionary<string, string>, 
+                    Dictionary<string, string>>, List<object>>()
                 {
-                    var content = readTask.Result;
-                    this.Invoke(() =>
                     {
-                        textBox1.Text = content;
-                    });
-                });
-                string headerOutput = "";
-                foreach (var header in response.Headers)
+                        authBasicHeader,
+                        new List<Object>() { "admin", "admin" }
+                    }
+                },
+                asserts = new List<
+                    Func<HttpResponseMessage, 
+                    Dictionary<string, string>, Task<bool>>>()
                 {
-                    string value = string.Join(", ", header.Value);
-                    headerOutput += $"{header.Key}: {value}{Environment.NewLine}";
+                    AssertStatusCodeOK
+                },
+                getDatas = new List<
+                    Func<HttpResponseMessage, 
+                    Dictionary<string, string>, 
+                    Task<Dictionary<string, string>>>>()
+                {
+                    getAuthToken
                 }
-                this.Invoke(() =>
+            };
+
+            await xyTest.oneTestAsync(testTask, contextPars);
+
+            taskRequest = new TaskRequest()
+            {
+                url = "http://192.168.168.130:8080/user",
+                method = HttpMethod.Post
+            };
+            testTask = new TestTask()
+            {
+                request = taskRequest,
+                headerCreaters = new Dictionary<
+                    Func<List<object>,
+                    Dictionary<string, string>,
+                    Dictionary<string, string>>, List<object>>()
                 {
-                    textBox4.Text = headerOutput;
-                    label3.Text = $"Status Code: {(int)response.StatusCode} {response.ReasonPhrase}";
-                });
-            });
+                    {
+                        authBearerHeader,
+                        null
+                    }
+                },
+                contentCreater = addUserContent,
+                contentCreaterPars = new List<Object>()
+                { "1", "testuser", "123456" },
+                asserts = new List<
+                    Func<HttpResponseMessage,
+                    Dictionary<string, string>, Task<bool>>>()
+                {
+                    AssertStatusCodeOK
+                },
+                getDatas = new List<
+                    Func<HttpResponseMessage,
+                    Dictionary<string, string>,
+                    Task<Dictionary<string, string>>>>()
+                {}
+            };
+
+            await xyTest.oneTestAsync(testTask, contextPars);
         }
+
+
+
 
         Dictionary<string, string> headers =
             new Dictionary<string, string>();
@@ -70,7 +109,7 @@ namespace xyRESTTest
             if (FAB.ShowDialog() == DialogResult.OK)
             {
                 var hString = "Basic " +
-                    tools.Base64Encode($"{FAB.Username}:{FAB.Password}");
+                    xyTest.Base64Encode($"{FAB.Username}:{FAB.Password}");
                 listBox1.Items.Add("Authorization: " + hString);
                 headers["Authorization"] = hString;
             }
@@ -91,6 +130,64 @@ namespace xyRESTTest
         {
             headers.Clear();
             listBox1.Items.Clear();
+        }
+
+
+
+
+        private Dictionary<string, string> authBasicHeader(
+            List<Object> pars,
+            Dictionary<string, string> contextPars
+            )
+        {
+            var auHeader = new Dictionary<string, string>();
+            string username = pars[0].ToString() ?? "";
+            string password = pars[1].ToString() ?? "";
+            var authString = xyTest.Base64Encode($"{username}:{password}");
+            auHeader["Authorization"] = "Basic " + authString;
+            return auHeader;
+        }
+        private Dictionary<string, string> authBearerHeader(
+            List<Object> pars, 
+            Dictionary<string, string> contextPars
+            )
+        {
+            var auHeader = new Dictionary<string, string>();
+            auHeader["Authorization"] = "Bearer " + contextPars["AuthToken"];
+            return auHeader;
+        }
+        private StringContent addUserContent(
+            List<Object> pars,
+            Dictionary<string, string> contextPars
+            )
+        {
+            var userRecord =
+                $"{{\"FID\":\"{pars[0]}\", \"FUserName\":\"{pars[1]}\", \"FPassword\":\"{pars[2]}\"}}";
+            return new StringContent(userRecord);
+        }
+
+        private async Task<bool> AssertStatusCodeOK(
+            HttpResponseMessage response, 
+            Dictionary<string, string> contextPars
+            )
+        {
+            label3.Text = $"Status Code: {(int)response.StatusCode}";
+            return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        private async Task<Dictionary<string, string>> getAuthToken(
+            HttpResponseMessage response, 
+            Dictionary<string, string> contextPars
+            )
+        {
+            var data = new Dictionary<string, string>();
+            var contentString = await response.Content.ReadAsStringAsync();
+            var token = new JsonTools(contentString)
+                .GetValueByPath("data.token") ?? "";
+            data["AuthToken"] = token;
+            textBox1.Text = token;
+            textBox4.Text = response.Headers.ToString();
+            return data;
         }
     }
 }
