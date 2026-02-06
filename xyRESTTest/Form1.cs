@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using xyRESTTestLib;
 
@@ -96,7 +97,20 @@ namespace xyRESTTest
                     Task<Dictionary<string, string>>>>()
                 {}
             };
-            testTaskList.Add(testTask);
+            //testTaskList.Add(testTask);
+
+            for(int i = 0; i < 50; i++)
+            {
+                var newTestTask = testTask;
+                List<Object> newPars = new List<Object>()
+                {
+                        (i+1).ToString("D5"), 
+                        "user" + GenerateRandomString(5), 
+                        GenerateRandomString(10)
+                };
+                newTestTask.contentCreaterPars = newPars;
+                testTaskList.Add(newTestTask);
+            }
 
             await xyTest.batchTestAsync(testTaskList);
             tabControl1.SelectedIndex = 1;
@@ -192,6 +206,18 @@ namespace xyRESTTest
             textBox1.Text = token;
             textBox4.Text = response.Headers.ToString();
             return data;
+        }
+
+        private static Random random = new Random();
+        private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        public static string GenerateRandomString(int length)
+        {
+            var result = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = Chars[random.Next(Chars.Length)];
+            }
+            return new string(result);
         }
     }
 }

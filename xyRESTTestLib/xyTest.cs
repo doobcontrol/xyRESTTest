@@ -69,11 +69,16 @@ namespace xyRESTTestLib
             var rMsg = makeHttpRequestMessage(testTask.request);
             var response = await sharedClient.SendAsync(rMsg);
 
+            //if(testTask.contentCreaterPars != null)
+            //{
+            //    sw.WriteLine(string.Join(",", testTask.contentCreaterPars));
+            //}
             // Assert response
-            foreach(var assert in testTask.asserts)
+            foreach (var assert in testTask.asserts)
             {
                 if (!await assert(response, contextPars))
                 {
+                    sw.WriteLine("assert: " + assert.Method.Name);
                     sw.WriteLine("HTTP status code: " + response.StatusCode);
                     return false;
                 }
@@ -98,6 +103,7 @@ namespace xyRESTTestLib
         {
             using (StreamWriter sw = new StreamWriter(reportFile, true))
             {
+                DateTime startTime = DateTime.Now;
                 sw.WriteLine("Start test...");
                 sw.WriteLine();
                 var contextPars = new Dictionary<string, string>();
@@ -107,13 +113,14 @@ namespace xyRESTTestLib
                     sw.WriteLine("API: " + task.request.url);
                     if (!await oneTestAsync(task, contextPars, sw))
                     {
-                        sw.WriteLine("Test: " + task.name + "... Failed");
+                        sw.WriteLine("... Failed");
                         return false;
                     }
-                    sw.WriteLine("Test: " + task.name + "... succeed");
+                    sw.WriteLine("... succeed");
                     sw.WriteLine();
                 }
                 sw.WriteLine("All test finished succeed");
+                sw.WriteLine("Time used: " + (DateTime.Now - startTime).TotalSeconds + " seconds");
             }
             return true;
         }
