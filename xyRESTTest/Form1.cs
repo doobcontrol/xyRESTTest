@@ -96,6 +96,7 @@ namespace xyRESTTest
             testTaskList.Add(testTask);
 
             await xyTest.batchTestAsync(testTaskList);
+            tabControl1.SelectedIndex = 1;
         }
 
 
