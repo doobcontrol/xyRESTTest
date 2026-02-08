@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using xyRESTTestLib;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace xyRESTTest
 {
@@ -28,11 +29,17 @@ namespace xyRESTTest
                 assertType = "StatusCode",
                 expected = HttpStatusCode.InternalServerError
             };
+
+
+            object authPars = "${AuthToken}";
+            var HeaderAuthorizationBearer =
+                new KeyValuePair<string, (string, object)>
+                ("Authorization", ("Bearer", authPars));
             var testHandler = new TestHandler();
 
             var testTaskList = new List<TestTask>();
 
-            object authPars = new List<string>() { "admin", "admin" }; //???
+            authPars = new List<string>() { "admin", "admin" }; //???
             RequestInfo requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/auth/login",
@@ -81,7 +88,6 @@ namespace xyRESTTest
                 new List<AssertInfo>() { assertInfoStatusUnauthorized };
             testTaskList.Add(testTask_LoginFial);
 
-            authPars = "${AuthToken}"; //???
             object bodyPars = new List<string>() { "000", "John", "12456" };
             requestInfo = new RequestInfo()
             {
@@ -90,7 +96,8 @@ namespace xyRESTTest
                 headers = new Dictionary<string, object>()
                 {
                     {
-                        "Authorization", ("Bearer", authPars)
+                        HeaderAuthorizationBearer.Key, 
+                        HeaderAuthorizationBearer.Value
                     }
                 },
                 body = ("jsonOneUser", bodyPars)
@@ -122,6 +129,62 @@ namespace xyRESTTest
                 newTestTask.requestInfo.body = ("jsonOneUser", bodyPars);
                 newTestTask.name = "Add User Test " + 
                     ((List<string>)bodyPars)[0];
+                testTaskList.Add(newTestTask);
+            }
+
+            // Update user test
+            bodyPars = new List<string>() { "000", "John2222", "12456" };
+            requestInfo = new RequestInfo()
+            {
+                url = "http://192.168.168.130:8080/user/000",
+                method = "PUT",
+                headers = new Dictionary<string, object>()
+                {
+                    {
+                        HeaderAuthorizationBearer.Key,
+                        HeaderAuthorizationBearer.Value
+                    }
+                },
+                body = ("jsonOneUser", bodyPars)
+            };
+            testTask = new TestTask()
+            {
+                name = "Update user test",
+                requestInfo = requestInfo,
+                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
+                testHandler = testHandler
+            };
+            testTaskList.Add(testTask);
+
+            // Delete user test
+            requestInfo = new RequestInfo()
+            {
+                url = "http://192.168.168.130:8080/user/000",
+                method = "DELETE",
+                headers = new Dictionary<string, object>()
+                {
+                    {
+                        HeaderAuthorizationBearer.Key,
+                        HeaderAuthorizationBearer.Value
+                    }
+                }
+            };
+            testTask = new TestTask()
+            {
+                name = "Delete user test",
+                requestInfo = requestInfo,
+                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
+                testHandler = testHandler
+            };
+            testTaskList.Add(testTask);
+
+            for (int i = 0; i < 50; i++)
+            {
+                var newTestTask = testTask;
+                string userid = (i + 1).ToString("D5");
+                newTestTask.requestInfo.url =
+                    "http://192.168.168.130:8080/user/" + userid;
+                newTestTask.name = "Delete User Test " + userid;
                 testTaskList.Add(newTestTask);
             }
 
