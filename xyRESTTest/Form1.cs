@@ -13,10 +13,20 @@ namespace xyRESTTest
         }
         private async void button1_Click(object sender, EventArgs e)
         {
-            AssertInfo assertInfo = new AssertInfo()
+            AssertInfo assertInfoStatusOK = new AssertInfo()
             {
                 assertType = "StatusCode",
                 expected = HttpStatusCode.OK
+            };
+            AssertInfo assertInfoStatusUnauthorized = new AssertInfo()
+            {
+                assertType = "StatusCode",
+                expected = HttpStatusCode.Unauthorized
+            };
+            AssertInfo assertInfoStatusInternalServerError = new AssertInfo()
+            {
+                assertType = "StatusCode",
+                expected = HttpStatusCode.InternalServerError
             };
             var testHandler = new TestHandler();
 
@@ -39,7 +49,7 @@ namespace xyRESTTest
             {
                 name = "Login Test",
                 requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfo,
+                assertInfos = new List<AssertInfo>() { assertInfoStatusOK,
                     new AssertInfo()
                     {
                         assertType = "BodyContains",
@@ -56,6 +66,20 @@ namespace xyRESTTest
                 testHandler = testHandler
             };
             testTaskList.Add(testTask);
+
+            var testTask_LoginFial = testTask;
+            authPars = new List<string>() { "admin", "wrongpassword" };
+            testTask_LoginFial.requestInfo.headers = new Dictionary<string, object>()
+            {
+                {
+                    "Authorization",
+                    ("Basic", authPars)
+                }
+            };
+            testTask_LoginFial.name = "Login Fail Test";
+            testTask_LoginFial.assertInfos = 
+                new List<AssertInfo>() { assertInfoStatusUnauthorized };
+            testTaskList.Add(testTask_LoginFial);
 
             authPars = "${AuthToken}"; //???
             object bodyPars = new List<string>() { "000", "John", "12456" };
@@ -75,10 +99,16 @@ namespace xyRESTTest
             {
                 name = "Add User Test",
                 requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfo },
+                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
                 testHandler = testHandler
             };
             testTaskList.Add(testTask);
+
+            var testTask_AddFial = testTask;
+            testTask_AddFial.name = "Add User Fail Test";
+            testTask_AddFial.assertInfos =
+                new List<AssertInfo>() { assertInfoStatusInternalServerError };
+            testTaskList.Add(testTask_AddFial);
 
             for (int i = 0; i < 50; i++)
             {
@@ -90,6 +120,8 @@ namespace xyRESTTest
                         GenerateRandomString(10)
                 };
                 newTestTask.requestInfo.body = ("jsonOneUser", bodyPars);
+                newTestTask.name = "Add User Test " + 
+                    ((List<string>)bodyPars)[0];
                 testTaskList.Add(newTestTask);
             }
 
