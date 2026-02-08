@@ -11,104 +11,85 @@ namespace xyRESTTest
         {
             InitializeComponent();
         }
-
-        Dictionary<string, HttpMethod> methodMap =
-            new Dictionary<string, HttpMethod>()
-        {
-            {"GET", HttpMethod.Get },
-            {"POST", HttpMethod.Post },
-            {"PUT", HttpMethod.Put },
-            {"DELETE", HttpMethod.Delete },
-            {"PATCH", HttpMethod.Patch },
-            {"HEAD", HttpMethod.Head },
-            {"OPTIONS", HttpMethod.Options },
-            {"TRACE", HttpMethod.Trace }
-        };
         private async void button1_Click(object sender, EventArgs e)
         {
+            AssertInfo assertInfo = new AssertInfo()
+            {
+                assertType = "StatusCode",
+                expected = HttpStatusCode.OK
+            };
+            var testHandler = new TestHandler();
+
             var testTaskList = new List<TestTask>();
 
-            TaskRequest taskRequest = new TaskRequest()
+            object authPars = new List<string>() { "admin", "admin" }; //???
+            RequestInfo requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/auth/login",
-                method = HttpMethod.Get
+                method = "GET",
+                headers = new Dictionary<string, object>()
+                {
+                    {
+                        "Authorization", 
+                        ("Basic", authPars)
+                    }
+                }
             };
             TestTask testTask = new TestTask()
             {
                 name = "Login Test",
-                request = taskRequest,
-                headerCreaters = new Dictionary<
-                    Func<List<object>, 
-                    Dictionary<string, string>, 
-                    Dictionary<string, string>>, List<object>>()
-                {
+                requestInfo = requestInfo,
+                assertInfos = new List<AssertInfo>() { assertInfo,
+                    new AssertInfo()
                     {
-                        authBasicHeader,
-                        new List<Object>() { "admin", "admin" }
-                    }
+                        assertType = "BodyContains",
+                        expected = "token",
+                        readData = new Dictionary<string, object>()
+                        {
+                            {
+                                "AuthToken",
+                                "data.token"
+                            }
+                        }
+                    },
                 },
-                asserts = new List<
-                    Func<HttpResponseMessage, 
-                    Dictionary<string, string>, Task<bool>>>()
-                {
-                    AssertStatusCodeOK
-                },
-                getDatas = new List<
-                    Func<HttpResponseMessage, 
-                    Dictionary<string, string>, 
-                    Task<Dictionary<string, string>>>>()
-                {
-                    getAuthToken
-                }
+                testHandler = testHandler
             };
             testTaskList.Add(testTask);
 
-            taskRequest = new TaskRequest()
+            authPars = "${AuthToken}"; //???
+            object bodyPars = new List<string>() { "000", "John", "12456" };
+            requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/user",
-                method = HttpMethod.Post
+                method = "POST",
+                headers = new Dictionary<string, object>()
+                {
+                    {
+                        "Authorization", ("Bearer", authPars)
+                    }
+                },
+                body = ("jsonOneUser", bodyPars)
             };
             testTask = new TestTask()
             {
                 name = "Add User Test",
-                request = taskRequest,
-                headerCreaters = new Dictionary<
-                    Func<List<object>,
-                    Dictionary<string, string>,
-                    Dictionary<string, string>>, List<object>>()
-                {
-                    {
-                        authBearerHeader,
-                        null
-                    }
-                },
-                contentCreater = addUserContent,
-                contentCreaterPars = new List<Object>()
-                { "1", "testuser", "123456" },
-                asserts = new List<
-                    Func<HttpResponseMessage,
-                    Dictionary<string, string>, Task<bool>>>()
-                {
-                    AssertStatusCodeOK
-                },
-                getDatas = new List<
-                    Func<HttpResponseMessage,
-                    Dictionary<string, string>,
-                    Task<Dictionary<string, string>>>>()
-                {}
+                requestInfo = requestInfo,
+                assertInfos = new List<AssertInfo>() { assertInfo },
+                testHandler = testHandler
             };
-            //testTaskList.Add(testTask);
+            testTaskList.Add(testTask);
 
-            for(int i = 0; i < 50; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var newTestTask = testTask;
-                List<Object> newPars = new List<Object>()
+                bodyPars = new List<string>()
                 {
-                        (i+1).ToString("D5"), 
-                        "user" + GenerateRandomString(5), 
+                        (i+1).ToString("D5"),
+                        "user" + GenerateRandomString(5),
                         GenerateRandomString(10)
                 };
-                newTestTask.contentCreaterPars = newPars;
+                newTestTask.requestInfo.body = ("jsonOneUser", bodyPars);
                 testTaskList.Add(newTestTask);
             }
 
@@ -152,61 +133,6 @@ namespace xyRESTTest
 
 
 
-
-        private Dictionary<string, string> authBasicHeader(
-            List<Object> pars,
-            Dictionary<string, string> contextPars
-            )
-        {
-            var auHeader = new Dictionary<string, string>();
-            string username = pars[0].ToString() ?? "";
-            string password = pars[1].ToString() ?? "";
-            var authString = xyTest.Base64Encode($"{username}:{password}");
-            auHeader["Authorization"] = "Basic " + authString;
-            return auHeader;
-        }
-        private Dictionary<string, string> authBearerHeader(
-            List<Object> pars, 
-            Dictionary<string, string> contextPars
-            )
-        {
-            var auHeader = new Dictionary<string, string>();
-            auHeader["Authorization"] = "Bearer " + contextPars["AuthToken"];
-            return auHeader;
-        }
-        private StringContent addUserContent(
-            List<Object> pars,
-            Dictionary<string, string> contextPars
-            )
-        {
-            var userRecord =
-                $"{{\"FID\":\"{pars[0]}\", \"FUserName\":\"{pars[1]}\", \"FPassword\":\"{pars[2]}\"}}";
-            return new StringContent(userRecord);
-        }
-
-        private async Task<bool> AssertStatusCodeOK(
-            HttpResponseMessage response, 
-            Dictionary<string, string> contextPars
-            )
-        {
-            label3.Text = $"Status Code: {(int)response.StatusCode}";
-            return response.StatusCode == HttpStatusCode.OK;
-        }
-
-        private async Task<Dictionary<string, string>> getAuthToken(
-            HttpResponseMessage response, 
-            Dictionary<string, string> contextPars
-            )
-        {
-            var data = new Dictionary<string, string>();
-            var contentString = await response.Content.ReadAsStringAsync();
-            var token = new JsonTools(contentString)
-                .GetValueByPath("data.token") ?? "";
-            data["AuthToken"] = token;
-            textBox1.Text = token;
-            textBox4.Text = response.Headers.ToString();
-            return data;
-        }
 
         private static Random random = new Random();
         private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

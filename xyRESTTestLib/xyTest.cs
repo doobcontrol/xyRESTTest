@@ -12,89 +12,81 @@ namespace xyRESTTestLib
             return System.Convert.ToBase64String(plainTextBytes);
         }
 
+        static Dictionary<string, HttpMethod> methodMap =
+            new Dictionary<string, HttpMethod>()
+        {
+            {"GET", HttpMethod.Get },
+            {"POST", HttpMethod.Post },
+            {"PUT", HttpMethod.Put },
+            {"DELETE", HttpMethod.Delete },
+            {"PATCH", HttpMethod.Patch },
+            {"HEAD", HttpMethod.Head },
+            {"OPTIONS", HttpMethod.Options },
+            {"TRACE", HttpMethod.Trace }
+        };
+
         public static HttpRequestMessage makeHttpRequestMessage(
-            TaskRequest taskRequest
+            TestTask testTask,
+            Dictionary<string, string> contextPars
             )
         {
+            var requestInfo = testTask.requestInfo;
+            var testHandler = testTask.testHandler;
             var rMsg = new HttpRequestMessage();
-            rMsg.RequestUri = new Uri(taskRequest.url);
-            rMsg.Method = taskRequest.method;
-            if (taskRequest.headers != null)
+
+            rMsg.RequestUri = new Uri(requestInfo.url);
+            rMsg.Method = methodMap[requestInfo.method];
+            if (requestInfo.headers != null)
             {
-                foreach (var header in taskRequest.headers)
+                var headers = testHandler.ParseHeaders(
+                    requestInfo.headers, contextPars);
+                foreach(var header in headers)
                 {
                     rMsg.Headers.Add(header.Key, header.Value);
                 }
             }
-            if (taskRequest.content != null
-                && (taskRequest.method == HttpMethod.Post 
-                || taskRequest.method == HttpMethod.Put))
+            if (requestInfo.body != null
+                && (requestInfo.method == "POST"
+                || requestInfo.method == "PUT"))
             {
-                rMsg.Content = taskRequest.content;
+                rMsg.Content = new StringContent(
+                    testHandler.ParseRequestBody(
+                        requestInfo.body, contextPars)
+                    );
             }
 
             return rMsg;
         }
 
         public static async Task<bool> oneTestAsync(
-            TestTask testTask, 
+            TestTask testTask,
             Dictionary<string, string> contextPars,
-            StreamWriter sw
+            StreamWriter rw
             )
         {
             // Prepare request
-            // Headers
-            if (testTask.headerCreaters != null)
-            {
-                foreach (var headerCreater in testTask.headerCreaters)
-                {
-                    var headers = headerCreater.Key(headerCreater.Value, contextPars);
-                    if (testTask.request.headers == null)
-                    {
-                        testTask.request.headers = new Dictionary<string, string>();
-                    }
-                    foreach (var kv in headers)
-                    {
-                        testTask.request.headers[kv.Key] = kv.Value;
-                    }
-                }
-            }
-            // Content
-            if (testTask.contentCreater != null)
-            {;
-                testTask.request.content =
-                    testTask.contentCreater(testTask.contentCreaterPars, 
-                    contextPars);
-            }
-            var rMsg = makeHttpRequestMessage(testTask.request);
+            var rMsg = makeHttpRequestMessage(testTask, contextPars);
             var response = await sharedClient.SendAsync(rMsg);
 
-            //if(testTask.contentCreaterPars != null)
-            //{
-            //    sw.WriteLine(string.Join(",", testTask.contentCreaterPars));
-            //}
-            // Assert response
-            foreach (var assert in testTask.asserts)
+            // Assert response (And get data to contextPars)
+            bool assert = true;
+            foreach (var assertInfo in testTask.assertInfos)
             {
-                if (!await assert(response, contextPars))
+                rw.WriteLine("Assert: " + assertInfo.assertType);
+                var assertResult = await testTask.testHandler.AssertResponse(
+                    response, assertInfo, contextPars, rw);
+                if (!assertResult)
                 {
-                    sw.WriteLine("assert: " + assert.Method.Name);
-                    sw.WriteLine("HTTP status code: " + response.StatusCode);
-                    return false;
+                    rw.WriteLine("... Failed");
+                    assert = false;
+                }
+                else
+                {
+                    rw.WriteLine("... Succeed");
                 }
             }
 
-            // Get info for following tests
-            foreach (var getData in testTask.getDatas)
-            {
-                var data = await getData(response, contextPars);
-                foreach (var kv in data)
-                {
-                    contextPars[kv.Key] = kv.Value;
-                }
-            }
-
-            return true;
+            return assert;
         }
 
         public static async Task<bool> batchTestAsync(
@@ -110,7 +102,7 @@ namespace xyRESTTestLib
                 foreach (var task in tasks)
                 {
                     sw.WriteLine("Test: " + task.name);
-                    sw.WriteLine("API: " + task.request.url);
+                    sw.WriteLine("API: " + task.requestInfo.url);
                     if (!await oneTestAsync(task, contextPars, sw))
                     {
                         sw.WriteLine("... Failed");
@@ -125,27 +117,25 @@ namespace xyRESTTestLib
             return true;
         }
     }
-    public struct TaskRequest
-    {
-        public string url;
-        public HttpMethod method;
-        public Dictionary<string, string>? headers;
-        public HttpContent? content;
-    }
     public struct TestTask
     {
         public string name;
-        public TaskRequest request;
-        public Dictionary<
-            Func<List<Object>, Dictionary<string, string>, 
-                Dictionary<string, string>>, List<Object>>
-            headerCreaters;
-        public Func<List<Object>, Dictionary<string, string>, StringContent> 
-            contentCreater;
-        public List<Object> contentCreaterPars;
-        public List<Func<HttpResponseMessage, Dictionary<string, string>, 
-            Task<bool>>> asserts;
-        public List<Func<HttpResponseMessage, Dictionary<string, string>, 
-            Task<Dictionary<string, string>>>> getDatas;
+        public RequestInfo requestInfo;
+        public List<AssertInfo> assertInfos;
+        public ITestHandler testHandler;
+    }
+
+    public struct RequestInfo
+    {
+        public string url;
+        public string method;
+        public Object? headers;
+        public Object? body;
+    }
+    public struct AssertInfo
+    {
+        public string assertType;
+        public object expected;
+        public object readData;
     }
 }
