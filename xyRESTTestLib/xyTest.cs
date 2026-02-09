@@ -129,7 +129,7 @@ namespace xyRESTTestLib
     {
         public string url;
         public string method;
-        public Object? headers;
+        public Dictionary<string, object>? headers;
         public Object? body;
     }
     public struct AssertInfo

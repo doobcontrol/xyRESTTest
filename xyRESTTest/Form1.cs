@@ -33,8 +33,9 @@ namespace xyRESTTest
 
             object authPars = "${AuthToken}";
             var HeaderAuthorizationBearer =
-                new KeyValuePair<string, (string, object)>
-                ("Authorization", ("Bearer", authPars));
+                new KeyValuePair<string, object>
+                ("Authorization", 
+                new KeyValuePair<string, object>("Bearer", authPars));
             var testHandler = new TestHandler();
 
             var testTaskList = new List<TestTask>();
@@ -47,8 +48,8 @@ namespace xyRESTTest
                 headers = new Dictionary<string, object>()
                 {
                     {
-                        "Authorization", 
-                        ("Basic", authPars)
+                        "Authorization",
+                        new KeyValuePair<string, object>("Basic", authPars)
                     }
                 }
             };
@@ -80,7 +81,7 @@ namespace xyRESTTest
             {
                 {
                     "Authorization",
-                    ("Basic", authPars)
+                    new KeyValuePair<string, object>("Basic", authPars)
                 }
             };
             testTask_LoginFial.name = "Login Fail Test";

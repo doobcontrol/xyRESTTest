@@ -74,27 +74,25 @@ namespace xyRESTTest
         }
 
         public Dictionary<string, string>? ParseHeaders(
-            object HeadersData, 
+            Dictionary<string, object> HeadersData, 
             Dictionary<string, string> contextPars)
         {
-            var headerList =
-                HeadersData as Dictionary<string, object>;
-            if (headerList == null) { 
+            if (HeadersData == null) { 
                 return null; 
             }
 
             var headers = new Dictionary<string, string>();
-            foreach (var hd in headerList)
+            foreach (var hd in HeadersData)
             {
                 switch(hd.Key)
                 {
                     case "Authorization":
                         var authData=
-                            ((string scheme, object parameter))hd.Value;
-                        switch (authData.scheme)
+                            (KeyValuePair<string, object>)hd.Value;
+                        switch (authData.Key)
                         {
                             case "Basic":
-                                List<string> basicPars = (List<string>)authData.parameter;
+                                List<string> basicPars = (List<string>)authData.Value;
                                 if (basicPars.Count == 2)
                                 {
                                     var hString = "Basic " +
@@ -110,7 +108,7 @@ namespace xyRESTTest
                                 string parName = "AuthToken"; 
                                 string token = contextPars.ContainsKey(parName) 
                                     ? contextPars[parName] : null;
-                                string parValue = (string)authData.parameter;
+                                string parValue = (string)authData.Value;
                                 if (token != null 
                                     && parValue.Contains("${" + parName + "}"))
                                 {

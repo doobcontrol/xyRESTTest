@@ -9,7 +9,7 @@ namespace xyRESTTestLib
     public interface ITestHandler
     {
         Dictionary<string, string>? ParseHeaders(
-            Object HeadersData,
+            Dictionary<string, object> HeadersData,
             Dictionary<string, string> contextPars);
         string? ParseRequestBody(
             Object BodyData,
