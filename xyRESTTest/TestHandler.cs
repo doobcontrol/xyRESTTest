@@ -87,37 +87,27 @@ namespace xyRESTTest
                 switch(hd.Key)
                 {
                     case "Authorization":
-                        var authData=
-                            (KeyValuePair<string, object>)hd.Value;
-                        switch (authData.Key)
+                        var authData= (AuthHeaderInfo)hd.Value;
+                        if(authData.scheme == "Bearer")
                         {
-                            case "Basic":
-                                List<string> basicPars = (List<string>)authData.Value;
-                                if (basicPars.Count == 2)
-                                {
-                                    var hString = "Basic " +
-                                        xyTest.Base64Encode(
-                                            $"{basicPars[0]}:{basicPars[1]}"
-                                        );
-                                    headers["Authorization"] = hString;
-                                }
-                                break;
-                            case "Bearer":
-                                // This is a convention for the parameter name in contextPars,
-                                // you can change it as needed.
-                                string parName = "AuthToken"; 
-                                string token = contextPars.ContainsKey(parName) 
-                                    ? contextPars[parName] : null;
-                                string parValue = (string)authData.Value;
-                                if (token != null 
-                                    && parValue.Contains("${" + parName + "}"))
-                                {
-                                    parValue = parValue.Replace(
-                                        "${" + parName + "}", 
-                                        token);
-                                }
-                                headers["Authorization"] = "Bearer " + parValue;
-                                break;
+                            // Get token value from context parameters if it
+                            // contains the placeholder
+                            string parName = "AuthToken";
+                            string? token = contextPars.ContainsKey(parName)
+                                ? contextPars[parName] : null;
+                            if (token != null
+                                && authData.authToken.
+                                Contains("${" + parName + "}"))
+                            {
+                                authData.authToken = authData.authToken.Replace(
+                                    "${" + parName + "}",
+                                    token);
+                            }
+                        }
+                        string? headerValue = RheaderTools.HeaderAuth(authData);
+                        if (headerValue != null)
+                        {
+                            headers["Authorization"] = headerValue;
                         }
                         break;
                     default:

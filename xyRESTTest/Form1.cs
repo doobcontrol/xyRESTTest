@@ -30,27 +30,29 @@ namespace xyRESTTest
                 expected = HttpStatusCode.InternalServerError
             };
 
+            var HeaderAuthBearer = new AuthHeaderInfo()
+            {
+                scheme = "Bearer",
+                authToken = "${AuthToken}"
+            };
+            var HeaderAuthBasic = new AuthHeaderInfo()
+            {
+                scheme = "Basic",
+                username = "admin",
+                password = "admin"
+            };
 
-            object authPars = "${AuthToken}";
-            var HeaderAuthorizationBearer =
-                new KeyValuePair<string, object>
-                ("Authorization", 
-                new KeyValuePair<string, object>("Bearer", authPars));
             var testHandler = new TestHandler();
 
             var testTaskList = new List<TestTask>();
 
-            authPars = new List<string>() { "admin", "admin" }; //???
             RequestInfo requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/auth/login",
                 method = "GET",
                 headers = new Dictionary<string, object>()
                 {
-                    {
-                        "Authorization",
-                        new KeyValuePair<string, object>("Basic", authPars)
-                    }
+                    { "Authorization", HeaderAuthBasic }
                 }
             };
             TestTask testTask = new TestTask()
@@ -76,13 +78,15 @@ namespace xyRESTTest
             testTaskList.Add(testTask);
 
             var testTask_LoginFial = testTask;
-            authPars = new List<string>() { "admin", "wrongpassword" };
+            HeaderAuthBasic = new AuthHeaderInfo()
+            {
+                scheme = "Basic",
+                username = "admin",
+                password = "wrongpassword"
+            };
             testTask_LoginFial.requestInfo.headers = new Dictionary<string, object>()
             {
-                {
-                    "Authorization",
-                    new KeyValuePair<string, object>("Basic", authPars)
-                }
+                { "Authorization", HeaderAuthBasic }
             };
             testTask_LoginFial.name = "Login Fail Test";
             testTask_LoginFial.assertInfos = 
@@ -96,10 +100,7 @@ namespace xyRESTTest
                 method = "POST",
                 headers = new Dictionary<string, object>()
                 {
-                    {
-                        HeaderAuthorizationBearer.Key, 
-                        HeaderAuthorizationBearer.Value
-                    }
+                    { "Authorization", HeaderAuthBearer }
                 },
                 body = ("jsonOneUser", bodyPars)
             };
@@ -141,10 +142,7 @@ namespace xyRESTTest
                 method = "PUT",
                 headers = new Dictionary<string, object>()
                 {
-                    {
-                        HeaderAuthorizationBearer.Key,
-                        HeaderAuthorizationBearer.Value
-                    }
+                    { "Authorization", HeaderAuthBearer }
                 },
                 body = ("jsonOneUser", bodyPars)
             };
@@ -164,10 +162,7 @@ namespace xyRESTTest
                 method = "DELETE",
                 headers = new Dictionary<string, object>()
                 {
-                    {
-                        HeaderAuthorizationBearer.Key,
-                        HeaderAuthorizationBearer.Value
-                    }
+                    { "Authorization", HeaderAuthBearer }
                 }
             };
             testTask = new TestTask()
