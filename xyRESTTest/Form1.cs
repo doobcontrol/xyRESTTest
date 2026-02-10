@@ -93,7 +93,15 @@ namespace xyRESTTest
                 new List<AssertInfo>() { assertInfoStatusUnauthorized };
             testTaskList.Add(testTask_LoginFial);
 
-            object bodyPars = new List<string>() { "000", "John", "12456" };
+            ContentInfo contentInfo = new ContentInfo()
+            {
+                recordData = new Dictionary<string, string>()
+                {
+                    { "FID", "000" },
+                    { "FUserName", "John" },
+                    { "FPassword", "123456" }
+                }
+            };
             requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/user",
@@ -102,7 +110,7 @@ namespace xyRESTTest
                 {
                     { "Authorization", HeaderAuthBearer }
                 },
-                body = ("jsonOneUser", bodyPars)
+                body = contentInfo
             };
             testTask = new TestTask()
             {
@@ -122,20 +130,30 @@ namespace xyRESTTest
             for (int i = 0; i < 50; i++)
             {
                 var newTestTask = testTask;
-                bodyPars = new List<string>()
+                contentInfo = new ContentInfo()
                 {
-                        (i+1).ToString("D5"),
-                        "user" + GenerateRandomString(5),
-                        GenerateRandomString(10)
+                    recordData = new Dictionary<string, string>()
+                    {
+                        { "FID", (i+1).ToString("D5") },
+                        { "FUserName", "user" + GenerateRandomString(5) },
+                        { "FPassword", GenerateRandomString(10) }
+                    }
                 };
-                newTestTask.requestInfo.body = ("jsonOneUser", bodyPars);
-                newTestTask.name = "Add User Test " + 
-                    ((List<string>)bodyPars)[0];
+                newTestTask.requestInfo.body = contentInfo;
+                newTestTask.name = "Add User Test " +
+                    contentInfo.recordData["FID"];
                 testTaskList.Add(newTestTask);
             }
 
             // Update user test
-            bodyPars = new List<string>() { "000", "John2222", "12456" };
+            contentInfo = new ContentInfo()
+            {
+                recordData = new Dictionary<string, string>()
+                {
+                    { "FUserName", "John2222" },
+                    { "FPassword", "123456" }
+                }
+            };
             requestInfo = new RequestInfo()
             {
                 url = "http://192.168.168.130:8080/user/000",
@@ -144,7 +162,7 @@ namespace xyRESTTest
                 {
                     { "Authorization", HeaderAuthBearer }
                 },
-                body = ("jsonOneUser", bodyPars)
+                body = contentInfo
             };
             testTask = new TestTask()
             {

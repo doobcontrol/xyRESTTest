@@ -119,22 +119,18 @@ namespace xyRESTTest
         }
 
         public string? ParseRequestBody(
-            object BodyData, 
+            ContentInfo? contentInfo, 
             Dictionary<string, string> contextPars)
         {
+            if(contentInfo == null) { 
+                return null;
+            }
             string? bodyString = null;
-            (string bodyType, object bodyData) bodyInfo 
-                = ((string, object))BodyData;
-            switch(bodyInfo.bodyType)
+            switch(contentInfo.Value.type)
             {
-                case "raw":
-                    bodyString = bodyInfo.bodyData as string;
-                    break;
-                case "jsonOneUser":
-                    List<string> userData = bodyInfo.bodyData as List<string>;
-                    bodyString = $"{{\"FID\":\"{userData[0]}\", "
-                        + $"\"FUserName\":\"{userData[1]}\", "
-                        + $"\"FPassword\":\"{userData[2]}\"}}";
+                case "SimpleJson":
+                    bodyString = RcontentTools.SimpleJson(
+                        contentInfo.Value.recordData);
                     break;
                 default:
                     break;

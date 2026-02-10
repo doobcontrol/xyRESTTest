@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 
 namespace xyRESTTestLib
 {
@@ -49,10 +50,15 @@ namespace xyRESTTestLib
                 && (requestInfo.method == "POST"
                 || requestInfo.method == "PUT"))
             {
-                rMsg.Content = new StringContent(
-                    testHandler.ParseRequestBody(
-                        requestInfo.body, contextPars)
-                    );
+                string? contentStr = testHandler.ParseRequestBody(
+                        requestInfo.body, contextPars);
+                if(contentStr != null)
+                {
+                    Encoding encodeing = 
+                        Encoding.GetEncoding(requestInfo.body.Value.encoding);
+                    rMsg.Content = new StringContent(
+                        contentStr, encodeing, requestInfo.body.Value.ctype);
+                }
             }
 
             return rMsg;
@@ -130,7 +136,7 @@ namespace xyRESTTestLib
         public string url;
         public string method;
         public Dictionary<string, object>? headers;
-        public Object? body;
+        public ContentInfo? body;
     }
     public struct AssertInfo
     {
