@@ -122,26 +122,45 @@ namespace xyRESTTestLib
             }
             return true;
         }
+
+        public static void saveTestProject(TestProject testProject)
+        {
+            var json = System.Text.Json.JsonSerializer.Serialize(testProject);
+            File.WriteAllText(testProject.projectFile, json);
+        }
+        public static TestProject loadTestProject(string projectFile)
+        {
+            var json = File.ReadAllText(projectFile);
+            var testProject = System.Text.Json.JsonSerializer.Deserialize<TestProject>(json);
+
+            return testProject;
+        }
     }
-    public struct TestTask
+    public class TestTask
     {
-        public string name;
-        public RequestInfo requestInfo;
-        public List<AssertInfo> assertInfos;
-        public ITestHandler testHandler;
+        public string name { get; set; }
+        public RequestInfo requestInfo { get; set; }
+        public List<AssertInfo> assertInfos { get; set; }
+        public ITestHandler testHandler { get; set; }
+    }
+    public class TestProject
+    {
+        public string name { get; set; }
+        public string projectFile { get; set; }
+        public List<TestTask> tasks { get; set; }
     }
 
-    public struct RequestInfo
+    public class RequestInfo
     {
-        public string url;
-        public string method;
-        public Dictionary<string, object>? headers;
-        public ContentInfo? body;
+        public string url { get; set; }
+        public string method { get; set; }
+        public Dictionary<string, object>? headers { get; set; }
+        public ContentInfo? body { get; set; }
     }
-    public struct AssertInfo
+    public class AssertInfo
     {
-        public string assertType;
-        public object expected;
-        public object readData;
+        public string assertType { get; set; }
+        public object expected { get; set; }
+        public object readData { get; set; }
     }
 }
