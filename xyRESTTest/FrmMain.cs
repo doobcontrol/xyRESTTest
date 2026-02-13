@@ -52,6 +52,11 @@ namespace xyRESTTest
             if (sender is UcTestCaseItem selected)
             {
                 selectedItem = selected;
+
+                panel2.Controls.Clear();
+                var utc = new UcTestCase(selected.TestTask);
+                utc.Dock = DockStyle.Fill;
+                panel2.Controls.Add(utc);
             }
         }
 

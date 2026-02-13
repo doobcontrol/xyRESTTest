@@ -141,7 +141,7 @@ namespace xyRESTTestLib
         public string name { get; set; }
         public RequestInfo requestInfo { get; set; }
         public List<AssertInfo> assertInfos { get; set; }
-        public ITestHandler testHandler { get; set; }
+        public ITestHandler testHandler;
     }
     public class TestProject
     {

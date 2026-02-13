@@ -58,7 +58,7 @@ namespace xyRESTTest
         }
 
         Color orgBackColor;
-        Color selectedBackColor = Color.LightBlue;
+        public static Color selectedBackColor = Color.LightBlue;
         BorderStyle orgBordderStyle;
         BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 

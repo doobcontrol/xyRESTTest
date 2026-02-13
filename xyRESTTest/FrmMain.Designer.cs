@@ -149,6 +149,7 @@
             // 
             // panel2
             // 
+            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(toolStrip2);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(250, 0);
@@ -161,7 +162,7 @@
             toolStrip2.ImageScalingSize = new Size(20, 20);
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(550, 25);
+            toolStrip2.Size = new Size(548, 25);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
