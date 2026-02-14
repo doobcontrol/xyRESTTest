@@ -136,12 +136,15 @@ namespace xyRESTTestLib
 
             foreach(var task in testProject.tasks)
             {
-                foreach (var header in task.requestInfo.headers)
+                if(task.requestInfo != null && task.requestInfo.headers != null)
                 {
-                    if (header.Key == "Authorization")
+                    foreach (var header in task.requestInfo.headers)
                     {
-                        task.requestInfo.headers[header.Key] = 
-                            JsonSerializer.Deserialize<AuthHeaderInfo>(header.Value.ToString());
+                        if (header.Key == "Authorization")
+                        {
+                            task.requestInfo.headers[header.Key] =
+                                JsonSerializer.Deserialize<AuthHeaderInfo>(header.Value.ToString());
+                        }
                     }
                 }
             }
