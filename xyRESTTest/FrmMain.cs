@@ -55,8 +55,17 @@ namespace xyRESTTest
 
                 panel2.Controls.Clear();
                 var utc = new UcTestCase(selected.TestTask);
+                utc.Edited += TestCase_edited;
                 utc.Dock = DockStyle.Fill;
                 panel2.Controls.Add(utc);
+            }
+        }
+        private void TestCase_edited(object? sender, EventArgs e)
+        {
+            if (sender is UcTestCase ute)
+            {
+                selectedItem?.UpdateDisplay();
+                xyTest.saveTestProject(testProject);
             }
         }
 

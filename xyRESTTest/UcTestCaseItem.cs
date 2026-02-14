@@ -18,7 +18,7 @@ namespace xyRESTTest
         public UcTestCaseItem(TestTask testTask)
         {
             InitializeComponent();
-            SubscribeAllControlClicks(this); 
+            SubscribeAllControlClicks(this);
             orgBackColor = this.BackColor;
             orgBordderStyle = this.BorderStyle;
 
@@ -77,5 +77,13 @@ namespace xyRESTTest
         }
 
         public event EventHandler<EventArgs>? Selected;
+
+        public void UpdateDisplay()
+        {
+            if (label1.Text != testTask.name)
+            {
+                label1.Text = testTask.name;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace xyRESTTestLib
@@ -125,13 +126,25 @@ namespace xyRESTTestLib
 
         public static void saveTestProject(TestProject testProject)
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(testProject);
+            var json = JsonSerializer.Serialize(testProject);
             File.WriteAllText(testProject.projectFile, json);
         }
         public static TestProject loadTestProject(string projectFile)
         {
             var json = File.ReadAllText(projectFile);
-            var testProject = System.Text.Json.JsonSerializer.Deserialize<TestProject>(json);
+            var testProject = JsonSerializer.Deserialize<TestProject>(json);
+
+            foreach(var task in testProject.tasks)
+            {
+                foreach (var header in task.requestInfo.headers)
+                {
+                    if (header.Key == "Authorization")
+                    {
+                        task.requestInfo.headers[header.Key] = 
+                            JsonSerializer.Deserialize<AuthHeaderInfo>(header.Value.ToString());
+                    }
+                }
+            }
 
             return testProject;
         }

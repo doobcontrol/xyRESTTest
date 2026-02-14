@@ -36,11 +36,23 @@ namespace xyRESTTestLib
         }
     }
 
-    public struct AuthHeaderInfo
+    public class AuthHeaderInfo
     {
-        public string scheme; // e.g., "Basic", "Bearer"
-        public string username;
-        public string password;
-        public string authToken;
+        public string scheme { get; set; } // e.g., "Basic", "Bearer"
+        public string username { get; set; }
+        public string password { get; set; }
+        public string authToken { get; set; }
+        public override string ToString()
+        {
+            if (scheme == "Basic")
+            {
+                return $"{scheme} {xyTest.Base64Encode(username + ":" + password)}";
+            }
+            else if (scheme == "Bearer")
+            {
+                return $"{scheme} {authToken}";
+            }
+            return "";
+        }
     }
 }

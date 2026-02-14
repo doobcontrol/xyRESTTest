@@ -7,17 +7,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTestLib;
 
 namespace xyRESTTest
 {
     public partial class UcHeaderItem : UserControl
     {
-        UcHeaderEdit uhi = new UcHeaderEdit() { Visible = false};
+
+        public string HeaderName { get => uhe.HeaderName; }
+        public object HeaderValue { get => uhe.HeaderValue; }
+
+        UcHeaderEdit uhe;
         Control? uhiContainer;
-        public UcHeaderItem(Control? uhiContainer = null)
+        public UcHeaderItem(
+            KeyValuePair<string, object>? header,
+            Control? uhiContainer = null)
         {
             InitializeComponent();
             this.uhiContainer = uhiContainer;
+
+            uhe = new UcHeaderEdit(header) { Visible = false };
+            uhe.Edited += Header_edited;
+
+            if (uhe.HeaderName == null || uhe.HeaderName == "")
+            {
+                lbInfo.Text = "<Empty Header>";
+            }
+            else
+            {
+                lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
+            }
+        }
+        public event EventHandler<EventArgs>? Edited;
+        private void Header_edited(object? sender, EventArgs e)
+        {
+            if (sender is UcHeaderEdit uhe)
+            {
+                lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
+
+                Edited?.Invoke(this, new EventArgs());
+            }
         }
 
         private void UcHeaderItem_Load(object sender, EventArgs e)
@@ -28,7 +57,7 @@ namespace xyRESTTest
             }
             if (uhiContainer != null)
             {
-                uhiContainer.Controls.Add(uhi);
+                uhiContainer.Controls.Add(uhe);
             }
         }
 
@@ -44,14 +73,14 @@ namespace xyRESTTest
 
         private void showUhi()
         {
-            if (!uhi.Visible)
+            if (!uhe.Visible)
             {
                 Point parentPoint = uhiContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
-                uhi.Location = parentPoint;
-                uhi.BringToFront();
+                uhe.Location = parentPoint;
+                uhe.BringToFront();
             }
-            uhi.Visible = !uhi.Visible;
+            uhe.Visible = !uhe.Visible;
         }
     }
 }

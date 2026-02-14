@@ -33,11 +33,11 @@
             panel2 = new Panel();
             TlpBearer = new TableLayoutPanel();
             label3 = new Label();
-            textBox3 = new TextBox();
+            TxtToken = new TextBox();
             TlpBasic = new TableLayoutPanel();
             label1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            TxtUsername = new TextBox();
+            TxtPassword = new TextBox();
             label2 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -90,7 +90,7 @@
             TlpBearer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
             TlpBearer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TlpBearer.Controls.Add(label3, 0, 0);
-            TlpBearer.Controls.Add(textBox3, 1, 0);
+            TlpBearer.Controls.Add(TxtToken, 1, 0);
             TlpBearer.Dock = DockStyle.Top;
             TlpBearer.Location = new Point(0, 66);
             TlpBearer.Name = "TlpBearer";
@@ -112,13 +112,13 @@
             label3.Text = "token:";
             label3.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // textBox3
+            // TxtToken
             // 
-            textBox3.Dock = DockStyle.Top;
-            textBox3.Location = new Point(93, 3);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(252, 27);
-            textBox3.TabIndex = 2;
+            TxtToken.Dock = DockStyle.Top;
+            TxtToken.Location = new Point(93, 3);
+            TxtToken.Name = "TxtToken";
+            TxtToken.Size = new Size(252, 27);
+            TxtToken.TabIndex = 2;
             // 
             // TlpBasic
             // 
@@ -128,8 +128,8 @@
             TlpBasic.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
             TlpBasic.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TlpBasic.Controls.Add(label1, 0, 0);
-            TlpBasic.Controls.Add(textBox1, 1, 0);
-            TlpBasic.Controls.Add(textBox2, 1, 1);
+            TlpBasic.Controls.Add(TxtUsername, 1, 0);
+            TlpBasic.Controls.Add(TxtPassword, 1, 1);
             TlpBasic.Controls.Add(label2, 0, 1);
             TlpBasic.Dock = DockStyle.Top;
             TlpBasic.Location = new Point(0, 0);
@@ -152,21 +152,21 @@
             label1.Text = "username:";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // TxtUsername
             // 
-            textBox1.Dock = DockStyle.Top;
-            textBox1.Location = new Point(93, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(252, 27);
-            textBox1.TabIndex = 2;
+            TxtUsername.Dock = DockStyle.Top;
+            TxtUsername.Location = new Point(93, 3);
+            TxtUsername.Name = "TxtUsername";
+            TxtUsername.Size = new Size(252, 27);
+            TxtUsername.TabIndex = 2;
             // 
-            // textBox2
+            // TxtPassword
             // 
-            textBox2.Dock = DockStyle.Top;
-            textBox2.Location = new Point(93, 36);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(252, 27);
-            textBox2.TabIndex = 3;
+            TxtPassword.Dock = DockStyle.Top;
+            TxtPassword.Location = new Point(93, 36);
+            TxtPassword.Name = "TxtPassword";
+            TxtPassword.Size = new Size(252, 27);
+            TxtPassword.TabIndex = 3;
             // 
             // label2
             // 
@@ -208,11 +208,11 @@
         private Panel panel2;
         private TableLayoutPanel TlpBasic;
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox TxtUsername;
+        private TextBox TxtPassword;
         private Label label2;
         private TableLayoutPanel TlpBearer;
         private Label label3;
-        private TextBox textBox3;
+        private TextBox TxtToken;
     }
 }
