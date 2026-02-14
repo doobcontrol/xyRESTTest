@@ -34,7 +34,12 @@ namespace xyRESTTest
             testProject.tasks.Add(newTesk);
             xyTest.saveTestProject(testProject);
 
-            var newItem = new UcTestCaseItem(newTesk);
+            AddTestCaseItem(newTesk);
+        }
+        private void AddTestCaseItem(TestTask tTask)
+        {
+            var newItem = new UcTestCaseItem(tTask);
+            newItem.Dock = DockStyle.Top;
             newItem.Selected += UcTestCaseItem_Selected;
             PnTestcases.Controls.Add(newItem);
         }
@@ -125,9 +130,7 @@ namespace xyRESTTest
                     PnTestcases.Controls.Clear();
                     foreach (var task in testProject.tasks)
                     {
-                        var newItem = new UcTestCaseItem(task);
-                        newItem.Selected += UcTestCaseItem_Selected;
-                        PnTestcases.Controls.Add(newItem);
+                        AddTestCaseItem(task);
                     }
                 }
                 catch (Exception ex)

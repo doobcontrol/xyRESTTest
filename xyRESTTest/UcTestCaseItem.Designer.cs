@@ -40,20 +40,22 @@
             // 
             // label1
             // 
-            label1.Dock = DockStyle.Top;
-            label1.Location = new Point(0, 3);
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(397, 27);
+            label1.Size = new Size(107, 24);
             label1.TabIndex = 0;
             label1.Text = "label1";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
             panel1.Controls.Add(toolStrip1);
             panel1.Dock = DockStyle.Right;
-            panel1.Location = new Point(397, 0);
+            panel1.Location = new Point(107, 0);
+            panel1.Margin = new Padding(3, 0, 3, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(43, 27);
+            panel1.Size = new Size(43, 24);
             panel1.TabIndex = 1;
             // 
             // toolStrip1
@@ -80,20 +82,22 @@
             panel2.Controls.Add(label1);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 0, 3, 0);
             panel2.Name = "panel2";
-            panel2.Padding = new Padding(0, 3, 0, 0);
-            panel2.Size = new Size(397, 27);
+            panel2.Size = new Size(107, 24);
             panel2.TabIndex = 2;
             // 
             // UcTestCaseItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Controls.Add(panel2);
             Controls.Add(panel1);
             Margin = new Padding(3, 0, 3, 0);
+            MinimumSize = new Size(100, 24);
             Name = "UcTestCaseItem";
-            Size = new Size(440, 27);
+            Size = new Size(150, 24);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             toolStrip1.ResumeLayout(false);
