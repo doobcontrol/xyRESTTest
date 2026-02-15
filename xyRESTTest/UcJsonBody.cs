@@ -17,9 +17,9 @@ namespace xyRESTTest
         public UcJsonBody(ContentInfo? contentInfo)
         {
             InitializeComponent();
-            if(contentInfo!=null)
+            if(contentInfo != null)
             {
-                this.contentInfo = contentInfo.Value;
+                this.contentInfo = contentInfo;
             }
             else
             {

@@ -118,24 +118,32 @@ namespace xyRESTTest
             return headers;
         }
 
-        public string? ParseRequestBody(
+        public HttpContent? ParseRequestBody(
             ContentInfo? contentInfo, 
             Dictionary<string, string> contextPars)
         {
             if(contentInfo == null) { 
                 return null;
             }
-            string? bodyString = null;
-            switch(contentInfo.Value.type)
+            HttpContent? bodyContent = null;
+            switch(contentInfo.type)
             {
                 case "SimpleJson":
-                    bodyString = RcontentTools.SimpleJson(
-                        contentInfo.Value.recordData);
+                    var bodyString = RcontentTools.SimpleJson(
+                        contentInfo.recordData);
+                    if (bodyString != null)
+                    {
+                        bodyContent = new StringContent(
+                            bodyString, 
+                            Encoding.GetEncoding(contentInfo.encoding), 
+                            contentInfo.ctype
+                            );
+                    }
                     break;
                 default:
                     break;
             }
-            return bodyString;
+            return bodyContent;
         }
     }
 }

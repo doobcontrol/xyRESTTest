@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace xyRESTTestLib
@@ -51,14 +52,11 @@ namespace xyRESTTestLib
                 && (requestInfo.method == "POST"
                 || requestInfo.method == "PUT"))
             {
-                string? contentStr = testHandler.ParseRequestBody(
+                HttpContent? content = testHandler.ParseRequestBody(
                         requestInfo.body, contextPars);
-                if(contentStr != null)
+                if(content != null)
                 {
-                    Encoding encodeing = 
-                        Encoding.GetEncoding(requestInfo.body.Value.encoding);
-                    rMsg.Content = new StringContent(
-                        contentStr, encodeing, requestInfo.body.Value.ctype);
+                    rMsg.Content = content;
                 }
             }
 
@@ -156,6 +154,7 @@ namespace xyRESTTestLib
     {
         public string name { get; set; }
         public RequestInfo requestInfo { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<AssertInfo> assertInfos { get; set; }
         public ITestHandler testHandler;
     }
@@ -170,13 +169,16 @@ namespace xyRESTTestLib
     {
         public string url { get; set; }
         public string method { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, object>? headers { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ContentInfo? body { get; set; }
     }
     public class AssertInfo
     {
         public string assertType { get; set; }
         public object expected { get; set; }
-        public object readData { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public object? readData { get; set; }
     }
 }

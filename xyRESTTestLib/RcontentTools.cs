@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace xyRESTTestLib
@@ -25,15 +26,12 @@ namespace xyRESTTestLib
         }
     }
 
-    public struct ContentInfo
+    public class ContentInfo
     {
-        public string type = "SimpleJson"; // e.g., "SimpleJson"
-        public string ctype = "application/json"; // e.g., "application/json"
-        public string encoding = "UTF-8"; // e.g., "UTF-8"
-        public Dictionary<string, string>? recordData;
-
-        public ContentInfo()
-        {
-        }
+        public string type { get; set; } = "SimpleJson"; // e.g., "SimpleJson"
+        public string ctype { get; set; } = "application/json"; // e.g., "application/json"
+        public string encoding { get; set; } = "UTF-8"; // e.g., "UTF-8"
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? recordData { get; set; }
     }
 }

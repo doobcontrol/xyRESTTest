@@ -11,7 +11,7 @@ namespace xyRESTTestLib
         Dictionary<string, string>? ParseHeaders(
             Dictionary<string, object> HeadersData,
             Dictionary<string, string> contextPars);
-        string? ParseRequestBody(
+        HttpContent? ParseRequestBody(
             ContentInfo? contentInfo,
             Dictionary<string, string> contextPars);
         Task<bool> AssertResponse(
