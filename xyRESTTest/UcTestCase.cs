@@ -110,14 +110,21 @@ namespace xyRESTTest
             {
                 TxtUrl.Text = testTask.requestInfo?.url;
                 CmbMothod.Text = testTask.requestInfo?.method;
-                if (testTask.requestInfo != null && testTask.requestInfo.headers != null)
+                if (testTask.requestInfo != null)
                 {
-                    foreach (var header in testTask.requestInfo.headers)
+                    if(testTask.requestInfo.headers != null)
                     {
-                        var uhi = new UcHeaderItem(header, this);
-                        uhi.Dock = DockStyle.Top;
-                        uhi.Edited += Header_edited;
-                        TlpHeaders.Controls.Add(uhi);
+                        foreach (var header in testTask.requestInfo.headers)
+                        {
+                            var uhi = new UcHeaderItem(header, this);
+                            uhi.Dock = DockStyle.Top;
+                            uhi.Edited += Header_edited;
+                            TlpHeaders.Controls.Add(uhi);
+                        }
+                    }
+                    if(testTask.requestInfo.body != null)
+                    {
+                        CmbBodyType.Text = testTask.requestInfo.body.ctype;
                     }
                 }
             }
@@ -167,7 +174,19 @@ namespace xyRESTTest
             switch (CmbBodyType.Text)
             {
                 case "application/json":
-                    var ujb = new UcJsonBody(testTask.requestInfo?.body);
+                    if(testTask.requestInfo.body == null)
+                    {
+                        testTask.requestInfo.body = new ContentInfo()
+                        {
+                            recordData = new Dictionary<string, string>(),
+                            ctype = "application/json"
+                        };
+                    }
+                    var ujb = new UcJsonBody(testTask.requestInfo.body);
+                    ujb.Edited += (s, ev) =>
+                    {
+                        Edited?.Invoke(this, new EventArgs());
+                    };
                     ujb.Dock = DockStyle.Fill;
                     PnlBody.Controls.Clear();
                     PnlBody.Controls.Add(ujb);

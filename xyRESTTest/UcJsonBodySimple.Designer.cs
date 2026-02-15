@@ -33,7 +33,7 @@
             TsbDelPar = new ToolStripButton();
             splitContainer1 = new SplitContainer();
             dataGridView1 = new DataGridView();
-            textBox1 = new TextBox();
+            TxtContent = new TextBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -84,7 +84,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(textBox1);
+            splitContainer1.Panel2.Controls.Add(TxtContent);
             splitContainer1.Size = new Size(165, 38);
             splitContainer1.SplitterDistance = 55;
             splitContainer1.TabIndex = 1;
@@ -105,14 +105,15 @@
             dataGridView1.Size = new Size(55, 38);
             dataGridView1.TabIndex = 0;
             // 
-            // textBox1
+            // TxtContent
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(0, 0);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(106, 38);
-            textBox1.TabIndex = 0;
+            TxtContent.Dock = DockStyle.Fill;
+            TxtContent.Location = new Point(0, 0);
+            TxtContent.Multiline = true;
+            TxtContent.Name = "TxtContent";
+            TxtContent.ReadOnly = true;
+            TxtContent.Size = new Size(106, 38);
+            TxtContent.TabIndex = 0;
             // 
             // UcJsonBodySimple
             // 
@@ -144,6 +145,6 @@
         private SplitContainer splitContainer1;
         private ToolStripButton TsbDelPar;
         private DataGridView dataGridView1;
-        private TextBox textBox1;
+        private TextBox TxtContent;
     }
 }

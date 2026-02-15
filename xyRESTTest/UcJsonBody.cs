@@ -20,10 +20,15 @@ namespace xyRESTTest
             if(contentInfo != null)
             {
                 this.contentInfo = contentInfo;
+                comboBox1.Text = contentInfo.type;
             }
             else
             {
-                this.contentInfo = new ContentInfo();
+                this.contentInfo = new ContentInfo()
+                {
+                    recordData = new Dictionary<string, string>(),
+                    ctype = "application/json"
+                };
             }
         }
 
@@ -33,11 +38,22 @@ namespace xyRESTTest
             {
                 case "SimpleJson":
                     PnlJsonEditor.Controls.Clear();
+                    contentInfo.type = "simplejson";
                     var ucSimpleJson = new UcJsonBodySimple(contentInfo);
+                    ucSimpleJson.Edited += JsonBody_Edited;
                     ucSimpleJson.Dock = DockStyle.Fill;
                     PnlJsonEditor.Controls.Add(ucSimpleJson);
                     break;
             }
         }
+
+        private void JsonBody_Edited(object? sender, EventArgs e)
+        {
+            if (contentInfo != null)
+            {
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+        public event EventHandler<EventArgs>? Edited;
     }
 }
