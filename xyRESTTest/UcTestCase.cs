@@ -36,9 +36,9 @@ namespace xyRESTTest
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
-            TxtUrl.KeyPress+= (s,e) =>
+            TxtUrl.KeyPress += (s, e) =>
             {
-                if(e.KeyChar == (char)Keys.Enter && TxtUrl.Text != testTask.requestInfo?.url)
+                if (e.KeyChar == (char)Keys.Enter && TxtUrl.Text != testTask.requestInfo?.url)
                 {
                     if (testTask.requestInfo == null)
                     {
@@ -159,6 +159,21 @@ namespace xyRESTTest
             if (e.KeyCode == Keys.Enter)
             {
                 EditCaseName(false);
+            }
+        }
+
+        private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (CmbBodyType.Text)
+            {
+                case "application/json":
+                    var ujb = new UcJsonBody(testTask.requestInfo?.body);
+                    ujb.Dock = DockStyle.Fill;
+                    PnlBody.Controls.Clear();
+                    PnlBody.Controls.Add(ujb);
+                    break;
+                default:
+                    break;
             }
         }
     }

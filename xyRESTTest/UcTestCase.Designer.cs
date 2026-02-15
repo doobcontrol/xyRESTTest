@@ -37,6 +37,10 @@
             tabRequest = new TabPage();
             splitter1 = new Splitter();
             groupBox2 = new GroupBox();
+            PnlBody = new Panel();
+            panel3 = new Panel();
+            CmbBodyType = new ComboBox();
+            label1 = new Label();
             groupBox1 = new GroupBox();
             TlpHeaders = new TableLayoutPanel();
             toolStrip1 = new ToolStrip();
@@ -49,6 +53,8 @@
             toolTip1 = new ToolTip(components);
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
+            groupBox2.SuspendLayout();
+            panel3.SuspendLayout();
             groupBox1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
@@ -80,7 +86,7 @@
             // 
             // TxtUrl
             // 
-            TxtUrl.Location = new Point(133, 15);
+            TxtUrl.Location = new Point(133, 3);
             TxtUrl.Name = "TxtUrl";
             TxtUrl.Size = new Size(534, 27);
             TxtUrl.TabIndex = 4;
@@ -122,7 +128,7 @@
             // splitter1
             // 
             splitter1.Dock = DockStyle.Top;
-            splitter1.Location = new Point(3, 204);
+            splitter1.Location = new Point(3, 125);
             splitter1.Name = "splitter1";
             splitter1.Size = new Size(680, 4);
             splitter1.TabIndex = 10;
@@ -130,28 +136,73 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(PnlBody);
+            groupBox2.Controls.Add(panel3);
             groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(3, 204);
+            groupBox2.Location = new Point(3, 125);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(680, 104);
+            groupBox2.Size = new Size(680, 183);
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "Body";
             // 
+            // PnlBody
+            // 
+            PnlBody.Dock = DockStyle.Fill;
+            PnlBody.Location = new Point(3, 53);
+            PnlBody.Name = "PnlBody";
+            PnlBody.Size = new Size(674, 127);
+            PnlBody.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(CmbBodyType);
+            panel3.Controls.Add(label1);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(3, 23);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(674, 30);
+            panel3.TabIndex = 3;
+            // 
+            // CmbBodyType
+            // 
+            CmbBodyType.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbBodyType.FormattingEnabled = true;
+            CmbBodyType.Items.AddRange(new object[] { "application/json" });
+            CmbBodyType.Location = new Point(108, 0);
+            CmbBodyType.Name = "CmbBodyType";
+            CmbBodyType.Size = new Size(151, 28);
+            CmbBodyType.TabIndex = 1;
+            CmbBodyType.SelectedIndexChanged += CmbBodyType_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 3);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Content Type:";
+            // 
             // groupBox1
             // 
+            groupBox1.AutoSize = true;
+            groupBox1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             groupBox1.Controls.Add(TlpHeaders);
             groupBox1.Controls.Add(toolStrip1);
             groupBox1.Dock = DockStyle.Top;
-            groupBox1.Location = new Point(3, 93);
+            groupBox1.Location = new Point(3, 72);
+            groupBox1.MinimumSize = new Size(0, 30);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(680, 111);
+            groupBox1.Size = new Size(680, 53);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Headers";
             // 
             // TlpHeaders
             // 
+            TlpHeaders.AutoSize = true;
+            TlpHeaders.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             TlpHeaders.ColumnCount = 1;
             TlpHeaders.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TlpHeaders.Dock = DockStyle.Top;
@@ -159,7 +210,7 @@
             TlpHeaders.Name = "TlpHeaders";
             TlpHeaders.RowCount = 1;
             TlpHeaders.RowStyles.Add(new RowStyle());
-            TlpHeaders.Size = new Size(674, 32);
+            TlpHeaders.Size = new Size(674, 0);
             TlpHeaders.TabIndex = 0;
             // 
             // toolStrip1
@@ -191,14 +242,14 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(680, 90);
+            panel2.Size = new Size(680, 69);
             panel2.TabIndex = 7;
             // 
             // CmbMothod
             // 
             CmbMothod.FormattingEnabled = true;
             CmbMothod.Items.AddRange(new object[] { "GET", "POST", "PUT", "DELETE" });
-            CmbMothod.Location = new Point(133, 48);
+            CmbMothod.Location = new Point(133, 36);
             CmbMothod.Name = "CmbMothod";
             CmbMothod.Size = new Size(151, 28);
             CmbMothod.TabIndex = 6;
@@ -206,7 +257,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(20, 51);
+            label4.Location = new Point(20, 39);
             label4.Name = "label4";
             label4.Size = new Size(64, 20);
             label4.TabIndex = 5;
@@ -243,6 +294,10 @@
             Size = new Size(694, 405);
             tabControl1.ResumeLayout(false);
             tabRequest.ResumeLayout(false);
+            tabRequest.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -275,5 +330,9 @@
         private ToolStrip toolStrip1;
         private ToolStripButton TsbAddHeader;
         private ToolTip toolTip1;
+        private Panel PnlBody;
+        private Panel panel3;
+        private ComboBox CmbBodyType;
+        private Label label1;
     }
 }
