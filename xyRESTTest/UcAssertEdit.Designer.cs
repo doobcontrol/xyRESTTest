@@ -1,6 +1,6 @@
 ﻿namespace xyRESTTest
 {
-    partial class UcHeaderEdit
+    partial class UcAssertEdit
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,26 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panel3 = new Panel();
             comboBox1 = new ComboBox();
             BtnOk = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
             BtnCancel = new Button();
-            panel3 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
+            // 
+            // panel3
+            // 
+            panel3.AutoSize = true;
+            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 28);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(148, 0);
+            panel3.TabIndex = 6;
             // 
             // comboBox1
             // 
             comboBox1.Dock = DockStyle.Top;
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Authorization", "Accept" });
+            comboBox1.Items.AddRange(new object[] { "StatusCode", "JsonContent" });
             comboBox1.Location = new Point(0, 0);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(148, 28);
-            comboBox1.TabIndex = 0;
+            comboBox1.TabIndex = 4;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // BtnOk
@@ -67,7 +77,7 @@
             panel1.Location = new Point(0, 28);
             panel1.Name = "panel1";
             panel1.Size = new Size(148, 35);
-            panel1.TabIndex = 2;
+            panel1.TabIndex = 5;
             // 
             // panel2
             // 
@@ -89,17 +99,7 @@
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
-            // panel3
-            // 
-            panel3.AutoSize = true;
-            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 28);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(148, 0);
-            panel3.TabIndex = 3;
-            // 
-            // UcHeaderEdit
+            // UcAssertEdit
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -107,13 +107,13 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(panel3);
-            Controls.Add(panel1);
             Controls.Add(comboBox1);
+            Controls.Add(panel1);
             MinimumSize = new Size(150, 0);
-            Name = "UcHeaderEdit";
+            Name = "UcAssertEdit";
             Size = new Size(148, 63);
-            VisibleChanged += UcHeaderEdit_VisibleChanged;
-            MouseDown += UcHeaderEdit_MouseDown;
+            VisibleChanged += UcAssertEdit_VisibleChanged;
+            MouseDown += UcAssertEdit_MouseDown;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -122,11 +122,11 @@
 
         #endregion
 
+        private Panel panel3;
         private ComboBox comboBox1;
         private Button BtnOk;
         private Panel panel1;
         private Panel panel2;
         private Button BtnCancel;
-        private Panel panel3;
     }
 }

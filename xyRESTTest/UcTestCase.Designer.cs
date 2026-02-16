@@ -51,6 +51,10 @@
             tabAssert = new TabPage();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
+            toolStrip2 = new ToolStrip();
+            TsbAddAssert = new ToolStripButton();
+            PnlAssertItems = new Panel();
+            TsbDelAssert = new ToolStripButton();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -58,7 +62,9 @@
             groupBox1.SuspendLayout();
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
+            tabAssert.SuspendLayout();
             panel1.SuspendLayout();
+            toolStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // LbCaseName
@@ -265,6 +271,8 @@
             // 
             // tabAssert
             // 
+            tabAssert.Controls.Add(PnlAssertItems);
+            tabAssert.Controls.Add(toolStrip2);
             tabAssert.Location = new Point(4, 29);
             tabAssert.Name = "tabAssert";
             tabAssert.Padding = new Padding(3);
@@ -283,6 +291,44 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(694, 61);
             panel1.TabIndex = 6;
+            // 
+            // toolStrip2
+            // 
+            toolStrip2.ImageScalingSize = new Size(20, 20);
+            toolStrip2.Items.AddRange(new ToolStripItem[] { TsbAddAssert, TsbDelAssert });
+            toolStrip2.Location = new Point(3, 3);
+            toolStrip2.Name = "toolStrip2";
+            toolStrip2.Size = new Size(680, 27);
+            toolStrip2.TabIndex = 2;
+            toolStrip2.Text = "toolStrip2";
+            // 
+            // TsbAddAssert
+            // 
+            TsbAddAssert.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbAddAssert.Image = Properties.Resources.Add;
+            TsbAddAssert.ImageTransparentColor = Color.Magenta;
+            TsbAddAssert.Name = "TsbAddAssert";
+            TsbAddAssert.Size = new Size(29, 24);
+            TsbAddAssert.Text = "toolStripButton1";
+            TsbAddAssert.Click += TsbAddAssert_Click;
+            // 
+            // PnlAssertItems
+            // 
+            PnlAssertItems.Dock = DockStyle.Fill;
+            PnlAssertItems.Location = new Point(3, 30);
+            PnlAssertItems.Name = "PnlAssertItems";
+            PnlAssertItems.Size = new Size(680, 278);
+            PnlAssertItems.TabIndex = 3;
+            // 
+            // TsbDelAssert
+            // 
+            TsbDelAssert.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbDelAssert.Image = Properties.Resources.Delete;
+            TsbDelAssert.ImageTransparentColor = Color.Magenta;
+            TsbDelAssert.Name = "TsbDelAssert";
+            TsbDelAssert.Size = new Size(29, 24);
+            TsbDelAssert.Text = "toolStripButton1";
+            TsbDelAssert.Click += TsbDelAssert_Click;
             // 
             // UcTestCase
             // 
@@ -304,8 +350,12 @@
             toolStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            tabAssert.ResumeLayout(false);
+            tabAssert.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            toolStrip2.ResumeLayout(false);
+            toolStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -334,5 +384,9 @@
         private Panel panel3;
         private ComboBox CmbBodyType;
         private Label label1;
+        private Panel PnlAssertItems;
+        private ToolStrip toolStrip2;
+        private ToolStripButton TsbAddAssert;
+        private ToolStripButton TsbDelAssert;
     }
 }

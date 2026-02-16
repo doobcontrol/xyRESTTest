@@ -112,7 +112,7 @@ namespace xyRESTTest
                 CmbMothod.Text = testTask.requestInfo?.method;
                 if (testTask.requestInfo != null)
                 {
-                    if(testTask.requestInfo.headers != null)
+                    if (testTask.requestInfo.headers != null)
                     {
                         foreach (var header in testTask.requestInfo.headers)
                         {
@@ -122,9 +122,19 @@ namespace xyRESTTest
                             TlpHeaders.Controls.Add(uhi);
                         }
                     }
-                    if(testTask.requestInfo.body != null)
+                    if (testTask.requestInfo.body != null)
                     {
                         CmbBodyType.Text = testTask.requestInfo.body.ctype;
+                    }
+                }
+                if (testTask.assertInfos != null)
+                {
+                    foreach (var assertInfo in testTask.assertInfos)
+                    {
+                        var uai = new UcAssertItem(assertInfo, this);
+                        uai.Dock = DockStyle.Top;
+                        uai.Edited += Assert_edited;
+                        PnlAssertItems.Controls.Add(uai);
                     }
                 }
             }
@@ -174,7 +184,7 @@ namespace xyRESTTest
             switch (CmbBodyType.Text)
             {
                 case "application/json":
-                    if(testTask.requestInfo.body == null)
+                    if (testTask.requestInfo.body == null)
                     {
                         testTask.requestInfo.body = new ContentInfo()
                         {
@@ -194,6 +204,35 @@ namespace xyRESTTest
                 default:
                     break;
             }
+        }
+
+        private void TsbAddAssert_Click(object sender, EventArgs e)
+        {
+            if (testTask.assertInfos == null)
+            {
+                testTask.assertInfos = new List<AssertInfo>();
+            }
+
+            var uai = new UcAssertItem(null, this);
+            uai.Dock = DockStyle.Top;
+            uai.Edited += Assert_edited;
+            PnlAssertItems.Controls.Add(uai);
+        }
+        private void Assert_edited(object? sender, EventArgs e)
+        {
+            if (sender is UcAssertItem uai)
+            {
+                if(!testTask.assertInfos.Contains(uai.AssertInfo))
+                {
+                    testTask.assertInfos.Add(uai.AssertInfo);
+                }
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+
+        private void TsbDelAssert_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

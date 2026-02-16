@@ -16,9 +16,18 @@ namespace xyRESTTestLib
         }
         public string? GetValueByPath(string nodePath)
         {
+            JsonNode? node = GetNodeByPath(nodePath);
+            if (node == null) {
+                return null;
+            }
+            return node.GetValue<string>();
+        }
+        public JsonNode? GetNodeByPath(string nodePath)
+        {
             var pathParts = nodePath.Split('.');
             JsonNode tempNode = topNode;
-            foreach (var part in pathParts) {
+            foreach (var part in pathParts)
+            {
                 if (part.Contains('[') && part.Contains(']'))
                 {
                     // Array access
@@ -43,7 +52,7 @@ namespace xyRESTTestLib
                 }
                 else
                 {
-                    if(tempNode == null || tempNode[part] == null)
+                    if (tempNode == null || tempNode[part] == null)
                     {
                         return null;
                     }
@@ -53,7 +62,8 @@ namespace xyRESTTestLib
                     }
                 }
             }
-            return tempNode.GetValue<string>();
+            return tempNode;
         }
+
     }
 }

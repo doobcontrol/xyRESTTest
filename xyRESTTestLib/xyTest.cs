@@ -176,9 +176,19 @@ namespace xyRESTTestLib
     }
     public class AssertInfo
     {
-        public string assertType { get; set; }
-        public object expected { get; set; }
+        public string assertType { get; set; } = "StatusCode";
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public object? readData { get; set; }
+        public string? expected { get; set; }
+
+        // Assert exist and read to contextPars, for use in later test
+        // The key is the variable name to store in contextPars,
+        // the value is the jsonPath(or search schame) to read data from response body
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? readList { get; set; }
+
+        // Assert value, key is the jsonPath to read data from response body,
+        // value is the expected value to assert
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, string>? assertList { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using xyRESTTestLib;
 
@@ -15,10 +16,11 @@ namespace xyRESTTest
             Dictionary<string, string> contextPars, 
             StreamWriter rw)
         {
+            bool ret = true;
             switch(assertInfo.assertType)
             {
                 case "StatusCode":
-                    int expectedCode = (int)assertInfo.expected;
+                    int expectedCode = int.Parse(assertInfo.expected);
                     if ((int)response.StatusCode != expectedCode)
                     {
                         rw.WriteLine(
@@ -28,40 +30,71 @@ namespace xyRESTTest
                         return false;
                     }
                     break;
-                case "HeaderExists":
-                    string headerName = assertInfo.expected as string;
-                    if (!response.Headers.Contains(headerName))
-                    {
-                        rw.WriteLine($"Assert Failed: " +
-                            $"Expected header '{headerName}' " +
-                            $"not found in response.");
-                        return false;
-                    }
-                    break;
-                case "BodyContains":
-                    string expectedContent = assertInfo.expected as string;
+                case "JsonContent":
                     string responseBody = 
                         await response.Content.ReadAsStringAsync();
-                    if (!responseBody.Contains(expectedContent))
+
+                    if(assertInfo.assertList != null)
                     {
-                        rw.WriteLine($"Assert Failed: Expected response body to contain '{expectedContent}', but it was not found.");
-                        return false;
-                    }
-                    //read data for potential use in later tests
-                    if(assertInfo.readData != null)
-                    {
-                        var readDataList =
-                        assertInfo.readData as Dictionary<string, object>;
-                        foreach (var rd in readDataList)
+                        var assertList = assertInfo.assertList;
+                        //assert content type
+                        if(response.Content.Headers.ContentType == null
+                            || !response.Content.Headers.ContentType.MediaType
+                                .Contains("application/json"))
                         {
-                            string varName = rd.Key;
-                            string jsonPath = rd.Value as string;
+                            rw.WriteLine($"Assert Failed: " +
+                                $"Expected content type " +
+                                $"application/json, but got " +
+                                $"{response.Content.Headers.ContentType}");
+                            return false;
+                        }
+                        foreach (var al in assertList)
+                        {
+                            string jsonPath = al.Key;
+                            string expectedValue = al.Value;
+                            // Here you would use a JSON parsing library to extract the value
+                            // from the response body using the jsonPath and compare it to expectedValue.
+                            // This is a placeholder for that logic.
+                            JsonNode? node = new JsonTools(responseBody).GetNodeByPath(jsonPath);
+                            if (node == null)
+                            {
+                                rw.WriteLine($"Assert Failed: JSON path '{jsonPath}' " +
+                                    $"not found in response.");
+                                ret = false;
+                            }
+                            else
+                            {
+                                if (node.GetValue<string>() != expectedValue)
+                                {
+                                    rw.WriteLine($"Assert Failed: Expected value at JSON path '" +
+                                        $"{jsonPath}' to be '{expectedValue}', but got '" +
+                                        $"{node.GetValue<string>()}'.");
+                                    ret = false;
+                                }
+                            }
+                        }
+                    }
+                    if (assertInfo.readList != null)
+                    {
+                        var readList = assertInfo.readList;
+                        foreach (var rl in readList)
+                        {
+                            string varName = rl.Key;
+                            string jsonPath = rl.Value;
                             // Here you would use a JSON parsing library to extract the value
                             // from the response body using the jsonPath and store it in contextPars
                             // for use in later tests. This is a placeholder for that logic.
-                            string extractedValue =
-                                new JsonTools(responseBody).GetValueByPath(jsonPath);
-                            contextPars[varName] = extractedValue;
+
+                            JsonNode? node = new JsonTools(responseBody).GetNodeByPath(jsonPath);
+                            if (node == null)
+                            {
+                                rw.WriteLine($"Assert Failed: JSON path '{jsonPath}' not found in response.");
+                                ret = false;
+                            }
+                            else
+                            {
+                                contextPars[varName] = node.GetValue<string>();
+                            }
                         }
                     }
                     break;
@@ -70,7 +103,7 @@ namespace xyRESTTest
                         $"'{assertInfo.assertType}'.");
                     return false;
             }
-            return true;
+            return ret;
         }
 
         public Dictionary<string, string>? ParseHeaders(

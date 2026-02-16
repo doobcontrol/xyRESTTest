@@ -14,196 +14,196 @@ namespace xyRESTTest
         }
         private async void button1_Click(object sender, EventArgs e)
         {
-            AssertInfo assertInfoStatusOK = new AssertInfo()
-            {
-                assertType = "StatusCode",
-                expected = HttpStatusCode.OK
-            };
-            AssertInfo assertInfoStatusUnauthorized = new AssertInfo()
-            {
-                assertType = "StatusCode",
-                expected = HttpStatusCode.Unauthorized
-            };
-            AssertInfo assertInfoStatusInternalServerError = new AssertInfo()
-            {
-                assertType = "StatusCode",
-                expected = HttpStatusCode.InternalServerError
-            };
+            //AssertInfo assertInfoStatusOK = new AssertInfo()
+            //{
+            //    assertType = "StatusCode",
+            //    expected = HttpStatusCode.OK
+            //};
+            //AssertInfo assertInfoStatusUnauthorized = new AssertInfo()
+            //{
+            //    assertType = "StatusCode",
+            //    expected = HttpStatusCode.Unauthorized
+            //};
+            //AssertInfo assertInfoStatusInternalServerError = new AssertInfo()
+            //{
+            //    assertType = "StatusCode",
+            //    expected = HttpStatusCode.InternalServerError
+            //};
 
-            var HeaderAuthBearer = new AuthHeaderInfo()
-            {
-                scheme = "Bearer",
-                authToken = "${AuthToken}"
-            };
-            var HeaderAuthBasic = new AuthHeaderInfo()
-            {
-                scheme = "Basic",
-                username = "admin",
-                password = "admin"
-            };
+            //var HeaderAuthBearer = new AuthHeaderInfo()
+            //{
+            //    scheme = "Bearer",
+            //    authToken = "${AuthToken}"
+            //};
+            //var HeaderAuthBasic = new AuthHeaderInfo()
+            //{
+            //    scheme = "Basic",
+            //    username = "admin",
+            //    password = "admin"
+            //};
 
-            var testHandler = new TestHandler();
+            //var testHandler = new TestHandler();
 
-            var testTaskList = new List<TestTask>();
+            //var testTaskList = new List<TestTask>();
 
-            RequestInfo requestInfo = new RequestInfo()
-            {
-                url = "http://192.168.168.130:8080/auth/login",
-                method = "GET",
-                headers = new Dictionary<string, object>()
-                {
-                    { "Authorization", HeaderAuthBasic }
-                }
-            };
-            TestTask testTask = new TestTask()
-            {
-                name = "Login Test",
-                requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfoStatusOK,
-                    new AssertInfo()
-                    {
-                        assertType = "BodyContains",
-                        expected = "token",
-                        readData = new Dictionary<string, object>()
-                        {
-                            {
-                                "AuthToken",
-                                "data.token"
-                            }
-                        }
-                    },
-                },
-                testHandler = testHandler
-            };
-            testTaskList.Add(testTask);
+            //RequestInfo requestInfo = new RequestInfo()
+            //{
+            //    url = "http://192.168.168.130:8080/auth/login",
+            //    method = "GET",
+            //    headers = new Dictionary<string, object>()
+            //    {
+            //        { "Authorization", HeaderAuthBasic }
+            //    }
+            //};
+            //TestTask testTask = new TestTask()
+            //{
+            //    name = "Login Test",
+            //    requestInfo = requestInfo,
+            //    assertInfos = new List<AssertInfo>() { assertInfoStatusOK,
+            //        new AssertInfo()
+            //        {
+            //            assertType = "JsonContent",
+            //            expected = "token",
+            //            readData = new Dictionary<string, object>()
+            //            {
+            //                {
+            //                    "AuthToken",
+            //                    "data.token"
+            //                }
+            //            }
+            //        },
+            //    },
+            //    testHandler = testHandler
+            //};
+            //testTaskList.Add(testTask);
 
-            var testTask_LoginFial = testTask;
-            HeaderAuthBasic = new AuthHeaderInfo()
-            {
-                scheme = "Basic",
-                username = "admin",
-                password = "wrongpassword"
-            };
-            testTask_LoginFial.requestInfo.headers = new Dictionary<string, object>()
-            {
-                { "Authorization", HeaderAuthBasic }
-            };
-            testTask_LoginFial.name = "Login Fail Test";
-            testTask_LoginFial.assertInfos = 
-                new List<AssertInfo>() { assertInfoStatusUnauthorized };
-            testTaskList.Add(testTask_LoginFial);
+            //var testTask_LoginFial = testTask;
+            //HeaderAuthBasic = new AuthHeaderInfo()
+            //{
+            //    scheme = "Basic",
+            //    username = "admin",
+            //    password = "wrongpassword"
+            //};
+            //testTask_LoginFial.requestInfo.headers = new Dictionary<string, object>()
+            //{
+            //    { "Authorization", HeaderAuthBasic }
+            //};
+            //testTask_LoginFial.name = "Login Fail Test";
+            //testTask_LoginFial.assertInfos = 
+            //    new List<AssertInfo>() { assertInfoStatusUnauthorized };
+            //testTaskList.Add(testTask_LoginFial);
 
-            ContentInfo contentInfo = new ContentInfo()
-            {
-                recordData = new Dictionary<string, string>()
-                {
-                    { "FID", "000" },
-                    { "FUserName", "John" },
-                    { "FPassword", "123456" }
-                }
-            };
-            requestInfo = new RequestInfo()
-            {
-                url = "http://192.168.168.130:8080/user",
-                method = "POST",
-                headers = new Dictionary<string, object>()
-                {
-                    { "Authorization", HeaderAuthBearer }
-                },
-                body = contentInfo
-            };
-            testTask = new TestTask()
-            {
-                name = "Add User Test",
-                requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
-                testHandler = testHandler
-            };
-            testTaskList.Add(testTask);
+            //ContentInfo contentInfo = new ContentInfo()
+            //{
+            //    recordData = new Dictionary<string, string>()
+            //    {
+            //        { "FID", "000" },
+            //        { "FUserName", "John" },
+            //        { "FPassword", "123456" }
+            //    }
+            //};
+            //requestInfo = new RequestInfo()
+            //{
+            //    url = "http://192.168.168.130:8080/user",
+            //    method = "POST",
+            //    headers = new Dictionary<string, object>()
+            //    {
+            //        { "Authorization", HeaderAuthBearer }
+            //    },
+            //    body = contentInfo
+            //};
+            //testTask = new TestTask()
+            //{
+            //    name = "Add User Test",
+            //    requestInfo = requestInfo,
+            //    assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
+            //    testHandler = testHandler
+            //};
+            //testTaskList.Add(testTask);
 
-            var testTask_AddFial = testTask;
-            testTask_AddFial.name = "Add User Fail Test";
-            testTask_AddFial.assertInfos =
-                new List<AssertInfo>() { assertInfoStatusInternalServerError };
-            testTaskList.Add(testTask_AddFial);
+            //var testTask_AddFial = testTask;
+            //testTask_AddFial.name = "Add User Fail Test";
+            //testTask_AddFial.assertInfos =
+            //    new List<AssertInfo>() { assertInfoStatusInternalServerError };
+            //testTaskList.Add(testTask_AddFial);
 
-            for (int i = 0; i < 50; i++)
-            {
-                var newTestTask = testTask;
-                contentInfo = new ContentInfo()
-                {
-                    recordData = new Dictionary<string, string>()
-                    {
-                        { "FID", (i+1).ToString("D5") },
-                        { "FUserName", "user" + GenerateRandomString(5) },
-                        { "FPassword", GenerateRandomString(10) }
-                    }
-                };
-                newTestTask.requestInfo.body = contentInfo;
-                newTestTask.name = "Add User Test " +
-                    contentInfo.recordData["FID"];
-                testTaskList.Add(newTestTask);
-            }
+            //for (int i = 0; i < 50; i++)
+            //{
+            //    var newTestTask = testTask;
+            //    contentInfo = new ContentInfo()
+            //    {
+            //        recordData = new Dictionary<string, string>()
+            //        {
+            //            { "FID", (i+1).ToString("D5") },
+            //            { "FUserName", "user" + GenerateRandomString(5) },
+            //            { "FPassword", GenerateRandomString(10) }
+            //        }
+            //    };
+            //    newTestTask.requestInfo.body = contentInfo;
+            //    newTestTask.name = "Add User Test " +
+            //        contentInfo.recordData["FID"];
+            //    testTaskList.Add(newTestTask);
+            //}
 
-            // Update user test
-            contentInfo = new ContentInfo()
-            {
-                recordData = new Dictionary<string, string>()
-                {
-                    { "FUserName", "John2222" },
-                    { "FPassword", "123456" }
-                }
-            };
-            requestInfo = new RequestInfo()
-            {
-                url = "http://192.168.168.130:8080/user/000",
-                method = "PUT",
-                headers = new Dictionary<string, object>()
-                {
-                    { "Authorization", HeaderAuthBearer }
-                },
-                body = contentInfo
-            };
-            testTask = new TestTask()
-            {
-                name = "Update user test",
-                requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
-                testHandler = testHandler
-            };
-            testTaskList.Add(testTask);
+            //// Update user test
+            //contentInfo = new ContentInfo()
+            //{
+            //    recordData = new Dictionary<string, string>()
+            //    {
+            //        { "FUserName", "John2222" },
+            //        { "FPassword", "123456" }
+            //    }
+            //};
+            //requestInfo = new RequestInfo()
+            //{
+            //    url = "http://192.168.168.130:8080/user/000",
+            //    method = "PUT",
+            //    headers = new Dictionary<string, object>()
+            //    {
+            //        { "Authorization", HeaderAuthBearer }
+            //    },
+            //    body = contentInfo
+            //};
+            //testTask = new TestTask()
+            //{
+            //    name = "Update user test",
+            //    requestInfo = requestInfo,
+            //    assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
+            //    testHandler = testHandler
+            //};
+            //testTaskList.Add(testTask);
 
-            // Delete user test
-            requestInfo = new RequestInfo()
-            {
-                url = "http://192.168.168.130:8080/user/000",
-                method = "DELETE",
-                headers = new Dictionary<string, object>()
-                {
-                    { "Authorization", HeaderAuthBearer }
-                }
-            };
-            testTask = new TestTask()
-            {
-                name = "Delete user test",
-                requestInfo = requestInfo,
-                assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
-                testHandler = testHandler
-            };
-            testTaskList.Add(testTask);
+            //// Delete user test
+            //requestInfo = new RequestInfo()
+            //{
+            //    url = "http://192.168.168.130:8080/user/000",
+            //    method = "DELETE",
+            //    headers = new Dictionary<string, object>()
+            //    {
+            //        { "Authorization", HeaderAuthBearer }
+            //    }
+            //};
+            //testTask = new TestTask()
+            //{
+            //    name = "Delete user test",
+            //    requestInfo = requestInfo,
+            //    assertInfos = new List<AssertInfo>() { assertInfoStatusOK },
+            //    testHandler = testHandler
+            //};
+            //testTaskList.Add(testTask);
 
-            for (int i = 0; i < 50; i++)
-            {
-                var newTestTask = testTask;
-                string userid = (i + 1).ToString("D5");
-                newTestTask.requestInfo.url =
-                    "http://192.168.168.130:8080/user/" + userid;
-                newTestTask.name = "Delete User Test " + userid;
-                testTaskList.Add(newTestTask);
-            }
+            //for (int i = 0; i < 50; i++)
+            //{
+            //    var newTestTask = testTask;
+            //    string userid = (i + 1).ToString("D5");
+            //    newTestTask.requestInfo.url =
+            //        "http://192.168.168.130:8080/user/" + userid;
+            //    newTestTask.name = "Delete User Test " + userid;
+            //    testTaskList.Add(newTestTask);
+            //}
 
-            await xyTest.batchTestAsync(testTaskList);
-            tabControl1.SelectedIndex = 1;
+            //await xyTest.batchTestAsync(testTaskList);
+            //tabControl1.SelectedIndex = 1;
         }
 
 
