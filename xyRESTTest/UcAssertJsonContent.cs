@@ -61,6 +61,9 @@ namespace xyRESTTest
             DgvRead.Tag = assertInfo.readList;
             DgvAssert.CellEndEdit += Dgv_CellEndEdit;
             DgvRead.CellEndEdit += Dgv_CellEndEdit;
+
+            DgvAssert.SelectionMode= DataGridViewSelectionMode.FullRowSelect;
+            DgvRead.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
         private void switchList(object? sender, EventArgs e)
         {
@@ -128,7 +131,17 @@ namespace xyRESTTest
 
         private void TsbDelAssertList_Click(object sender, EventArgs e)
         {
-
+            if(DgvAssert.SelectedRows.Count > 0)
+            {
+                var row = DgvAssert.SelectedRows[0];
+                var list = DgvAssert.Tag as Dictionary<string, string>;
+                if (list != null && row.Tag != null)
+                {
+                    list.Remove(row.Tag.ToString());
+                }
+                DgvAssert.Rows.Remove(row);
+                AutoHeightGrid(DgvAssert);
+            }
         }
 
         private void TsbAddReadList_Click(object sender, EventArgs e)
@@ -139,7 +152,17 @@ namespace xyRESTTest
 
         private void TsbDelReadList_Click(object sender, EventArgs e)
         {
-
+            if (DgvRead.SelectedRows.Count > 0)
+            {
+                var row = DgvRead.SelectedRows[0];
+                var list = DgvRead.Tag as Dictionary<string, string>;
+                if (list != null && row.Tag != null)
+                {
+                    list.Remove(row.Tag.ToString());
+                }
+                DgvRead.Rows.Remove(row);
+                AutoHeightGrid(DgvRead);
+            }
         }
 
         private void Dgv_CellEndEdit(object? sender, DataGridViewCellEventArgs e)
