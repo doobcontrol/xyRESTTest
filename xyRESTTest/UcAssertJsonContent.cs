@@ -61,8 +61,6 @@ namespace xyRESTTest
             DgvRead.Tag = assertInfo.readList;
             DgvAssert.CellEndEdit += Dgv_CellEndEdit;
             DgvRead.CellEndEdit += Dgv_CellEndEdit;
-            //DgvAssert.CellValidating += Dgv_CellValidating;
-            //DgvRead.CellValidating += Dgv_CellValidating;
         }
         private void switchList(object? sender, EventArgs e)
         {
@@ -190,33 +188,6 @@ namespace xyRESTTest
                     dgv.Rows[e.RowIndex].Tag = keyCell.Value;
                     list.Add(keyCell.Value.ToString(), valueCell.Value.ToString());
                 }
-            }
-        }
-        private void Dgv_CellValidating(object? sender, DataGridViewCellValidatingEventArgs e)
-        {
-            var dgv = sender as DataGridView;
-            if (dgv == null)
-            {
-                return;
-            }
-            var list = dgv.Tag as Dictionary<string, string>;
-            if (list == null)
-            {
-                return;
-            }
-            
-            // Assume validation for a specific column, e.g., an "Age" column
-            if (e.ColumnIndex == 0 
-                && e.FormattedValue.ToString() != dgv.Rows[e.RowIndex].Tag
-                && list.ContainsKey(e.FormattedValue.ToString()))
-            {
-                // Invalid value: display an error and cancel the event
-                e.Cancel = true;
-                dgv.Rows[e.RowIndex].ErrorText = "Key already exists.";
-            }
-            else
-            {
-                dgv.Rows[e.RowIndex].ErrorText = string.Empty;
             }
         }
     }
