@@ -23,6 +23,7 @@ namespace xyRESTTest
             LbPrjName.Text = "No Project Loaded";
             TsbAddCase.Visible = false;
             TsbDelCase.Visible = false;
+            TsbRun.Visible = false;
         }
 
         private void TsbAddCase_Click(object sender, EventArgs e)
@@ -41,6 +42,7 @@ namespace xyRESTTest
             var newItem = new UcTestCaseItem(tTask);
             newItem.Dock = DockStyle.Top;
             newItem.Selected += UcTestCaseItem_Selected;
+            newItem.Run += UcTestCaseItem_Run;
             PnTestcases.Controls.Add(newItem);
         }
 
@@ -63,6 +65,23 @@ namespace xyRESTTest
                 utc.Edited += TestCase_edited;
                 utc.Dock = DockStyle.Fill;
                 panel2.Controls.Add(utc);
+            }
+        }
+        private async void UcTestCaseItem_Run(object? sender, EventArgs e)
+        {
+            if (sender is UcTestCaseItem utci)
+            {
+                var path = Path.GetDirectoryName(testProject.projectFile);
+                var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
+                outputfile = Path.Combine(
+                    path ?? "", $"{outputfile}_output.txt");
+
+                utci.TestTask.testHandler = new TestHandler();
+                var contextPars = new Dictionary<string, string>();
+                using (var sw = new StreamWriter(outputfile, true))
+                {
+                    await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
+                }
             }
         }
         private void TestCase_edited(object? sender, EventArgs e)
@@ -96,6 +115,7 @@ namespace xyRESTTest
                 LbPrjName.Text = testProject.name;
                 TsbAddCase.Visible = true;
                 TsbDelCase.Visible = true;
+                TsbRun.Visible = true;
             }
         }
 
@@ -126,6 +146,7 @@ namespace xyRESTTest
                     LbPrjName.Text = testProject.name;
                     TsbAddCase.Visible = true;
                     TsbDelCase.Visible = true;
+                    TsbRun.Visible = true;
 
                     PnTestcases.Controls.Clear();
                     foreach (var task in testProject.tasks)
@@ -136,10 +157,20 @@ namespace xyRESTTest
                 catch (Exception ex)
                 {
                     // Handle any errors that might occur
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " 
+                    MessageBox.Show("Error: Could not read file from disk. Original error: "
                         + ex.Message);
                 }
             }
+        }
+
+        private async void TsbRun_Click(object sender, EventArgs e)
+        {
+            var handler = new TestHandler();
+            foreach(var task in testProject.tasks)
+            {
+                task.testHandler = handler;
+            }
+            await xyTest.runProjectAsync(testProject);
         }
     }
 }

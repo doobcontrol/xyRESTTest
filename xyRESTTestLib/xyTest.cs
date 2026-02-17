@@ -71,7 +71,16 @@ namespace xyRESTTestLib
         {
             // Prepare request
             var rMsg = makeHttpRequestMessage(testTask, contextPars);
-            var response = await sharedClient.SendAsync(rMsg);
+            HttpResponseMessage response;
+            try
+            {
+                response = await sharedClient.SendAsync(rMsg);
+            }
+            catch (Exception e)
+            {
+                rw.WriteLine("Error when sending request: " + e.Message);
+                return false;
+            }
 
             // Assert response (And get data to contextPars)
             bool assert = true;
@@ -120,6 +129,15 @@ namespace xyRESTTestLib
                 sw.WriteLine("Time used: " + (DateTime.Now - startTime).TotalSeconds + " seconds");
             }
             return true;
+        }
+        public static async Task<bool> runProjectAsync(TestProject testProject)
+        {
+            var path = Path.GetDirectoryName(testProject.projectFile);
+            var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
+            outputfile = Path.Combine(
+                path ?? "", $"{outputfile}_testReport.txt");
+
+            return await batchTestAsync(testProject.tasks, outputfile);
         }
 
         public static void saveTestProject(TestProject testProject)

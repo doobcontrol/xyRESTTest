@@ -31,7 +31,7 @@
             label1 = new Label();
             panel1 = new Panel();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
+            tsbRun = new ToolStripButton();
             panel2 = new Panel();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -61,21 +61,21 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tsbRun });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(43, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // tsbRun
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = Properties.Resources.Run;
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(29, 24);
-            toolStripButton1.Text = "toolStripButton1";
+            tsbRun.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tsbRun.Image = Properties.Resources.Run;
+            tsbRun.ImageTransparentColor = Color.Magenta;
+            tsbRun.Name = "tsbRun";
+            tsbRun.Size = new Size(29, 24);
+            tsbRun.Text = "toolStripButton1";
             // 
             // panel2
             // 
@@ -111,7 +111,7 @@
         private Label label1;
         private Panel panel1;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton tsbRun;
         private Panel panel2;
     }
 }

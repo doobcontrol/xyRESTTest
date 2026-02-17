@@ -15,6 +15,9 @@ namespace xyRESTTest
     {
         TestTask testTask;
         public TestTask TestTask { get => testTask; }
+
+        public event EventHandler<EventArgs>? Selected;
+        public event EventHandler<EventArgs>? Run;
         public UcTestCaseItem(TestTask testTask)
         {
             InitializeComponent();
@@ -24,6 +27,11 @@ namespace xyRESTTest
 
             this.testTask = testTask;
             label1.Text = testTask.name;
+
+            tsbRun.Click += (s, e)  =>
+             {
+                 Run?.Invoke(this, new EventArgs());
+             };
         }
 
         // A single event handler for all controls
@@ -75,8 +83,6 @@ namespace xyRESTTest
                 this.BorderStyle = orgBordderStyle;
             }
         }
-
-        public event EventHandler<EventArgs>? Selected;
 
         public void UpdateDisplay()
         {

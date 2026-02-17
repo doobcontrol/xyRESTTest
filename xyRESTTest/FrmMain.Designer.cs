@@ -40,6 +40,8 @@
             TsbDelCase = new ToolStripButton();
             panel2 = new Panel();
             toolStrip2 = new ToolStrip();
+            toolStripSeparator2 = new ToolStripSeparator();
+            TsbRun = new ToolStripButton();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -95,7 +97,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, toolStripSeparator2, TsbRun });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(248, 27);
@@ -166,6 +168,21 @@
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 27);
+            // 
+            // TsbRun
+            // 
+            TsbRun.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbRun.Image = Properties.Resources.Run;
+            TsbRun.ImageTransparentColor = Color.Magenta;
+            TsbRun.Name = "TsbRun";
+            TsbRun.Size = new Size(29, 24);
+            TsbRun.Text = "toolStripButton1";
+            TsbRun.Click += TsbRun_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -198,5 +215,7 @@
         private Panel PnPrj;
         private Label LbPrjName;
         private TableLayoutPanel PnTestcases;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton TsbRun;
     }
 }
