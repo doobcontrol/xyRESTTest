@@ -34,11 +34,11 @@ namespace xyRESTTest
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            contentInfo.type = comboBox1.Text;
             switch (comboBox1.Text)
             {
                 case "SimpleJson":
                     PnlJsonEditor.Controls.Clear();
-                    contentInfo.type = "simplejson";
                     var ucSimpleJson = new UcJsonBodySimple(contentInfo);
                     ucSimpleJson.Edited += JsonBody_Edited;
                     ucSimpleJson.Dock = DockStyle.Fill;
