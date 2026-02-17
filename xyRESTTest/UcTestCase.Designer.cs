@@ -46,15 +46,15 @@
             toolStrip1 = new ToolStrip();
             TsbAddHeader = new ToolStripButton();
             panel2 = new Panel();
-            CmbMothod = new ComboBox();
+            CmbMethod = new ComboBox();
             label4 = new Label();
             tabAssert = new TabPage();
-            panel1 = new Panel();
-            toolTip1 = new ToolTip(components);
+            PnlAssertItems = new Panel();
             toolStrip2 = new ToolStrip();
             TsbAddAssert = new ToolStripButton();
-            PnlAssertItems = new Panel();
             TsbDelAssert = new ToolStripButton();
+            panel1 = new Panel();
+            toolTip1 = new ToolTip(components);
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -63,8 +63,8 @@
             toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
             tabAssert.SuspendLayout();
-            panel1.SuspendLayout();
             toolStrip2.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // LbCaseName
@@ -242,7 +242,7 @@
             // panel2
             // 
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(CmbMothod);
+            panel2.Controls.Add(CmbMethod);
             panel2.Controls.Add(TxtUrl);
             panel2.Controls.Add(label4);
             panel2.Dock = DockStyle.Top;
@@ -251,14 +251,15 @@
             panel2.Size = new Size(680, 69);
             panel2.TabIndex = 7;
             // 
-            // CmbMothod
+            // CmbMethod
             // 
-            CmbMothod.FormattingEnabled = true;
-            CmbMothod.Items.AddRange(new object[] { "GET", "POST", "PUT", "DELETE" });
-            CmbMothod.Location = new Point(133, 36);
-            CmbMothod.Name = "CmbMothod";
-            CmbMothod.Size = new Size(151, 28);
-            CmbMothod.TabIndex = 6;
+            CmbMethod.DropDownStyle = ComboBoxStyle.DropDownList;
+            CmbMethod.FormattingEnabled = true;
+            CmbMethod.Items.AddRange(new object[] { "GET", "POST", "PUT", "DELETE" });
+            CmbMethod.Location = new Point(133, 36);
+            CmbMethod.Name = "CmbMethod";
+            CmbMethod.Size = new Size(151, 28);
+            CmbMethod.TabIndex = 6;
             // 
             // label4
             // 
@@ -281,16 +282,13 @@
             tabAssert.Text = "Assertion Information";
             tabAssert.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // PnlAssertItems
             // 
-            panel1.AutoSize = true;
-            panel1.Controls.Add(LbCaseName);
-            panel1.Controls.Add(TxtCaseName);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(694, 61);
-            panel1.TabIndex = 6;
+            PnlAssertItems.Dock = DockStyle.Fill;
+            PnlAssertItems.Location = new Point(3, 30);
+            PnlAssertItems.Name = "PnlAssertItems";
+            PnlAssertItems.Size = new Size(680, 278);
+            PnlAssertItems.TabIndex = 3;
             // 
             // toolStrip2
             // 
@@ -312,14 +310,6 @@
             TsbAddAssert.Text = "toolStripButton1";
             TsbAddAssert.Click += TsbAddAssert_Click;
             // 
-            // PnlAssertItems
-            // 
-            PnlAssertItems.Dock = DockStyle.Fill;
-            PnlAssertItems.Location = new Point(3, 30);
-            PnlAssertItems.Name = "PnlAssertItems";
-            PnlAssertItems.Size = new Size(680, 278);
-            PnlAssertItems.TabIndex = 3;
-            // 
             // TsbDelAssert
             // 
             TsbDelAssert.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -329,6 +319,17 @@
             TsbDelAssert.Size = new Size(29, 24);
             TsbDelAssert.Text = "toolStripButton1";
             TsbDelAssert.Click += TsbDelAssert_Click;
+            // 
+            // panel1
+            // 
+            panel1.AutoSize = true;
+            panel1.Controls.Add(LbCaseName);
+            panel1.Controls.Add(TxtCaseName);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(694, 61);
+            panel1.TabIndex = 6;
             // 
             // UcTestCase
             // 
@@ -352,10 +353,10 @@
             panel2.PerformLayout();
             tabAssert.ResumeLayout(false);
             tabAssert.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -370,7 +371,7 @@
         private TabPage tabRequest;
         private TabPage tabAssert;
         private Panel panel1;
-        private ComboBox CmbMothod;
+        private ComboBox CmbMethod;
         private Label label4;
         private GroupBox groupBox2;
         private GroupBox groupBox1;

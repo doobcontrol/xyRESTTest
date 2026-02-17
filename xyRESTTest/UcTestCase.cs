@@ -48,15 +48,15 @@ namespace xyRESTTest
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
-            CmbMothod.TextChanged += (s, e) =>
+            CmbMethod.TextChanged += (s, e) =>
             {
-                if (CmbMothod.Text != testTask.requestInfo?.method)
+                if (CmbMethod.Text != testTask.requestInfo?.method)
                 {
                     if (testTask.requestInfo == null)
                     {
                         testTask.requestInfo = new RequestInfo();
                     }
-                    testTask.requestInfo.method = CmbMothod.Text;
+                    testTask.requestInfo.method = CmbMethod.Text;
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
@@ -109,7 +109,7 @@ namespace xyRESTTest
             if (testTask != null)
             {
                 TxtUrl.Text = testTask.requestInfo?.url;
-                CmbMothod.Text = testTask.requestInfo?.method;
+                CmbMethod.Text = testTask.requestInfo?.method;
                 if (testTask.requestInfo != null)
                 {
                     if (testTask.requestInfo.headers != null)
@@ -222,7 +222,7 @@ namespace xyRESTTest
         {
             if (sender is UcAssertItem uai)
             {
-                if(!testTask.assertInfos.Contains(uai.AssertInfo))
+                if (!testTask.assertInfos.Contains(uai.AssertInfo))
                 {
                     testTask.assertInfos.Add(uai.AssertInfo);
                 }
