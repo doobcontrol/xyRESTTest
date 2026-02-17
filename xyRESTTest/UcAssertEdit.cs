@@ -72,11 +72,11 @@ namespace xyRESTTest
             }
             else if (comboBox1.Text == "JsonContent")
             {
-                //assertValueEdit = new UcAssertStatusCode(assertInfo)
-                //{ Dock = DockStyle.Fill };
-                //panel3.Controls.Clear();
-                //panel3.Controls.Add(assertValueEdit);
-                //this.Refresh();
+                assertValueEdit = new UcAssertJsonContent(assertInfo)
+                { Dock = DockStyle.Fill };
+                panel3.Controls.Clear();
+                panel3.Controls.Add(assertValueEdit);
+                this.Refresh();
             }
         }
     }

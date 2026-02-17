@@ -18,7 +18,6 @@ namespace xyRESTTest
         {
             InitializeComponent();
             this.assertInfo = assertInfo;
-            this.assertInfo.assertType = "StatusCode";
             TxtExpected.Text = assertInfo.expected;
 
             TxtExpected.TextChanged += TxtExpected_TextChanged;
