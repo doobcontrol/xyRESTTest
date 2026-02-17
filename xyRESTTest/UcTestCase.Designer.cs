@@ -174,7 +174,6 @@
             // 
             CmbBodyType.DropDownStyle = ComboBoxStyle.DropDownList;
             CmbBodyType.FormattingEnabled = true;
-            CmbBodyType.Items.AddRange(new object[] { "application/json" });
             CmbBodyType.Location = new Point(108, 0);
             CmbBodyType.Name = "CmbBodyType";
             CmbBodyType.Size = new Size(151, 28);
@@ -255,7 +254,6 @@
             // 
             CmbMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             CmbMethod.FormattingEnabled = true;
-            CmbMethod.Items.AddRange(new object[] { "GET", "POST", "PUT", "DELETE" });
             CmbMethod.Location = new Point(133, 36);
             CmbMethod.Name = "CmbMethod";
             CmbMethod.Size = new Size(151, 28);

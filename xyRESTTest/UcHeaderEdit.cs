@@ -32,6 +32,7 @@ namespace xyRESTTest
                 this.headerValue = header.Value.Value;
             }
 
+            UiTools.FillCbWithEnum(comboBox1, typeof(HeaderType));
             comboBox1.Text = headerName;
         }
 
@@ -83,9 +84,9 @@ namespace xyRESTTest
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "Authorization")
+            if (comboBox1.Text == nameof(HeaderType.Authorization))
             {
-                headerName = "Authorization";
+                headerName = comboBox1.Text;
                 if (headerValue == null)
                 {
                     headerValue = new AuthHeaderInfo();

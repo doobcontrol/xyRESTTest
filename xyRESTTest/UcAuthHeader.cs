@@ -17,6 +17,8 @@ namespace xyRESTTest
         public UcAuthHeader(AuthHeaderInfo authHeader)
         {
             InitializeComponent();
+            UiTools.FillCbWithEnum(comboBox1, typeof(AuthType));
+
             comboBox1.Text = authHeader.scheme;
             TxtUsername.Text = authHeader.username;
             TxtPassword.Text = authHeader.password;
@@ -42,12 +44,12 @@ namespace xyRESTTest
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "Basic")
+            if (comboBox1.Text == nameof(AuthType.Basic))
             {
                 TlpBasic.Visible = true;
                 TlpBearer.Visible = false;
             }
-            else if (comboBox1.Text == "Bearer")
+            else if (comboBox1.Text == nameof(AuthType.Bearer))
             {
                 TlpBasic.Visible = false;
                 TlpBearer.Visible = true;

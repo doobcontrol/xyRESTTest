@@ -17,7 +17,8 @@ namespace xyRESTTest
         public UcJsonBody(ContentInfo? contentInfo)
         {
             InitializeComponent();
-            if(contentInfo != null)
+            UiTools.FillCbWithEnum(comboBox1, typeof(JCType));
+            if (contentInfo != null)
             {
                 this.contentInfo = contentInfo;
                 comboBox1.Text = contentInfo.type;
@@ -27,7 +28,7 @@ namespace xyRESTTest
                 this.contentInfo = new ContentInfo()
                 {
                     recordData = new Dictionary<string, string>(),
-                    ctype = "application/json"
+                    ctype = xyTest.CT_app_json
                 };
             }
         }
@@ -37,7 +38,7 @@ namespace xyRESTTest
             contentInfo.type = comboBox1.Text;
             switch (comboBox1.Text)
             {
-                case "SimpleJson":
+                case nameof(JCType.SimpleJson):
                     PnlJsonEditor.Controls.Clear();
                     var ucSimpleJson = new UcJsonBodySimple(contentInfo);
                     ucSimpleJson.Edited += JsonBody_Edited;

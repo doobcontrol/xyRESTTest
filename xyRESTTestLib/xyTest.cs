@@ -43,7 +43,7 @@ namespace xyRESTTestLib
             {
                 var headers = testHandler.ParseHeaders(
                     requestInfo.headers, contextPars);
-                foreach(var header in headers)
+                foreach (var header in headers)
                 {
                     rMsg.Headers.Add(header.Key, header.Value);
                 }
@@ -54,7 +54,7 @@ namespace xyRESTTestLib
             {
                 HttpContent? content = testHandler.ParseRequestBody(
                         requestInfo.body, contextPars);
-                if(content != null)
+                if (content != null)
                 {
                     rMsg.Content = content;
                 }
@@ -150,9 +150,9 @@ namespace xyRESTTestLib
             var json = File.ReadAllText(projectFile);
             var testProject = JsonSerializer.Deserialize<TestProject>(json);
 
-            foreach(var task in testProject.tasks)
+            foreach (var task in testProject.tasks)
             {
-                if(task.requestInfo != null && task.requestInfo.headers != null)
+                if (task.requestInfo != null && task.requestInfo.headers != null)
                 {
                     foreach (var header in task.requestInfo.headers)
                     {
@@ -167,6 +167,8 @@ namespace xyRESTTestLib
 
             return testProject;
         }
+
+        public const string CT_app_json = "application/json";
     }
     public class TestTask
     {
@@ -208,5 +210,32 @@ namespace xyRESTTestLib
         // value is the expected value to assert
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, string>? assertList { get; set; }
+    }
+
+    public enum JCType
+    {
+        SimpleJson
+    }
+    public enum ReqMethod
+    {
+        GET,
+        POST,
+        PUT,
+        DELETE,
+    }
+    public enum HeaderType
+    {
+        Authorization,
+        Accept
+    }
+    public enum AuthType
+    {
+        Basic,
+        Bearer
+    }
+    public enum AssertType
+    {
+        StatusCode,
+        JsonContent
     }
 }

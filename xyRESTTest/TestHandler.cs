@@ -19,7 +19,7 @@ namespace xyRESTTest
             bool ret = true;
             switch(assertInfo.assertType)
             {
-                case "StatusCode":
+                case nameof(AssertType.StatusCode):
                     int expectedCode = int.Parse(assertInfo.expected);
                     if ((int)response.StatusCode != expectedCode)
                     {
@@ -30,7 +30,7 @@ namespace xyRESTTest
                         return false;
                     }
                     break;
-                case "JsonContent":
+                case nameof(AssertType.JsonContent):
                     string responseBody = 
                         await response.Content.ReadAsStringAsync();
 
@@ -40,7 +40,7 @@ namespace xyRESTTest
                         //assert content type
                         if(response.Content.Headers.ContentType == null
                             || !response.Content.Headers.ContentType.MediaType
-                                .Contains("application/json"))
+                                .Contains(xyTest.CT_app_json))
                         {
                             rw.WriteLine($"Assert Failed: " +
                                 $"Expected content type " +
@@ -119,9 +119,9 @@ namespace xyRESTTest
             {
                 switch(hd.Key)
                 {
-                    case "Authorization":
+                    case nameof(HeaderType.Authorization):
                         var authData= (AuthHeaderInfo)hd.Value;
-                        if(authData.scheme == "Bearer")
+                        if(authData.scheme == nameof(AuthType.Bearer))
                         {
                             // Get token value from context parameters if it
                             // contains the placeholder
@@ -140,7 +140,7 @@ namespace xyRESTTest
                         string? headerValue = RheaderTools.HeaderAuth(authData);
                         if (headerValue != null)
                         {
-                            headers["Authorization"] = headerValue;
+                            headers[hd.Key] = headerValue;
                         }
                         break;
                     default:
@@ -161,7 +161,7 @@ namespace xyRESTTest
             HttpContent? bodyContent = null;
             switch(contentInfo.type)
             {
-                case "SimpleJson":
+                case nameof(JCType.SimpleJson):
                     var bodyString = RcontentTools.SimpleJson(
                         contentInfo.recordData);
                     if (bodyString != null)

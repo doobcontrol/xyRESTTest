@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using xyRESTTestLib;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace xyRESTTest
 {
@@ -48,6 +49,7 @@ namespace xyRESTTest
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
+            UiTools.FillCbWithEnum(CmbMethod, typeof(ReqMethod));
             CmbMethod.TextChanged += (s, e) =>
             {
                 if (CmbMethod.Text != testTask.requestInfo?.method)
@@ -60,6 +62,9 @@ namespace xyRESTTest
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
+
+            CmbBodyType.Items.Clear();
+            CmbBodyType.Items.Add(xyTest.CT_app_json);
 
             deplopData();
         }
@@ -178,18 +183,18 @@ namespace xyRESTTest
                 EditCaseName(false);
             }
         }
-
+        
         private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (CmbBodyType.Text)
             {
-                case "application/json":
+                case xyTest.CT_app_json:
                     if (testTask.requestInfo.body == null)
                     {
                         testTask.requestInfo.body = new ContentInfo()
                         {
                             recordData = new Dictionary<string, string>(),
-                            ctype = "application/json"
+                            ctype = CmbBodyType.Text
                         };
                     }
                     var ujb = new UcJsonBody(testTask.requestInfo.body);

@@ -21,6 +21,7 @@ namespace xyRESTTest
         public UcAssertEdit(AssertInfo assertInfo)
         {
             InitializeComponent();
+            UiTools.FillCbWithEnum(comboBox1, typeof(AssertType));
             Leave += (s, e) => { Hide(); };
 
             this.assertInfo = assertInfo;
@@ -62,7 +63,7 @@ namespace xyRESTTest
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             assertInfo.assertType = comboBox1.Text;
-            if (comboBox1.Text == "StatusCode")
+            if (comboBox1.Text == nameof(AssertType.StatusCode))
             {
                 assertValueEdit = new UcAssertStatusCode(assertInfo)
                 { Dock = DockStyle.Fill };
@@ -70,7 +71,7 @@ namespace xyRESTTest
                 panel3.Controls.Add(assertValueEdit);
                 this.Refresh();
             }
-            else if (comboBox1.Text == "JsonContent")
+            else if (comboBox1.Text == nameof(AssertType.JsonContent))
             {
                 assertValueEdit = new UcAssertJsonContent(assertInfo)
                 { Dock = DockStyle.Fill };
