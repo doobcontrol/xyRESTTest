@@ -23,7 +23,9 @@ namespace xyRESTTest
             LbPrjName.Text = "No Project Loaded";
             TsbAddCase.Visible = false;
             TsbDelCase.Visible = false;
+            toolStripSeparator1.Visible = false;
             TsbRun.Visible = false;
+            toolStripSeparator2.Visible = false;
         }
 
         private void TsbAddCase_Click(object sender, EventArgs e)
@@ -115,7 +117,9 @@ namespace xyRESTTest
                 LbPrjName.Text = testProject.name;
                 TsbAddCase.Visible = true;
                 TsbDelCase.Visible = true;
+                toolStripSeparator1.Visible = true;
                 TsbRun.Visible = true;
+                toolStripSeparator2.Visible = true;
             }
         }
 
@@ -146,7 +150,9 @@ namespace xyRESTTest
                     LbPrjName.Text = testProject.name;
                     TsbAddCase.Visible = true;
                     TsbDelCase.Visible = true;
+                    toolStripSeparator1.Visible = true;
                     TsbRun.Visible = true;
+                    toolStripSeparator2.Visible = true;
 
                     PnTestcases.Controls.Clear();
                     foreach (var task in testProject.tasks)
