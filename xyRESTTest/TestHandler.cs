@@ -36,7 +36,6 @@ namespace xyRESTTest
 
                     if(assertInfo.assertList != null)
                     {
-                        var assertList = assertInfo.assertList;
                         //assert content type
                         if(response.Content.Headers.ContentType == null
                             || !response.Content.Headers.ContentType.MediaType
@@ -48,7 +47,7 @@ namespace xyRESTTest
                                 $"{response.Content.Headers.ContentType}");
                             return false;
                         }
-                        foreach (var al in assertList)
+                        foreach (var al in assertInfo.assertList)
                         {
                             string jsonPath = al.Key;
                             string expectedValue = al.Value;

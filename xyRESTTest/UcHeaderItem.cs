@@ -55,10 +55,7 @@ namespace xyRESTTest
             {
                 uhiContainer = Parent;
             }
-            if (uhiContainer != null)
-            {
-                uhiContainer.Controls.Add(uhe);
-            }
+            uhiContainer.Controls.Add(uhe);
         }
 
         private void btnDropDown_Click(object sender, EventArgs e)

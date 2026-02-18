@@ -32,7 +32,14 @@ namespace xyRESTTest
         {
             var newTesk = new TestTask
             {
-                name = $"Test Task {PnTestcases.Controls.Count + 1}"
+                name = $"Test Task {PnTestcases.Controls.Count + 1}",
+                requestInfo = new RequestInfo
+                {
+                    method = "",
+                    url = "",
+                    headers = new Dictionary<string, object>(),
+                },
+                assertInfos = new List<AssertInfo>(),
             };
             testProject.tasks.Add(newTesk);
             xyTest.saveTestProject(testProject);

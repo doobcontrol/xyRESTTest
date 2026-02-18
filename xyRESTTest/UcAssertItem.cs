@@ -36,7 +36,10 @@ namespace xyRESTTest
             }
             else
             {
-                this.assertInfo = new AssertInfo();
+                this.assertInfo = new AssertInfo() 
+                { 
+                    assertType = nameof(AssertType.StatusCode) 
+                };
                 lbInfo.Text = "Please click to select assert type";
             }
 

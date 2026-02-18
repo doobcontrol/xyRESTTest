@@ -172,23 +172,23 @@ namespace xyRESTTestLib
     }
     public class TestTask
     {
-        public string name { get; set; }
-        public RequestInfo requestInfo { get; set; }
+        public required string name { get; set; }
+        public required RequestInfo requestInfo { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<AssertInfo> assertInfos { get; set; }
+        public required List<AssertInfo> assertInfos { get; set; }
         public ITestHandler testHandler;
     }
     public class TestProject
     {
-        public string name { get; set; }
-        public string projectFile { get; set; }
-        public List<TestTask> tasks { get; set; }
+        public required string name { get; set; }
+        public required string projectFile { get; set; }
+        public required List<TestTask> tasks { get; set; }
     }
 
     public class RequestInfo
     {
-        public string url { get; set; }
-        public string method { get; set; }
+        public required string url { get; set; }
+        public required string method { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, object>? headers { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -196,7 +196,7 @@ namespace xyRESTTestLib
     }
     public class AssertInfo
     {
-        public string assertType { get; set; } = "StatusCode";
+        public required string assertType { get; set; } = "StatusCode";
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? expected { get; set; }
 

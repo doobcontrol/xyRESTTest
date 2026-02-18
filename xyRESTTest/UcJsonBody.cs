@@ -50,10 +50,7 @@ namespace xyRESTTest
 
         private void JsonBody_Edited(object? sender, EventArgs e)
         {
-            if (contentInfo != null)
-            {
-                Edited?.Invoke(this, new EventArgs());
-            }
+            Edited?.Invoke(this, new EventArgs());
         }
         public event EventHandler<EventArgs>? Edited;
     }

@@ -29,11 +29,7 @@ namespace xyRESTTest
             {
                 if (TxtUrl.Text != testTask.requestInfo?.url)
                 {
-                    if (testTask.requestInfo == null)
-                    {
-                        testTask.requestInfo = new RequestInfo();
-                    }
-                    testTask.requestInfo.url = TxtUrl.Text;
+                    this.testTask.requestInfo.url = TxtUrl.Text;
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
@@ -41,11 +37,7 @@ namespace xyRESTTest
             {
                 if (e.KeyChar == (char)Keys.Enter && TxtUrl.Text != testTask.requestInfo?.url)
                 {
-                    if (testTask.requestInfo == null)
-                    {
-                        testTask.requestInfo = new RequestInfo();
-                    }
-                    testTask.requestInfo.url = TxtUrl.Text;
+                    this.testTask.requestInfo.url = TxtUrl.Text;
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
@@ -54,11 +46,7 @@ namespace xyRESTTest
             {
                 if (CmbMethod.Text != testTask.requestInfo?.method)
                 {
-                    if (testTask.requestInfo == null)
-                    {
-                        testTask.requestInfo = new RequestInfo();
-                    }
-                    testTask.requestInfo.method = CmbMethod.Text;
+                    this.testTask.requestInfo.method = CmbMethod.Text;
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
@@ -71,13 +59,6 @@ namespace xyRESTTest
 
         private void TsbAddHeader_Click(object sender, EventArgs e)
         {
-            if (testTask.requestInfo == null)
-            {
-                testTask.requestInfo = new RequestInfo()
-                {
-                    headers = new Dictionary<string, object>()
-                };
-            }
             if (testTask.requestInfo.headers == null)
             {
                 testTask.requestInfo.headers = new Dictionary<string, object>();
@@ -93,55 +74,38 @@ namespace xyRESTTest
         {
             if (sender is UcHeaderItem uhi)
             {
-                if (uhi.HeaderName != null)
-                {
-                    if (testTask.requestInfo.headers.ContainsKey(uhi.HeaderName))
-                    {
-                        testTask.requestInfo.headers[uhi.HeaderName] = uhi.HeaderValue;
-                    }
-                    else
-                    {
-                        testTask.requestInfo.headers.Add(uhi.HeaderName, uhi.HeaderValue);
-                    }
+                testTask.requestInfo.headers[uhi.HeaderName] = uhi.HeaderValue;
 
-                    Edited?.Invoke(this, new EventArgs());
-                }
+                Edited?.Invoke(this, new EventArgs());
             }
         }
 
         private void deplopData()
         {
-            if (testTask != null)
+            TxtUrl.Text = testTask.requestInfo?.url;
+            CmbMethod.Text = testTask.requestInfo?.method;
+
+            if (testTask.requestInfo.headers != null)
             {
-                TxtUrl.Text = testTask.requestInfo?.url;
-                CmbMethod.Text = testTask.requestInfo?.method;
-                if (testTask.requestInfo != null)
+                foreach (var header in testTask.requestInfo.headers)
                 {
-                    if (testTask.requestInfo.headers != null)
-                    {
-                        foreach (var header in testTask.requestInfo.headers)
-                        {
-                            var uhi = new UcHeaderItem(header, this);
-                            uhi.Dock = DockStyle.Top;
-                            uhi.Edited += Header_edited;
-                            TlpHeaders.Controls.Add(uhi);
-                        }
-                    }
-                    if (testTask.requestInfo.body != null)
-                    {
-                        CmbBodyType.Text = testTask.requestInfo.body.ctype;
-                    }
+                    var uhi = new UcHeaderItem(header, this);
+                    uhi.Dock = DockStyle.Top;
+                    uhi.Edited += Header_edited;
+                    TlpHeaders.Controls.Add(uhi);
                 }
-                if (testTask.assertInfos != null)
-                {
-                    foreach (var assertInfo in testTask.assertInfos)
-                    {
-                        var uai = new UcAssertItem(assertInfo, this);
-                        uai.Dock = DockStyle.Top;
-                        uai.Edited += Assert_edited;
-                        PnlAssertItems.Controls.Add(uai);
-                    }
-                }
+            }
+            if (testTask.requestInfo.body != null)
+            {
+                CmbBodyType.Text = testTask.requestInfo.body.ctype;
+            }
+
+            foreach (var assertInfo in testTask.assertInfos)
+            {
+                var uai = new UcAssertItem(assertInfo, this);
+                uai.Dock = DockStyle.Top;
+                uai.Edited += Assert_edited;
+                PnlAssertItems.Controls.Add(uai);
             }
         }
 
@@ -213,11 +177,6 @@ namespace xyRESTTest
 
         private void TsbAddAssert_Click(object sender, EventArgs e)
         {
-            if (testTask.assertInfos == null)
-            {
-                testTask.assertInfos = new List<AssertInfo>();
-            }
-
             var uai = new UcAssertItem(null, this);
             uai.Dock = DockStyle.Top;
             uai.Edited += Assert_edited;
