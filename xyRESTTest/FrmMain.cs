@@ -26,6 +26,9 @@ namespace xyRESTTest
             toolStripSeparator1.Visible = false;
             TsbRun.Visible = false;
             toolStripSeparator2.Visible = false;
+
+            PnlRun.Visible = false;
+            splitter1.Visible = false;
         }
 
         private void TsbAddCase_Click(object sender, EventArgs e)
@@ -87,10 +90,12 @@ namespace xyRESTTest
 
                 utci.TestTask.testHandler = new TestHandler();
                 var contextPars = new Dictionary<string, string>();
+                setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
                 {
                     await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
                 }
+                setRunnningState(false);
             }
         }
         private void TestCase_edited(object? sender, EventArgs e)
@@ -181,11 +186,35 @@ namespace xyRESTTest
         private async void TsbRun_Click(object sender, EventArgs e)
         {
             var handler = new TestHandler();
-            foreach(var task in testProject.tasks)
+            foreach (var task in testProject.tasks)
             {
                 task.testHandler = handler;
             }
+            setRunnningState(true);
             await xyTest.runProjectAsync(testProject);
+            setRunnningState(false);
+        }
+        private void setRunnningState(bool isRunning)
+        {
+            btnHideRunWindow.Enabled = !isRunning;
+            PnlRun.Visible = true;
+            splitter1.Visible = true;
+            PnlWork.Enabled = !isRunning;
+            if (isRunning)
+            {
+                lbRunningInfo.Text = "Running...";
+
+            }
+            else
+            {
+                lbRunningInfo.Text = "Finished.";
+            }
+        }
+
+        private void btnHideRunWindow_Click(object sender, EventArgs e)
+        {
+            PnlRun.Visible = false;
+            splitter1.Visible = false;
         }
     }
 }
