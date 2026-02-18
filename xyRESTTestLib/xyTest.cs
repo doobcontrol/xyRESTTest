@@ -19,14 +19,10 @@ namespace xyRESTTestLib
         static Dictionary<string, HttpMethod> methodMap =
             new Dictionary<string, HttpMethod>()
         {
-            {"GET", HttpMethod.Get },
-            {"POST", HttpMethod.Post },
-            {"PUT", HttpMethod.Put },
-            {"DELETE", HttpMethod.Delete },
-            {"PATCH", HttpMethod.Patch },
-            {"HEAD", HttpMethod.Head },
-            {"OPTIONS", HttpMethod.Options },
-            {"TRACE", HttpMethod.Trace }
+            {nameof(ReqMethod.GET), HttpMethod.Get },
+            {nameof(ReqMethod.POST), HttpMethod.Post },
+            {nameof(ReqMethod.PUT), HttpMethod.Put },
+            {nameof(ReqMethod.DELETE), HttpMethod.Delete },
         };
 
         public static HttpRequestMessage makeHttpRequestMessage(
