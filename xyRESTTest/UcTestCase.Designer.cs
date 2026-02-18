@@ -55,6 +55,7 @@
             TsbDelAssert = new ToolStripButton();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
+            TsbDelHeader = new ToolStripButton();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -221,7 +222,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbAddHeader });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbAddHeader, TsbDelHeader });
             toolStrip1.Location = new Point(3, 23);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(674, 27);
@@ -329,6 +330,16 @@
             panel1.Size = new Size(694, 61);
             panel1.TabIndex = 6;
             // 
+            // TsbDelHeader
+            // 
+            TsbDelHeader.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbDelHeader.Image = Properties.Resources.Delete;
+            TsbDelHeader.ImageTransparentColor = Color.Magenta;
+            TsbDelHeader.Name = "TsbDelHeader";
+            TsbDelHeader.Size = new Size(29, 24);
+            TsbDelHeader.Text = "toolStripButton1";
+            TsbDelHeader.Click += TsbDelHeader_Click;
+            // 
             // UcTestCase
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -387,5 +398,6 @@
         private ToolStrip toolStrip2;
         private ToolStripButton TsbAddAssert;
         private ToolStripButton TsbDelAssert;
+        private ToolStripButton TsbDelHeader;
     }
 }

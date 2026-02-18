@@ -19,11 +19,22 @@ namespace xyRESTTest
 
         UcHeaderEdit uhe;
         Control? uhiContainer;
+
+        public event EventHandler<EventArgs>? Edited;
+        public event EventHandler<EventArgs>? Selected;
+
+        Color orgBackColor;
+        Color selectedBackColor = Color.LightBlue;
+        BorderStyle orgBordderStyle;
+        BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
+
         public UcHeaderItem(
             KeyValuePair<string, object>? header,
             Control? uhiContainer = null)
         {
             InitializeComponent();
+            orgBackColor = lbInfo.BackColor;
+            //orgBordderStyle = this.BorderStyle;
             this.uhiContainer = uhiContainer;
 
             uhe = new UcHeaderEdit(header) { Visible = false };
@@ -38,7 +49,6 @@ namespace xyRESTTest
                 lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
             }
         }
-        public event EventHandler<EventArgs>? Edited;
         private void Header_edited(object? sender, EventArgs e)
         {
             if (sender is UcHeaderEdit uhe)
@@ -60,11 +70,13 @@ namespace xyRESTTest
 
         private void btnDropDown_Click(object sender, EventArgs e)
         {
+            Selected?.Invoke(this, new EventArgs());
             showUhi();
         }
 
         private void lbInfo_Click(object sender, EventArgs e)
         {
+            Selected?.Invoke(this, new EventArgs());
             showUhi();
         }
 
@@ -78,6 +90,20 @@ namespace xyRESTTest
                 uhe.BringToFront();
             }
             uhe.Visible = !uhe.Visible;
+        }
+
+        public void SetSelected(bool selected)
+        {
+            if (selected)
+            {
+                lbInfo.BackColor = selectedBackColor;
+                //this.BorderStyle = selectedBorderStyle;
+            }
+            else
+            {
+                lbInfo.BackColor = orgBackColor;
+                //this.BorderStyle = orgBordderStyle;
+            }
         }
     }
 }

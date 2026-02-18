@@ -21,12 +21,20 @@ namespace xyRESTTest
         Control? uaeContainer;
 
         public event EventHandler<EventArgs>? Edited;
+        public event EventHandler<EventArgs>? Selected;
+
+        Color orgBackColor;
+        Color selectedBackColor = Color.LightBlue;
+        BorderStyle orgBordderStyle;
+        BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 
         public UcAssertItem(
             AssertInfo? assertInfo,
             Control? uaeContainer = null)
         {
             InitializeComponent();
+            orgBackColor = this.BackColor;
+            orgBordderStyle = this.BorderStyle;
             this.uaeContainer = uaeContainer;
 
             if (assertInfo != null)
@@ -70,11 +78,13 @@ namespace xyRESTTest
 
         private void btnDropDown_Click(object sender, EventArgs e)
         {
+            Selected?.Invoke(this, new EventArgs());
             showUae();
         }
 
         private void lbInfo_Click(object sender, EventArgs e)
         {
+            Selected?.Invoke(this, new EventArgs());
             showUae();
         }
 
@@ -88,6 +98,20 @@ namespace xyRESTTest
                 uae.BringToFront();
             }
             uae.Visible = !uae.Visible;
+        }
+
+        public void SetSelected(bool selected)
+        {
+            if (selected)
+            {
+                this.BackColor = selectedBackColor;
+                this.BorderStyle = selectedBorderStyle;
+            }
+            else
+            {
+                this.BackColor = orgBackColor;
+                this.BorderStyle = orgBordderStyle;
+            }
         }
     }
 }

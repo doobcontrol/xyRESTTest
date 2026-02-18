@@ -67,6 +67,7 @@ namespace xyRESTTest
             var uhi = new UcHeaderItem(null, this);
             uhi.Dock = DockStyle.Top;
             uhi.Edited += Header_edited;
+            uhi.Selected += UcHeaderItem_Selected;
             TlpHeaders.Controls.Add(uhi);
         }
         public event EventHandler<EventArgs>? Edited;
@@ -92,6 +93,7 @@ namespace xyRESTTest
                     var uhi = new UcHeaderItem(header, this);
                     uhi.Dock = DockStyle.Top;
                     uhi.Edited += Header_edited;
+                    uhi.Selected += UcHeaderItem_Selected;
                     TlpHeaders.Controls.Add(uhi);
                 }
             }
@@ -105,6 +107,7 @@ namespace xyRESTTest
                 var uai = new UcAssertItem(assertInfo, this);
                 uai.Dock = DockStyle.Top;
                 uai.Edited += Assert_edited;
+                uai.Selected += UcAssertItem_Selected;
                 PnlAssertItems.Controls.Add(uai);
             }
         }
@@ -147,7 +150,7 @@ namespace xyRESTTest
                 EditCaseName(false);
             }
         }
-        
+
         private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (CmbBodyType.Text)
@@ -180,6 +183,7 @@ namespace xyRESTTest
             var uai = new UcAssertItem(null, this);
             uai.Dock = DockStyle.Top;
             uai.Edited += Assert_edited;
+            uai.Selected += UcAssertItem_Selected;
             PnlAssertItems.Controls.Add(uai);
         }
         private void Assert_edited(object? sender, EventArgs e)
@@ -196,7 +200,54 @@ namespace xyRESTTest
 
         private void TsbDelAssert_Click(object sender, EventArgs e)
         {
+            if(selectedAssertItem != null)
+            {
+                PnlAssertItems.Controls.Remove(selectedAssertItem);
+                testTask.assertInfos.Remove(selectedAssertItem.AssertInfo);
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
 
+        private void TsbDelHeader_Click(object sender, EventArgs e)
+        {
+            if(selectedHeaderItem != null)
+            {
+                TlpHeaders.Controls.Remove(selectedHeaderItem);
+                testTask.requestInfo.headers.Remove(selectedHeaderItem.HeaderName);
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+
+        UcHeaderItem? selectedHeaderItem;
+        private void UcHeaderItem_Selected(object? sender, EventArgs e)
+        {
+            foreach (Control control in TlpHeaders.Controls)
+            {
+                if (control is UcHeaderItem item)
+                {
+                    item.SetSelected(item == sender);
+                }
+            }
+            if (sender is UcHeaderItem selected)
+            {
+                selectedHeaderItem = selected;
+            }
+        }
+
+        UcAssertItem? selectedAssertItem;
+        private void UcAssertItem_Selected(object? sender, EventArgs e)
+        {
+            foreach (Control control in PnlAssertItems.Controls)
+            {
+                if (control is UcAssertItem item)
+                {
+                    item.SetSelected(item == sender);
+                }
+            }
+            if (sender is UcAssertItem selected)
+            {
+                selectedAssertItem = selected;
+            }
         }
     }
 }

@@ -106,12 +106,14 @@ namespace xyRESTTest
         {
             if (selectedItem != null)
             {
-                testProject.tasks.Add(selectedItem.TestTask);
+                testProject.tasks.Remove(selectedItem.TestTask);
                 xyTest.saveTestProject(testProject);
 
                 PnTestcases.Controls.Remove(selectedItem);
                 selectedItem.Dispose();
                 selectedItem = null;
+
+                panel2.Controls.Clear();
             }
         }
 
