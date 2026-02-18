@@ -25,13 +25,15 @@ namespace xyRESTTestLib
             {nameof(ReqMethod.DELETE), HttpMethod.Delete },
         };
 
+
+        public static ITestHandler TestHandler;
         public static HttpRequestMessage makeHttpRequestMessage(
             TestTask testTask,
             Dictionary<string, string> contextPars
             )
         {
             var requestInfo = testTask.requestInfo;
-            var testHandler = testTask.testHandler;
+            var testHandler = TestHandler;
             var rMsg = new HttpRequestMessage();
 
             rMsg.RequestUri = new Uri(requestInfo.url);
@@ -84,7 +86,7 @@ namespace xyRESTTestLib
             foreach (var assertInfo in testTask.assertInfos)
             {
                 rw.WriteLine("Assert: " + assertInfo.assertType);
-                var assertResult = await testTask.testHandler.AssertResponse(
+                var assertResult = await TestHandler.AssertResponse(
                     response, assertInfo, contextPars, rw);
                 if (!assertResult)
                 {
@@ -185,7 +187,6 @@ namespace xyRESTTestLib
         public required RequestInfo requestInfo { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public required List<AssertInfo> assertInfos { get; set; }
-        public ITestHandler testHandler;
     }
     public class TestProject
     {

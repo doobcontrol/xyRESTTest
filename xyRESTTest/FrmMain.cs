@@ -20,6 +20,8 @@ namespace xyRESTTest
         {
             InitializeComponent();
 
+            xyTest.TestHandler = new TestHandler();
+
             LbPrjName.Text = "No Project Loaded";
             TsbAddCase.Visible = false;
             TsbDelCase.Visible = false;
@@ -88,7 +90,6 @@ namespace xyRESTTest
                 outputfile = Path.Combine(
                     path ?? "", $"{outputfile}_output.txt");
 
-                utci.TestTask.testHandler = new TestHandler();
                 var contextPars = new Dictionary<string, string>();
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
@@ -185,11 +186,6 @@ namespace xyRESTTest
 
         private async void TsbRun_Click(object sender, EventArgs e)
         {
-            var handler = new TestHandler();
-            foreach (var task in testProject.tasks)
-            {
-                task.testHandler = handler;
-            }
             setRunnningState(true);
             await xyTest.runProjectAsync(testProject);
             setRunnningState(false);
