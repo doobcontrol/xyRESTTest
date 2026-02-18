@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace xyRESTTestLib
@@ -166,6 +167,18 @@ namespace xyRESTTestLib
             }
 
             return testProject;
+        }
+        public static string HandleParams(Dictionary<string, string> parsDic, string inputStr)
+        {
+            string pattern = @"\$\{(?<parName>\w+)\}";
+            MatchCollection matches = Regex.Matches(inputStr, pattern);
+            string returnStr = inputStr;
+            foreach (Match match in matches)
+            {
+                returnStr = returnStr.Replace(match.Value, 
+                    parsDic[match.Groups["parName"].Value]);
+            }
+            return returnStr;
         }
 
         public const string CT_app_json = "application/json";

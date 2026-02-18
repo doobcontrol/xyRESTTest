@@ -8,18 +8,21 @@ namespace xyRESTTestLib
 {
     public class RheaderTools
     {
-        public static string? HeaderAuth(AuthHeaderInfo authHeaderInfo)
+        public static string? HeaderAuth(
+            AuthHeaderInfo authHeaderInfo,
+            Dictionary<string, string> parsDic)
         {
             string? header = null;
             switch (authHeaderInfo.scheme)
             {
                 case "Basic":
                     header = HeaderAuthBasic(
-                        authHeaderInfo.username,
-                        authHeaderInfo.password);
+                        xyTest.HandleParams(parsDic, authHeaderInfo.username),
+                        xyTest.HandleParams(parsDic, authHeaderInfo.password));
                     break;
                 case "Bearer":
-                    header = HeaderAuthBearer(authHeaderInfo.authToken);
+                    header = HeaderAuthBearer(
+                        xyTest.HandleParams(parsDic, authHeaderInfo.authToken));
                     break;
             }
             return header;

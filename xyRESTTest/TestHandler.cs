@@ -120,23 +120,8 @@ namespace xyRESTTest
                 {
                     case nameof(HeaderType.Authorization):
                         var authData= (AuthHeaderInfo)hd.Value;
-                        if(authData.scheme == nameof(AuthType.Bearer))
-                        {
-                            // Get token value from context parameters if it
-                            // contains the placeholder
-                            string parName = "AuthToken";
-                            string? token = contextPars.ContainsKey(parName)
-                                ? contextPars[parName] : null;
-                            if (token != null
-                                && authData.authToken.
-                                Contains("${" + parName + "}"))
-                            {
-                                authData.authToken = authData.authToken.Replace(
-                                    "${" + parName + "}",
-                                    token);
-                            }
-                        }
-                        string? headerValue = RheaderTools.HeaderAuth(authData);
+                        string? headerValue = RheaderTools.HeaderAuth(
+                            authData, contextPars);
                         if (headerValue != null)
                         {
                             headers[hd.Key] = headerValue;
