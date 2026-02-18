@@ -36,6 +36,10 @@ namespace xyRESTTest
             orgBackColor = lbInfo.BackColor;
             //orgBordderStyle = this.BorderStyle;
             this.uhiContainer = uhiContainer;
+            if (this.uhiContainer == null)
+            {
+                this.uhiContainer = Parent;
+            }
 
             uhe = new UcHeaderEdit(header) { Visible = false };
             uhe.Edited += Header_edited;
@@ -59,15 +63,6 @@ namespace xyRESTTest
             }
         }
 
-        private void UcHeaderItem_Load(object sender, EventArgs e)
-        {
-            if (uhiContainer == null)
-            {
-                uhiContainer = Parent;
-            }
-            uhiContainer.Controls.Add(uhe);
-        }
-
         private void btnDropDown_Click(object sender, EventArgs e)
         {
             Selected?.Invoke(this, new EventArgs());
@@ -84,10 +79,15 @@ namespace xyRESTTest
         {
             if (!uhe.Visible)
             {
+                uhiContainer.Controls.Add(uhe);
                 Point parentPoint = uhiContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
                 uhe.Location = parentPoint;
                 uhe.BringToFront();
+            }
+            else
+            {
+                uhiContainer.Controls.Remove(uhe);
             }
             uhe.Visible = !uhe.Visible;
         }

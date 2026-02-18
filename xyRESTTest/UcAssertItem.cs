@@ -36,6 +36,10 @@ namespace xyRESTTest
             orgBackColor = this.BackColor;
             orgBordderStyle = this.BorderStyle;
             this.uaeContainer = uaeContainer;
+            if (this.uaeContainer == null)
+            {
+                this.uaeContainer = Parent;
+            }
 
             if (assertInfo != null)
             {
@@ -64,18 +68,6 @@ namespace xyRESTTest
             }
         }
 
-        private void UcAssertItem_Load(object sender, EventArgs e)
-        {
-            if (uaeContainer == null)
-            {
-                uaeContainer = Parent;
-            }
-            if (uaeContainer != null)
-            {
-                uaeContainer.Controls.Add(uae);
-            }
-        }
-
         private void btnDropDown_Click(object sender, EventArgs e)
         {
             Selected?.Invoke(this, new EventArgs());
@@ -92,10 +84,15 @@ namespace xyRESTTest
         {
             if (!uae.Visible)
             {
+                uaeContainer.Controls.Add(uae);
                 Point parentPoint = uaeContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
                 uae.Location = parentPoint;
                 uae.BringToFront();
+            }
+            else
+            {
+                uaeContainer.Controls.Remove(uae);
             }
             uae.Visible = !uae.Visible;
         }

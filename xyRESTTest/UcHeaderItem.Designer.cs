@@ -88,7 +88,6 @@
             MinimumSize = new Size(150, 0);
             Name = "UcHeaderItem";
             Size = new Size(148, 20);
-            Load += UcHeaderItem_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);

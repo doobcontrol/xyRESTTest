@@ -88,7 +88,6 @@
             MinimumSize = new Size(150, 0);
             Name = "UcAssertItem";
             Size = new Size(148, 20);
-            Load += UcAssertItem_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
