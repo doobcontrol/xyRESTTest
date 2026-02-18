@@ -135,6 +135,9 @@ namespace xyRESTTest
                 toolStripSeparator1.Visible = true;
                 TsbRun.Visible = true;
                 toolStripSeparator2.Visible = true;
+
+                PnTestcases.Controls.Clear();
+                panel2.Controls.Clear();
             }
         }
 
@@ -170,6 +173,7 @@ namespace xyRESTTest
                     toolStripSeparator2.Visible = true;
 
                     PnTestcases.Controls.Clear();
+                    panel2.Controls.Clear();
                     foreach (var task in testProject.tasks)
                     {
                         AddTestCaseItem(task);
