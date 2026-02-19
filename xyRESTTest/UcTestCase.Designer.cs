@@ -93,15 +93,15 @@
             // 
             // TxtUrl
             // 
-            TxtUrl.Location = new Point(133, 3);
+            TxtUrl.Location = new Point(90, 3);
             TxtUrl.Name = "TxtUrl";
-            TxtUrl.Size = new Size(534, 27);
+            TxtUrl.Size = new Size(571, 27);
             TxtUrl.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(20, 18);
+            label3.Location = new Point(53, 6);
             label3.Name = "label3";
             label3.Size = new Size(31, 20);
             label3.TabIndex = 3;
@@ -265,7 +265,7 @@
             // 
             CmbMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             CmbMethod.FormattingEnabled = true;
-            CmbMethod.Location = new Point(133, 36);
+            CmbMethod.Location = new Point(90, 36);
             CmbMethod.Name = "CmbMethod";
             CmbMethod.Size = new Size(151, 28);
             CmbMethod.TabIndex = 6;
