@@ -41,10 +41,26 @@ namespace xyRESTTest
                     Edited?.Invoke(this, new EventArgs());
                 }
             };
+            splitter1.Visible = false;
+            GbBody.Visible = false;
             UiTools.FillCbWithEnum(CmbMethod, typeof(ReqMethod));
             CmbMethod.TextChanged += (s, e) =>
             {
-                if (CmbMethod.Text != testTask.requestInfo?.method)
+                if (
+                    CmbMethod.Text == nameof(ReqMethod.GET)
+                    || CmbMethod.Text == nameof(ReqMethod.DELETE))
+                {
+                    PnlBody.Controls.Clear();
+                    testTask.requestInfo.body = null;
+                    splitter1.Visible = false;
+                    GbBody.Visible = false;
+                }
+                else
+                {
+                    splitter1.Visible = true;
+                    GbBody.Visible = true;
+                }
+                if (CmbMethod.Text != testTask.requestInfo.method)
                 {
                     this.testTask.requestInfo.method = CmbMethod.Text;
                     Edited?.Invoke(this, new EventArgs());
@@ -200,7 +216,7 @@ namespace xyRESTTest
 
         private void TsbDelAssert_Click(object sender, EventArgs e)
         {
-            if(selectedAssertItem != null)
+            if (selectedAssertItem != null)
             {
                 PnlAssertItems.Controls.Remove(selectedAssertItem);
                 testTask.assertInfos.Remove(selectedAssertItem.AssertInfo);
@@ -210,7 +226,7 @@ namespace xyRESTTest
 
         private void TsbDelHeader_Click(object sender, EventArgs e)
         {
-            if(selectedHeaderItem != null)
+            if (selectedHeaderItem != null)
             {
                 TlpHeaders.Controls.Remove(selectedHeaderItem);
                 testTask.requestInfo.headers.Remove(selectedHeaderItem.HeaderName);

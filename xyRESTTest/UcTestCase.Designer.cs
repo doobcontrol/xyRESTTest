@@ -36,7 +36,7 @@
             tabControl1 = new TabControl();
             tabRequest = new TabPage();
             splitter1 = new Splitter();
-            groupBox2 = new GroupBox();
+            GbBody = new GroupBox();
             PnlBody = new Panel();
             panel3 = new Panel();
             CmbBodyType = new ComboBox();
@@ -45,6 +45,7 @@
             TlpHeaders = new TableLayoutPanel();
             toolStrip1 = new ToolStrip();
             TsbAddHeader = new ToolStripButton();
+            TsbDelHeader = new ToolStripButton();
             panel2 = new Panel();
             CmbMethod = new ComboBox();
             label4 = new Label();
@@ -55,10 +56,9 @@
             TsbDelAssert = new ToolStripButton();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
-            TsbDelHeader = new ToolStripButton();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
-            groupBox2.SuspendLayout();
+            GbBody.SuspendLayout();
             panel3.SuspendLayout();
             groupBox1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -121,7 +121,7 @@
             // tabRequest
             // 
             tabRequest.Controls.Add(splitter1);
-            tabRequest.Controls.Add(groupBox2);
+            tabRequest.Controls.Add(GbBody);
             tabRequest.Controls.Add(groupBox1);
             tabRequest.Controls.Add(panel2);
             tabRequest.Location = new Point(4, 29);
@@ -141,17 +141,17 @@
             splitter1.TabIndex = 10;
             splitter1.TabStop = false;
             // 
-            // groupBox2
+            // GbBody
             // 
-            groupBox2.Controls.Add(PnlBody);
-            groupBox2.Controls.Add(panel3);
-            groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(3, 125);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(680, 183);
-            groupBox2.TabIndex = 9;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Body";
+            GbBody.Controls.Add(PnlBody);
+            GbBody.Controls.Add(panel3);
+            GbBody.Dock = DockStyle.Fill;
+            GbBody.Location = new Point(3, 125);
+            GbBody.Name = "GbBody";
+            GbBody.Size = new Size(680, 183);
+            GbBody.TabIndex = 9;
+            GbBody.TabStop = false;
+            GbBody.Text = "Body";
             // 
             // PnlBody
             // 
@@ -238,6 +238,16 @@
             TsbAddHeader.Size = new Size(29, 24);
             TsbAddHeader.Text = "toolStripButton1";
             TsbAddHeader.Click += TsbAddHeader_Click;
+            // 
+            // TsbDelHeader
+            // 
+            TsbDelHeader.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbDelHeader.Image = Properties.Resources.Delete;
+            TsbDelHeader.ImageTransparentColor = Color.Magenta;
+            TsbDelHeader.Name = "TsbDelHeader";
+            TsbDelHeader.Size = new Size(29, 24);
+            TsbDelHeader.Text = "toolStripButton1";
+            TsbDelHeader.Click += TsbDelHeader_Click;
             // 
             // panel2
             // 
@@ -330,16 +340,6 @@
             panel1.Size = new Size(694, 61);
             panel1.TabIndex = 6;
             // 
-            // TsbDelHeader
-            // 
-            TsbDelHeader.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbDelHeader.Image = Properties.Resources.Delete;
-            TsbDelHeader.ImageTransparentColor = Color.Magenta;
-            TsbDelHeader.Name = "TsbDelHeader";
-            TsbDelHeader.Size = new Size(29, 24);
-            TsbDelHeader.Text = "toolStripButton1";
-            TsbDelHeader.Click += TsbDelHeader_Click;
-            // 
             // UcTestCase
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -351,7 +351,7 @@
             tabControl1.ResumeLayout(false);
             tabRequest.ResumeLayout(false);
             tabRequest.PerformLayout();
-            groupBox2.ResumeLayout(false);
+            GbBody.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -382,7 +382,7 @@
         private Panel panel1;
         private ComboBox CmbMethod;
         private Label label4;
-        private GroupBox groupBox2;
+        private GroupBox GbBody;
         private GroupBox groupBox1;
         private Panel panel2;
         private Splitter splitter1;
