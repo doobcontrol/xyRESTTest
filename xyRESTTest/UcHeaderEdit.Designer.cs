@@ -111,8 +111,6 @@
             MinimumSize = new Size(150, 0);
             Name = "UcHeaderEdit";
             Size = new Size(148, 63);
-            VisibleChanged += UcHeaderEdit_VisibleChanged;
-            MouseDown += UcHeaderEdit_MouseDown;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);

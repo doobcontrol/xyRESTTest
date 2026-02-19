@@ -82,19 +82,20 @@ namespace xyRESTTest
 
         private void showUae()
         {
-            if (!uae.Visible)
+            uae.Visible = !uae.Visible;
+            if (uae.Visible)
             {
                 uaeContainer.Controls.Add(uae);
                 Point parentPoint = uaeContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
                 uae.Location = parentPoint;
                 uae.BringToFront();
+                uae.Select();
             }
             else
             {
                 uaeContainer.Controls.Remove(uae);
             }
-            uae.Visible = !uae.Visible;
         }
 
         public void SetSelected(bool selected)

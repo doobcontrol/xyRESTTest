@@ -13,7 +13,6 @@ namespace xyRESTTest
 {
     public partial class UcHeaderItem : UserControl
     {
-
         public string HeaderName { get => uhe.HeaderName; }
         public object HeaderValue { get => uhe.HeaderValue; }
 
@@ -43,6 +42,7 @@ namespace xyRESTTest
 
             uhe = new UcHeaderEdit(header) { Visible = false };
             uhe.Edited += Header_edited;
+            uhe.Leave += (s, e) => { uhe.Visible = false; };
 
             if (uhe.HeaderName == null || uhe.HeaderName == "")
             {
@@ -77,19 +77,20 @@ namespace xyRESTTest
 
         private void showUhi()
         {
-            if (!uhe.Visible)
+            uhe.Visible = !uhe.Visible;
+            if (uhe.Visible)
             {
                 uhiContainer.Controls.Add(uhe);
                 Point parentPoint = uhiContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
                 uhe.Location = parentPoint;
                 uhe.BringToFront();
+                uhe.Select();
             }
             else
             {
                 uhiContainer.Controls.Remove(uhe);
             }
-            uhe.Visible = !uhe.Visible;
         }
 
         public void SetSelected(bool selected)

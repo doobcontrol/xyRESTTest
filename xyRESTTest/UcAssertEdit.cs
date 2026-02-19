@@ -29,25 +29,6 @@ namespace xyRESTTest
             comboBox1.Text = this.assertInfo.assertType;
         }
 
-        private void UcAssertEdit_MouseDown(object sender, MouseEventArgs e)
-        {
-            // Convert the mouse coordinates from screen to the control's client coordinates
-            Point clientPoint = PointToClient(Cursor.Position);
-
-            // Check if the click occurred outside the control's client rectangle
-            if (!ClientRectangle.Contains(clientPoint))
-            {
-                // Hide the control
-                Hide();
-            }
-        }
-
-        private void UcAssertEdit_VisibleChanged(object sender, EventArgs e)
-        {
-            // Release the mouse capture
-            Capture = Visible;
-        }
-
         private void BtnOk_Click(object sender, EventArgs e)
         {
             Edited?.Invoke(this, new EventArgs());

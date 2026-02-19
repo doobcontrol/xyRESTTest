@@ -111,8 +111,6 @@
             MinimumSize = new Size(150, 0);
             Name = "UcAssertEdit";
             Size = new Size(148, 63);
-            VisibleChanged += UcAssertEdit_VisibleChanged;
-            MouseDown += UcAssertEdit_MouseDown;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
