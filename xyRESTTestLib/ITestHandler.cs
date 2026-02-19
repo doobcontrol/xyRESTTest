@@ -19,5 +19,9 @@ namespace xyRESTTestLib
             AssertInfo assertInfo,
             Dictionary<string, string> contextPars,
             StreamWriter rw);
+
+        List<Dictionary<string, string>> GenerateTestDatas(
+            DataGenerator dataGenerator);
+        TestTask ApplyLocalPars(TestTask task, Dictionary<string, string> LocalPars);
     }
 }

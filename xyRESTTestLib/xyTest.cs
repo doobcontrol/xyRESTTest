@@ -116,11 +116,31 @@ namespace xyRESTTestLib
                 {
                     sw.WriteLine("Test: " + task.name);
                     sw.WriteLine("API: " + task.requestInfo.url);
-                    if (!await oneTestAsync(task, contextPars, sw))
+
+                    if (task.dataGenerator == null)
                     {
-                        sw.WriteLine("... Failed");
-                        return false;
+                        if (!await oneTestAsync(task, contextPars, sw))
+                        {
+                            sw.WriteLine("... Failed");
+                            return false;
+                        }
                     }
+                    else
+                    {
+                        var testDataList = TestHandler.GenerateTestDatas(task.dataGenerator);
+                        foreach (var testData in testDataList)
+                        {
+                            var newTask = TestHandler.ApplyLocalPars(task, testData);
+                            sw.WriteLine("Test data: " + string.Join(", ", testData));
+                            if (!await oneTestAsync(newTask, contextPars, sw))
+                            {
+                                sw.WriteLine("... Failed");
+                                return false;
+                            }
+                            sw.WriteLine("... succeed");
+                        }
+                    }
+
                     sw.WriteLine("... succeed");
                     sw.WriteLine();
                 }
@@ -166,7 +186,8 @@ namespace xyRESTTestLib
 
             return testProject;
         }
-        public static string HandleParams(Dictionary<string, string> parsDic, string inputStr)
+        public static string HandleContextParams(
+            Dictionary<string, string> parsDic, string inputStr)
         {
             string pattern = @"\$\{(?<parName>\w+)\}";
             MatchCollection matches = Regex.Matches(inputStr, pattern);
@@ -174,6 +195,19 @@ namespace xyRESTTestLib
             foreach (Match match in matches)
             {
                 returnStr = returnStr.Replace(match.Value, 
+                    parsDic[match.Groups["parName"].Value]);
+            }
+            return returnStr;
+        }
+        public static string HandleLocalParams(
+            Dictionary<string, string> parsDic, string inputStr)
+        {
+            string pattern = @"\{\{(?<parName>\w+)\}\}";
+            MatchCollection matches = Regex.Matches(inputStr, pattern);
+            string returnStr = inputStr;
+            foreach (Match match in matches)
+            {
+                returnStr = returnStr.Replace(match.Value,
                     parsDic[match.Groups["parName"].Value]);
             }
             return returnStr;
@@ -187,6 +221,8 @@ namespace xyRESTTestLib
         public required RequestInfo requestInfo { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public required List<AssertInfo> assertInfos { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public DataGenerator? dataGenerator { get; set; }
     }
     public class TestProject
     {
@@ -203,6 +239,12 @@ namespace xyRESTTestLib
         public Dictionary<string, object>? headers { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public ContentInfo? body { get; set; }
+    }
+    public class DataGenerator
+    {
+        public required List<string> ParamList { get; set; }
+        public required string GeneratorType { get; set; }
+        public required Dictionary<string, string> GeneratorInfo { get; set; }
     }
     public class AssertInfo
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using xyRESTTestLib;
@@ -10,6 +11,25 @@ namespace xyRESTTest
 {
     internal class TestHandler : ITestHandler
     {
+        public TestTask ApplyLocalPars(TestTask task, Dictionary<string, string> LocalPars)
+        {
+            var json = JsonSerializer.Serialize(task);
+            json = xyTest.HandleLocalParams(LocalPars, json);
+            var newTask = JsonSerializer.Deserialize<TestTask>(json);
+            if (newTask.requestInfo != null && newTask.requestInfo.headers != null)
+            {
+                foreach (var header in newTask.requestInfo.headers)
+                {
+                    if (header.Key == "Authorization")
+                    {
+                        newTask.requestInfo.headers[header.Key] =
+                            JsonSerializer.Deserialize<AuthHeaderInfo>(header.Value.ToString());
+                    }
+                }
+            }
+            return newTask;
+        }
+
         public async Task<bool> AssertResponse(
             HttpResponseMessage response,
             AssertInfo assertInfo,
@@ -103,6 +123,24 @@ namespace xyRESTTest
                     return false;
             }
             return ret;
+        }
+
+        public List<Dictionary<string, string>> GenerateTestDatas(DataGenerator dataGenerator)
+        {
+            var retList = new List<Dictionary<string, string>>();
+            retList.Add(new Dictionary<string, string>()
+            {
+                {"FID", "000"},{"FUserName", "Alice"},{"FPassword", "123456"}
+            });
+            retList.Add(new Dictionary<string, string>()
+            {
+                {"FID", "001"},{"FUserName", "Alice1"},{"FPassword", "1234561"}
+            });
+            retList.Add(new Dictionary<string, string>()
+            {
+                {"FID", "002"},{"FUserName", "Alice2"},{"FPassword", "1234562"}
+            });
+            return retList;
         }
 
         public Dictionary<string, string>? ParseHeaders(

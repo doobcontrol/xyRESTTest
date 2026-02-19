@@ -56,6 +56,8 @@
             TsbDelAssert = new ToolStripButton();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
+            tabData = new TabPage();
+            CbDataGenerator = new CheckBox();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             GbBody.SuspendLayout();
@@ -66,6 +68,7 @@
             tabAssert.SuspendLayout();
             toolStrip2.SuspendLayout();
             panel1.SuspendLayout();
+            tabData.SuspendLayout();
             SuspendLayout();
             // 
             // LbCaseName
@@ -111,6 +114,7 @@
             // 
             tabControl1.Controls.Add(tabRequest);
             tabControl1.Controls.Add(tabAssert);
+            tabControl1.Controls.Add(tabData);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 61);
             tabControl1.Name = "tabControl1";
@@ -340,6 +344,27 @@
             panel1.Size = new Size(694, 61);
             panel1.TabIndex = 6;
             // 
+            // tabData
+            // 
+            tabData.Controls.Add(CbDataGenerator);
+            tabData.Location = new Point(4, 29);
+            tabData.Name = "tabData";
+            tabData.Size = new Size(686, 311);
+            tabData.TabIndex = 2;
+            tabData.Text = "Data Generator";
+            tabData.UseVisualStyleBackColor = true;
+            // 
+            // CbDataGenerator
+            // 
+            CbDataGenerator.AutoSize = true;
+            CbDataGenerator.Location = new Point(20, 14);
+            CbDataGenerator.Name = "CbDataGenerator";
+            CbDataGenerator.Size = new Size(250, 24);
+            CbDataGenerator.TabIndex = 0;
+            CbDataGenerator.Text = "Dynamically regenerate test data";
+            CbDataGenerator.UseVisualStyleBackColor = true;
+            CbDataGenerator.CheckedChanged += CbDataGenerator_CheckedChanged;
+            // 
             // UcTestCase
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -366,6 +391,8 @@
             toolStrip2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            tabData.ResumeLayout(false);
+            tabData.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -399,5 +426,7 @@
         private ToolStripButton TsbAddAssert;
         private ToolStripButton TsbDelAssert;
         private ToolStripButton TsbDelHeader;
+        private TabPage tabData;
+        private CheckBox CbDataGenerator;
     }
 }

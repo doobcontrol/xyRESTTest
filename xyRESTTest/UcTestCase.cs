@@ -265,5 +265,23 @@ namespace xyRESTTest
                 selectedAssertItem = selected;
             }
         }
+
+        private void CbDataGenerator_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CbDataGenerator.Checked)
+            {
+                testTask.dataGenerator = new DataGenerator()
+                {
+                    GeneratorType = "Random",
+                    GeneratorInfo = new Dictionary<string, string>(),
+                    ParamList = new List<string>()
+                };
+            }
+            else
+            {
+                testTask.dataGenerator = null;
+            }
+            Edited?.Invoke(this, new EventArgs());
+        }
     }
 }
