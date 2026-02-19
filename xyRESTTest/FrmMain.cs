@@ -19,6 +19,7 @@ namespace xyRESTTest
         public FrmMain()
         {
             InitializeComponent();
+            Text = "REST API Test Tool";
 
             xyTest.TestHandler = new TestHandler();
 
