@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using xyRESTTestLib;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static xyRESTTest.UcTestCase;
 
 namespace xyRESTTest
 {
@@ -70,6 +71,18 @@ namespace xyRESTTest
             CmbBodyType.Items.Clear();
             CmbBodyType.Items.Add(xyTest.CT_app_json);
 
+            UiTools.FillCbWithEnum(CbGeneratorType, typeof(GeneratorType));
+            DgvParameters.AllowUserToAddRows = false;
+            DgvParameters.AllowUserToDeleteRows = false;
+            DgvParameters.AllowUserToResizeRows = false;
+            DgvParameters.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+            DgvParameters.RowHeadersVisible = false;
+            DgvParameters.ColumnHeadersVisible = false;
+            DgvParameters.SelectionMode= DataGridViewSelectionMode.FullRowSelect;
+            DgvParameters.MultiSelect = false;
+            DgvParameters.Columns.Add("Parameter", "Parameter");
+
             deplopData();
         }
 
@@ -126,6 +139,8 @@ namespace xyRESTTest
                 uai.Selected += UcAssertItem_Selected;
                 PnlAssertItems.Controls.Add(uai);
             }
+
+            deplopGeneratorData();
         }
 
         private void EditCaseName(bool startEdit)
@@ -266,22 +281,126 @@ namespace xyRESTTest
             }
         }
 
+        #region Test data generator
         private void CbDataGenerator_CheckedChanged(object sender, EventArgs e)
         {
             if (CbDataGenerator.Checked)
             {
-                testTask.dataGenerator = new DataGenerator()
+                if (testTask.dataGenerator == null)
                 {
-                    GeneratorType = "Random",
-                    GeneratorInfo = new Dictionary<string, string>(),
-                    ParamList = new List<string>()
-                };
+                    testTask.dataGenerator = new DataGenerator()
+                    {
+                        GeneratorType = nameof(GeneratorType.Basic),
+                        GeneratorInfo = new Dictionary<string, string>(),
+                        ParamList = new List<string>()
+                    };
+                }
+                PnlGenerator.Visible = true;
+                CbGeneratorType.Visible = true;
             }
             else
             {
                 testTask.dataGenerator = null;
+                PnlGenerator.Visible = false;
+                CbGeneratorType.Visible = false;
             }
             Edited?.Invoke(this, new EventArgs());
         }
+
+        public interface IGeneratorConfigControl
+        {
+            void AddAParam(string ParamName);
+            void DelAParam(string ParamName);
+            void UpdateAParam(string newName, string oldName);
+        }
+        IGeneratorConfigControl generatorConfigControl;
+        private void CbGeneratorType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CbGeneratorType.Text != null
+                && CbGeneratorType.Text != "")
+            {
+                testTask.dataGenerator.GeneratorType = CbGeneratorType.Text;
+                switch (testTask.dataGenerator.GeneratorType)
+                {
+                    case nameof(GeneratorType.Basic):
+                        PnlRecords.Controls.Clear();
+                        if (!testTask.dataGenerator.GeneratorInfo.ContainsKey(
+                            xyTest.DGT_Basic_File))
+                        {
+                            testTask.dataGenerator.GeneratorInfo.Add(
+                                xyTest.DGT_Basic_File,
+                                Path.Combine(UiTools.WorkDir, TestTask.name.Replace(" ", ""))
+                                );
+                        }
+                        var ugb = new UcGeneratorBasic(testTask.dataGenerator);
+                        ugb.Edited += (s, ev) =>
+                        {
+                            Edited?.Invoke(this, new EventArgs());
+                        };
+                        ugb.Dock = DockStyle.Fill;
+                        PnlRecords.Controls.Add(ugb);
+                        generatorConfigControl = ugb;
+                        break;
+                    default:
+                        PnlRecords.Controls.Clear();
+                        break;
+                }
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+
+        private void TsbAddParam_Click(object sender, EventArgs e)
+        {
+            DgvParameters.Rows.Add();
+        }
+
+        private void TsbDelParam_Click(object sender, EventArgs e)
+        {
+            if (DgvParameters.SelectedRows.Count > 0)
+            {
+                if (DgvParameters.SelectedRows[0].Tag != null)
+                {
+                    testTask.dataGenerator.ParamList.Remove(
+                        DgvParameters.SelectedRows[0].Tag.ToString());
+                    generatorConfigControl?.DelAParam(
+                        DgvParameters.SelectedRows[0].Tag.ToString());
+                }
+                DgvParameters.Rows.Remove(DgvParameters.SelectedRows[0]);
+            }
+        }
+
+        private void DgvParameters_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = DgvParameters.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var newParamName = cell.Value?.ToString();
+            if (DgvParameters.Rows[e.RowIndex].Tag != null)
+            {
+                var oldParamName = DgvParameters.Rows[e.RowIndex].Tag?.ToString();
+                int index = testTask.dataGenerator.ParamList.FindIndex(p => p == oldParamName);
+                testTask.dataGenerator.ParamList[index] = newParamName;
+                DgvParameters.Rows[e.RowIndex].Tag = newParamName;
+                generatorConfigControl?.UpdateAParam(newParamName, oldParamName);
+            }
+            else
+            {
+                testTask.dataGenerator.ParamList.Add(newParamName);
+                DgvParameters.Rows[e.RowIndex].Tag = newParamName;
+                generatorConfigControl?.AddAParam(newParamName);
+            }
+        }
+        private void deplopGeneratorData()
+        {
+            CbDataGenerator.Checked = testTask.dataGenerator != null;
+            if (CbDataGenerator.Checked)
+            {
+                CbGeneratorType.Text = testTask.dataGenerator.GeneratorType;
+                foreach (var param in testTask.dataGenerator.ParamList)
+                {
+                    DgvParameters.Rows.Add(param);
+                    DgvParameters.Rows[DgvParameters.Rows.Count - 1].Tag = param;
+                }
+            }
+        }
+        #endregion
     }
 }

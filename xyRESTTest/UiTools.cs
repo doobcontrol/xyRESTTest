@@ -16,5 +16,18 @@ namespace xyRESTTest
                 cb.Items.Add(name);
             });
         }
+
+        public static string WorkDir { 
+            get {
+                var workDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "xyRESTTest");
+                if(!Directory.Exists(workDir))
+                {
+                    Directory.CreateDirectory(workDir);
+                }
+                return workDir;
+            }
+        }
     }
 }

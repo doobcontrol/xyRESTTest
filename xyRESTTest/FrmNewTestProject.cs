@@ -20,8 +20,7 @@ namespace xyRESTTest
         public FrmNewTestProject()
         {
             InitializeComponent();
-            TxtProjectFolder.Text =
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            TxtProjectFolder.Text = UiTools.WorkDir;
             TxtProjectName.TextChanged += ProjectNameOrFolder_TextChanged;
             TxtProjectFolder.TextChanged += ProjectNameOrFolder_TextChanged;
 

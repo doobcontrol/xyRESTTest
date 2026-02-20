@@ -128,18 +128,34 @@ namespace xyRESTTest
         public List<Dictionary<string, string>> GenerateTestDatas(DataGenerator dataGenerator)
         {
             var retList = new List<Dictionary<string, string>>();
-            retList.Add(new Dictionary<string, string>()
+
+            switch(dataGenerator.GeneratorType)
             {
-                {"FID", "000"},{"FUserName", "Alice"},{"FPassword", "123456"}
-            });
-            retList.Add(new Dictionary<string, string>()
-            {
-                {"FID", "001"},{"FUserName", "Alice1"},{"FPassword", "1234561"}
-            });
-            retList.Add(new Dictionary<string, string>()
-            {
-                {"FID", "002"},{"FUserName", "Alice2"},{"FPassword", "1234562"}
-            });
+                case nameof(GeneratorType.Basic):
+                    if (dataGenerator.GeneratorInfo.TryGetValue(
+                        xyTest.DGT_Basic_File, out string? filePath))
+                    {
+                        if (filePath != null)
+                        {
+                            var lines = File.ReadAllLines(filePath);
+                            var headers = lines[0].Split(',');
+                            for (int i = 1; i < lines.Length; i++)
+                            {
+                                var values = lines[i].Split(',');
+                                var dataDict = new Dictionary<string, string>();
+                                for (int j = 0; j < headers.Length; j++)
+                                {
+                                    dataDict[headers[j]] = values[j];
+                                }
+                                retList.Add(dataDict);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
             return retList;
         }
 

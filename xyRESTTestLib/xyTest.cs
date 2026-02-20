@@ -213,7 +213,11 @@ namespace xyRESTTestLib
             return returnStr;
         }
 
+        // Content Type
         public const string CT_app_json = "application/json";
+
+        // Data Generator Type
+        public const string DGT_Basic_File = "DataFile";
     }
     public class TestTask
     {
@@ -289,5 +293,9 @@ namespace xyRESTTestLib
     {
         StatusCode,
         JsonContent
+    }
+    public enum GeneratorType
+    {
+        Basic
     }
 }

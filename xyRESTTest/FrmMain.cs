@@ -148,7 +148,7 @@ namespace xyRESTTest
             var ofd = new OpenFileDialog();
 
             // Set properties for the dialog
-            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ofd.InitialDirectory = UiTools.WorkDir;
             ofd.Title = "Open Test Project";
             ofd.CheckFileExists = true;
             ofd.CheckPathExists = true;

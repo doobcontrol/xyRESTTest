@@ -54,10 +54,21 @@
             toolStrip2 = new ToolStrip();
             TsbAddAssert = new ToolStripButton();
             TsbDelAssert = new ToolStripButton();
+            tabData = new TabPage();
+            PnlGenerator = new Panel();
+            PnlRecords = new Panel();
+            splitter2 = new Splitter();
+            PnlParameters = new Panel();
+            DgvParameters = new DataGridView();
+            label2 = new Label();
+            toolStrip3 = new ToolStrip();
+            TsbAddParam = new ToolStripButton();
+            TsbDelParam = new ToolStripButton();
+            panel4 = new Panel();
+            CbGeneratorType = new ComboBox();
+            CbDataGenerator = new CheckBox();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
-            tabData = new TabPage();
-            CbDataGenerator = new CheckBox();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             GbBody.SuspendLayout();
@@ -67,16 +78,22 @@
             panel2.SuspendLayout();
             tabAssert.SuspendLayout();
             toolStrip2.SuspendLayout();
-            panel1.SuspendLayout();
             tabData.SuspendLayout();
+            PnlGenerator.SuspendLayout();
+            PnlParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvParameters).BeginInit();
+            toolStrip3.SuspendLayout();
+            panel4.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // LbCaseName
             // 
+            LbCaseName.BorderStyle = BorderStyle.FixedSingle;
             LbCaseName.Dock = DockStyle.Top;
             LbCaseName.Location = new Point(0, 27);
             LbCaseName.Name = "LbCaseName";
-            LbCaseName.Size = new Size(694, 34);
+            LbCaseName.Size = new Size(694, 31);
             LbCaseName.TabIndex = 0;
             LbCaseName.Text = "label1";
             LbCaseName.TextAlign = ContentAlignment.MiddleCenter;
@@ -116,10 +133,10 @@
             tabControl1.Controls.Add(tabAssert);
             tabControl1.Controls.Add(tabData);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(0, 61);
+            tabControl1.Location = new Point(0, 58);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(694, 344);
+            tabControl1.Size = new Size(694, 347);
             tabControl1.TabIndex = 5;
             // 
             // tabRequest
@@ -131,7 +148,7 @@
             tabRequest.Location = new Point(4, 29);
             tabRequest.Name = "tabRequest";
             tabRequest.Padding = new Padding(3);
-            tabRequest.Size = new Size(686, 311);
+            tabRequest.Size = new Size(686, 314);
             tabRequest.TabIndex = 0;
             tabRequest.Text = "Request Information";
             tabRequest.UseVisualStyleBackColor = true;
@@ -152,7 +169,7 @@
             GbBody.Dock = DockStyle.Fill;
             GbBody.Location = new Point(3, 125);
             GbBody.Name = "GbBody";
-            GbBody.Size = new Size(680, 183);
+            GbBody.Size = new Size(680, 186);
             GbBody.TabIndex = 9;
             GbBody.TabStop = false;
             GbBody.Text = "Body";
@@ -162,7 +179,7 @@
             PnlBody.Dock = DockStyle.Fill;
             PnlBody.Location = new Point(3, 53);
             PnlBody.Name = "PnlBody";
-            PnlBody.Size = new Size(674, 127);
+            PnlBody.Size = new Size(674, 130);
             PnlBody.TabIndex = 2;
             // 
             // panel3
@@ -290,7 +307,7 @@
             tabAssert.Location = new Point(4, 29);
             tabAssert.Name = "tabAssert";
             tabAssert.Padding = new Padding(3);
-            tabAssert.Size = new Size(686, 311);
+            tabAssert.Size = new Size(686, 314);
             tabAssert.TabIndex = 1;
             tabAssert.Text = "Assertion Information";
             tabAssert.UseVisualStyleBackColor = true;
@@ -300,7 +317,7 @@
             PnlAssertItems.Dock = DockStyle.Fill;
             PnlAssertItems.Location = new Point(3, 30);
             PnlAssertItems.Name = "PnlAssertItems";
-            PnlAssertItems.Size = new Size(680, 278);
+            PnlAssertItems.Size = new Size(680, 281);
             PnlAssertItems.TabIndex = 3;
             // 
             // toolStrip2
@@ -333,6 +350,142 @@
             TsbDelAssert.Text = "toolStripButton1";
             TsbDelAssert.Click += TsbDelAssert_Click;
             // 
+            // tabData
+            // 
+            tabData.Controls.Add(PnlGenerator);
+            tabData.Controls.Add(panel4);
+            tabData.Location = new Point(4, 29);
+            tabData.Name = "tabData";
+            tabData.Size = new Size(686, 314);
+            tabData.TabIndex = 2;
+            tabData.Text = "Data Generator";
+            tabData.UseVisualStyleBackColor = true;
+            // 
+            // PnlGenerator
+            // 
+            PnlGenerator.Controls.Add(PnlRecords);
+            PnlGenerator.Controls.Add(splitter2);
+            PnlGenerator.Controls.Add(PnlParameters);
+            PnlGenerator.Dock = DockStyle.Fill;
+            PnlGenerator.Location = new Point(0, 45);
+            PnlGenerator.Name = "PnlGenerator";
+            PnlGenerator.Size = new Size(686, 269);
+            PnlGenerator.TabIndex = 1;
+            PnlGenerator.Visible = false;
+            // 
+            // PnlRecords
+            // 
+            PnlRecords.BorderStyle = BorderStyle.FixedSingle;
+            PnlRecords.Dock = DockStyle.Fill;
+            PnlRecords.Location = new Point(202, 0);
+            PnlRecords.Name = "PnlRecords";
+            PnlRecords.Size = new Size(484, 269);
+            PnlRecords.TabIndex = 3;
+            // 
+            // splitter2
+            // 
+            splitter2.Location = new Point(198, 0);
+            splitter2.Name = "splitter2";
+            splitter2.Size = new Size(4, 269);
+            splitter2.TabIndex = 2;
+            splitter2.TabStop = false;
+            // 
+            // PnlParameters
+            // 
+            PnlParameters.BorderStyle = BorderStyle.FixedSingle;
+            PnlParameters.Controls.Add(DgvParameters);
+            PnlParameters.Controls.Add(label2);
+            PnlParameters.Controls.Add(toolStrip3);
+            PnlParameters.Dock = DockStyle.Left;
+            PnlParameters.Location = new Point(0, 0);
+            PnlParameters.Name = "PnlParameters";
+            PnlParameters.Size = new Size(198, 269);
+            PnlParameters.TabIndex = 1;
+            // 
+            // DgvParameters
+            // 
+            DgvParameters.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvParameters.Dock = DockStyle.Fill;
+            DgvParameters.Location = new Point(0, 50);
+            DgvParameters.Name = "DgvParameters";
+            DgvParameters.RowHeadersWidth = 51;
+            DgvParameters.Size = new Size(196, 217);
+            DgvParameters.TabIndex = 3;
+            DgvParameters.CellEndEdit += DgvParameters_CellEndEdit;
+            // 
+            // label2
+            // 
+            label2.Dock = DockStyle.Top;
+            label2.Location = new Point(0, 27);
+            label2.Name = "label2";
+            label2.Size = new Size(196, 23);
+            label2.TabIndex = 2;
+            label2.Text = "Parameters";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // toolStrip3
+            // 
+            toolStrip3.ImageScalingSize = new Size(20, 20);
+            toolStrip3.Items.AddRange(new ToolStripItem[] { TsbAddParam, TsbDelParam });
+            toolStrip3.Location = new Point(0, 0);
+            toolStrip3.Name = "toolStrip3";
+            toolStrip3.Size = new Size(196, 27);
+            toolStrip3.TabIndex = 1;
+            toolStrip3.Text = "toolStrip3";
+            // 
+            // TsbAddParam
+            // 
+            TsbAddParam.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbAddParam.Image = Properties.Resources.Add;
+            TsbAddParam.ImageTransparentColor = Color.Magenta;
+            TsbAddParam.Name = "TsbAddParam";
+            TsbAddParam.Size = new Size(29, 24);
+            TsbAddParam.Text = "toolStripButton1";
+            TsbAddParam.Click += TsbAddParam_Click;
+            // 
+            // TsbDelParam
+            // 
+            TsbDelParam.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbDelParam.Image = Properties.Resources.Delete;
+            TsbDelParam.ImageTransparentColor = Color.Magenta;
+            TsbDelParam.Name = "TsbDelParam";
+            TsbDelParam.Size = new Size(29, 24);
+            TsbDelParam.Text = "toolStripButton1";
+            TsbDelParam.Click += TsbDelParam_Click;
+            // 
+            // panel4
+            // 
+            panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.Controls.Add(CbGeneratorType);
+            panel4.Controls.Add(CbDataGenerator);
+            panel4.Dock = DockStyle.Top;
+            panel4.Location = new Point(0, 0);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(686, 45);
+            panel4.TabIndex = 2;
+            // 
+            // CbGeneratorType
+            // 
+            CbGeneratorType.DropDownStyle = ComboBoxStyle.DropDownList;
+            CbGeneratorType.FormattingEnabled = true;
+            CbGeneratorType.Location = new Point(261, 7);
+            CbGeneratorType.Name = "CbGeneratorType";
+            CbGeneratorType.Size = new Size(151, 28);
+            CbGeneratorType.TabIndex = 1;
+            CbGeneratorType.Visible = false;
+            CbGeneratorType.SelectedIndexChanged += CbGeneratorType_SelectedIndexChanged;
+            // 
+            // CbDataGenerator
+            // 
+            CbDataGenerator.AutoSize = true;
+            CbDataGenerator.Location = new Point(19, 11);
+            CbDataGenerator.Name = "CbDataGenerator";
+            CbDataGenerator.Size = new Size(236, 24);
+            CbDataGenerator.TabIndex = 0;
+            CbDataGenerator.Text = "Dynamically generate test case";
+            CbDataGenerator.UseVisualStyleBackColor = true;
+            CbDataGenerator.CheckedChanged += CbDataGenerator_CheckedChanged;
+            // 
             // panel1
             // 
             panel1.AutoSize = true;
@@ -341,29 +494,8 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(694, 61);
+            panel1.Size = new Size(694, 58);
             panel1.TabIndex = 6;
-            // 
-            // tabData
-            // 
-            tabData.Controls.Add(CbDataGenerator);
-            tabData.Location = new Point(4, 29);
-            tabData.Name = "tabData";
-            tabData.Size = new Size(686, 311);
-            tabData.TabIndex = 2;
-            tabData.Text = "Data Generator";
-            tabData.UseVisualStyleBackColor = true;
-            // 
-            // CbDataGenerator
-            // 
-            CbDataGenerator.AutoSize = true;
-            CbDataGenerator.Location = new Point(20, 14);
-            CbDataGenerator.Name = "CbDataGenerator";
-            CbDataGenerator.Size = new Size(250, 24);
-            CbDataGenerator.TabIndex = 0;
-            CbDataGenerator.Text = "Dynamically regenerate test data";
-            CbDataGenerator.UseVisualStyleBackColor = true;
-            CbDataGenerator.CheckedChanged += CbDataGenerator_CheckedChanged;
             // 
             // UcTestCase
             // 
@@ -389,10 +521,17 @@
             tabAssert.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            tabData.ResumeLayout(false);
+            PnlGenerator.ResumeLayout(false);
+            PnlParameters.ResumeLayout(false);
+            PnlParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvParameters).EndInit();
+            toolStrip3.ResumeLayout(false);
+            toolStrip3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            tabData.ResumeLayout(false);
-            tabData.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -428,5 +567,16 @@
         private ToolStripButton TsbDelHeader;
         private TabPage tabData;
         private CheckBox CbDataGenerator;
+        private Panel PnlGenerator;
+        private Panel PnlParameters;
+        private Label label2;
+        private ToolStrip toolStrip3;
+        private ToolStripButton TsbDelParam;
+        private ToolStripButton TsbAddParam;
+        private DataGridView DgvParameters;
+        private Splitter splitter2;
+        private Panel PnlRecords;
+        private Panel panel4;
+        private ComboBox CbGeneratorType;
     }
 }
