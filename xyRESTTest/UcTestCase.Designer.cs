@@ -257,7 +257,7 @@
             TsbAddHeader.ImageTransparentColor = Color.Magenta;
             TsbAddHeader.Name = "TsbAddHeader";
             TsbAddHeader.Size = new Size(29, 24);
-            TsbAddHeader.Text = "toolStripButton1";
+            TsbAddHeader.Text = "Add a header";
             TsbAddHeader.Click += TsbAddHeader_Click;
             // 
             // TsbDelHeader
@@ -267,7 +267,7 @@
             TsbDelHeader.ImageTransparentColor = Color.Magenta;
             TsbDelHeader.Name = "TsbDelHeader";
             TsbDelHeader.Size = new Size(29, 24);
-            TsbDelHeader.Text = "toolStripButton1";
+            TsbDelHeader.Text = "Delete selected header";
             TsbDelHeader.Click += TsbDelHeader_Click;
             // 
             // panel2
@@ -337,7 +337,7 @@
             TsbAddAssert.ImageTransparentColor = Color.Magenta;
             TsbAddAssert.Name = "TsbAddAssert";
             TsbAddAssert.Size = new Size(29, 24);
-            TsbAddAssert.Text = "toolStripButton1";
+            TsbAddAssert.Text = "Add an assertion";
             TsbAddAssert.Click += TsbAddAssert_Click;
             // 
             // TsbDelAssert
@@ -347,7 +347,7 @@
             TsbDelAssert.ImageTransparentColor = Color.Magenta;
             TsbDelAssert.Name = "TsbDelAssert";
             TsbDelAssert.Size = new Size(29, 24);
-            TsbDelAssert.Text = "toolStripButton1";
+            TsbDelAssert.Text = "Delete selected assertion";
             TsbDelAssert.Click += TsbDelAssert_Click;
             // 
             // tabData
@@ -440,7 +440,7 @@
             TsbAddParam.ImageTransparentColor = Color.Magenta;
             TsbAddParam.Name = "TsbAddParam";
             TsbAddParam.Size = new Size(29, 24);
-            TsbAddParam.Text = "toolStripButton1";
+            TsbAddParam.Text = "Add a parameter";
             TsbAddParam.Click += TsbAddParam_Click;
             // 
             // TsbDelParam
@@ -450,7 +450,7 @@
             TsbDelParam.ImageTransparentColor = Color.Magenta;
             TsbDelParam.Name = "TsbDelParam";
             TsbDelParam.Size = new Size(29, 24);
-            TsbDelParam.Text = "toolStripButton1";
+            TsbDelParam.Text = "Delete selected parameter";
             TsbDelParam.Click += TsbDelParam_Click;
             // 
             // panel4

@@ -121,6 +121,7 @@
             TsbNewProject.Name = "TsbNewProject";
             TsbNewProject.Size = new Size(29, 24);
             TsbNewProject.Text = "New test";
+            TsbNewProject.ToolTipText = "New test project";
             TsbNewProject.Click += TsbNewProject_Click;
             // 
             // TsbOpenProject
@@ -131,6 +132,7 @@
             TsbOpenProject.Name = "TsbOpenProject";
             TsbOpenProject.Size = new Size(29, 24);
             TsbOpenProject.Text = "Open a test";
+            TsbOpenProject.ToolTipText = "Open a test project";
             TsbOpenProject.Click += TsbOpenProject_Click;
             // 
             // toolStripSeparator1
@@ -171,6 +173,7 @@
             TsbRun.Name = "TsbRun";
             TsbRun.Size = new Size(29, 24);
             TsbRun.Text = "toolStripButton1";
+            TsbRun.ToolTipText = "Run whole test project";
             TsbRun.Click += TsbRun_Click;
             // 
             // panel2

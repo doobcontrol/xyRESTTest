@@ -75,7 +75,7 @@
             tsbRun.ImageTransparentColor = Color.Magenta;
             tsbRun.Name = "tsbRun";
             tsbRun.Size = new Size(29, 24);
-            tsbRun.Text = "toolStripButton1";
+            tsbRun.Text = "Run this test case";
             // 
             // panel2
             // 

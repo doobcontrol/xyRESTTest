@@ -59,7 +59,7 @@
             TsbAddPar.ImageTransparentColor = Color.Magenta;
             TsbAddPar.Name = "TsbAddPar";
             TsbAddPar.Size = new Size(29, 24);
-            TsbAddPar.Text = "toolStripButton1";
+            TsbAddPar.Text = "Add a JSON value";
             TsbAddPar.Click += TsbAddPar_Click;
             // 
             // TsbDelPar
@@ -69,7 +69,7 @@
             TsbDelPar.ImageTransparentColor = Color.Magenta;
             TsbDelPar.Name = "TsbDelPar";
             TsbDelPar.Size = new Size(29, 24);
-            TsbDelPar.Text = "toolStripButton1";
+            TsbDelPar.Text = "Delete selected JSON value";
             TsbDelPar.Click += TsbDelPar_Click;
             // 
             // splitContainer1

@@ -94,7 +94,7 @@
             TsbAddAssertList.ImageTransparentColor = Color.Magenta;
             TsbAddAssertList.Name = "TsbAddAssertList";
             TsbAddAssertList.Size = new Size(29, 24);
-            TsbAddAssertList.Text = "toolStripButton1";
+            TsbAddAssertList.Text = "Add an assertion";
             TsbAddAssertList.Click += TsbAddAssertList_Click;
             // 
             // TsbDelAssertList
@@ -104,7 +104,7 @@
             TsbDelAssertList.ImageTransparentColor = Color.Magenta;
             TsbDelAssertList.Name = "TsbDelAssertList";
             TsbDelAssertList.Size = new Size(29, 24);
-            TsbDelAssertList.Text = "toolStripButton2";
+            TsbDelAssertList.Text = "Delete selected assertion";
             TsbDelAssertList.Click += TsbDelAssertList_Click;
             // 
             // toolStripSeparator1
@@ -162,7 +162,7 @@
             TsbAddReadList.ImageTransparentColor = Color.Magenta;
             TsbAddReadList.Name = "TsbAddReadList";
             TsbAddReadList.Size = new Size(29, 24);
-            TsbAddReadList.Text = "toolStripButton3";
+            TsbAddReadList.Text = "Add a read data item";
             TsbAddReadList.Click += TsbAddReadList_Click;
             // 
             // TsbDelReadList
@@ -172,7 +172,7 @@
             TsbDelReadList.ImageTransparentColor = Color.Magenta;
             TsbDelReadList.Name = "TsbDelReadList";
             TsbDelReadList.Size = new Size(29, 24);
-            TsbDelReadList.Text = "toolStripButton4";
+            TsbDelReadList.Text = "Delete selected read data item";
             TsbDelReadList.Click += TsbDelReadList_Click;
             // 
             // toolStripSeparator2

@@ -77,7 +77,7 @@
             TsbAddRecord.ImageTransparentColor = Color.Magenta;
             TsbAddRecord.Name = "TsbAddRecord";
             TsbAddRecord.Size = new Size(29, 24);
-            TsbAddRecord.Text = "toolStripButton1";
+            TsbAddRecord.Text = "Add a test data record";
             TsbAddRecord.Click += TsbAddRecord_Click;
             // 
             // TsbDelRecord
@@ -87,7 +87,7 @@
             TsbDelRecord.ImageTransparentColor = Color.Magenta;
             TsbDelRecord.Name = "TsbDelRecord";
             TsbDelRecord.Size = new Size(29, 24);
-            TsbDelRecord.Text = "toolStripButton1";
+            TsbDelRecord.Text = "Delete selected data record";
             TsbDelRecord.Click += TsbDelRecord_Click;
             // 
             // TsbDataFile
@@ -97,7 +97,7 @@
             TsbDataFile.ImageTransparentColor = Color.Magenta;
             TsbDataFile.Name = "TsbDataFile";
             TsbDataFile.Size = new Size(29, 24);
-            TsbDataFile.Text = "toolStripButton1";
+            TsbDataFile.Text = "Set test data file";
             TsbDataFile.Click += TsbDataFile_Click;
             // 
             // TslDataFile
