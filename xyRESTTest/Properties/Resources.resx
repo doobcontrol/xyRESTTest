@@ -265,4 +265,10 @@
   <data name="strSetTestFataFile" xml:space="preserve">
     <value>Set test data file</value>
   </data>
+  <data name="strRunning" xml:space="preserve">
+    <value>Running...</value>
+  </data>
+  <data name="strRunFinished" xml:space="preserve">
+    <value>Finished.</value>
+  </data>
 </root>

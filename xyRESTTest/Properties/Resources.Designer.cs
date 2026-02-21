@@ -456,6 +456,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished..
+        /// </summary>
+        internal static string strRunFinished {
+            get {
+                return ResourceManager.GetString("strRunFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running....
+        /// </summary>
+        internal static string strRunning {
+            get {
+                return ResourceManager.GetString("strRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run whole test project.
         /// </summary>
         internal static string strRunTestProject {

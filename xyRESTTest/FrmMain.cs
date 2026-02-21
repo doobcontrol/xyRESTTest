@@ -23,6 +23,8 @@ namespace xyRESTTest
         string LangDefault = "en-US";
         string LangChinese = "zh-CN";
         bool hasProjectLoaded = false;
+        string lang;
+        bool testRunning = false;
         public FrmMain()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace xyRESTTest
             xyCfg.init(new Dictionary<string, string>() {
                 {LangParName, CultureInfo.InstalledUICulture.Name}
             });
-            string lang = xyCfg.get(LangParName);
+            lang = xyCfg.get(LangParName);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             TscbLang.Items.Add(LangDefault);
@@ -78,6 +80,14 @@ namespace xyRESTTest
                 {
                     utc.LoadStringResources();
                 }
+            }
+            if (testRunning)
+            {
+                lbRunningInfo.Text = Resources.strRunning;
+            }
+            else
+            {
+                lbRunningInfo.Text = Resources.strRunFinished;
             }
         }
 
@@ -252,13 +262,13 @@ namespace xyRESTTest
             PnlWork.Enabled = !isRunning;
             if (isRunning)
             {
-                lbRunningInfo.Text = "Running...";
-
+                lbRunningInfo.Text = Resources.strRunning;
             }
             else
             {
-                lbRunningInfo.Text = "Finished.";
+                lbRunningInfo.Text = Resources.strRunFinished; 
             }
+            testRunning = isRunning;
         }
 
         private void btnHideRunWindow_Click(object sender, EventArgs e)
@@ -269,8 +279,8 @@ namespace xyRESTTest
 
         private void TscbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            xyCfg.set(LangParName, TscbLang.Text);
-            string lang = xyCfg.get(LangParName);
+            lang = TscbLang.Text;
+            xyCfg.set(LangParName, lang);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             LoadStringResources();

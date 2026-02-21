@@ -5,11 +5,11 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
-using xyRESTTestLib;
+using xyRESTTestLib.Properties;
 
-namespace xyRESTTest
+namespace xyRESTTestLib
 {
-    internal class TestHandler : ITestHandler
+    public class TestHandler : ITestHandler
     {
         public TestTask ApplyLocalPars(TestTask task, Dictionary<string, string> LocalPars)
         {
@@ -33,38 +33,40 @@ namespace xyRESTTest
         public async Task<bool> AssertResponse(
             HttpResponseMessage response,
             AssertInfo assertInfo,
-            Dictionary<string, string> contextPars, 
+            Dictionary<string, string> contextPars,
             StreamWriter rw)
         {
             bool ret = true;
-            switch(assertInfo.assertType)
+            switch (assertInfo.assertType)
             {
                 case nameof(AssertType.StatusCode):
                     int expectedCode = int.Parse(assertInfo.expected);
                     if ((int)response.StatusCode != expectedCode)
                     {
                         rw.WriteLine(
-                            $"Assert Failed: Expected status code " +
-                            $"{expectedCode}, but got " +
-                            $"{(int)response.StatusCode}");
+                            string.Format(
+                                Resources.strAssertFailedStatusCode,
+                                expectedCode, (int)response.StatusCode)
+                        );
                         return false;
                     }
                     break;
                 case nameof(AssertType.JsonContent):
-                    string responseBody = 
+                    string responseBody =
                         await response.Content.ReadAsStringAsync();
 
-                    if(assertInfo.assertList != null)
+                    if (assertInfo.assertList != null)
                     {
                         //assert content type
-                        if(response.Content.Headers.ContentType == null
+                        if (response.Content.Headers.ContentType == null
                             || !response.Content.Headers.ContentType.MediaType
                                 .Contains(xyTest.CT_app_json))
                         {
-                            rw.WriteLine($"Assert Failed: " +
-                                $"Expected content type " +
-                                $"application/json, but got " +
-                                $"{response.Content.Headers.ContentType}");
+                            rw.WriteLine(
+                                string.Format(
+                                    Resources.strAssertFailedNotJSON,
+                                    response.Content.Headers.ContentType)
+                            );
                             return false;
                         }
                         foreach (var al in assertInfo.assertList)
@@ -77,17 +79,22 @@ namespace xyRESTTest
                             JsonNode? node = new JsonTools(responseBody).GetNodeByPath(jsonPath);
                             if (node == null)
                             {
-                                rw.WriteLine($"Assert Failed: JSON path '{jsonPath}' " +
-                                    $"not found in response.");
+                                rw.WriteLine(
+                                    string.Format(
+                                        Resources.strAssertFailedJSONPathNotFound,
+                                        jsonPath)
+                                );
                                 ret = false;
                             }
                             else
                             {
                                 if (node.GetValue<string>() != expectedValue)
-                                {
-                                    rw.WriteLine($"Assert Failed: Expected value at JSON path '" +
-                                        $"{jsonPath}' to be '{expectedValue}', but got '" +
-                                        $"{node.GetValue<string>()}'.");
+                                    {
+                                    rw.WriteLine(
+                                        string.Format(
+                                            Resources.strAssertFailedStatusCode,
+                                            jsonPath, expectedValue, node.GetValue<string>())
+                                    );
                                     ret = false;
                                 }
                             }
@@ -107,7 +114,11 @@ namespace xyRESTTest
                             JsonNode? node = new JsonTools(responseBody).GetNodeByPath(jsonPath);
                             if (node == null)
                             {
-                                rw.WriteLine($"Assert Failed: JSON path '{jsonPath}' not found in response.");
+                                rw.WriteLine(
+                                    string.Format(
+                                        Resources.strAssertFailedJSONPathNotFound,
+                                        jsonPath)
+                                );
                                 ret = false;
                             }
                             else
@@ -118,8 +129,11 @@ namespace xyRESTTest
                     }
                     break;
                 default:
-                    rw.WriteLine($"Assert Failed: Unknown assert type " +
-                        $"'{assertInfo.assertType}'.");
+                    rw.WriteLine(
+                        string.Format(
+                            Resources.strAssertFailedUnknowType,
+                            assertInfo.assertType)
+                    );
                     return false;
             }
             return ret;
@@ -129,7 +143,7 @@ namespace xyRESTTest
         {
             var retList = new List<Dictionary<string, string>>();
 
-            switch(dataGenerator.GeneratorType)
+            switch (dataGenerator.GeneratorType)
             {
                 case nameof(GeneratorType.Basic):
                     if (dataGenerator.GeneratorInfo.TryGetValue(
@@ -160,20 +174,21 @@ namespace xyRESTTest
         }
 
         public Dictionary<string, string>? ParseHeaders(
-            Dictionary<string, object> HeadersData, 
+            Dictionary<string, object> HeadersData,
             Dictionary<string, string> contextPars)
         {
-            if (HeadersData == null) { 
-                return null; 
+            if (HeadersData == null)
+            {
+                return null;
             }
 
             var headers = new Dictionary<string, string>();
             foreach (var hd in HeadersData)
             {
-                switch(hd.Key)
+                switch (hd.Key)
                 {
                     case nameof(HeaderType.Authorization):
-                        var authData= (AuthHeaderInfo)hd.Value;
+                        var authData = (AuthHeaderInfo)hd.Value;
                         string? headerValue = RheaderTools.HeaderAuth(
                             authData, contextPars);
                         if (headerValue != null)
@@ -190,14 +205,15 @@ namespace xyRESTTest
         }
 
         public HttpContent? ParseRequestBody(
-            ContentInfo? contentInfo, 
+            ContentInfo? contentInfo,
             Dictionary<string, string> contextPars)
         {
-            if(contentInfo == null) { 
+            if (contentInfo == null)
+            {
                 return null;
             }
             HttpContent? bodyContent = null;
-            switch(contentInfo.type)
+            switch (contentInfo.type)
             {
                 case nameof(JCType.SimpleJson):
                     var bodyString = RcontentTools.SimpleJson(
@@ -205,8 +221,8 @@ namespace xyRESTTest
                     if (bodyString != null)
                     {
                         bodyContent = new StringContent(
-                            bodyString, 
-                            Encoding.GetEncoding(contentInfo.encoding), 
+                            bodyString,
+                            Encoding.GetEncoding(contentInfo.encoding),
                             contentInfo.ctype
                             );
                     }

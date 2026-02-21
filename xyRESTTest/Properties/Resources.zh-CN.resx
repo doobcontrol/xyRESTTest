@@ -265,4 +265,10 @@
   <data name="strSetTestFataFile" xml:space="preserve">
     <value>设置测试数据文件</value>
   </data>
+  <data name="strRunning" xml:space="preserve">
+    <value>测试运行中...</value>
+  </data>
+  <data name="strRunFinished" xml:space="preserve">
+    <value>测试运行结束</value>
+  </data>
 </root>

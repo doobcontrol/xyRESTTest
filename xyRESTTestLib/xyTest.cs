@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using xyRESTTestLib.Properties;
 
 namespace xyRESTTestLib
 {
@@ -77,7 +78,9 @@ namespace xyRESTTestLib
             }
             catch (Exception e)
             {
-                rw.WriteLine("Error when sending request: " + e.Message);
+                rw.WriteLine(
+                    string.Format(Resources.strErrorWhenSendingRequest_, e.Message)
+                    );
                 return false;
             }
 
@@ -85,17 +88,13 @@ namespace xyRESTTestLib
             bool assert = true;
             foreach (var assertInfo in testTask.assertInfos)
             {
-                rw.WriteLine("Assert: " + assertInfo.assertType);
+                rw.WriteLine(string.Format(Resources.strAssertType, assertInfo.assertType));
+                rw.WriteLine(string.Format(Resources.strExpectedValue, assertInfo.expected));
                 var assertResult = await TestHandler.AssertResponse(
                     response, assertInfo, contextPars, rw);
                 if (!assertResult)
                 {
-                    rw.WriteLine("... Failed");
                     assert = false;
-                }
-                else
-                {
-                    rw.WriteLine("... Succeed");
                 }
             }
 
@@ -103,50 +102,59 @@ namespace xyRESTTestLib
         }
 
         public static async Task<bool> batchTestAsync(
-            List<TestTask> tasks, string reportFile = "testReport.txt"
+            List<TestTask> tasks, StreamWriter sw
             )
         {
-            using (StreamWriter sw = new StreamWriter(reportFile, true))
+            DateTime startTime = DateTime.Now;
+            sw.WriteLine(Resources.strStartTest);
+            sw.WriteLine();
+            var contextPars = new Dictionary<string, string>();
+            foreach (var task in tasks)
             {
-                DateTime startTime = DateTime.Now;
-                sw.WriteLine("Start test...");
-                sw.WriteLine();
-                var contextPars = new Dictionary<string, string>();
-                foreach (var task in tasks)
-                {
-                    sw.WriteLine("Test: " + task.name);
-                    sw.WriteLine("API: " + task.requestInfo.url);
+                sw.WriteLine(string.Format(Resources.strTestCaseName, task.name));
+                sw.WriteLine(string.Format(Resources.strTargetApi, task.requestInfo.url));
+                sw.WriteLine(string.Format(Resources.strRequestMethod, task.requestInfo.method));
 
-                    if (task.dataGenerator == null)
+                if (task.dataGenerator == null)
+                {
+                    if (!await oneTestAsync(task, contextPars, sw))
                     {
-                        if (!await oneTestAsync(task, contextPars, sw))
+                        sw.WriteLine(Resources.strFailed);
+                        sw.WriteLine();
+                        return false;
+                    }
+                }
+                else
+                {
+                    var testDataList = TestHandler.GenerateTestDatas(task.dataGenerator);
+                    foreach (var testData in testDataList)
+                    {
+                        var newTask = TestHandler.ApplyLocalPars(task, testData);
+                        sw.WriteLine(
+                            string.Format(
+                                Resources.strTestData,
+                                string.Join(", ", testData))
+                            );
+                        if (!await oneTestAsync(newTask, contextPars, sw))
                         {
-                            sw.WriteLine("... Failed");
+                            sw.WriteLine(Resources.strFailed);
+                            sw.WriteLine();
                             return false;
                         }
+                        sw.WriteLine(Resources.strSucceed);
                     }
-                    else
-                    {
-                        var testDataList = TestHandler.GenerateTestDatas(task.dataGenerator);
-                        foreach (var testData in testDataList)
-                        {
-                            var newTask = TestHandler.ApplyLocalPars(task, testData);
-                            sw.WriteLine("Test data: " + string.Join(", ", testData));
-                            if (!await oneTestAsync(newTask, contextPars, sw))
-                            {
-                                sw.WriteLine("... Failed");
-                                return false;
-                            }
-                            sw.WriteLine("... succeed");
-                        }
-                    }
-
-                    sw.WriteLine("... succeed");
-                    sw.WriteLine();
                 }
-                sw.WriteLine("All test finished succeed");
-                sw.WriteLine("Time used: " + (DateTime.Now - startTime).TotalSeconds + " seconds");
+                sw.WriteLine(Resources.strSucceed);
+                sw.WriteLine();
             }
+            sw.WriteLine(Resources.strAllTestFinishedSucceed);
+            sw.WriteLine(
+                string.Format(
+                    Resources.strTestTime,
+                    (DateTime.Now - startTime).TotalSeconds)
+                );
+            sw.WriteLine();
+
             return true;
         }
         public static async Task<bool> runProjectAsync(TestProject testProject)
@@ -156,7 +164,13 @@ namespace xyRESTTestLib
             outputfile = Path.Combine(
                 path ?? "", $"{outputfile}_testReport.txt");
 
-            return await batchTestAsync(testProject.tasks, outputfile);
+            bool retB;
+            using (StreamWriter sw = new StreamWriter(outputfile, true))
+            {
+                retB = await batchTestAsync(testProject.tasks, sw);
+            }
+
+            return retB;
         }
 
         public static void saveTestProject(TestProject testProject)
