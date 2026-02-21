@@ -15,10 +15,10 @@ namespace xyRESTTest
     public partial class UcHeaderEdit : UserControl
     {
         string headerName = string.Empty;
-        object headerValue;
+        object? headerValue;
 
         public string HeaderName { get => headerName; }
-        public object HeaderValue { get => headerValue; }
+        public object? HeaderValue { get => headerValue; }
 
         public UcHeaderEdit(
             KeyValuePair<string, object>? header)
@@ -60,14 +60,17 @@ namespace xyRESTTest
             {
                 if(headerValueEdit is TextBox tb)
                 {
-                    headerValue = tb.Text;
+                    headerValue = tb.Text??"";
                 }
                 else if(headerValueEdit is UcAuthHeader uah)
                 {
                     headerValue = uah.AuthHeader;
                 }
             }
-            Edited?.Invoke(this, new EventArgs());
+            if(headerValue != null)
+            {
+                Edited?.Invoke(this, new EventArgs());
+            }
 
             Hide();
         }
@@ -82,6 +85,10 @@ namespace xyRESTTest
             if (comboBox1.Text == nameof(HeaderType.Authorization))
             {
                 headerName = comboBox1.Text;
+                if(headerValue is not AuthHeaderInfo)
+                {
+                    headerValue = null;
+                }
                 if (headerValue == null)
                 {
                     headerValue = new AuthHeaderInfo();
@@ -91,7 +98,15 @@ namespace xyRESTTest
                     { Dock = DockStyle.Fill };
                 panel3.Controls.Clear();
                 panel3.Controls.Add(headerValueEdit);
-                this.Refresh();
+            }
+            else if (comboBox1.Text == nameof(HeaderType.Accept))
+            {
+                headerName = comboBox1.Text;
+
+                headerValueEdit = new TextBox()
+                { Dock = DockStyle.Top };
+                panel3.Controls.Clear();
+                panel3.Controls.Add(headerValueEdit);
             }
         }
     }
