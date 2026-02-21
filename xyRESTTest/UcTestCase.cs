@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -21,10 +22,10 @@ namespace xyRESTTest
         public UcTestCase(TestTask testTask)
         {
             InitializeComponent();
+            LoadStringResources();
             this.testTask = testTask;
             LbCaseName.BackColor = UcTestCaseItem.selectedBackColor;
             LbCaseName.Text = testTask.name;
-            toolTip1.SetToolTip(LbCaseName, "Double-click to edit");
 
             TxtUrl.Leave += (s, e) =>
             {
@@ -84,6 +85,53 @@ namespace xyRESTTest
             DgvParameters.Columns.Add("Parameter", "Parameter");
 
             deplopData();
+        }
+        public void LoadStringResources()
+        {
+            toolTip1.SetToolTip(LbCaseName, Resources.strDoubleClickToEdit);
+            toolTip1.ShowAlways = true;
+            tabControl1.TabPages[0].Text = Resources.strRequestInformation;
+            tabControl1.TabPages[1].Text = Resources.strAssertionInformation;
+            tabControl1.TabPages[2].Text = Resources.strDataGenerator;
+            TsbAddHeader.ToolTipText = Resources.strAddHeader;
+            TsbDelHeader.ToolTipText = Resources.strDeleteHeader;
+            TsbAddAssert.ToolTipText = Resources.strAddAssertion;
+            TsbDelAssert.ToolTipText = Resources.strDeleteAssertion;
+
+            foreach(Control control in TlpHeaders.Controls)
+            {
+                if(control is UcHeaderItem uhi)
+                {
+                    uhi.LoadStringResources();
+                }
+            }
+            foreach(Control control in PnlAssertItems.Controls)
+            {
+                if(control is UcAssertItem uai)
+                {
+                    uai.LoadStringResources();
+                }
+            }
+            LbContentType.Text = Resources.strContentType;
+
+            if (PnlBody.Controls.Count > 0)
+            {
+                if (PnlBody.Controls[0] is UcJsonBody ujb)
+                {
+                    ujb.LoadStringResources();
+                }
+            }
+            CbDataGenerator.Text = Resources.strDynamicallyGenerateTestCase;
+            LbParameters.Text = Resources.strParameters;
+            TsbAddParam.ToolTipText = Resources.strAddParameter;
+            TsbDelParam.ToolTipText = Resources.strDeleteParameter;
+            if(PnlRecords.Controls.Count > 0)
+            {
+                if(PnlRecords.Controls[0] is UcGeneratorBasic ugb)
+                {
+                    ugb.LoadStringResources();
+                }
+            }
         }
 
         private void TsbAddHeader_Click(object sender, EventArgs e)

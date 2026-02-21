@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xy.Cfg;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -16,14 +19,18 @@ namespace xyRESTTest
     public partial class FrmMain : Form
     {
         TestProject testProject;
+        string LangParName = "LangCode";
+        string LangDefault = "en-US";
+        string LangChinese = "zh-CN";
+        bool hasProjectLoaded = false;
         public FrmMain()
         {
             InitializeComponent();
-            Text = "REST API Test Tool";
+            LangConfig();
+            LoadStringResources();
 
             xyTest.TestHandler = new TestHandler();
 
-            LbPrjName.Text = "No Project Loaded";
             TsbAddCase.Visible = false;
             TsbDelCase.Visible = false;
             toolStripSeparator1.Visible = false;
@@ -32,6 +39,46 @@ namespace xyRESTTest
 
             PnlRun.Visible = false;
             splitter1.Visible = false;
+        }
+        private void LangConfig()
+        {
+            xyCfg.init(new Dictionary<string, string>() {
+                {LangParName, CultureInfo.InstalledUICulture.Name}
+            });
+            string lang = xyCfg.get(LangParName);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            TscbLang.Items.Add(LangDefault);
+            TscbLang.Items.Add(LangChinese);
+            TscbLang.Text = lang;
+        }
+        private void LoadStringResources()
+        {
+            Text = Resources.strAppTitle;
+            if (!hasProjectLoaded)
+            {
+                LbPrjName.Text = Resources.strNoProjectLoaded;
+            }
+            TsbNewProject.Text = Resources.strNewTestProject;
+            TsbOpenProject.Text = Resources.strOpenTestProject;
+            TsbAddCase.Text = Resources.strAddTestCase;
+            TsbDelCase.Text = Resources.strDeleteTestCase;
+            TsbRun.Text = Resources.strRunTestProject;
+            foreach(Control control in PnTestcases.Controls)
+            {
+                if (control is UcTestCaseItem item)
+                {
+                    item.LoadStringResources();
+                }
+            }
+            if (PnlTestCase.Controls.Count > 0)
+            {
+                var control = PnlTestCase.Controls[0];
+                if (control is UcTestCase utc)
+                {
+                    utc.LoadStringResources();
+                }
+            }
         }
 
         private void TsbAddCase_Click(object sender, EventArgs e)
@@ -75,11 +122,11 @@ namespace xyRESTTest
             {
                 selectedItem = selected;
 
-                panel2.Controls.Clear();
+                PnlTestCase.Controls.Clear();
                 var utc = new UcTestCase(selected.TestTask);
                 utc.Edited += TestCase_edited;
                 utc.Dock = DockStyle.Fill;
-                panel2.Controls.Add(utc);
+                PnlTestCase.Controls.Add(utc);
             }
         }
         private async void UcTestCaseItem_Run(object? sender, EventArgs e)
@@ -120,7 +167,7 @@ namespace xyRESTTest
                 selectedItem.Dispose();
                 selectedItem = null;
 
-                panel2.Controls.Clear();
+                PnlTestCase.Controls.Clear();
             }
         }
 
@@ -138,7 +185,8 @@ namespace xyRESTTest
                 toolStripSeparator2.Visible = true;
 
                 PnTestcases.Controls.Clear();
-                panel2.Controls.Clear();
+                PnlTestCase.Controls.Clear(); 
+                hasProjectLoaded = true;
             }
         }
 
@@ -174,11 +222,12 @@ namespace xyRESTTest
                     toolStripSeparator2.Visible = true;
 
                     PnTestcases.Controls.Clear();
-                    panel2.Controls.Clear();
+                    PnlTestCase.Controls.Clear();
                     foreach (var task in testProject.tasks)
                     {
                         AddTestCaseItem(task);
                     }
+                    hasProjectLoaded = true;
                 }
                 catch (Exception ex)
                 {
@@ -216,6 +265,15 @@ namespace xyRESTTest
         {
             PnlRun.Visible = false;
             splitter1.Visible = false;
+        }
+
+        private void TscbLang_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            xyCfg.set(LangParName, TscbLang.Text);
+            string lang = xyCfg.get(LangParName);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            LoadStringResources();
         }
     }
 }

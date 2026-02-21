@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static xyRESTTest.UcTestCase;
 
@@ -22,6 +23,7 @@ namespace xyRESTTest
         public UcGeneratorBasic(DataGenerator dataGenerator)
         {
             InitializeComponent();
+            LoadStringResources();
 
             DgvRecords.AllowUserToAddRows = false;
             DgvRecords.AllowUserToDeleteRows = false;
@@ -38,6 +40,13 @@ namespace xyRESTTest
             LoadDataRecords();
 
             RefreshDataRecords();
+        }
+        public void LoadStringResources()
+        {
+            LbTableTitle.Text = Resources.strTestDataRecords;
+            TsbAddRecord.ToolTipText = Resources.strAddTestDataDecord;
+            TsbDelRecord.ToolTipText = Resources.strDeleteTestDataRecord;
+            TsbDataFile.ToolTipText = Resources.strSetTestFataFile;
         }
         private void InitParamList(List<string> ParamNames)
         {

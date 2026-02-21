@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -27,6 +28,8 @@ namespace xyRESTTest
         BorderStyle orgBordderStyle;
         BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 
+        bool isNew = false;
+
         public UcHeaderItem(
             KeyValuePair<string, object>? header,
             Control? uhiContainer = null)
@@ -43,15 +46,26 @@ namespace xyRESTTest
             uhe = new UcHeaderEdit(header) { Visible = false };
             uhe.Edited += Header_edited;
             uhe.Leave += (s, e) => { uhe.Visible = false; };
+            LoadStringResources();
 
             if (uhe.HeaderName == null || uhe.HeaderName == "")
             {
-                lbInfo.Text = "<Empty Header>";
+                lbInfo.Text = Resources.strUnfefined;
+                isNew = true;
             }
             else
             {
                 lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
+                isNew = false;
             }
+        }
+        public void LoadStringResources()
+        {
+            if(isNew)
+            {
+                lbInfo.Text = Resources.strUnfefined;
+            }
+            uhe?.LoadStringResources();
         }
         private void Header_edited(object? sender, EventArgs e)
         {
@@ -60,6 +74,7 @@ namespace xyRESTTest
                 lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
 
                 Edited?.Invoke(this, new EventArgs());
+                isNew = false;
             }
         }
 

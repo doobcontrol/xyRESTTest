@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -15,15 +16,20 @@ namespace xyRESTTest
     {
         AssertInfo assertInfo; 
         ToolTip toolTip1 = new ToolTip();
+        string cNameJsonPath = "JsonPath";
+        string cNameExpected = "Expected";
+        string cNameSaveKey = "SaveKey";
         public UcAssertJsonContent(AssertInfo assertInfo)
         {
             InitializeComponent();
             this.assertInfo = assertInfo;
 
-            DgvAssert.Columns.Add("JsonPath", "Json Path");
-            DgvAssert.Columns.Add("Expected", "Expected");
-            DgvRead.Columns.Add("SaveKey", "Save Key");
-            DgvRead.Columns.Add("JsonPath", "Json Path");
+            DgvAssert.Columns.Add(cNameJsonPath, Resources.strJSONPath);
+            DgvAssert.Columns.Add(cNameExpected, Resources.strExpectedValue);
+            DgvRead.Columns.Add(cNameSaveKey, Resources.strParameterName);
+            DgvRead.Columns.Add(cNameJsonPath, Resources.strJSONPath);
+            LoadStringResources();
+
             if (this.assertInfo.assertList == null)
             {
                 this.assertInfo.assertList = new Dictionary<string, string>();
@@ -64,6 +70,19 @@ namespace xyRESTTest
 
             DgvAssert.SelectionMode= DataGridViewSelectionMode.FullRowSelect;
             DgvRead.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        public void LoadStringResources()
+        {
+            DgvAssert.Columns[cNameJsonPath].HeaderText = Resources.strJSONPath;
+            DgvAssert.Columns[cNameExpected].HeaderText = Resources.strExpectedValue;
+            DgvRead.Columns[cNameSaveKey].HeaderText = Resources.strParameterName;
+            DgvRead.Columns[cNameJsonPath].HeaderText = Resources.strJSONPath;
+            TslAssertionList.Text = Resources.strAssertionList;
+            TslReadDataList.Text = Resources.strReadDataList;
+            TsbAddAssertList.ToolTipText = Resources.strAddAssertion;
+            TsbDelAssertList.ToolTipText = Resources.strDeleteAssertion;
+            TsbAddReadList.ToolTipText = Resources.strAddReadItem;
+            TsbDelReadList.ToolTipText = Resources.strDeleteReadItem;
         }
         private void switchList(object? sender, EventArgs e)
         {

@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace xyRESTTest
 {
@@ -24,6 +24,7 @@ namespace xyRESTTest
             KeyValuePair<string, object>? header)
         {
             InitializeComponent();
+            LoadStringResources();
             Leave += (s, e) => { Hide(); };
 
             if (header != null)
@@ -34,6 +35,19 @@ namespace xyRESTTest
 
             UiTools.FillCbWithEnum(comboBox1, typeof(HeaderType));
             comboBox1.Text = headerName;
+        }
+        public void LoadStringResources()
+        {
+            BtnOk.Text = Resources.strOk;
+            BtnCancel.Text = Resources.strCancel;
+            if(panel3.Controls.Count > 0)   
+            {
+                var headerValueEdit = panel3.Controls[0];
+                if(headerValueEdit is UcAuthHeader uah)
+                {
+                    uah.LoadStringResources();
+                }
+            }
         }
 
         private Control headerValueEdit;

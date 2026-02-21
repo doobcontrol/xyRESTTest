@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -17,10 +18,15 @@ namespace xyRESTTest
         public UcAssertStatusCode(AssertInfo assertInfo)
         {
             InitializeComponent();
+            LoadStringResources();
             this.assertInfo = assertInfo;
             TxtExpected.Text = assertInfo.expected;
 
             TxtExpected.TextChanged += TxtExpected_TextChanged;
+        }
+        public void LoadStringResources()
+        {
+            TxtExpected.PlaceholderText = Resources.strExpectedValue;
         }
 
         private void TxtExpected_TextChanged(object? sender, EventArgs e)

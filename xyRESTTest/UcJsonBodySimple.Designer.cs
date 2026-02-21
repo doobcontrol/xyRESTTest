@@ -48,7 +48,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { TsbAddPar, TsbDelPar });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(165, 27);
+            toolStrip1.Size = new Size(300, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -81,12 +81,13 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(dataGridView1);
+            splitContainer1.Panel1MinSize = 150;
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(TxtContent);
-            splitContainer1.Size = new Size(165, 38);
-            splitContainer1.SplitterDistance = 55;
+            splitContainer1.Size = new Size(300, 123);
+            splitContainer1.SplitterDistance = 150;
             splitContainer1.TabIndex = 1;
             // 
             // dataGridView1
@@ -102,7 +103,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(55, 38);
+            dataGridView1.Size = new Size(150, 123);
             dataGridView1.TabIndex = 0;
             // 
             // TxtContent
@@ -112,7 +113,7 @@
             TxtContent.Multiline = true;
             TxtContent.Name = "TxtContent";
             TxtContent.ReadOnly = true;
-            TxtContent.Size = new Size(106, 38);
+            TxtContent.Size = new Size(146, 123);
             TxtContent.TabIndex = 0;
             // 
             // UcJsonBodySimple
@@ -123,9 +124,9 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
-            MinimumSize = new Size(165, 65);
+            MinimumSize = new Size(300, 150);
             Name = "UcJsonBodySimple";
-            Size = new Size(165, 65);
+            Size = new Size(300, 150);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);

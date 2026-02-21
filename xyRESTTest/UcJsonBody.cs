@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -14,9 +15,12 @@ namespace xyRESTTest
     public partial class UcJsonBody : UserControl
     {
         ContentInfo contentInfo;
+        Control jsonEditor;
+        public event EventHandler<EventArgs>? Edited;
         public UcJsonBody(ContentInfo? contentInfo)
         {
             InitializeComponent();
+            LoadStringResources();
             UiTools.FillCbWithEnum(comboBox1, typeof(JCType));
             if (contentInfo != null)
             {
@@ -32,6 +36,16 @@ namespace xyRESTTest
                 };
             }
         }
+        public void LoadStringResources()
+        {
+            if (jsonEditor != null )
+            {
+                if (jsonEditor is UcJsonBodySimple ucSimpleJson)
+                {
+                    ucSimpleJson.LoadStringResources();
+                }
+            }
+        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -44,6 +58,7 @@ namespace xyRESTTest
                     ucSimpleJson.Edited += JsonBody_Edited;
                     ucSimpleJson.Dock = DockStyle.Fill;
                     PnlJsonEditor.Controls.Add(ucSimpleJson);
+                    jsonEditor = ucSimpleJson;
                     break;
             }
         }
@@ -52,6 +67,5 @@ namespace xyRESTTest
         {
             Edited?.Invoke(this, new EventArgs());
         }
-        public event EventHandler<EventArgs>? Edited;
     }
 }

@@ -32,6 +32,14 @@
             PnTestcases = new TableLayoutPanel();
             PnPrj = new Panel();
             LbPrjName = new Label();
+            PnlTestCase = new Panel();
+            toolStrip2 = new ToolStrip();
+            PnlWork = new Panel();
+            PnlRun = new Panel();
+            lbRunningInfo = new Label();
+            panel3 = new Panel();
+            btnHideRunWindow = new Button();
+            splitter1 = new Splitter();
             toolStrip1 = new ToolStrip();
             TsbNewProject = new ToolStripButton();
             TsbOpenProject = new ToolStripButton();
@@ -40,21 +48,14 @@
             TsbDelCase = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             TsbRun = new ToolStripButton();
-            panel2 = new Panel();
-            toolStrip2 = new ToolStrip();
-            PnlWork = new Panel();
-            PnlRun = new Panel();
-            lbRunningInfo = new Label();
-            panel3 = new Panel();
-            btnHideRunWindow = new Button();
-            splitter1 = new Splitter();
+            TscbLang = new ToolStripComboBox();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
-            toolStrip1.SuspendLayout();
-            panel2.SuspendLayout();
+            PnlTestCase.SuspendLayout();
             PnlWork.SuspendLayout();
             PnlRun.SuspendLayout();
             panel3.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -62,11 +63,10 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(PnTestcases);
             panel1.Controls.Add(PnPrj);
-            panel1.Controls.Add(toolStrip1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 367);
+            panel1.Size = new Size(226, 339);
             panel1.TabIndex = 2;
             // 
             // PnTestcases
@@ -76,18 +76,18 @@
             PnTestcases.ColumnCount = 1;
             PnTestcases.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             PnTestcases.Dock = DockStyle.Fill;
-            PnTestcases.Location = new Point(0, 70);
+            PnTestcases.Location = new Point(0, 43);
             PnTestcases.Name = "PnTestcases";
             PnTestcases.RowCount = 1;
             PnTestcases.RowStyles.Add(new RowStyle());
-            PnTestcases.Size = new Size(224, 295);
+            PnTestcases.Size = new Size(224, 294);
             PnTestcases.TabIndex = 2;
             // 
             // PnPrj
             // 
             PnPrj.Controls.Add(LbPrjName);
             PnPrj.Dock = DockStyle.Top;
-            PnPrj.Location = new Point(0, 27);
+            PnPrj.Location = new Point(0, 0);
             PnPrj.Name = "PnPrj";
             PnPrj.Padding = new Padding(0, 3, 0, 0);
             PnPrj.Size = new Size(224, 43);
@@ -103,88 +103,15 @@
             LbPrjName.TabIndex = 0;
             LbPrjName.Text = "New Test";
             // 
-            // toolStrip1
+            // PnlTestCase
             // 
-            toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, toolStripSeparator2, TsbRun });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(224, 27);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
-            // 
-            // TsbNewProject
-            // 
-            TsbNewProject.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbNewProject.Image = Properties.Resources.New;
-            TsbNewProject.ImageTransparentColor = Color.Magenta;
-            TsbNewProject.Name = "TsbNewProject";
-            TsbNewProject.Size = new Size(29, 24);
-            TsbNewProject.Text = "New test";
-            TsbNewProject.ToolTipText = "New test project";
-            TsbNewProject.Click += TsbNewProject_Click;
-            // 
-            // TsbOpenProject
-            // 
-            TsbOpenProject.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbOpenProject.Image = Properties.Resources.Open;
-            TsbOpenProject.ImageTransparentColor = Color.Magenta;
-            TsbOpenProject.Name = "TsbOpenProject";
-            TsbOpenProject.Size = new Size(29, 24);
-            TsbOpenProject.Text = "Open a test";
-            TsbOpenProject.ToolTipText = "Open a test project";
-            TsbOpenProject.Click += TsbOpenProject_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 27);
-            // 
-            // TsbAddCase
-            // 
-            TsbAddCase.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbAddCase.Image = Properties.Resources.Add;
-            TsbAddCase.ImageTransparentColor = Color.Magenta;
-            TsbAddCase.Name = "TsbAddCase";
-            TsbAddCase.Size = new Size(29, 24);
-            TsbAddCase.Text = "Add a test case";
-            TsbAddCase.Click += TsbAddCase_Click;
-            // 
-            // TsbDelCase
-            // 
-            TsbDelCase.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbDelCase.Image = Properties.Resources.Delete;
-            TsbDelCase.ImageTransparentColor = Color.Magenta;
-            TsbDelCase.Name = "TsbDelCase";
-            TsbDelCase.Size = new Size(29, 24);
-            TsbDelCase.Text = "Delete selected test case";
-            TsbDelCase.Click += TsbDelCase_Click;
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 27);
-            // 
-            // TsbRun
-            // 
-            TsbRun.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbRun.Image = Properties.Resources.Run;
-            TsbRun.ImageTransparentColor = Color.Magenta;
-            TsbRun.Name = "TsbRun";
-            TsbRun.Size = new Size(29, 24);
-            TsbRun.Text = "toolStripButton1";
-            TsbRun.ToolTipText = "Run whole test project";
-            TsbRun.Click += TsbRun_Click;
-            // 
-            // panel2
-            // 
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(toolStrip2);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(226, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(574, 367);
-            panel2.TabIndex = 3;
+            PnlTestCase.BorderStyle = BorderStyle.FixedSingle;
+            PnlTestCase.Controls.Add(toolStrip2);
+            PnlTestCase.Dock = DockStyle.Fill;
+            PnlTestCase.Location = new Point(226, 0);
+            PnlTestCase.Name = "PnlTestCase";
+            PnlTestCase.Size = new Size(574, 339);
+            PnlTestCase.TabIndex = 3;
             // 
             // toolStrip2
             // 
@@ -197,12 +124,12 @@
             // 
             // PnlWork
             // 
-            PnlWork.Controls.Add(panel2);
+            PnlWork.Controls.Add(PnlTestCase);
             PnlWork.Controls.Add(panel1);
             PnlWork.Dock = DockStyle.Fill;
-            PnlWork.Location = new Point(0, 0);
+            PnlWork.Location = new Point(0, 28);
             PnlWork.Name = "PnlWork";
-            PnlWork.Size = new Size(800, 367);
+            PnlWork.Size = new Size(800, 339);
             PnlWork.TabIndex = 4;
             // 
             // PnlRun
@@ -256,49 +183,128 @@
             splitter1.TabIndex = 6;
             splitter1.TabStop = false;
             // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, toolStripSeparator2, TsbRun, TscbLang });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(800, 28);
+            toolStrip1.TabIndex = 7;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // TsbNewProject
+            // 
+            TsbNewProject.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbNewProject.Image = Properties.Resources.New;
+            TsbNewProject.ImageTransparentColor = Color.Magenta;
+            TsbNewProject.Name = "TsbNewProject";
+            TsbNewProject.Size = new Size(29, 25);
+            TsbNewProject.Text = "New test";
+            TsbNewProject.Click += TsbNewProject_Click;
+            // 
+            // TsbOpenProject
+            // 
+            TsbOpenProject.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbOpenProject.Image = Properties.Resources.Open;
+            TsbOpenProject.ImageTransparentColor = Color.Magenta;
+            TsbOpenProject.Name = "TsbOpenProject";
+            TsbOpenProject.Size = new Size(29, 25);
+            TsbOpenProject.Text = "Open a test";
+            TsbOpenProject.Click += TsbOpenProject_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 28);
+            // 
+            // TsbAddCase
+            // 
+            TsbAddCase.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbAddCase.Image = Properties.Resources.Add;
+            TsbAddCase.ImageTransparentColor = Color.Magenta;
+            TsbAddCase.Name = "TsbAddCase";
+            TsbAddCase.Size = new Size(29, 25);
+            TsbAddCase.Text = "Add a test case";
+            TsbAddCase.Click += TsbAddCase_Click;
+            // 
+            // TsbDelCase
+            // 
+            TsbDelCase.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbDelCase.Image = Properties.Resources.Delete;
+            TsbDelCase.ImageTransparentColor = Color.Magenta;
+            TsbDelCase.Name = "TsbDelCase";
+            TsbDelCase.Size = new Size(29, 25);
+            TsbDelCase.Click += TsbDelCase_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 28);
+            // 
+            // TsbRun
+            // 
+            TsbRun.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbRun.Image = Properties.Resources.Run;
+            TsbRun.ImageTransparentColor = Color.Magenta;
+            TsbRun.Name = "TsbRun";
+            TsbRun.Size = new Size(29, 25);
+            TsbRun.Text = "toolStripButton1";
+            TsbRun.Click += TsbRun_Click;
+            // 
+            // TscbLang
+            // 
+            TscbLang.Alignment = ToolStripItemAlignment.Right;
+            TscbLang.DropDownStyle = ComboBoxStyle.DropDownList;
+            TscbLang.Name = "TscbLang";
+            TscbLang.Size = new Size(121, 28);
+            TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(PnlWork);
+            Controls.Add(toolStrip1);
             Controls.Add(splitter1);
             Controls.Add(PnlRun);
             Name = "FrmMain";
             Text = "FrmMain";
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             PnPrj.ResumeLayout(false);
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            PnlTestCase.ResumeLayout(false);
+            PnlTestCase.PerformLayout();
             PnlWork.ResumeLayout(false);
             PnlRun.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private Panel panel1;
-        private ToolStrip toolStrip1;
-        private ToolStripButton TsbNewProject;
-        private Panel panel2;
+        private Panel PnlTestCase;
         private ToolStrip toolStrip2;
-        private ToolStripButton TsbOpenProject;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton TsbAddCase;
-        private ToolStripButton TsbDelCase;
         private Panel PnPrj;
         private Label LbPrjName;
         private TableLayoutPanel PnTestcases;
-        private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton TsbRun;
         private Panel PnlWork;
         private Panel PnlRun;
         private Splitter splitter1;
         private Label lbRunningInfo;
         private Panel panel3;
         private Button btnHideRunWindow;
+        private ToolStrip toolStrip1;
+        private ToolStripButton TsbNewProject;
+        private ToolStripButton TsbOpenProject;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton TsbAddCase;
+        private ToolStripButton TsbDelCase;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton TsbRun;
+        private ToolStripComboBox TscbLang;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -21,6 +22,7 @@ namespace xyRESTTest
         public UcTestCaseItem(TestTask testTask)
         {
             InitializeComponent();
+            LoadStringResources();
             SubscribeAllControlClicks(this);
             orgBackColor = this.BackColor;
             orgBordderStyle = this.BorderStyle;
@@ -28,10 +30,10 @@ namespace xyRESTTest
             this.testTask = testTask;
             label1.Text = testTask.name;
 
-            tsbRun.Click += (s, e)  =>
-             {
-                 Run?.Invoke(this, new EventArgs());
-             };
+            TsbRun.Click += (s, e)  =>
+            {
+                Run?.Invoke(this, new EventArgs());
+            };
         }
 
         // A single event handler for all controls
@@ -91,5 +93,10 @@ namespace xyRESTTest
                 label1.Text = testTask.name;
             }
         }
+        public void LoadStringResources()
+        {
+            TsbRun.Text = Resources.strRunThisTestCase;
+        }
+
     }
 }

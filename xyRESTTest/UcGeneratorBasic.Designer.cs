@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             DgvRecords = new DataGridView();
-            label5 = new Label();
+            LbTableTitle = new Label();
             toolStrip4 = new ToolStrip();
             TsbAddRecord = new ToolStripButton();
             TsbDelRecord = new ToolStripButton();
@@ -50,15 +50,15 @@
             DgvRecords.TabIndex = 9;
             DgvRecords.CellEndEdit += DgvRecords_CellEndEdit;
             // 
-            // label5
+            // LbTableTitle
             // 
-            label5.Dock = DockStyle.Top;
-            label5.Location = new Point(0, 27);
-            label5.Name = "label5";
-            label5.Size = new Size(231, 23);
-            label5.TabIndex = 8;
-            label5.Text = "Test Data Records";
-            label5.TextAlign = ContentAlignment.MiddleCenter;
+            LbTableTitle.Dock = DockStyle.Top;
+            LbTableTitle.Location = new Point(0, 27);
+            LbTableTitle.Name = "LbTableTitle";
+            LbTableTitle.Size = new Size(231, 23);
+            LbTableTitle.TabIndex = 8;
+            LbTableTitle.Text = "Test Data Records";
+            LbTableTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // toolStrip4
             // 
@@ -112,7 +112,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(DgvRecords);
-            Controls.Add(label5);
+            Controls.Add(LbTableTitle);
             Controls.Add(toolStrip4);
             Name = "UcGeneratorBasic";
             Size = new Size(231, 150);
@@ -126,7 +126,7 @@
         #endregion
 
         private DataGridView DgvRecords;
-        private Label label5;
+        private Label LbTableTitle;
         private ToolStrip toolStrip4;
         private ToolStripButton TsbAddRecord;
         private ToolStripButton TsbDelRecord;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -28,6 +29,8 @@ namespace xyRESTTest
         BorderStyle orgBordderStyle;
         BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 
+        bool isNew = false;
+
         public UcAssertItem(
             AssertInfo? assertInfo,
             Control? uaeContainer = null)
@@ -44,7 +47,8 @@ namespace xyRESTTest
             if (assertInfo != null)
             {
                 this.assertInfo = assertInfo;
-                lbInfo.Text = $"{assertInfo.assertType}:";
+                lbInfo.Text = $"{assertInfo.assertType}:"; 
+                isNew = false;
             }
             else
             {
@@ -52,11 +56,21 @@ namespace xyRESTTest
                 { 
                     assertType = nameof(AssertType.StatusCode) 
                 };
-                lbInfo.Text = "Please click to select assert type";
+                lbInfo.Text = Resources.strUnfefined;
+                isNew = true;
             }
 
             uae = new UcAssertEdit(this.assertInfo) { Visible = false };
             uae.Edited += Assert_edited;
+            LoadStringResources();
+        }
+        public void LoadStringResources()
+        {
+            if (isNew)
+            {
+                lbInfo.Text = Resources.strUnfefined;
+            }
+            uae?.LoadStringResources();
         }
         private void Assert_edited(object? sender, EventArgs e)
         {
@@ -65,6 +79,7 @@ namespace xyRESTTest
                 lbInfo.Text = $"{assertInfo.assertType}:";
 
                 Edited?.Invoke(this, new EventArgs());
+                isNew = false;
             }
         }
 

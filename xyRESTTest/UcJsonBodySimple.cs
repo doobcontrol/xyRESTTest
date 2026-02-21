@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -17,13 +19,18 @@ namespace xyRESTTest
 
         public Dictionary<string, string> RecordData { get => recordData; }
 
+        string cNameKey = "Key";
+        string cNameValue = "Value";
+
         public UcJsonBodySimple(ContentInfo contentInfo)
         {
             InitializeComponent();
             recordData = contentInfo.recordData ?? new Dictionary<string, string>();
 
-            dataGridView1.Columns.Add("Key", "Key");
-            dataGridView1.Columns.Add("Value", "Value");
+            dataGridView1.Columns.Add(cNameKey, Resources.strKey);
+            dataGridView1.Columns.Add(cNameValue, Resources.strValue);
+            LoadStringResources();
+
             foreach (var kv in recordData)
             {
                 dataGridView1.Rows.Add(kv.Key, kv.Value);
@@ -36,6 +43,13 @@ namespace xyRESTTest
                     recordDataChanged();
                 }
             };
+        }
+        public void LoadStringResources()
+        {
+            dataGridView1.Columns[cNameKey].HeaderText = Resources.strKey;
+            dataGridView1.Columns[cNameValue].HeaderText = Resources.strValue;
+            TsbAddPar.ToolTipText = Resources.strAddJSONValue;
+            TsbDelPar.ToolTipText = Resources.strDeleteJSONValue;
         }
         private void ShowTextContent()
         {

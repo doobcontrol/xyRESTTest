@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -17,12 +18,18 @@ namespace xyRESTTest
         public UcAuthHeader(AuthHeaderInfo authHeader)
         {
             InitializeComponent();
+            LoadStringResources();
             UiTools.FillCbWithEnum(comboBox1, typeof(AuthType));
 
             comboBox1.Text = authHeader.scheme;
             TxtUsername.Text = authHeader.username;
             TxtPassword.Text = authHeader.password;
             TxtToken.Text = authHeader.authToken;
+        }
+        public void LoadStringResources()
+        {
+            LbUserName.Text = Resources.strLoginName;
+            LbPassword.Text = Resources.strPassword;
         }
 
         public AuthHeaderInfo AuthHeader

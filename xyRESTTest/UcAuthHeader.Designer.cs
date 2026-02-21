@@ -35,10 +35,10 @@
             label3 = new Label();
             TxtToken = new TextBox();
             TlpBasic = new TableLayoutPanel();
-            label1 = new Label();
+            LbUserName = new Label();
             TxtUsername = new TextBox();
             TxtPassword = new TextBox();
-            label2 = new Label();
+            LbPassword = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             TlpBearer.SuspendLayout();
@@ -86,7 +86,7 @@
             TlpBearer.AutoSize = true;
             TlpBearer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             TlpBearer.ColumnCount = 2;
-            TlpBearer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            TlpBearer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             TlpBearer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             TlpBearer.Controls.Add(label3, 0, 0);
             TlpBearer.Controls.Add(TxtToken, 1, 0);
@@ -94,7 +94,6 @@
             TlpBearer.Location = new Point(0, 66);
             TlpBearer.Name = "TlpBearer";
             TlpBearer.RowCount = 1;
-            TlpBearer.RowStyles.Add(new RowStyle());
             TlpBearer.RowStyles.Add(new RowStyle());
             TlpBearer.Size = new Size(348, 33);
             TlpBearer.TabIndex = 1;
@@ -114,9 +113,9 @@
             // TxtToken
             // 
             TxtToken.Dock = DockStyle.Top;
-            TxtToken.Location = new Point(93, 3);
+            TxtToken.Location = new Point(103, 3);
             TxtToken.Name = "TxtToken";
-            TxtToken.Size = new Size(252, 27);
+            TxtToken.Size = new Size(242, 27);
             TxtToken.TabIndex = 2;
             // 
             // TlpBasic
@@ -124,12 +123,12 @@
             TlpBasic.AutoSize = true;
             TlpBasic.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             TlpBasic.ColumnCount = 2;
-            TlpBasic.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            TlpBasic.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             TlpBasic.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            TlpBasic.Controls.Add(label1, 0, 0);
+            TlpBasic.Controls.Add(LbUserName, 0, 0);
             TlpBasic.Controls.Add(TxtUsername, 1, 0);
             TlpBasic.Controls.Add(TxtPassword, 1, 1);
-            TlpBasic.Controls.Add(label2, 0, 1);
+            TlpBasic.Controls.Add(LbPassword, 0, 1);
             TlpBasic.Dock = DockStyle.Top;
             TlpBasic.Location = new Point(0, 0);
             TlpBasic.Name = "TlpBasic";
@@ -140,43 +139,43 @@
             TlpBasic.TabIndex = 0;
             TlpBasic.Visible = false;
             // 
-            // label1
+            // LbUserName
             // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Left;
-            label1.Location = new Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(76, 33);
-            label1.TabIndex = 0;
-            label1.Text = "username:";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
+            LbUserName.AutoSize = true;
+            LbUserName.Dock = DockStyle.Left;
+            LbUserName.Location = new Point(3, 0);
+            LbUserName.Name = "LbUserName";
+            LbUserName.Size = new Size(93, 33);
+            LbUserName.TabIndex = 0;
+            LbUserName.Text = "Login Name:";
+            LbUserName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TxtUsername
             // 
             TxtUsername.Dock = DockStyle.Top;
-            TxtUsername.Location = new Point(93, 3);
+            TxtUsername.Location = new Point(103, 3);
             TxtUsername.Name = "TxtUsername";
-            TxtUsername.Size = new Size(252, 27);
+            TxtUsername.Size = new Size(242, 27);
             TxtUsername.TabIndex = 2;
             // 
             // TxtPassword
             // 
             TxtPassword.Dock = DockStyle.Top;
-            TxtPassword.Location = new Point(93, 36);
+            TxtPassword.Location = new Point(103, 36);
             TxtPassword.Name = "TxtPassword";
-            TxtPassword.Size = new Size(252, 27);
+            TxtPassword.Size = new Size(242, 27);
             TxtPassword.TabIndex = 3;
             // 
-            // label2
+            // LbPassword
             // 
-            label2.AutoSize = true;
-            label2.Dock = DockStyle.Left;
-            label2.Location = new Point(3, 33);
-            label2.Name = "label2";
-            label2.Size = new Size(75, 33);
-            label2.TabIndex = 1;
-            label2.Text = "password:";
-            label2.TextAlign = ContentAlignment.MiddleLeft;
+            LbPassword.AutoSize = true;
+            LbPassword.Dock = DockStyle.Left;
+            LbPassword.Location = new Point(3, 33);
+            LbPassword.Name = "LbPassword";
+            LbPassword.Size = new Size(75, 33);
+            LbPassword.TabIndex = 1;
+            LbPassword.Text = "password:";
+            LbPassword.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // UcAuthHeader
             // 
@@ -206,10 +205,10 @@
         private ComboBox comboBox1;
         private Panel panel2;
         private TableLayoutPanel TlpBasic;
-        private Label label1;
+        private Label LbUserName;
         private TextBox TxtUsername;
         private TextBox TxtPassword;
-        private Label label2;
+        private Label LbPassword;
         private TableLayoutPanel TlpBearer;
         private Label label3;
         private TextBox TxtToken;

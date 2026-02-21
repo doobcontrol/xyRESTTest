@@ -34,14 +34,14 @@
             TsbAddAssertList = new ToolStripButton();
             TsbDelAssertList = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            toolStripLabel2 = new ToolStripLabel();
+            TslAssertionList = new ToolStripLabel();
             panel2 = new Panel();
             DgvRead = new DataGridView();
             TsRead = new ToolStrip();
             TsbAddReadList = new ToolStripButton();
             TsbDelReadList = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
-            toolStripLabel1 = new ToolStripLabel();
+            TslReadDataList = new ToolStripLabel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvAssert).BeginInit();
             TsAssert.SuspendLayout();
@@ -59,7 +59,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(212, 27);
+            panel1.Size = new Size(426, 27);
             panel1.TabIndex = 1;
             // 
             // DgvAssert
@@ -74,16 +74,16 @@
             DgvAssert.Name = "DgvAssert";
             DgvAssert.RowHeadersVisible = false;
             DgvAssert.RowHeadersWidth = 51;
-            DgvAssert.Size = new Size(212, 0);
+            DgvAssert.Size = new Size(426, 0);
             DgvAssert.TabIndex = 3;
             // 
             // TsAssert
             // 
             TsAssert.ImageScalingSize = new Size(20, 20);
-            TsAssert.Items.AddRange(new ToolStripItem[] { TsbAddAssertList, TsbDelAssertList, toolStripSeparator1, toolStripLabel2 });
+            TsAssert.Items.AddRange(new ToolStripItem[] { TsbAddAssertList, TsbDelAssertList, toolStripSeparator1, TslAssertionList });
             TsAssert.Location = new Point(0, 0);
             TsAssert.Name = "TsAssert";
-            TsAssert.Size = new Size(212, 27);
+            TsAssert.Size = new Size(426, 27);
             TsAssert.TabIndex = 2;
             TsAssert.Text = "toolStrip1";
             // 
@@ -112,11 +112,11 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 27);
             // 
-            // toolStripLabel2
+            // TslAssertionList
             // 
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new Size(96, 24);
-            toolStripLabel2.Text = "Assertion List";
+            TslAssertionList.Name = "TslAssertionList";
+            TslAssertionList.Size = new Size(96, 24);
+            TslAssertionList.Text = "Assertion List";
             // 
             // panel2
             // 
@@ -127,7 +127,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 27);
             panel2.Name = "panel2";
-            panel2.Size = new Size(212, 27);
+            panel2.Size = new Size(426, 27);
             panel2.TabIndex = 2;
             // 
             // DgvRead
@@ -142,16 +142,16 @@
             DgvRead.Name = "DgvRead";
             DgvRead.RowHeadersVisible = false;
             DgvRead.RowHeadersWidth = 51;
-            DgvRead.Size = new Size(212, 0);
+            DgvRead.Size = new Size(426, 0);
             DgvRead.TabIndex = 3;
             // 
             // TsRead
             // 
             TsRead.ImageScalingSize = new Size(20, 20);
-            TsRead.Items.AddRange(new ToolStripItem[] { TsbAddReadList, TsbDelReadList, toolStripSeparator2, toolStripLabel1 });
+            TsRead.Items.AddRange(new ToolStripItem[] { TsbAddReadList, TsbDelReadList, toolStripSeparator2, TslReadDataList });
             TsRead.Location = new Point(0, 0);
             TsRead.Name = "TsRead";
-            TsRead.Size = new Size(212, 27);
+            TsRead.Size = new Size(426, 27);
             TsRead.TabIndex = 2;
             TsRead.Text = "toolStrip2";
             // 
@@ -180,11 +180,11 @@
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 27);
             // 
-            // toolStripLabel1
+            // TslReadDataList
             // 
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(105, 24);
-            toolStripLabel1.Text = "Read Data List";
+            TslReadDataList.Name = "TslReadDataList";
+            TslReadDataList.Size = new Size(105, 24);
+            TslReadDataList.Text = "Read Data List";
             // 
             // UcAssertJsonContent
             // 
@@ -195,9 +195,9 @@
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(panel2);
             Controls.Add(panel1);
-            MinimumSize = new Size(214, 0);
+            MinimumSize = new Size(428, 0);
             Name = "UcAssertJsonContent";
-            Size = new Size(212, 54);
+            Size = new Size(426, 54);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)DgvAssert).EndInit();
@@ -220,13 +220,13 @@
         private ToolStripButton TsbAddAssertList;
         private ToolStripButton TsbDelAssertList;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripLabel toolStripLabel2;
+        private ToolStripLabel TslAssertionList;
         private Panel panel2;
         private DataGridView DgvRead;
         private ToolStrip TsRead;
         private ToolStripButton TsbAddReadList;
         private ToolStripButton TsbDelReadList;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripLabel toolStripLabel1;
+        private ToolStripLabel TslReadDataList;
     }
 }

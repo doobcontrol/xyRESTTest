@@ -40,7 +40,7 @@
             PnlBody = new Panel();
             panel3 = new Panel();
             CmbBodyType = new ComboBox();
-            label1 = new Label();
+            LbContentType = new Label();
             groupBox1 = new GroupBox();
             TlpHeaders = new TableLayoutPanel();
             toolStrip1 = new ToolStrip();
@@ -60,7 +60,7 @@
             splitter2 = new Splitter();
             PnlParameters = new Panel();
             DgvParameters = new DataGridView();
-            label2 = new Label();
+            LbParameters = new Label();
             toolStrip3 = new ToolStrip();
             TsbAddParam = new ToolStripButton();
             TsbDelParam = new ToolStripButton();
@@ -185,7 +185,7 @@
             // panel3
             // 
             panel3.Controls.Add(CmbBodyType);
-            panel3.Controls.Add(label1);
+            panel3.Controls.Add(LbContentType);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(3, 23);
             panel3.Name = "panel3";
@@ -202,14 +202,14 @@
             CmbBodyType.TabIndex = 1;
             CmbBodyType.SelectedIndexChanged += CmbBodyType_SelectedIndexChanged;
             // 
-            // label1
+            // LbContentType
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 3);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Content Type:";
+            LbContentType.AutoSize = true;
+            LbContentType.Location = new Point(3, 3);
+            LbContentType.Name = "LbContentType";
+            LbContentType.Size = new Size(99, 20);
+            LbContentType.TabIndex = 0;
+            LbContentType.Text = "Content Type:";
             // 
             // groupBox1
             // 
@@ -394,7 +394,7 @@
             // 
             PnlParameters.BorderStyle = BorderStyle.FixedSingle;
             PnlParameters.Controls.Add(DgvParameters);
-            PnlParameters.Controls.Add(label2);
+            PnlParameters.Controls.Add(LbParameters);
             PnlParameters.Controls.Add(toolStrip3);
             PnlParameters.Dock = DockStyle.Left;
             PnlParameters.Location = new Point(0, 0);
@@ -413,15 +413,15 @@
             DgvParameters.TabIndex = 3;
             DgvParameters.CellEndEdit += DgvParameters_CellEndEdit;
             // 
-            // label2
+            // LbParameters
             // 
-            label2.Dock = DockStyle.Top;
-            label2.Location = new Point(0, 27);
-            label2.Name = "label2";
-            label2.Size = new Size(196, 23);
-            label2.TabIndex = 2;
-            label2.Text = "Parameters";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
+            LbParameters.Dock = DockStyle.Top;
+            LbParameters.Location = new Point(0, 27);
+            LbParameters.Name = "LbParameters";
+            LbParameters.Size = new Size(196, 23);
+            LbParameters.TabIndex = 2;
+            LbParameters.Text = "Parameters";
+            LbParameters.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // toolStrip3
             // 
@@ -559,7 +559,7 @@
         private Panel PnlBody;
         private Panel panel3;
         private ComboBox CmbBodyType;
-        private Label label1;
+        private Label LbContentType;
         private Panel PnlAssertItems;
         private ToolStrip toolStrip2;
         private ToolStripButton TsbAddAssert;
@@ -569,7 +569,7 @@
         private CheckBox CbDataGenerator;
         private Panel PnlGenerator;
         private Panel PnlParameters;
-        private Label label2;
+        private Label LbParameters;
         private ToolStrip toolStrip3;
         private ToolStripButton TsbDelParam;
         private ToolStripButton TsbAddParam;

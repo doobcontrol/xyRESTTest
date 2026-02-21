@@ -143,126 +143,126 @@
     <value>..\Resources\OpenFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strAppTitle" xml:space="preserve">
-    <value>REST API Test Tool</value>
+    <value>REST API 测试工具</value>
   </data>
   <data name="strNoProjectLoaded" xml:space="preserve">
-    <value>No Project Loaded</value>
+    <value>无测试项目</value>
   </data>
   <data name="strNewTestProject" xml:space="preserve">
-    <value>New test project</value>
+    <value>新建测试项目</value>
   </data>
   <data name="strOpenTestProject" xml:space="preserve">
-    <value>Open a test project</value>
+    <value>打开测试项目</value>
   </data>
   <data name="strAddTestCase" xml:space="preserve">
-    <value>Add a test case</value>
+    <value>新增测试项</value>
   </data>
   <data name="strDeleteTestCase" xml:space="preserve">
-    <value>Delete selected test case</value>
+    <value>删除选中的测试项</value>
   </data>
   <data name="strRunTestProject" xml:space="preserve">
-    <value>Run whole test project</value>
+    <value>运行测试项目</value>
   </data>
   <data name="strRunThisTestCase" xml:space="preserve">
-    <value>Run this test case</value>
+    <value>运行此测试项</value>
   </data>
   <data name="strDoubleClickToEdit" xml:space="preserve">
-    <value>Double-click to edit</value>
+    <value>双击修改</value>
   </data>
   <data name="strRequestInformation" xml:space="preserve">
-    <value>Request Information</value>
+    <value>Request 配置</value>
   </data>
   <data name="strAssertionInformation" xml:space="preserve">
-    <value>Assertion Information</value>
+    <value>结果判断配置</value>
   </data>
   <data name="strDataGenerator" xml:space="preserve">
-    <value>Data Generator</value>
+    <value>测试数据</value>
   </data>
   <data name="strAddHeader" xml:space="preserve">
-    <value>Add a header</value>
+    <value>添加一个 header</value>
   </data>
   <data name="strDeleteHeader" xml:space="preserve">
-    <value>Delete selected header</value>
+    <value>删除选中的 header</value>
   </data>
   <data name="strAddAssertion" xml:space="preserve">
-    <value>Add an assertion</value>
+    <value>添加一项判断</value>
   </data>
   <data name="strDeleteAssertion" xml:space="preserve">
-    <value>Delete selected assertion</value>
+    <value>删除选中的判断项</value>
   </data>
   <data name="strOk" xml:space="preserve">
-    <value>Ok</value>
+    <value>确定</value>
   </data>
   <data name="strCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="strUnfefined" xml:space="preserve">
-    <value>&lt;Unfefined&gt;</value>
+    <value>&lt;未定义&gt;</value>
   </data>
   <data name="strLoginName" xml:space="preserve">
-    <value>Login Name</value>
+    <value>登陆名</value>
   </data>
   <data name="strPassword" xml:space="preserve">
-    <value>Password</value>
+    <value>密码</value>
   </data>
   <data name="strExpectedValue" xml:space="preserve">
-    <value>Expected value</value>
+    <value>期待值</value>
   </data>
   <data name="strJSONPath" xml:space="preserve">
-    <value>JSON Path</value>
+    <value>JSON 路径</value>
   </data>
   <data name="strParameterName" xml:space="preserve">
-    <value>Parameter Name</value>
+    <value>参数名称</value>
   </data>
   <data name="strAssertionList" xml:space="preserve">
-    <value>Assertion List</value>
+    <value>判断项列表</value>
   </data>
   <data name="strReadDataList" xml:space="preserve">
-    <value>Read Data List</value>
+    <value>读取项列表</value>
   </data>
   <data name="strAddReadItem" xml:space="preserve">
-    <value>Add a read data item</value>
+    <value>添加一个读取项</value>
   </data>
   <data name="strDeleteReadItem" xml:space="preserve">
-    <value>Delete selected read data item</value>
+    <value>删除选中的读取项</value>
   </data>
   <data name="strContentType" xml:space="preserve">
-    <value>Content Type</value>
+    <value>类型</value>
   </data>
   <data name="strKey" xml:space="preserve">
-    <value>Key</value>
+    <value>键</value>
   </data>
   <data name="strValue" xml:space="preserve">
-    <value>Value</value>
+    <value>值</value>
   </data>
   <data name="strAddJSONValue" xml:space="preserve">
-    <value>Add a JSON value</value>
+    <value>添加一个JSON项</value>
   </data>
   <data name="strDeleteJSONValue" xml:space="preserve">
-    <value>Delete selected JSON value</value>
+    <value>删除选中的JSON项</value>
   </data>
   <data name="strDynamicallyGenerateTestCase" xml:space="preserve">
-    <value>Dynamically generate test case</value>
+    <value>动态生成测试项</value>
   </data>
   <data name="strParameters" xml:space="preserve">
-    <value>Parameters</value>
+    <value>参数表</value>
   </data>
   <data name="strAddParameter" xml:space="preserve">
-    <value>Add a parameter</value>
+    <value>添加一个参数</value>
   </data>
   <data name="strDeleteParameter" xml:space="preserve">
-    <value>Delete selected parameter</value>
+    <value>删除选中的参数</value>
   </data>
   <data name="strTestDataRecords" xml:space="preserve">
-    <value>Test Data Records</value>
+    <value>测试数据集</value>
   </data>
   <data name="strAddTestDataDecord" xml:space="preserve">
-    <value>Add a test data record</value>
+    <value>添加一条测试数据</value>
   </data>
   <data name="strDeleteTestDataRecord" xml:space="preserve">
-    <value>Delete selected data record</value>
+    <value>删除选中的测试数据</value>
   </data>
   <data name="strSetTestFataFile" xml:space="preserve">
-    <value>Set test data file</value>
+    <value>设置测试数据文件</value>
   </data>
 </root>

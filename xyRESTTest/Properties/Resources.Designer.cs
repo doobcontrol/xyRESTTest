@@ -139,5 +139,374 @@ namespace xyRESTTest.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an assertion.
+        /// </summary>
+        internal static string strAddAssertion {
+            get {
+                return ResourceManager.GetString("strAddAssertion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a header.
+        /// </summary>
+        internal static string strAddHeader {
+            get {
+                return ResourceManager.GetString("strAddHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a JSON value.
+        /// </summary>
+        internal static string strAddJSONValue {
+            get {
+                return ResourceManager.GetString("strAddJSONValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a parameter.
+        /// </summary>
+        internal static string strAddParameter {
+            get {
+                return ResourceManager.GetString("strAddParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a read data item.
+        /// </summary>
+        internal static string strAddReadItem {
+            get {
+                return ResourceManager.GetString("strAddReadItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a test case.
+        /// </summary>
+        internal static string strAddTestCase {
+            get {
+                return ResourceManager.GetString("strAddTestCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a test data record.
+        /// </summary>
+        internal static string strAddTestDataDecord {
+            get {
+                return ResourceManager.GetString("strAddTestDataDecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REST API Test Tool.
+        /// </summary>
+        internal static string strAppTitle {
+            get {
+                return ResourceManager.GetString("strAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assertion Information.
+        /// </summary>
+        internal static string strAssertionInformation {
+            get {
+                return ResourceManager.GetString("strAssertionInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assertion List.
+        /// </summary>
+        internal static string strAssertionList {
+            get {
+                return ResourceManager.GetString("strAssertionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string strCancel {
+            get {
+                return ResourceManager.GetString("strCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Content Type.
+        /// </summary>
+        internal static string strContentType {
+            get {
+                return ResourceManager.GetString("strContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Generator.
+        /// </summary>
+        internal static string strDataGenerator {
+            get {
+                return ResourceManager.GetString("strDataGenerator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected assertion.
+        /// </summary>
+        internal static string strDeleteAssertion {
+            get {
+                return ResourceManager.GetString("strDeleteAssertion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected header.
+        /// </summary>
+        internal static string strDeleteHeader {
+            get {
+                return ResourceManager.GetString("strDeleteHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected JSON value.
+        /// </summary>
+        internal static string strDeleteJSONValue {
+            get {
+                return ResourceManager.GetString("strDeleteJSONValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected parameter.
+        /// </summary>
+        internal static string strDeleteParameter {
+            get {
+                return ResourceManager.GetString("strDeleteParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected read data item.
+        /// </summary>
+        internal static string strDeleteReadItem {
+            get {
+                return ResourceManager.GetString("strDeleteReadItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected test case.
+        /// </summary>
+        internal static string strDeleteTestCase {
+            get {
+                return ResourceManager.GetString("strDeleteTestCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected data record.
+        /// </summary>
+        internal static string strDeleteTestDataRecord {
+            get {
+                return ResourceManager.GetString("strDeleteTestDataRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Double-click to edit.
+        /// </summary>
+        internal static string strDoubleClickToEdit {
+            get {
+                return ResourceManager.GetString("strDoubleClickToEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dynamically generate test case.
+        /// </summary>
+        internal static string strDynamicallyGenerateTestCase {
+            get {
+                return ResourceManager.GetString("strDynamicallyGenerateTestCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected value.
+        /// </summary>
+        internal static string strExpectedValue {
+            get {
+                return ResourceManager.GetString("strExpectedValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON Path.
+        /// </summary>
+        internal static string strJSONPath {
+            get {
+                return ResourceManager.GetString("strJSONPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key.
+        /// </summary>
+        internal static string strKey {
+            get {
+                return ResourceManager.GetString("strKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login Name.
+        /// </summary>
+        internal static string strLoginName {
+            get {
+                return ResourceManager.GetString("strLoginName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New test project.
+        /// </summary>
+        internal static string strNewTestProject {
+            get {
+                return ResourceManager.GetString("strNewTestProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Project Loaded.
+        /// </summary>
+        internal static string strNoProjectLoaded {
+            get {
+                return ResourceManager.GetString("strNoProjectLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string strOk {
+            get {
+                return ResourceManager.GetString("strOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open a test project.
+        /// </summary>
+        internal static string strOpenTestProject {
+            get {
+                return ResourceManager.GetString("strOpenTestProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter Name.
+        /// </summary>
+        internal static string strParameterName {
+            get {
+                return ResourceManager.GetString("strParameterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters.
+        /// </summary>
+        internal static string strParameters {
+            get {
+                return ResourceManager.GetString("strParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string strPassword {
+            get {
+                return ResourceManager.GetString("strPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Data List.
+        /// </summary>
+        internal static string strReadDataList {
+            get {
+                return ResourceManager.GetString("strReadDataList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request Information.
+        /// </summary>
+        internal static string strRequestInformation {
+            get {
+                return ResourceManager.GetString("strRequestInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run whole test project.
+        /// </summary>
+        internal static string strRunTestProject {
+            get {
+                return ResourceManager.GetString("strRunTestProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run this test case.
+        /// </summary>
+        internal static string strRunThisTestCase {
+            get {
+                return ResourceManager.GetString("strRunThisTestCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set test data file.
+        /// </summary>
+        internal static string strSetTestFataFile {
+            get {
+                return ResourceManager.GetString("strSetTestFataFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Data Records.
+        /// </summary>
+        internal static string strTestDataRecords {
+            get {
+                return ResourceManager.GetString("strTestDataRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;Unfefined&gt;.
+        /// </summary>
+        internal static string strUnfefined {
+            get {
+                return ResourceManager.GetString("strUnfefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        internal static string strValue {
+            get {
+                return ResourceManager.GetString("strValue", resourceCulture);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -21,12 +22,30 @@ namespace xyRESTTest
         public UcAssertEdit(AssertInfo assertInfo)
         {
             InitializeComponent();
+            LoadStringResources();
             UiTools.FillCbWithEnum(comboBox1, typeof(AssertType));
             Leave += (s, e) => { Hide(); };
 
             this.assertInfo = assertInfo;
 
             comboBox1.Text = this.assertInfo.assertType;
+        }
+        public void LoadStringResources()
+        {
+            BtnOk.Text = Resources.strOk;
+            BtnCancel.Text = Resources.strCancel;
+            if (panel3.Controls.Count > 0)
+            {
+                var assertEdit = panel3.Controls[0];
+                if (assertEdit is UcAssertStatusCode uasc)
+                {
+                    uasc.LoadStringResources();
+                }
+                else if (assertEdit is UcAssertJsonContent uajc)
+                {
+                    uajc.LoadStringResources();
+                }
+            }
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
