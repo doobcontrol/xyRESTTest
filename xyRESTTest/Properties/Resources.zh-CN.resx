@@ -274,4 +274,16 @@
   <data name="strLoadProjectFlashInfo" xml:space="preserve">
     <value>正在加载项目，请稍候...</value>
   </data>
+  <data name="strProjectOpenError" xml:space="preserve">
+    <value>出错: 读项目文件失败. 错误信息: {0}</value>
+  </data>
+  <data name="strNewProjectName" xml:space="preserve">
+    <value>项目名称:</value>
+  </data>
+  <data name="strNewProjectSaveFolder" xml:space="preserve">
+    <value>保存位置:</value>
+  </data>
+  <data name="strNewProjectSaveName" xml:space="preserve">
+    <value>项目保存名称:</value>
+  </data>
 </root>

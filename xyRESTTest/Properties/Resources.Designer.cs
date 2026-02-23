@@ -384,6 +384,33 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project Name:.
+        /// </summary>
+        internal static string strNewProjectName {
+            get {
+                return ResourceManager.GetString("strNewProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Save Folder:.
+        /// </summary>
+        internal static string strNewProjectSaveFolder {
+            get {
+                return ResourceManager.GetString("strNewProjectSaveFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Save Name:.
+        /// </summary>
+        internal static string strNewProjectSaveName {
+            get {
+                return ResourceManager.GetString("strNewProjectSaveName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New test project.
         /// </summary>
         internal static string strNewTestProject {
@@ -443,6 +470,15 @@ namespace xyRESTTest.Properties {
         internal static string strPassword {
             get {
                 return ResourceManager.GetString("strPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: Could not read file from disk. Original error: {0}.
+        /// </summary>
+        internal static string strProjectOpenError {
+            get {
+                return ResourceManager.GetString("strProjectOpenError", resourceCulture);
             }
         }
         

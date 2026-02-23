@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
+            LbProjectName = new Label();
+            LbProjectSaveFolder = new Label();
+            LbProjectSaveName = new Label();
             TxtProjectName = new TextBox();
             TxtProjectFolder = new TextBox();
             BtnBrowser = new Button();
@@ -39,32 +39,32 @@
             BtnCancel = new Button();
             SuspendLayout();
             // 
-            // label1
+            // LbProjectName
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(102, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Project Name:";
+            LbProjectName.AutoSize = true;
+            LbProjectName.Location = new Point(12, 9);
+            LbProjectName.Name = "LbProjectName";
+            LbProjectName.Size = new Size(102, 20);
+            LbProjectName.TabIndex = 0;
+            LbProjectName.Text = "Project Name:";
             // 
-            // label2
+            // LbProjectSaveFolder
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 44);
-            label2.Name = "label2";
-            label2.Size = new Size(139, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Project Save Folder:";
+            LbProjectSaveFolder.AutoSize = true;
+            LbProjectSaveFolder.Location = new Point(12, 44);
+            LbProjectSaveFolder.Name = "LbProjectSaveFolder";
+            LbProjectSaveFolder.Size = new Size(139, 20);
+            LbProjectSaveFolder.TabIndex = 1;
+            LbProjectSaveFolder.Text = "Project Save Folder:";
             // 
-            // label3
+            // LbProjectSaveName
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 77);
-            label3.Name = "label3";
-            label3.Size = new Size(137, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Project Save Name:";
+            LbProjectSaveName.AutoSize = true;
+            LbProjectSaveName.Location = new Point(12, 77);
+            LbProjectSaveName.Name = "LbProjectSaveName";
+            LbProjectSaveName.Size = new Size(137, 20);
+            LbProjectSaveName.TabIndex = 2;
+            LbProjectSaveName.Text = "Project Save Name:";
             // 
             // TxtProjectName
             // 
@@ -130,9 +130,9 @@
             Controls.Add(BtnBrowser);
             Controls.Add(TxtProjectFolder);
             Controls.Add(TxtProjectName);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(LbProjectSaveName);
+            Controls.Add(LbProjectSaveFolder);
+            Controls.Add(LbProjectName);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "FrmNewTestProject";
             Text = "New Test Project";
@@ -142,9 +142,9 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
+        private Label LbProjectName;
+        private Label LbProjectSaveFolder;
+        private Label LbProjectSaveName;
         private TextBox TxtProjectName;
         private TextBox TxtProjectFolder;
         private Button BtnBrowser;

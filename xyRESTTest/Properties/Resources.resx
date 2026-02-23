@@ -274,4 +274,16 @@
   <data name="strLoadProjectFlashInfo" xml:space="preserve">
     <value>Loading ...</value>
   </data>
+  <data name="strProjectOpenError" xml:space="preserve">
+    <value>Error: Could not read file from disk. Original error: {0}</value>
+  </data>
+  <data name="strNewProjectName" xml:space="preserve">
+    <value>Project Name:</value>
+  </data>
+  <data name="strNewProjectSaveFolder" xml:space="preserve">
+    <value>Project Save Folder:</value>
+  </data>
+  <data name="strNewProjectSaveName" xml:space="preserve">
+    <value>Project Save Name:</value>
+  </data>
 </root>

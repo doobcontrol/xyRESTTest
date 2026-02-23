@@ -209,7 +209,7 @@ namespace xyRESTTest
 
             // Set properties for the dialog
             ofd.InitialDirectory = UiTools.WorkDir;
-            ofd.Title = "Open Test Project";
+            ofd.Title = Resources.strOpenTestProject;
             ofd.CheckFileExists = true;
             ofd.CheckPathExists = true;
 
@@ -255,8 +255,11 @@ namespace xyRESTTest
                 catch (Exception ex)
                 {
                     // Handle any errors that might occur
-                    MessageBox.Show("Error: Could not read file from disk. Original error: "
-                        + ex.Message);
+                    MessageBox.Show(
+                        string.Format(
+                            Resources.strProjectOpenError,
+                            ex.Message)
+                    );
                 }
             }
         }

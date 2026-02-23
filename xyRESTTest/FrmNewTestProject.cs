@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.Properties;
 using xyRESTTestLib;
 
 namespace xyRESTTest
@@ -20,6 +21,12 @@ namespace xyRESTTest
         public FrmNewTestProject()
         {
             InitializeComponent();
+            Text = Resources.strNewTestProject;
+            BtnOk.Text = Resources.strOk;
+            BtnCancel.Text = Resources.strCancel;
+            LbProjectName.Text = Resources.strNewProjectName;
+            LbProjectSaveFolder.Text = Resources.strNewProjectSaveFolder;
+            LbProjectSaveName.Text = Resources.strNewProjectSaveName;
             TxtProjectFolder.Text = UiTools.WorkDir;
             TxtProjectName.TextChanged += ProjectNameOrFolder_TextChanged;
             TxtProjectFolder.TextChanged += ProjectNameOrFolder_TextChanged;
@@ -29,6 +36,7 @@ namespace xyRESTTest
         private void BtnBrowser_Click(object sender, EventArgs e)
         {
             var fbd = new FolderBrowserDialog();
+            fbd.Description = Resources.strNewProjectSaveFolder;
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 TxtProjectFolder.Text = fbd.SelectedPath;
