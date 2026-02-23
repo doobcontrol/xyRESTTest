@@ -222,11 +222,8 @@ namespace xyRESTTest
             {
                 try
                 {
-                    var flpf = new FrmLoadProjectFlash();
-                    Task.Run(()=>
-                    {
-                        flpf.ShowDialog();
-                    });
+                    LoadProjectMask(true);
+
                     // Get the path of the specified file
                     string filePath = ofd.FileName;
                     toolStrip1.SuspendLayout();
@@ -250,7 +247,8 @@ namespace xyRESTTest
                     PnPrj.ResumeLayout();
                     PnTestcases.ResumeLayout();
                     toolStrip1.ResumeLayout();
-                    flpf.DialogResult = DialogResult.OK;
+
+                    LoadProjectMask(false);
                 }
                 catch (Exception ex)
                 {
@@ -261,6 +259,32 @@ namespace xyRESTTest
                             ex.Message)
                     );
                 }
+            }
+        }
+
+        Label lbLoading;
+        private void LoadProjectMask(bool mask)
+        {
+            if (mask)
+            {
+                lbLoading = new Label
+                {
+                    Text = Resources.strLoadProjectFlashInfo,
+                    AutoSize = true,
+                    Parent = this,
+                };
+                lbLoading.Location = new Point(
+                    (this.ClientSize.Width - lbLoading.Width) / 2,
+                    (this.ClientSize.Height - lbLoading.Height) / 2);
+                this.Controls.Add(lbLoading);
+                lbLoading.BringToFront();
+                this.Enabled = false;
+            }
+            else
+            {
+                this.Controls.Remove(lbLoading);
+                lbLoading.Dispose();
+                this.Enabled = true;
             }
         }
 
