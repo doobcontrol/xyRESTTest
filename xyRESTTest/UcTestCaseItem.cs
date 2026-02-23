@@ -16,6 +16,7 @@ namespace xyRESTTest
     {
         TestTask testTask;
         public TestTask TestTask { get => testTask; }
+        bool selected;
 
         public event EventHandler<EventArgs>? Selected;
         public event EventHandler<EventArgs>? Run;
@@ -39,15 +40,11 @@ namespace xyRESTTest
         // A single event handler for all controls
         private void AllControls_Click(object sender, EventArgs e)
         {
-            // Use the 'sender' object to determine which control was clicked
-            Control clickedControl = sender as Control;
-
-            if (clickedControl != null)
+            if (!selected)
             {
+                SetSelected(true);
+                Selected?.Invoke(this, new EventArgs());
             }
-
-            SetSelected(true);
-            Selected?.Invoke(this, new EventArgs());
         }
 
         // Recursive method to subscribe all controls within a parent control
@@ -84,6 +81,7 @@ namespace xyRESTTest
                 this.BackColor = orgBackColor;
                 this.BorderStyle = orgBordderStyle;
             }
+            this.selected = selected;
         }
 
         public void UpdateDisplay()
