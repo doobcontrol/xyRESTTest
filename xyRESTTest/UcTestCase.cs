@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using xyRESTTest.Properties;
 using xyRESTTestLib;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static xyRESTTest.UcTestCase;
 
 namespace xyRESTTest
 {
@@ -19,6 +16,7 @@ namespace xyRESTTest
     {
         TestTask testTask;
         public TestTask TestTask { get => testTask; }
+
         public UcTestCase(TestTask testTask)
         {
             InitializeComponent();
@@ -84,6 +82,12 @@ namespace xyRESTTest
             DgvParameters.MultiSelect = false;
             DgvParameters.Columns.Add("Parameter", "Parameter");
 
+            editorSelector = new ComboBox();
+            editorSelector.DropDownStyle = ComboBoxStyle.DropDownList;
+            editorSelector.Dock = DockStyle.Top;
+            UiTools.FillCbWithEnum(editorSelector, typeof(HeaderType));
+            editorSelector.SelectedIndexChanged += editorSelector_SelectedIndexChanged;
+
             deplopData();
         }
         public void LoadStringResources()
@@ -134,6 +138,17 @@ namespace xyRESTTest
             }
         }
 
+        private ComboBox? editorSelector;
+        private void editorSelector_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (editorSelector.SelectedItem != null && editorSelector.Tag != null)
+            {
+                if (editorSelector.Tag is UcHeaderEdit uhe)
+                {
+                    uhe.setEditor();
+                }
+            }
+        }
         private void TsbAddHeader_Click(object sender, EventArgs e)
         {
             if (testTask.requestInfo.headers == null)
@@ -141,11 +156,16 @@ namespace xyRESTTest
                 testTask.requestInfo.headers = new Dictionary<string, object>();
             }
 
-            var uhi = new UcHeaderItem(null, this);
+            var uhi = new UcHeaderItem(null, editorSelector, this);
             uhi.Dock = DockStyle.Top;
             uhi.Edited += Header_edited;
             uhi.Selected += UcHeaderItem_Selected;
+            uhi.Uhe.editorSelectorCountChanged += (s, ev) =>
+            {
+                TsbAddHeader.Visible = editorSelector.Items.Count > 0;
+            };
             TlpHeaders.Controls.Add(uhi);
+            TsbAddHeader.Visible = false;
         }
         public event EventHandler<EventArgs>? Edited;
         private void Header_edited(object? sender, EventArgs e)
@@ -167,7 +187,9 @@ namespace xyRESTTest
             {
                 foreach (var header in testTask.requestInfo.headers)
                 {
-                    var uhi = new UcHeaderItem(header, this);
+                    editorSelector?.Items.Remove(header.Key);
+                    TsbAddHeader.Visible = editorSelector.Items.Count > 0;
+                    var uhi = new UcHeaderItem(header, editorSelector, this);
                     uhi.Dock = DockStyle.Top;
                     uhi.Edited += Header_edited;
                     uhi.Selected += UcHeaderItem_Selected;
@@ -294,6 +316,14 @@ namespace xyRESTTest
                 TlpHeaders.Controls.Remove(selectedHeaderItem);
                 testTask.requestInfo.headers.Remove(selectedHeaderItem.HeaderName);
                 Edited?.Invoke(this, new EventArgs());
+                if (!selectedHeaderItem.IsNew)
+                {
+                    editorSelector?.Items.Add(selectedHeaderItem.HeaderName);
+                }
+                TsbAddHeader.Visible = true;
+                editorSelector.Tag = null;
+                selectedHeaderItem.clear();
+                selectedHeaderItem.Dispose();
             }
         }
 

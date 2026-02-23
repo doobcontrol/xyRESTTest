@@ -28,26 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
             BtnOk = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
             BtnCancel = new Button();
-            panel3 = new Panel();
+            PnlEditor = new Panel();
+            PnlEditorSelector = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            comboBox1.Dock = DockStyle.Top;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(0, 0);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(148, 28);
-            comboBox1.TabIndex = 0;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // BtnOk
             // 
@@ -63,7 +52,7 @@
             // 
             panel1.Controls.Add(panel2);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 28);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(148, 35);
             panel1.TabIndex = 2;
@@ -88,15 +77,25 @@
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
-            // panel3
+            // PnlEditor
             // 
-            panel3.AutoSize = true;
-            panel3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 28);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(148, 0);
-            panel3.TabIndex = 3;
+            PnlEditor.AutoSize = true;
+            PnlEditor.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnlEditor.Dock = DockStyle.Fill;
+            PnlEditor.Location = new Point(0, 0);
+            PnlEditor.Name = "PnlEditor";
+            PnlEditor.Size = new Size(148, 0);
+            PnlEditor.TabIndex = 3;
+            // 
+            // PnlEditorSelector
+            // 
+            PnlEditorSelector.AutoSize = true;
+            PnlEditorSelector.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnlEditorSelector.Dock = DockStyle.Top;
+            PnlEditorSelector.Location = new Point(0, 0);
+            PnlEditorSelector.Name = "PnlEditorSelector";
+            PnlEditorSelector.Size = new Size(148, 0);
+            PnlEditorSelector.TabIndex = 4;
             // 
             // UcHeaderEdit
             // 
@@ -105,12 +104,12 @@
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BorderStyle = BorderStyle.FixedSingle;
-            Controls.Add(panel3);
+            Controls.Add(PnlEditor);
+            Controls.Add(PnlEditorSelector);
             Controls.Add(panel1);
-            Controls.Add(comboBox1);
             MinimumSize = new Size(150, 0);
             Name = "UcHeaderEdit";
-            Size = new Size(148, 63);
+            Size = new Size(148, 35);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -118,12 +117,11 @@
         }
 
         #endregion
-
-        private ComboBox comboBox1;
         private Button BtnOk;
         private Panel panel1;
         private Panel panel2;
         private Button BtnCancel;
-        private Panel panel3;
+        private Panel PnlEditor;
+        private Panel PnlEditorSelector;
     }
 }

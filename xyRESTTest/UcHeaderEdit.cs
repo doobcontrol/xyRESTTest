@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xyRESTTest.Properties;
@@ -19,9 +20,9 @@ namespace xyRESTTest
 
         public string HeaderName { get => headerName; }
         public object? HeaderValue { get => headerValue; }
-
+        public event EventHandler<EventArgs>? editorSelectorCountChanged;
         public UcHeaderEdit(
-            KeyValuePair<string, object>? header)
+            KeyValuePair<string, object>? header, ComboBox cbEs)
         {
             InitializeComponent();
             LoadStringResources();
@@ -31,18 +32,23 @@ namespace xyRESTTest
             {
                 this.headerName = header.Value.Key;
                 this.headerValue = header.Value.Value;
-            }
 
-            UiTools.FillCbWithEnum(comboBox1, typeof(HeaderType));
-            comboBox1.Text = headerName;
+                CreateHeaderValueEdit(this.headerName);
+            }
+            else
+            {
+                PnlEditor.Controls.Clear();
+                PnlEditorSelector.Controls.Add(cbEs);
+                cbEs.Tag = this;
+            }
         }
         public void LoadStringResources()
         {
             BtnOk.Text = Resources.strOk;
             BtnCancel.Text = Resources.strCancel;
-            if(panel3.Controls.Count > 0)   
+            if(PnlEditor.Controls.Count > 0)   
             {
-                var headerValueEdit = panel3.Controls[0];
+                var headerValueEdit = PnlEditor.Controls[0];
                 if(headerValueEdit is UcAuthHeader uah)
                 {
                     uah.LoadStringResources();
@@ -55,7 +61,6 @@ namespace xyRESTTest
         private void BtnOk_Click(object sender, EventArgs e)
         {
             // Here you can add code to save the header information entered by the user
-            headerName = comboBox1.Text;
             if(headerValueEdit != null)
             {
                 if(headerValueEdit is TextBox tb)
@@ -79,13 +84,31 @@ namespace xyRESTTest
         {
             Hide();
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        public void setEditor()
         {
-            if (comboBox1.Text == nameof(HeaderType.Authorization))
+            var editorSelector = PnlEditorSelector.Controls[0] as ComboBox;
+            headerName = editorSelector.Text;
+            CreateHeaderValueEdit(headerName);
+
+            editorSelector.Items.Remove(headerName);
+            editorSelectorCountChanged?.Invoke(this, new EventArgs());
+            PnlEditorSelector.Controls.Clear();
+
+            if (headerValueEdit is TextBox tb)
             {
-                headerName = comboBox1.Text;
-                if(headerValue is not AuthHeaderInfo)
+                headerValue = tb.Text ?? "";
+            }
+            else if (headerValueEdit is UcAuthHeader uah)
+            {
+                headerValue = uah.AuthHeader;
+            }
+            Edited?.Invoke(this, new EventArgs());
+        }
+        private void CreateHeaderValueEdit(string headerType)
+        {
+            if (headerType == nameof(HeaderType.Authorization))
+            {
+                if (headerValue is not AuthHeaderInfo)
                 {
                     headerValue = null;
                 }
@@ -93,21 +116,36 @@ namespace xyRESTTest
                 {
                     headerValue = new AuthHeaderInfo();
                 }
-                
-                headerValueEdit = new UcAuthHeader((AuthHeaderInfo)headerValue)
-                    { Dock = DockStyle.Fill };
-                panel3.Controls.Clear();
-                panel3.Controls.Add(headerValueEdit);
-            }
-            else if (comboBox1.Text == nameof(HeaderType.Accept))
-            {
-                headerName = comboBox1.Text;
 
+                headerValueEdit = new UcAuthHeader((AuthHeaderInfo)headerValue)
+                { Dock = DockStyle.Fill };
+                PnlEditor.Controls.Clear();
+                PnlEditor.Controls.Add(headerValueEdit);
+            }
+            else if (headerType == nameof(HeaderType.Accept))
+            {
                 headerValueEdit = new TextBox()
                 { Dock = DockStyle.Top };
-                panel3.Controls.Clear();
-                panel3.Controls.Add(headerValueEdit);
+                if (headerValue != null)
+                {
+                    if(headerValue is JsonElement s)
+                    {
+                        headerValueEdit.Text = s.ToString();
+                    }
+                }
+                PnlEditor.Controls.Clear();
+                PnlEditor.Controls.Add(headerValueEdit);
             }
+        }
+
+        public void clear()
+        {
+            PnlEditorSelector.Controls.Clear();
+
+            headerName = string.Empty;
+            headerValue = null;
+            editorSelectorCountChanged = null;
+            Edited = null;
         }
     }
 }

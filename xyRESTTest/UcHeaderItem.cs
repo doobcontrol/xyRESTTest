@@ -14,10 +14,12 @@ namespace xyRESTTest
 {
     public partial class UcHeaderItem : UserControl
     {
-        public string HeaderName { get => uhe.HeaderName; }
-        public object HeaderValue { get => uhe.HeaderValue; }
+        public string HeaderName { get => Uhe.HeaderName; }
+        public object HeaderValue { get => Uhe.HeaderValue; }
 
         UcHeaderEdit uhe;
+        public UcHeaderEdit Uhe { get => uhe; }
+
         Control? uhiContainer;
 
         public event EventHandler<EventArgs>? Edited;
@@ -25,25 +27,23 @@ namespace xyRESTTest
 
         Color orgBackColor;
         Color selectedBackColor = Color.LightBlue;
-        BorderStyle orgBordderStyle;
-        BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 
         bool isNew = false;
+        public bool IsNew { get => isNew; }
 
         public UcHeaderItem(
             KeyValuePair<string, object>? header,
-            Control? uhiContainer = null)
+            ComboBox editorSelector, Control? uhiContainer = null)
         {
             InitializeComponent();
             orgBackColor = lbInfo.BackColor;
-            //orgBordderStyle = this.BorderStyle;
             this.uhiContainer = uhiContainer;
             if (this.uhiContainer == null)
             {
                 this.uhiContainer = Parent;
             }
 
-            uhe = new UcHeaderEdit(header) { Visible = false };
+            uhe = new UcHeaderEdit(header, editorSelector) { Visible = false };
             uhe.Edited += Header_edited;
             uhe.Leave += (s, e) => { uhe.Visible = false; };
             LoadStringResources();
@@ -65,13 +65,13 @@ namespace xyRESTTest
             {
                 lbInfo.Text = Resources.strUnfefined;
             }
-            uhe?.LoadStringResources();
+            Uhe?.LoadStringResources();
         }
         private void Header_edited(object? sender, EventArgs e)
         {
             if (sender is UcHeaderEdit uhe)
             {
-                lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
+                lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue?.ToString()}";
 
                 Edited?.Invoke(this, new EventArgs());
                 isNew = false;
@@ -92,19 +92,19 @@ namespace xyRESTTest
 
         private void showUhi()
         {
-            uhe.Visible = !uhe.Visible;
-            if (uhe.Visible)
+            Uhe.Visible = !Uhe.Visible;
+            if (Uhe.Visible)
             {
-                uhiContainer.Controls.Add(uhe);
+                uhiContainer.Controls.Add(Uhe);
                 Point parentPoint = uhiContainer.PointToClient(
                     this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
-                uhe.Location = parentPoint;
-                uhe.BringToFront();
-                uhe.Select();
+                Uhe.Location = parentPoint;
+                Uhe.BringToFront();
+                Uhe.Select();
             }
             else
             {
-                uhiContainer.Controls.Remove(uhe);
+                uhiContainer.Controls.Remove(Uhe);
             }
         }
 
@@ -113,12 +113,19 @@ namespace xyRESTTest
             if (selected)
             {
                 lbInfo.BackColor = selectedBackColor;
-                //this.BorderStyle = selectedBorderStyle;
             }
             else
             {
                 lbInfo.BackColor = orgBackColor;
-                //this.BorderStyle = orgBordderStyle;
+            }
+        }
+
+        public void clear()
+        {
+            uhe.clear();
+            if (uhiContainer != null)
+            {
+                uhiContainer.Controls.Remove(Uhe);
             }
         }
     }
