@@ -366,6 +366,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading ....
+        /// </summary>
+        internal static string strLoadProjectFlashInfo {
+            get {
+                return ResourceManager.GetString("strLoadProjectFlashInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login Name.
         /// </summary>
         internal static string strLoginName {

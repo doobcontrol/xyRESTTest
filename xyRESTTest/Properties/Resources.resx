@@ -271,4 +271,7 @@
   <data name="strRunFinished" xml:space="preserve">
     <value>Finished.</value>
   </data>
+  <data name="strLoadProjectFlashInfo" xml:space="preserve">
+    <value>Loading ...</value>
+  </data>
 </root>

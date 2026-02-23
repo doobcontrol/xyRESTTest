@@ -271,4 +271,7 @@
   <data name="strRunFinished" xml:space="preserve">
     <value>测试运行结束</value>
   </data>
+  <data name="strLoadProjectFlashInfo" xml:space="preserve">
+    <value>正在加载项目，请稍候...</value>
+  </data>
 </root>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +21,9 @@ namespace xyRESTTest
         public UcTestCase(TestTask testTask)
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SuspendLayout();
+
             LoadStringResources();
             this.testTask = testTask;
             LbCaseName.BackColor = UcTestCaseItem.selectedBackColor;
@@ -89,6 +93,7 @@ namespace xyRESTTest
             editorSelector.SelectedIndexChanged += editorSelector_SelectedIndexChanged;
 
             deplopData();
+            this.ResumeLayout();
         }
         public void LoadStringResources()
         {
@@ -185,32 +190,40 @@ namespace xyRESTTest
 
             if (testTask.requestInfo.headers != null)
             {
+                TlpHeaders.SuspendLayout();
                 foreach (var header in testTask.requestInfo.headers)
                 {
                     editorSelector?.Items.Remove(header.Key);
                     TsbAddHeader.Visible = editorSelector.Items.Count > 0;
                     var uhi = new UcHeaderItem(header, editorSelector, this);
+                    uhi.Visible = false;
                     uhi.Dock = DockStyle.Top;
                     uhi.Edited += Header_edited;
                     uhi.Selected += UcHeaderItem_Selected;
                     TlpHeaders.Controls.Add(uhi);
+                    uhi.Visible = true;
                 }
+                TlpHeaders.ResumeLayout();
             }
             if (testTask.requestInfo.body != null)
             {
                 CmbBodyType.Text = testTask.requestInfo.body.ctype;
             }
 
+            PnlAssertItems.SuspendLayout();
             foreach (var assertInfo in testTask.assertInfos)
             {
                 var uai = new UcAssertItem(assertInfo, this);
+                uai.Visible = false;
                 uai.Dock = DockStyle.Top;
                 uai.Edited += Assert_edited;
                 uai.Selected += UcAssertItem_Selected;
                 PnlAssertItems.Controls.Add(uai);
+                uai.Visible = true;
             }
+            PnlAssertItems.ResumeLayout();
 
-            deplopGeneratorData();
+            deplopGeneratorData(); 
         }
 
         private void EditCaseName(bool startEdit)
@@ -266,6 +279,7 @@ namespace xyRESTTest
                         };
                     }
                     var ujb = new UcJsonBody(testTask.requestInfo.body);
+                    ujb.Visible = false;
                     ujb.Edited += (s, ev) =>
                     {
                         Edited?.Invoke(this, new EventArgs());
@@ -273,6 +287,7 @@ namespace xyRESTTest
                     ujb.Dock = DockStyle.Fill;
                     PnlBody.Controls.Clear();
                     PnlBody.Controls.Add(ujb);
+                    ujb.Visible = true;
                     break;
                 default:
                     break;
@@ -471,12 +486,14 @@ namespace xyRESTTest
             CbDataGenerator.Checked = testTask.dataGenerator != null;
             if (CbDataGenerator.Checked)
             {
+                DgvParameters.SuspendLayout();
                 CbGeneratorType.Text = testTask.dataGenerator.GeneratorType;
                 foreach (var param in testTask.dataGenerator.ParamList)
                 {
                     DgvParameters.Rows.Add(param);
                     DgvParameters.Rows[DgvParameters.Rows.Count - 1].Tag = param;
                 }
+                DgvParameters.ResumeLayout();
             }
         }
         #endregion

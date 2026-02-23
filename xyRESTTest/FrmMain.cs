@@ -134,9 +134,11 @@ namespace xyRESTTest
 
                 PnlTestCase.Controls.Clear();
                 var utc = new UcTestCase(selected.TestTask);
+                utc.Visible = false;
                 utc.Edited += TestCase_edited;
                 utc.Dock = DockStyle.Fill;
                 PnlTestCase.Controls.Add(utc);
+                utc.Visible = true;
             }
         }
         private async void UcTestCaseItem_Run(object? sender, EventArgs e)
@@ -220,9 +222,16 @@ namespace xyRESTTest
             {
                 try
                 {
+                    var flpf = new FrmLoadProjectFlash();
+                    Task.Run(()=>
+                    {
+                        flpf.ShowDialog();
+                    });
                     // Get the path of the specified file
                     string filePath = ofd.FileName;
-
+                    toolStrip1.SuspendLayout();
+                    PnTestcases.SuspendLayout();
+                    PnPrj.SuspendLayout();
                     testProject = xyTest.loadTestProject(filePath);
                     LbPrjName.Text = testProject.name;
                     TsbAddCase.Visible = true;
@@ -238,6 +247,10 @@ namespace xyRESTTest
                         AddTestCaseItem(task);
                     }
                     hasProjectLoaded = true;
+                    PnPrj.ResumeLayout();
+                    PnTestcases.ResumeLayout();
+                    toolStrip1.ResumeLayout();
+                    flpf.DialogResult = DialogResult.OK;
                 }
                 catch (Exception ex)
                 {
