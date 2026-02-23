@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             panel1 = new Panel();
             PnTestcases = new TableLayoutPanel();
             PnPrj = new Panel();
@@ -269,6 +270,7 @@
             Controls.Add(toolStrip1);
             Controls.Add(splitter1);
             Controls.Add(PnlRun);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmMain";
             Text = "FrmMain";
             panel1.ResumeLayout(false);

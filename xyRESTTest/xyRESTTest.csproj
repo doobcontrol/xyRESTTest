@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>xyRESTTest.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="xyRESTTest.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="xyCfg" Version="1.0.2" />
