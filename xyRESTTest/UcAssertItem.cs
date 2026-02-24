@@ -167,5 +167,13 @@ namespace xyRESTTest
             }
             return assertInfoText;
         }
+
+        public void clear()
+        {
+            if (uaeContainer != null)
+            {
+                uaeContainer.Controls.Remove(uae);
+            }
+        }
     }
 }

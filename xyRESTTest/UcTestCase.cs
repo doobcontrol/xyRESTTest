@@ -363,6 +363,8 @@ namespace xyRESTTest
                 PnlAssertItems.Controls.Remove(selectedAssertItem);
                 testTask.assertInfos.Remove(selectedAssertItem.AssertInfo);
                 Edited?.Invoke(this, new EventArgs());
+                selectedAssertItem.clear();
+                selectedAssertItem.Dispose();
             }
         }
 
