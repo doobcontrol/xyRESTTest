@@ -45,7 +45,7 @@ namespace xyRESTTest
             splitter1.Visible = false;
         }
 
-        #region MyRegion
+        #region TestCaseItem
 
         private void TsbAddCase_Click(object sender, EventArgs e)
         {
