@@ -148,46 +148,6 @@ namespace xyRESTTest
             }
         }
 
-        private ComboBox? editorSelector;
-        private void editorSelector_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            if (editorSelector.SelectedItem != null && editorSelector.Tag != null)
-            {
-                if (editorSelector.Tag is UcHeaderEdit uhe)
-                {
-                    uhe.setEditor();
-                }
-            }
-        }
-        private void TsbAddHeader_Click(object sender, EventArgs e)
-        {
-            if (testTask.requestInfo.headers == null)
-            {
-                testTask.requestInfo.headers = new Dictionary<string, object>();
-            }
-
-            var uhi = new UcHeaderItem(null, editorSelector, contextMenuStrip, this);
-            uhi.Dock = DockStyle.Top;
-            uhi.Edited += Header_edited;
-            uhi.Selected += UcHeaderItem_Selected;
-            uhi.Uhe.editorSelectorCountChanged += (s, ev) =>
-            {
-                TsbAddHeader.Visible = editorSelector.Items.Count > 0;
-            };
-            TlpHeaders.Controls.Add(uhi);
-            TsbAddHeader.Visible = false;
-        }
-        public event EventHandler<EventArgs>? Edited;
-        private void Header_edited(object? sender, EventArgs e)
-        {
-            if (sender is UcHeaderItem uhi)
-            {
-                testTask.requestInfo.headers[uhi.HeaderName] = uhi.HeaderValue;
-
-                Edited?.Invoke(this, new EventArgs());
-            }
-        }
-
         private void deplopData()
         {
             TxtUrl.Text = testTask.requestInfo?.url;
@@ -231,6 +191,8 @@ namespace xyRESTTest
             deplopGeneratorData(); 
         }
 
+        #region EditCaseName
+
         private void EditCaseName(bool startEdit)
         {
             LbCaseName.Visible = !startEdit;
@@ -270,61 +232,46 @@ namespace xyRESTTest
             }
         }
 
-        private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (CmbBodyType.Text)
-            {
-                case xyTest.CT_app_json:
-                    if (testTask.requestInfo.body == null)
-                    {
-                        testTask.requestInfo.body = new ContentInfo()
-                        {
-                            recordData = new Dictionary<string, string>(),
-                            ctype = CmbBodyType.Text
-                        };
-                    }
-                    var ujb = new UcJsonBody(testTask.requestInfo.body, contextMenuStrip);
-                    ujb.Visible = false;
-                    ujb.Edited += (s, ev) =>
-                    {
-                        Edited?.Invoke(this, new EventArgs());
-                    };
-                    ujb.Dock = DockStyle.Fill;
-                    PnlBody.Controls.Clear();
-                    PnlBody.Controls.Add(ujb);
-                    ujb.Visible = true;
-                    break;
-                default:
-                    break;
-            }
-        }
+        #endregion
 
-        private void TsbAddAssert_Click(object sender, EventArgs e)
+        #region Header
+
+        private ComboBox? editorSelector;
+        private void editorSelector_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            var uai = new UcAssertItem(null, contextMenuStrip, this);
-            uai.Dock = DockStyle.Top;
-            uai.Edited += Assert_edited;
-            uai.Selected += UcAssertItem_Selected;
-            PnlAssertItems.Controls.Add(uai);
-        }
-        private void Assert_edited(object? sender, EventArgs e)
-        {
-            if (sender is UcAssertItem uai)
+            if (editorSelector.SelectedItem != null && editorSelector.Tag != null)
             {
-                if (!testTask.assertInfos.Contains(uai.AssertInfo))
+                if (editorSelector.Tag is UcHeaderEdit uhe)
                 {
-                    testTask.assertInfos.Add(uai.AssertInfo);
+                    uhe.setEditor();
                 }
-                Edited?.Invoke(this, new EventArgs());
             }
         }
-
-        private void TsbDelAssert_Click(object sender, EventArgs e)
+        private void TsbAddHeader_Click(object sender, EventArgs e)
         {
-            if (selectedAssertItem != null)
+            if (testTask.requestInfo.headers == null)
             {
-                PnlAssertItems.Controls.Remove(selectedAssertItem);
-                testTask.assertInfos.Remove(selectedAssertItem.AssertInfo);
+                testTask.requestInfo.headers = new Dictionary<string, object>();
+            }
+
+            var uhi = new UcHeaderItem(null, editorSelector, contextMenuStrip, this);
+            uhi.Dock = DockStyle.Top;
+            uhi.Edited += Header_edited;
+            uhi.Selected += UcHeaderItem_Selected;
+            uhi.Uhe.editorSelectorCountChanged += (s, ev) =>
+            {
+                TsbAddHeader.Visible = editorSelector.Items.Count > 0;
+            };
+            TlpHeaders.Controls.Add(uhi);
+            TsbAddHeader.Visible = false;
+        }
+        public event EventHandler<EventArgs>? Edited;
+        private void Header_edited(object? sender, EventArgs e)
+        {
+            if (sender is UcHeaderItem uhi)
+            {
+                testTask.requestInfo.headers[uhi.HeaderName] = uhi.HeaderValue;
+
                 Edited?.Invoke(this, new EventArgs());
             }
         }
@@ -363,6 +310,73 @@ namespace xyRESTTest
             }
         }
 
+        #endregion
+
+        #region Body
+
+        private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (CmbBodyType.Text)
+            {
+                case xyTest.CT_app_json:
+                    if (testTask.requestInfo.body == null)
+                    {
+                        testTask.requestInfo.body = new ContentInfo()
+                        {
+                            recordData = new Dictionary<string, string>(),
+                            ctype = CmbBodyType.Text
+                        };
+                    }
+                    var ujb = new UcJsonBody(testTask.requestInfo.body, contextMenuStrip);
+                    ujb.Visible = false;
+                    ujb.Edited += (s, ev) =>
+                    {
+                        Edited?.Invoke(this, new EventArgs());
+                    };
+                    ujb.Dock = DockStyle.Fill;
+                    PnlBody.Controls.Clear();
+                    PnlBody.Controls.Add(ujb);
+                    ujb.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Assert
+
+        private void TsbAddAssert_Click(object sender, EventArgs e)
+        {
+            var uai = new UcAssertItem(null, contextMenuStrip, this);
+            uai.Dock = DockStyle.Top;
+            uai.Edited += Assert_edited;
+            uai.Selected += UcAssertItem_Selected;
+            PnlAssertItems.Controls.Add(uai);
+        }
+        private void Assert_edited(object? sender, EventArgs e)
+        {
+            if (sender is UcAssertItem uai)
+            {
+                if (!testTask.assertInfos.Contains(uai.AssertInfo))
+                {
+                    testTask.assertInfos.Add(uai.AssertInfo);
+                }
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+
+        private void TsbDelAssert_Click(object sender, EventArgs e)
+        {
+            if (selectedAssertItem != null)
+            {
+                PnlAssertItems.Controls.Remove(selectedAssertItem);
+                testTask.assertInfos.Remove(selectedAssertItem.AssertInfo);
+                Edited?.Invoke(this, new EventArgs());
+            }
+        }
+
         UcAssertItem? selectedAssertItem;
         private void UcAssertItem_Selected(object? sender, EventArgs e)
         {
@@ -378,6 +392,8 @@ namespace xyRESTTest
                 selectedAssertItem = selected;
             }
         }
+
+        #endregion
 
         #region Test data generator
         private void CbDataGenerator_CheckedChanged(object sender, EventArgs e)

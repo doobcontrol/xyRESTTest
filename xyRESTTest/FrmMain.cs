@@ -44,57 +44,8 @@ namespace xyRESTTest
             PnlRun.Visible = false;
             splitter1.Visible = false;
         }
-        private void LangConfig()
-        {
-            xyCfg.init(new Dictionary<string, string>() {
-                {LangParName, CultureInfo.InstalledUICulture.Name}
-            });
-            lang = xyCfg.get(LangParName);
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
-            TscbLang.Items.Add(LangDefault);
-            TscbLang.Items.Add(LangChinese);
-            TscbLang.Text = lang;
-        }
-        private void LoadStringResources()
-        {
-            Text = Resources.strAppTitle;
-            if (!hasProjectLoaded)
-            {
-                LbPrjName.Text = Resources.strNoProjectLoaded;
-            }
-            TsbNewProject.Text = Resources.strNewTestProject;
-            TsbOpenProject.Text = Resources.strOpenTestProject;
-            TsbAddCase.Text = Resources.strAddTestCase;
-            TsbDelCase.Text = Resources.strDeleteTestCase;
-            TsbRun.Text = Resources.strRunTestProject;
-            foreach (Control control in PnTestcases.Controls)
-            {
-                if (control is UcTestCaseItem item)
-                {
-                    item.LoadStringResources();
-                }
-            }
-            if (PnlTestCase.Controls.Count > 0)
-            {
-                var control = PnlTestCase.Controls[0];
-                if (control is UcTestCase utc)
-                {
-                    utc.LoadStringResources();
-                }
-            }
-            if (testRunning)
-            {
-                lbRunningInfo.Text = Resources.strRunning;
-            }
-            else
-            {
-                lbRunningInfo.Text = Resources.strRunFinished;
-            }
 
-            contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;
-            contextMenuStrip.Items[1].Text = Resources.strMenuInsertCaseParameter;
-        }
+        #region MyRegion
 
         private void TsbAddCase_Click(object sender, EventArgs e)
         {
@@ -146,24 +97,6 @@ namespace xyRESTTest
                 utc.Visible = true;
             }
         }
-        private async void UcTestCaseItem_Run(object? sender, EventArgs e)
-        {
-            if (sender is UcTestCaseItem utci)
-            {
-                var path = Path.GetDirectoryName(testProject.projectFile);
-                var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
-                outputfile = Path.Combine(
-                    path ?? "", $"{outputfile}_output.txt");
-
-                var contextPars = new Dictionary<string, string>();
-                setRunnningState(true);
-                using (var sw = new StreamWriter(outputfile, true))
-                {
-                    await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
-                }
-                setRunnningState(false);
-            }
-        }
         private void TestCase_edited(object? sender, EventArgs e)
         {
             if (sender is UcTestCase ute)
@@ -187,6 +120,10 @@ namespace xyRESTTest
                 PnlTestCase.Controls.Clear();
             }
         }
+
+        #endregion
+
+        #region Project
 
         private void TsbNewProject_Click(object sender, EventArgs e)
         {
@@ -293,6 +230,29 @@ namespace xyRESTTest
             }
         }
 
+        #endregion
+
+        #region Run test
+
+        private async void UcTestCaseItem_Run(object? sender, EventArgs e)
+        {
+            if (sender is UcTestCaseItem utci)
+            {
+                var path = Path.GetDirectoryName(testProject.projectFile);
+                var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
+                outputfile = Path.Combine(
+                    path ?? "", $"{outputfile}_output.txt");
+
+                var contextPars = new Dictionary<string, string>();
+                setRunnningState(true);
+                using (var sw = new StreamWriter(outputfile, true))
+                {
+                    await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
+                }
+                setRunnningState(false);
+            }
+        }
+
         private async void TsbRun_Click(object sender, EventArgs e)
         {
             setRunnningState(true);
@@ -322,6 +282,60 @@ namespace xyRESTTest
             splitter1.Visible = false;
         }
 
+        #endregion
+
+        #region i18n
+        private void LangConfig()
+        {
+            xyCfg.init(new Dictionary<string, string>() {
+                {LangParName, CultureInfo.InstalledUICulture.Name}
+            });
+            lang = xyCfg.get(LangParName);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            TscbLang.Items.Add(LangDefault);
+            TscbLang.Items.Add(LangChinese);
+            TscbLang.Text = lang;
+        }
+        private void LoadStringResources()
+        {
+            Text = Resources.strAppTitle;
+            if (!hasProjectLoaded)
+            {
+                LbPrjName.Text = Resources.strNoProjectLoaded;
+            }
+            TsbNewProject.Text = Resources.strNewTestProject;
+            TsbOpenProject.Text = Resources.strOpenTestProject;
+            TsbAddCase.Text = Resources.strAddTestCase;
+            TsbDelCase.Text = Resources.strDeleteTestCase;
+            TsbRun.Text = Resources.strRunTestProject;
+            foreach (Control control in PnTestcases.Controls)
+            {
+                if (control is UcTestCaseItem item)
+                {
+                    item.LoadStringResources();
+                }
+            }
+            if (PnlTestCase.Controls.Count > 0)
+            {
+                var control = PnlTestCase.Controls[0];
+                if (control is UcTestCase utc)
+                {
+                    utc.LoadStringResources();
+                }
+            }
+            if (testRunning)
+            {
+                lbRunningInfo.Text = Resources.strRunning;
+            }
+            else
+            {
+                lbRunningInfo.Text = Resources.strRunFinished;
+            }
+
+            contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;
+            contextMenuStrip.Items[1].Text = Resources.strMenuInsertCaseParameter;
+        }
         private void TscbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
             lang = TscbLang.Text;
@@ -331,6 +345,9 @@ namespace xyRESTTest
             LoadStringResources();
         }
 
+        #endregion
+
+        #region CreateContextMenu
         private void CreateContextMenu()
         {
             contextMenuStrip.Items.Clear();
@@ -391,5 +408,7 @@ namespace xyRESTTest
             myTextBox.SelectionStart = cursorPosition + textToInsert.Length;
             myTextBox.SelectionLength = 0; // Ensures no text is selected
         }
+
+        #endregion
     }
 }
