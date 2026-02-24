@@ -274,6 +274,7 @@ namespace xyRESTTest
                 lbRunningInfo.Text = Resources.strRunFinished;
             }
             testRunning = isRunning;
+            this.ControlBox = !isRunning;
         }
 
         private void btnHideRunWindow_Click(object sender, EventArgs e)
