@@ -43,6 +43,27 @@ namespace xyRESTTest
 
             PnlRun.Visible = false;
             splitter1.Visible = false;
+
+            LbPrjName.DoubleClick += (s, e) =>
+            {
+                if(testProject != null)
+                {
+                    EditProjectName(true);
+                }
+            };
+
+            TxtPrjName.Leave += (s, e) =>
+            {
+                EditProjectName(false);
+            };
+
+            TxtPrjName.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    EditProjectName(false);
+                }
+            };
         }
 
         #region TestCaseItem
@@ -124,6 +145,27 @@ namespace xyRESTTest
         #endregion
 
         #region Project
+
+        private void EditProjectName(bool startEdit)
+        {
+            LbPrjName.Visible = !startEdit;
+            TxtPrjName.Visible = startEdit;
+            if (startEdit)
+            {
+                TxtPrjName.Text = LbPrjName.Text;
+                TxtPrjName.Focus();
+                TxtPrjName.SelectAll();
+            }
+            else
+            {
+                if (TxtPrjName.Text != testProject.name)
+                {
+                    testProject.name = TxtPrjName.Text;
+                    LbPrjName.Text = TxtPrjName.Text;
+                    xyTest.saveTestProject(testProject);
+                }
+            }
+        }
 
         private void TsbNewProject_Click(object sender, EventArgs e)
         {

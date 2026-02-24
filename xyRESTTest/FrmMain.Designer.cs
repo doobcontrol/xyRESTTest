@@ -32,6 +32,7 @@
             panel1 = new Panel();
             PnTestcases = new TableLayoutPanel();
             PnPrj = new Panel();
+            TxtPrjName = new TextBox();
             LbPrjName = new Label();
             PnlTestCase = new Panel();
             PnlWork = new Panel();
@@ -75,30 +76,44 @@
             PnTestcases.ColumnCount = 1;
             PnTestcases.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             PnTestcases.Dock = DockStyle.Fill;
-            PnTestcases.Location = new Point(0, 43);
+            PnTestcases.Location = new Point(0, 59);
             PnTestcases.Name = "PnTestcases";
             PnTestcases.RowCount = 1;
             PnTestcases.RowStyles.Add(new RowStyle());
-            PnTestcases.Size = new Size(224, 294);
+            PnTestcases.Size = new Size(224, 278);
             PnTestcases.TabIndex = 2;
             // 
             // PnPrj
             // 
+            PnPrj.AutoSize = true;
+            PnPrj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            PnPrj.BorderStyle = BorderStyle.FixedSingle;
+            PnPrj.Controls.Add(TxtPrjName);
             PnPrj.Controls.Add(LbPrjName);
             PnPrj.Dock = DockStyle.Top;
             PnPrj.Location = new Point(0, 0);
+            PnPrj.MinimumSize = new Size(0, 27);
             PnPrj.Name = "PnPrj";
             PnPrj.Padding = new Padding(0, 3, 0, 0);
-            PnPrj.Size = new Size(224, 43);
+            PnPrj.Size = new Size(224, 59);
             PnPrj.TabIndex = 1;
+            // 
+            // TxtPrjName
+            // 
+            TxtPrjName.Dock = DockStyle.Top;
+            TxtPrjName.Location = new Point(0, 30);
+            TxtPrjName.Name = "TxtPrjName";
+            TxtPrjName.Size = new Size(222, 27);
+            TxtPrjName.TabIndex = 1;
+            TxtPrjName.Visible = false;
             // 
             // LbPrjName
             // 
             LbPrjName.Dock = DockStyle.Top;
-            LbPrjName.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LbPrjName.Font = new Font("Segoe UI", 9F);
             LbPrjName.Location = new Point(0, 3);
             LbPrjName.Name = "LbPrjName";
-            LbPrjName.Size = new Size(224, 28);
+            LbPrjName.Size = new Size(222, 27);
             LbPrjName.TabIndex = 0;
             LbPrjName.Text = "New Test";
             // 
@@ -262,7 +277,9 @@
             Name = "FrmMain";
             Text = "FrmMain";
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             PnPrj.ResumeLayout(false);
+            PnPrj.PerformLayout();
             PnlWork.ResumeLayout(false);
             PnlRun.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -293,5 +310,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton TsbRun;
         private ToolStripComboBox TscbLang;
+        private TextBox TxtPrjName;
     }
 }
