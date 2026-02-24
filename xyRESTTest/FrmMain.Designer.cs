@@ -34,7 +34,6 @@
             PnPrj = new Panel();
             LbPrjName = new Label();
             PnlTestCase = new Panel();
-            toolStrip2 = new ToolStrip();
             PnlWork = new Panel();
             PnlRun = new Panel();
             lbRunningInfo = new Label();
@@ -52,7 +51,6 @@
             TscbLang = new ToolStripComboBox();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
-            PnlTestCase.SuspendLayout();
             PnlWork.SuspendLayout();
             PnlRun.SuspendLayout();
             panel3.SuspendLayout();
@@ -107,21 +105,11 @@
             // PnlTestCase
             // 
             PnlTestCase.BorderStyle = BorderStyle.FixedSingle;
-            PnlTestCase.Controls.Add(toolStrip2);
             PnlTestCase.Dock = DockStyle.Fill;
             PnlTestCase.Location = new Point(226, 0);
             PnlTestCase.Name = "PnlTestCase";
             PnlTestCase.Size = new Size(574, 339);
             PnlTestCase.TabIndex = 3;
-            // 
-            // toolStrip2
-            // 
-            toolStrip2.ImageScalingSize = new Size(20, 20);
-            toolStrip2.Location = new Point(0, 0);
-            toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(572, 25);
-            toolStrip2.TabIndex = 0;
-            toolStrip2.Text = "toolStrip2";
             // 
             // PnlWork
             // 
@@ -275,8 +263,6 @@
             Text = "FrmMain";
             panel1.ResumeLayout(false);
             PnPrj.ResumeLayout(false);
-            PnlTestCase.ResumeLayout(false);
-            PnlTestCase.PerformLayout();
             PnlWork.ResumeLayout(false);
             PnlRun.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -289,7 +275,6 @@
         #endregion
         private Panel panel1;
         private Panel PnlTestCase;
-        private ToolStrip toolStrip2;
         private Panel PnPrj;
         private Label LbPrjName;
         private TableLayoutPanel PnTestcases;
