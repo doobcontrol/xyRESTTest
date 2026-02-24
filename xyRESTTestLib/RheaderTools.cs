@@ -49,7 +49,7 @@ namespace xyRESTTestLib
         {
             if (scheme == "Basic")
             {
-                return $"{scheme} {xyTest.Base64Encode(username + ":" + password)}";
+                return $"{scheme} {username + ":" + password}";
             }
             else if (scheme == "Bearer")
             {
