@@ -14,8 +14,8 @@ namespace xyRESTTest
 {
     public partial class UcAuthHeader : UserControl
     {
-
-        public UcAuthHeader(AuthHeaderInfo authHeader)
+        public UcAuthHeader(AuthHeaderInfo authHeader,
+            ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             LoadStringResources();
@@ -25,6 +25,9 @@ namespace xyRESTTest
             TxtUsername.Text = authHeader.username;
             TxtPassword.Text = authHeader.password;
             TxtToken.Text = authHeader.authToken;
+            TxtUsername.ContextMenuStrip = contextMenuStrip;
+            TxtPassword.ContextMenuStrip = contextMenuStrip;
+            TxtToken.ContextMenuStrip = contextMenuStrip;
         }
         public void LoadStringResources()
         {

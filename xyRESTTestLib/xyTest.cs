@@ -200,7 +200,7 @@ namespace xyRESTTestLib
 
             return testProject;
         }
-        public static string HandleContextParams(
+        public static string HandleProjectParams(
             Dictionary<string, string> parsDic, string inputStr)
         {
             string pattern = @"\$\{(?<parName>\w+)\}";
@@ -213,7 +213,7 @@ namespace xyRESTTestLib
             }
             return returnStr;
         }
-        public static string HandleLocalParams(
+        public static string HandleCaseParams(
             Dictionary<string, string> parsDic, string inputStr)
         {
             string pattern = @"\{\{(?<parName>\w+)\}\}";
@@ -225,6 +225,45 @@ namespace xyRESTTestLib
                     parsDic[match.Groups["parName"].Value]);
             }
             return returnStr;
+        }
+        public static List<string> GetProjectParams(TestProject testProject, int index)
+        {
+            var parsList = new List<string>();
+
+            foreach(var task in testProject.tasks)
+            {
+                if(testProject.tasks.IndexOf(task) >= index)
+                {
+                    break;
+                }
+                if (task.assertInfos != null)
+                {
+                    foreach (var assertInfo in task.assertInfos)
+                    {
+                        if (assertInfo.readList != null)
+                        {
+                            foreach (var readItem in assertInfo.readList)
+                            {
+                                if (!parsList.Contains(readItem.Key))
+                                {
+                                    parsList.Add(readItem.Key);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return parsList;
+        }
+        public static List<string> GetCaseParams(TestTask testTask)
+        {
+            var parsList = new List<string>();
+            if (testTask.dataGenerator != null)
+            {
+                parsList.AddRange(testTask.dataGenerator.ParamList);
+            }
+            return parsList;
         }
 
         // Content Type

@@ -21,8 +21,8 @@ namespace xyRESTTest
 
         string cNameKey = "Key";
         string cNameValue = "Value";
-
-        public UcJsonBodySimple(ContentInfo contentInfo)
+        ContextMenuStrip contextMenuStrip;
+        public UcJsonBodySimple(ContentInfo contentInfo, ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             recordData = contentInfo.recordData ?? new Dictionary<string, string>();
@@ -41,6 +41,15 @@ namespace xyRESTTest
                 if (s.RowIndex >= 0 && s.ColumnIndex >= 0)
                 {
                     recordDataChanged();
+                }
+            };
+
+            this.contextMenuStrip = contextMenuStrip;
+            dataGridView1.EditingControlShowing += (o, s) =>
+            {
+                if (s.Control is TextBox textBox)
+                {
+                    textBox.ContextMenuStrip = this.contextMenuStrip;
                 }
             };
         }

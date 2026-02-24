@@ -30,12 +30,16 @@ namespace xyRESTTest
 
         bool isNew = false;
         public bool IsNew { get => isNew; }
+        ContextMenuStrip contextMenuStrip;
 
         public UcHeaderItem(
             KeyValuePair<string, object>? header,
-            ComboBox editorSelector, Control? uhiContainer = null)
+            ComboBox editorSelector,
+            ContextMenuStrip contextMenuStrip,
+            Control? uhiContainer = null)
         {
             InitializeComponent();
+            this.contextMenuStrip = contextMenuStrip;
             orgBackColor = lbInfo.BackColor;
             this.uhiContainer = uhiContainer;
             if (this.uhiContainer == null)
@@ -43,7 +47,7 @@ namespace xyRESTTest
                 this.uhiContainer = Parent;
             }
 
-            uhe = new UcHeaderEdit(header, editorSelector) { Visible = false };
+            uhe = new UcHeaderEdit(header, editorSelector, contextMenuStrip) { Visible = false };
             uhe.Edited += Header_edited;
             uhe.Leave += (s, e) => { uhe.Visible = false; };
             LoadStringResources();

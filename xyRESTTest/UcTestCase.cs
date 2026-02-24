@@ -17,8 +17,10 @@ namespace xyRESTTest
     {
         TestTask testTask;
         public TestTask TestTask { get => testTask; }
+        ContextMenuStrip contextMenuStrip;
 
-        public UcTestCase(TestTask testTask)
+        public UcTestCase(
+            TestTask testTask, ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             this.DoubleBuffered = true;
@@ -82,7 +84,7 @@ namespace xyRESTTest
                 DataGridViewAutoSizeColumnsMode.Fill;
             DgvParameters.RowHeadersVisible = false;
             DgvParameters.ColumnHeadersVisible = false;
-            DgvParameters.SelectionMode= DataGridViewSelectionMode.FullRowSelect;
+            DgvParameters.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvParameters.MultiSelect = false;
             DgvParameters.Columns.Add("Parameter", "Parameter");
 
@@ -91,6 +93,9 @@ namespace xyRESTTest
             editorSelector.Dock = DockStyle.Top;
             UiTools.FillCbWithEnum(editorSelector, typeof(HeaderType));
             editorSelector.SelectedIndexChanged += editorSelector_SelectedIndexChanged;
+
+            this.contextMenuStrip = contextMenuStrip;
+            TxtUrl.ContextMenuStrip = contextMenuStrip;
 
             deplopData();
             this.ResumeLayout();
@@ -161,7 +166,7 @@ namespace xyRESTTest
                 testTask.requestInfo.headers = new Dictionary<string, object>();
             }
 
-            var uhi = new UcHeaderItem(null, editorSelector, this);
+            var uhi = new UcHeaderItem(null, editorSelector, contextMenuStrip, this);
             uhi.Dock = DockStyle.Top;
             uhi.Edited += Header_edited;
             uhi.Selected += UcHeaderItem_Selected;
@@ -195,7 +200,7 @@ namespace xyRESTTest
                 {
                     editorSelector?.Items.Remove(header.Key);
                     TsbAddHeader.Visible = editorSelector.Items.Count > 0;
-                    var uhi = new UcHeaderItem(header, editorSelector, this);
+                    var uhi = new UcHeaderItem(header, editorSelector, contextMenuStrip, this);
                     uhi.Visible = false;
                     uhi.Dock = DockStyle.Top;
                     uhi.Edited += Header_edited;
@@ -213,7 +218,7 @@ namespace xyRESTTest
             PnlAssertItems.SuspendLayout();
             foreach (var assertInfo in testTask.assertInfos)
             {
-                var uai = new UcAssertItem(assertInfo, this);
+                var uai = new UcAssertItem(assertInfo, contextMenuStrip, this);
                 uai.Visible = false;
                 uai.Dock = DockStyle.Top;
                 uai.Edited += Assert_edited;
@@ -278,7 +283,7 @@ namespace xyRESTTest
                             ctype = CmbBodyType.Text
                         };
                     }
-                    var ujb = new UcJsonBody(testTask.requestInfo.body);
+                    var ujb = new UcJsonBody(testTask.requestInfo.body, contextMenuStrip);
                     ujb.Visible = false;
                     ujb.Edited += (s, ev) =>
                     {
@@ -296,7 +301,7 @@ namespace xyRESTTest
 
         private void TsbAddAssert_Click(object sender, EventArgs e)
         {
-            var uai = new UcAssertItem(null, this);
+            var uai = new UcAssertItem(null, contextMenuStrip, this);
             uai.Dock = DockStyle.Top;
             uai.Edited += Assert_edited;
             uai.Selected += UcAssertItem_Selected;

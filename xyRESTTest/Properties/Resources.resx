@@ -286,4 +286,16 @@
   <data name="strNewProjectSaveName" xml:space="preserve">
     <value>Project Save Name:</value>
   </data>
+  <data name="strMenuInsertProjectParameter" xml:space="preserve">
+    <value>Insert Project Parameter</value>
+  </data>
+  <data name="strMenuInsertCaseParameter" xml:space="preserve">
+    <value>Insert Case Parameter</value>
+  </data>
+  <data name="strParameterSelectorTitle_Project" xml:space="preserve">
+    <value>Project Parameter Selector</value>
+  </data>
+  <data name="strParameterSelectorTitle_Case" xml:space="preserve">
+    <value>Case Parameter Selector</value>
+  </data>
 </root>

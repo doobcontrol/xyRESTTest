@@ -19,9 +19,11 @@ namespace xyRESTTest
         string cNameJsonPath = "JsonPath";
         string cNameExpected = "Expected";
         string cNameSaveKey = "SaveKey";
-        public UcAssertJsonContent(AssertInfo assertInfo)
+        ContextMenuStrip contextMenuStrip;
+        public UcAssertJsonContent(AssertInfo assertInfo, ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
+            this.contextMenuStrip = contextMenuStrip;
             this.assertInfo = assertInfo;
 
             DgvAssert.Columns.Add(cNameJsonPath, Resources.strJSONPath);
@@ -70,6 +72,21 @@ namespace xyRESTTest
 
             DgvAssert.SelectionMode= DataGridViewSelectionMode.FullRowSelect;
             DgvRead.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            DgvAssert.EditingControlShowing += (o, s) =>
+            {
+                if (s.Control is TextBox textBox)
+                {
+                    textBox.ContextMenuStrip = this.contextMenuStrip;
+                }
+            };
+            DgvRead.EditingControlShowing += (o, s) =>
+            {
+                if (s.Control is TextBox textBox)
+                {
+                    textBox.ContextMenuStrip = this.contextMenuStrip;
+                }
+            };
         }
         public void LoadStringResources()
         {

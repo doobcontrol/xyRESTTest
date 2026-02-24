@@ -14,7 +14,7 @@ namespace xyRESTTestLib
         public TestTask ApplyLocalPars(TestTask task, Dictionary<string, string> LocalPars)
         {
             var json = JsonSerializer.Serialize(task);
-            json = xyTest.HandleLocalParams(LocalPars, json);
+            json = xyTest.HandleCaseParams(LocalPars, json);
             var newTask = JsonSerializer.Deserialize<TestTask>(json);
             if (newTask.requestInfo != null && newTask.requestInfo.headers != null)
             {

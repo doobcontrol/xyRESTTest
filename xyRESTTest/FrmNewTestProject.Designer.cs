@@ -135,6 +135,7 @@
             Controls.Add(LbProjectName);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "FrmNewTestProject";
+            ShowInTaskbar = false;
             Text = "New Test Project";
             ResumeLayout(false);
             PerformLayout();

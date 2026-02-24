@@ -17,12 +17,12 @@ namespace xyRESTTestLib
             {
                 case "Basic":
                     header = HeaderAuthBasic(
-                        xyTest.HandleContextParams(parsDic, authHeaderInfo.username),
-                        xyTest.HandleContextParams(parsDic, authHeaderInfo.password));
+                        xyTest.HandleProjectParams(parsDic, authHeaderInfo.username),
+                        xyTest.HandleProjectParams(parsDic, authHeaderInfo.password));
                     break;
                 case "Bearer":
                     header = HeaderAuthBearer(
-                        xyTest.HandleContextParams(parsDic, authHeaderInfo.authToken));
+                        xyTest.HandleProjectParams(parsDic, authHeaderInfo.authToken));
                     break;
             }
             return header;

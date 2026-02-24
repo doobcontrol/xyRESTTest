@@ -15,12 +15,13 @@ namespace xyRESTTest
     public partial class UcAssertStatusCode : UserControl
     {
         AssertInfo assertInfo;
-        public UcAssertStatusCode(AssertInfo assertInfo)
+        public UcAssertStatusCode(AssertInfo assertInfo, ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             LoadStringResources();
             this.assertInfo = assertInfo;
             TxtExpected.Text = assertInfo.expected;
+            TxtExpected.ContextMenuStrip = contextMenuStrip;
 
             TxtExpected.TextChanged += TxtExpected_TextChanged;
         }

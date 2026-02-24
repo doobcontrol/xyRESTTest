@@ -33,6 +33,7 @@ namespace xyRESTTest
 
         public UcAssertItem(
             AssertInfo? assertInfo,
+            ContextMenuStrip contextMenuStrip,
             Control? uaeContainer = null)
         {
             InitializeComponent();
@@ -60,7 +61,7 @@ namespace xyRESTTest
                 isNew = true;
             }
 
-            uae = new UcAssertEdit(this.assertInfo) { Visible = false };
+            uae = new UcAssertEdit(this.assertInfo, contextMenuStrip) { Visible = false };
             uae.Edited += Assert_edited;
             LoadStringResources();
         }

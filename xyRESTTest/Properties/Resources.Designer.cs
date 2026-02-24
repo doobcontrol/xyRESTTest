@@ -384,6 +384,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Insert Case Parameter.
+        /// </summary>
+        internal static string strMenuInsertCaseParameter {
+            get {
+                return ResourceManager.GetString("strMenuInsertCaseParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert Project Parameter.
+        /// </summary>
+        internal static string strMenuInsertProjectParameter {
+            get {
+                return ResourceManager.GetString("strMenuInsertProjectParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project Name:.
         /// </summary>
         internal static string strNewProjectName {
@@ -461,6 +479,24 @@ namespace xyRESTTest.Properties {
         internal static string strParameters {
             get {
                 return ResourceManager.GetString("strParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Parameter Selector.
+        /// </summary>
+        internal static string strParameterSelectorTitle_Case {
+            get {
+                return ResourceManager.GetString("strParameterSelectorTitle_Case", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project Parameter Selector.
+        /// </summary>
+        internal static string strParameterSelectorTitle_Project {
+            get {
+                return ResourceManager.GetString("strParameterSelectorTitle_Project", resourceCulture);
             }
         }
         

@@ -17,10 +17,14 @@ namespace xyRESTTest
         ContentInfo contentInfo;
         Control jsonEditor;
         public event EventHandler<EventArgs>? Edited;
-        public UcJsonBody(ContentInfo? contentInfo)
+        ContextMenuStrip contextMenuStrip;
+        public UcJsonBody(ContentInfo? contentInfo, ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             LoadStringResources();
+
+            this.contextMenuStrip = contextMenuStrip;
+
             UiTools.FillCbWithEnum(comboBox1, typeof(JCType));
             if (contentInfo != null)
             {
@@ -54,7 +58,7 @@ namespace xyRESTTest
             {
                 case nameof(JCType.SimpleJson):
                     PnlJsonEditor.Controls.Clear();
-                    var ucSimpleJson = new UcJsonBodySimple(contentInfo);
+                    var ucSimpleJson = new UcJsonBodySimple(contentInfo, contextMenuStrip);
                     ucSimpleJson.Edited += JsonBody_Edited;
                     ucSimpleJson.Dock = DockStyle.Fill;
                     PnlJsonEditor.Controls.Add(ucSimpleJson);

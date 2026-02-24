@@ -286,4 +286,16 @@
   <data name="strNewProjectSaveName" xml:space="preserve">
     <value>项目保存名称:</value>
   </data>
+  <data name="strMenuInsertProjectParameter" xml:space="preserve">
+    <value>插入项目参数</value>
+  </data>
+  <data name="strMenuInsertCaseParameter" xml:space="preserve">
+    <value>插入测试项参数</value>
+  </data>
+  <data name="strParameterSelectorTitle_Project" xml:space="preserve">
+    <value>项目参数选择</value>
+  </data>
+  <data name="strParameterSelectorTitle_Case" xml:space="preserve">
+    <value>测试项参数选择</value>
+  </data>
 </root>

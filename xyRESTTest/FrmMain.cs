@@ -5,14 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xy.Cfg;
 using xyRESTTest.Properties;
 using xyRESTTestLib;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace xyRESTTest
 {
@@ -25,9 +24,12 @@ namespace xyRESTTest
         bool hasProjectLoaded = false;
         string lang;
         bool testRunning = false;
+        ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
         public FrmMain()
         {
             InitializeComponent();
+            CreateContextMenu();
             LangConfig();
             LoadStringResources();
 
@@ -66,7 +68,7 @@ namespace xyRESTTest
             TsbAddCase.Text = Resources.strAddTestCase;
             TsbDelCase.Text = Resources.strDeleteTestCase;
             TsbRun.Text = Resources.strRunTestProject;
-            foreach(Control control in PnTestcases.Controls)
+            foreach (Control control in PnTestcases.Controls)
             {
                 if (control is UcTestCaseItem item)
                 {
@@ -89,6 +91,9 @@ namespace xyRESTTest
             {
                 lbRunningInfo.Text = Resources.strRunFinished;
             }
+
+            contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;
+            contextMenuStrip.Items[1].Text = Resources.strMenuInsertCaseParameter;
         }
 
         private void TsbAddCase_Click(object sender, EventArgs e)
@@ -133,7 +138,7 @@ namespace xyRESTTest
                 selectedItem = selected;
 
                 PnlTestCase.Controls.Clear();
-                var utc = new UcTestCase(selected.TestTask);
+                var utc = new UcTestCase(selected.TestTask, contextMenuStrip);
                 utc.Visible = false;
                 utc.Edited += TestCase_edited;
                 utc.Dock = DockStyle.Fill;
@@ -197,7 +202,7 @@ namespace xyRESTTest
                 toolStripSeparator2.Visible = true;
 
                 PnTestcases.Controls.Clear();
-                PnlTestCase.Controls.Clear(); 
+                PnlTestCase.Controls.Clear();
                 hasProjectLoaded = true;
             }
         }
@@ -306,7 +311,7 @@ namespace xyRESTTest
             }
             else
             {
-                lbRunningInfo.Text = Resources.strRunFinished; 
+                lbRunningInfo.Text = Resources.strRunFinished;
             }
             testRunning = isRunning;
         }
@@ -324,6 +329,67 @@ namespace xyRESTTest
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             LoadStringResources();
+        }
+
+        private void CreateContextMenu()
+        {
+            contextMenuStrip.Items.Clear();
+            var InsertProjectParameterItem = 
+                new ToolStripMenuItem(Resources.strMenuInsertProjectParameter);
+            InsertProjectParameterItem.Click += (s, e) =>
+            {
+                if (selectedItem != null)
+                {
+                    Control sourceControl = 
+                        (((ToolStripMenuItem)s).Owner as ContextMenuStrip).SourceControl;
+                    var fps = new FrmParameterSelect(
+                        testProject, selectedItem.TestTask, true);
+                    if (fps.ShowDialog(this) == DialogResult.OK)
+                    {
+                        if (sourceControl is TextBox tb)
+                        {
+                            InsertTextAtCursor(tb, "${"+ fps.SelectedParameter + "}");
+                        }
+                    }
+                }
+            };
+            contextMenuStrip.Items.Add(InsertProjectParameterItem);
+            var InsertCaseParameterItem = 
+                new ToolStripMenuItem(Resources.strMenuInsertCaseParameter);
+            InsertCaseParameterItem.Click += async (s, e) =>
+            {
+                if (selectedItem != null)
+                {
+                    Control sourceControl =
+                        (((ToolStripMenuItem)s).Owner as ContextMenuStrip).SourceControl;
+                    var fps = new FrmParameterSelect(
+                        testProject, selectedItem.TestTask, false);
+                    if (fps.ShowDialog() == DialogResult.OK)
+                    {
+                        if (sourceControl is TextBox tb)
+                        {
+                            InsertTextAtCursor(tb, "{{" + fps.SelectedParameter + "}}");
+                        }
+                    }
+                }
+            };
+            contextMenuStrip.Items.Add(InsertCaseParameterItem);
+        }
+        private void InsertTextAtCursor(TextBox myTextBox, string textToInsert)
+        {
+            // Get the current cursor position (insertion point)
+            int cursorPosition = myTextBox.SelectionStart;
+
+            // Get the current text
+            string currentText = myTextBox.Text;
+
+            // Insert the new text at the cursor position
+            myTextBox.Text = currentText.Insert(cursorPosition, textToInsert);
+
+            // Optional: Restore the cursor to the position after the inserted text
+            // If you don't do this, the cursor will be placed at the beginning of the text box.
+            myTextBox.SelectionStart = cursorPosition + textToInsert.Length;
+            myTextBox.SelectionLength = 0; // Ensures no text is selected
         }
     }
 }

@@ -21,11 +21,14 @@ namespace xyRESTTest
         public string HeaderName { get => headerName; }
         public object? HeaderValue { get => headerValue; }
         public event EventHandler<EventArgs>? editorSelectorCountChanged;
+        ContextMenuStrip contextMenuStrip;
         public UcHeaderEdit(
-            KeyValuePair<string, object>? header, ComboBox cbEs)
+            KeyValuePair<string, object>? header, ComboBox cbEs,
+            ContextMenuStrip contextMenuStrip)
         {
             InitializeComponent();
             LoadStringResources();
+            this.contextMenuStrip = contextMenuStrip;
             Leave += (s, e) => { Hide(); };
 
             if (header != null)
@@ -117,7 +120,7 @@ namespace xyRESTTest
                     headerValue = new AuthHeaderInfo();
                 }
 
-                headerValueEdit = new UcAuthHeader((AuthHeaderInfo)headerValue)
+                headerValueEdit = new UcAuthHeader((AuthHeaderInfo)headerValue, contextMenuStrip)
                 { Dock = DockStyle.Fill };
                 PnlEditor.Controls.Clear();
                 PnlEditor.Controls.Add(headerValueEdit);
@@ -125,12 +128,21 @@ namespace xyRESTTest
             else if (headerType == nameof(HeaderType.Accept))
             {
                 headerValueEdit = new TextBox()
-                { Dock = DockStyle.Top };
+                {
+                    ContextMenuStrip = contextMenuStrip,
+                    Dock = DockStyle.Top 
+                };
                 if (headerValue != null)
                 {
-                    if(headerValue is JsonElement s)
+                    if(headerValue is JsonElement je)
                     {
-                        headerValueEdit.Text = s.ToString();
+                        // load from json file
+                        headerValueEdit.Text = je.ToString();
+                    }
+                    else if(headerValue is string s)
+                    {
+                        // when write in by app, it is string
+                        headerValueEdit.Text = s;
                     }
                 }
                 PnlEditor.Controls.Clear();
