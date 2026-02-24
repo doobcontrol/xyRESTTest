@@ -71,8 +71,9 @@
             btnDropDown.Dock = DockStyle.Right;
             btnDropDown.Image = Properties.Resources.drop_down;
             btnDropDown.Location = new Point(-1, 0);
+            btnDropDown.MinimumSize = new Size(0, 24);
             btnDropDown.Name = "btnDropDown";
-            btnDropDown.Size = new Size(23, 20);
+            btnDropDown.Size = new Size(23, 24);
             btnDropDown.TabIndex = 0;
             btnDropDown.UseVisualStyleBackColor = true;
             btnDropDown.Click += btnDropDown_Click;
@@ -85,9 +86,9 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(panel1);
-            MinimumSize = new Size(150, 0);
+            MinimumSize = new Size(150, 24);
             Name = "UcHeaderItem";
-            Size = new Size(148, 20);
+            Size = new Size(148, 22);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ResumeLayout(false);

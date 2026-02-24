@@ -48,7 +48,7 @@ namespace xyRESTTest
             if (assertInfo != null)
             {
                 this.assertInfo = assertInfo;
-                lbInfo.Text = $"{assertInfo.assertType}:"; 
+                lbInfo.Text = getAssertInfoText(); 
                 isNew = false;
             }
             else
@@ -71,13 +71,17 @@ namespace xyRESTTest
             {
                 lbInfo.Text = Resources.strUnfefined;
             }
+            else
+            {
+                lbInfo.Text = getAssertInfoText();
+            }
             uae?.LoadStringResources();
         }
         private void Assert_edited(object? sender, EventArgs e)
         {
             if (sender is UcAssertEdit uae)
             {
-                lbInfo.Text = $"{assertInfo.assertType}:";
+                lbInfo.Text = getAssertInfoText();
 
                 Edited?.Invoke(this, new EventArgs());
                 isNew = false;
@@ -103,7 +107,7 @@ namespace xyRESTTest
             {
                 uaeContainer.Controls.Add(uae);
                 Point parentPoint = uaeContainer.PointToClient(
-                    this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
+                    this.PointToScreen(new Point(lbInfo.Left, this.MinimumSize.Height)));
                 uae.Location = parentPoint;
                 uae.BringToFront();
                 uae.Select();
@@ -126,6 +130,42 @@ namespace xyRESTTest
                 this.BackColor = orgBackColor;
                 this.BorderStyle = orgBordderStyle;
             }
+        }
+
+        private string getAssertInfoText()
+        {
+            string assertInfoText = $"{assertInfo.assertType}";
+            switch (assertInfo.assertType)
+            {
+                case nameof(AssertType.StatusCode):
+                    assertInfoText += $": {assertInfo.expected}";
+                    break;
+                case nameof(AssertType.JsonContent):
+                    if(assertInfo.assertList == null)
+                    {
+                        assertInfoText += ": " 
+                            + string.Format(Resources.strAssertCount, 0);
+                    }
+                    else
+                    {
+                        assertInfoText += ": "
+                            + string.Format(Resources.strAssertCount, assertInfo.assertList.Count);
+                    }
+                    if (assertInfo.readList == null)
+                    {
+                        assertInfoText += ", "
+                            + string.Format(Resources.strReadDataCount, 0);
+                    }
+                    else
+                    {
+                        assertInfoText += ", "
+                            + string.Format(Resources.strReadDataCount, assertInfo.readList.Count);
+                    }
+                    break;
+                default:
+                    return assertInfo.assertType;
+            }
+            return assertInfoText;
         }
     }
 }

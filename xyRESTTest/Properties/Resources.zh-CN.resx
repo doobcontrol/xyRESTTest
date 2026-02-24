@@ -298,4 +298,10 @@
   <data name="strParameterSelectorTitle_Case" xml:space="preserve">
     <value>测试项参数选择</value>
   </data>
+  <data name="strAssertCount" xml:space="preserve">
+    <value>{0} 个判断项</value>
+  </data>
+  <data name="strReadDataCount" xml:space="preserve">
+    <value>{0} 个读取项</value>
+  </data>
 </root>

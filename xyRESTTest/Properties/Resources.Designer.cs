@@ -213,6 +213,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Asserts.
+        /// </summary>
+        internal static string strAssertCount {
+            get {
+                return ResourceManager.GetString("strAssertCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assertion Information.
         /// </summary>
         internal static string strAssertionInformation {
@@ -515,6 +524,15 @@ namespace xyRESTTest.Properties {
         internal static string strProjectOpenError {
             get {
                 return ResourceManager.GetString("strProjectOpenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} read data items.
+        /// </summary>
+        internal static string strReadDataCount {
+            get {
+                return ResourceManager.GetString("strReadDataCount", resourceCulture);
             }
         }
         

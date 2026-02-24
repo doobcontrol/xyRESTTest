@@ -298,4 +298,10 @@
   <data name="strParameterSelectorTitle_Case" xml:space="preserve">
     <value>Case Parameter Selector</value>
   </data>
+  <data name="strAssertCount" xml:space="preserve">
+    <value>{0} Asserts</value>
+  </data>
+  <data name="strReadDataCount" xml:space="preserve">
+    <value>{0} read data items</value>
+  </data>
 </root>

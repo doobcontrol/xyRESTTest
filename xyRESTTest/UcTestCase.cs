@@ -97,7 +97,7 @@ namespace xyRESTTest
             this.contextMenuStrip = contextMenuStrip;
             TxtUrl.ContextMenuStrip = contextMenuStrip;
 
-            deplopData();
+            deployData();
             this.ResumeLayout();
         }
         public void LoadStringResources()
@@ -148,7 +148,7 @@ namespace xyRESTTest
             }
         }
 
-        private void deplopData()
+        private void deployData()
         {
             TxtUrl.Text = testTask.requestInfo?.url;
             CmbMethod.Text = testTask.requestInfo?.method;
@@ -175,20 +175,9 @@ namespace xyRESTTest
                 CmbBodyType.Text = testTask.requestInfo.body.ctype;
             }
 
-            PnlAssertItems.SuspendLayout();
-            foreach (var assertInfo in testTask.assertInfos)
-            {
-                var uai = new UcAssertItem(assertInfo, contextMenuStrip, this);
-                uai.Visible = false;
-                uai.Dock = DockStyle.Top;
-                uai.Edited += Assert_edited;
-                uai.Selected += UcAssertItem_Selected;
-                PnlAssertItems.Controls.Add(uai);
-                uai.Visible = true;
-            }
-            PnlAssertItems.ResumeLayout();
+            deployAssertData();
 
-            deplopGeneratorData(); 
+            deployGeneratorData(); 
         }
 
         #region EditCaseName
@@ -393,6 +382,22 @@ namespace xyRESTTest
             }
         }
 
+        private void deployAssertData()
+        {
+            PnlAssertItems.SuspendLayout();
+            foreach (var assertInfo in testTask.assertInfos)
+            {
+                var uai = new UcAssertItem(assertInfo, contextMenuStrip, this);
+                uai.Visible = false;
+                uai.Dock = DockStyle.Top;
+                uai.Edited += Assert_edited;
+                uai.Selected += UcAssertItem_Selected;
+                PnlAssertItems.Controls.Add(uai);
+                uai.Visible = true;
+            }
+            PnlAssertItems.ResumeLayout();
+        }
+
         #endregion
 
         #region Test data generator
@@ -502,7 +507,7 @@ namespace xyRESTTest
                 generatorConfigControl?.AddAParam(newParamName);
             }
         }
-        private void deplopGeneratorData()
+        private void deployGeneratorData()
         {
             CbDataGenerator.Checked = testTask.dataGenerator != null;
             if (CbDataGenerator.Checked)

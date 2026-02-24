@@ -101,7 +101,7 @@ namespace xyRESTTest
             {
                 uhiContainer.Controls.Add(Uhe);
                 Point parentPoint = uhiContainer.PointToClient(
-                    this.PointToScreen(new Point(lbInfo.Left, lbInfo.Bottom)));
+                    this.PointToScreen(new Point(lbInfo.Left, this.MinimumSize.Height)));
                 Uhe.Location = parentPoint;
                 Uhe.BringToFront();
                 Uhe.Select();
