@@ -34,7 +34,6 @@
             TsbAddRecord = new ToolStripButton();
             TsbDelRecord = new ToolStripButton();
             TsbDataFile = new ToolStripButton();
-            TslDataFile = new ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)DgvRecords).BeginInit();
             toolStrip4.SuspendLayout();
             SuspendLayout();
@@ -46,7 +45,7 @@
             DgvRecords.Location = new Point(0, 50);
             DgvRecords.Name = "DgvRecords";
             DgvRecords.RowHeadersWidth = 51;
-            DgvRecords.Size = new Size(231, 100);
+            DgvRecords.Size = new Size(345, 100);
             DgvRecords.TabIndex = 9;
             DgvRecords.CellEndEdit += DgvRecords_CellEndEdit;
             // 
@@ -55,7 +54,7 @@
             LbTableTitle.Dock = DockStyle.Top;
             LbTableTitle.Location = new Point(0, 27);
             LbTableTitle.Name = "LbTableTitle";
-            LbTableTitle.Size = new Size(231, 23);
+            LbTableTitle.Size = new Size(345, 23);
             LbTableTitle.TabIndex = 8;
             LbTableTitle.Text = "Test Data Records";
             LbTableTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -63,10 +62,11 @@
             // toolStrip4
             // 
             toolStrip4.ImageScalingSize = new Size(20, 20);
-            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord, TsbDataFile, TslDataFile });
+            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord, TsbDataFile });
             toolStrip4.Location = new Point(0, 0);
             toolStrip4.Name = "toolStrip4";
-            toolStrip4.Size = new Size(231, 27);
+            toolStrip4.Size = new Size(345, 27);
+            toolStrip4.Stretch = true;
             toolStrip4.TabIndex = 7;
             toolStrip4.Text = "toolStrip4";
             // 
@@ -100,13 +100,6 @@
             TsbDataFile.Text = "Set test data file";
             TsbDataFile.Click += TsbDataFile_Click;
             // 
-            // TslDataFile
-            // 
-            TslDataFile.Name = "TslDataFile";
-            TslDataFile.Overflow = ToolStripItemOverflow.Never;
-            TslDataFile.Size = new Size(111, 24);
-            TslDataFile.Text = "toolStripLabel1";
-            // 
             // UcGeneratorBasic
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -115,7 +108,7 @@
             Controls.Add(LbTableTitle);
             Controls.Add(toolStrip4);
             Name = "UcGeneratorBasic";
-            Size = new Size(231, 150);
+            Size = new Size(345, 150);
             ((System.ComponentModel.ISupportInitialize)DgvRecords).EndInit();
             toolStrip4.ResumeLayout(false);
             toolStrip4.PerformLayout();
@@ -131,6 +124,5 @@
         private ToolStripButton TsbAddRecord;
         private ToolStripButton TsbDelRecord;
         private ToolStripButton TsbDataFile;
-        private ToolStripLabel TslDataFile;
     }
 }

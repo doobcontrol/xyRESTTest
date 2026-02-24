@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -23,8 +24,9 @@ namespace xyRESTTest
         public UcGeneratorBasic(DataGenerator dataGenerator)
         {
             InitializeComponent();
+            this.dataGenerator = dataGenerator;
             LoadStringResources();
-
+            
             DgvRecords.AllowUserToAddRows = false;
             DgvRecords.AllowUserToDeleteRows = false;
             DgvRecords.AllowUserToResizeRows = false;
@@ -34,7 +36,6 @@ namespace xyRESTTest
             DgvRecords.MultiSelect = false;
             DgvRecords.RowHeadersVisible = false;
 
-            TslDataFile.Text = dataGenerator.GeneratorInfo[xyTest.DGT_Basic_File];
             InitParamList(dataGenerator.ParamList);
 
             LoadDataRecords();
@@ -46,7 +47,9 @@ namespace xyRESTTest
             LbTableTitle.Text = Resources.strTestDataRecords;
             TsbAddRecord.ToolTipText = Resources.strAddTestDataDecord;
             TsbDelRecord.ToolTipText = Resources.strDeleteTestDataRecord;
-            TsbDataFile.ToolTipText = Resources.strSetTestFataFile;
+            TsbDataFile.ToolTipText = string.Format(
+                Resources.strSetTestDataFile, 
+                dataGenerator.GeneratorInfo[xyTest.DGT_Basic_File]);
         }
         private void InitParamList(List<string> ParamNames)
         {
@@ -73,10 +76,11 @@ namespace xyRESTTest
         }
         private void LoadDataRecords()
         {
-            if(File.Exists(TslDataFile.Text))
+            string dataFile = dataGenerator.GeneratorInfo[xyTest.DGT_Basic_File];
+            if (File.Exists(dataFile))
             {
                 dataRecords.Clear();
-                string[] lines = File.ReadAllLines(TslDataFile.Text);
+                string[] lines = File.ReadAllLines(dataFile);
                 if(lines.Length > 0)
                 {
                     string[] headers = lines[0].Split(',');
@@ -104,7 +108,8 @@ namespace xyRESTTest
                 string[] values = headers.Select(h => row.Cells[h].Value?.ToString() ?? "").ToArray();
                 lines.Add(string.Join(",", values));
             }
-            File.WriteAllLines(TslDataFile.Text, lines);
+            string dataFile = dataGenerator.GeneratorInfo[xyTest.DGT_Basic_File];
+            File.WriteAllLines(dataFile, lines);
         }
 
         #region UcTestCase.IGeneratorConfigControl

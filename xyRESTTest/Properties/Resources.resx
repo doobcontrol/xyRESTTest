@@ -262,8 +262,8 @@
   <data name="strDeleteTestDataRecord" xml:space="preserve">
     <value>Delete selected data record</value>
   </data>
-  <data name="strSetTestFataFile" xml:space="preserve">
-    <value>Set test data file</value>
+  <data name="strSetTestDataFile" xml:space="preserve">
+    <value>Set test data file: {0}</value>
   </data>
   <data name="strRunning" xml:space="preserve">
     <value>Running...</value>
