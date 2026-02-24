@@ -134,14 +134,8 @@ namespace xyRESTTest
                 };
                 if (headerValue != null)
                 {
-                    if(headerValue is JsonElement je)
+                    if(headerValue is string s)
                     {
-                        // load from json file
-                        headerValueEdit.Text = je.ToString();
-                    }
-                    else if(headerValue is string s)
-                    {
-                        // when write in by app, it is string
                         headerValueEdit.Text = s;
                     }
                 }

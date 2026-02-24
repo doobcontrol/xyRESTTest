@@ -189,10 +189,14 @@ namespace xyRESTTestLib
                 {
                     foreach (var header in task.requestInfo.headers)
                     {
-                        if (header.Key == "Authorization")
+                        if (header.Key == nameof(HeaderType.Authorization))
                         {
                             task.requestInfo.headers[header.Key] =
                                 JsonSerializer.Deserialize<AuthHeaderInfo>(header.Value.ToString());
+                        }
+                        else if(header.Key == nameof(HeaderType.Accept))
+                        {
+                            task.requestInfo.headers[header.Key] = header.Value.ToString();
                         }
                     }
                 }
