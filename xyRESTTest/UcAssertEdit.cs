@@ -26,7 +26,6 @@ namespace xyRESTTest
             this.contextMenuStrip = contextMenuStrip;
             LoadStringResources();
             UiTools.FillCbWithEnum(comboBox1, typeof(AssertType));
-            Leave += (s, e) => { Hide(); };
 
             this.assertInfo = assertInfo;
 

@@ -31,9 +31,7 @@
             lbInfo = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            btnDropDown = new Button();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // lbInfo
@@ -61,26 +59,14 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(btnDropDown);
+            panel2.BackgroundImage = Properties.Resources.drop_down;
+            panel2.BackgroundImageLayout = ImageLayout.Center;
             panel2.Dock = DockStyle.Right;
             panel2.Location = new Point(112, 0);
             panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
             panel2.Size = new Size(20, 18);
             panel2.TabIndex = 1;
-            // 
-            // btnDropDown
-            // 
-            btnDropDown.Dock = DockStyle.Right;
-            btnDropDown.Image = Properties.Resources.drop_down;
-            btnDropDown.Location = new Point(0, 0);
-            btnDropDown.Margin = new Padding(3, 2, 3, 2);
-            btnDropDown.MinimumSize = new Size(0, 18);
-            btnDropDown.Name = "btnDropDown";
-            btnDropDown.Size = new Size(20, 18);
-            btnDropDown.TabIndex = 0;
-            btnDropDown.UseVisualStyleBackColor = true;
-            btnDropDown.Click += btnDropDown_Click;
             // 
             // UcHeaderItem
             // 
@@ -94,7 +80,6 @@
             Name = "UcHeaderItem";
             Size = new Size(132, 18);
             panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -104,6 +89,5 @@
         private Label lbInfo;
         private Panel panel1;
         private Panel panel2;
-        private Button btnDropDown;
     }
 }

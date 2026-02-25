@@ -63,7 +63,21 @@ namespace xyRESTTest
 
             uae = new UcAssertEdit(this.assertInfo, contextMenuStrip) { Visible = false };
             uae.Edited += Assert_edited;
+            uae.Leave += (s, e) => {
+                uae.Visible = false;
+            };
             LoadStringResources();
+
+            panel2.Click += (s, e) => {
+                Selected?.Invoke(this, new EventArgs());
+                showUae();
+            };
+            panel2.MouseEnter += (s, e) => {
+                panel2.BorderStyle = selectedBorderStyle;
+            };
+            panel2.MouseLeave += (s, e) => {
+                panel2.BorderStyle = orgBordderStyle;
+            };
         }
         public void LoadStringResources()
         {
@@ -86,12 +100,6 @@ namespace xyRESTTest
                 Edited?.Invoke(this, new EventArgs());
                 isNew = false;
             }
-        }
-
-        private void btnDropDown_Click(object sender, EventArgs e)
-        {
-            Selected?.Invoke(this, new EventArgs());
-            showUae();
         }
 
         private void lbInfo_Click(object sender, EventArgs e)

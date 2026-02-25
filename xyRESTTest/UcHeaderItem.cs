@@ -52,7 +52,9 @@ namespace xyRESTTest
 
             uhe = new UcHeaderEdit(header, editorSelector, contextMenuStrip) { Visible = false };
             uhe.Edited += Header_edited;
-            uhe.Leave += (s, e) => { uhe.Visible = false; };
+            uhe.Leave += (s, e) => {
+                uhe.Visible = false;
+            };
             LoadStringResources();
 
             if (uhe.HeaderName == null || uhe.HeaderName == "")
@@ -65,6 +67,16 @@ namespace xyRESTTest
                 lbInfo.Text = $"{uhe.HeaderName}: {uhe.HeaderValue.ToString()}";
                 isNew = false;
             }
+            panel2.Click += (s, e) => {
+                Selected?.Invoke(this, new EventArgs());
+                showUhi();
+            };
+            panel2.MouseEnter += (s, e) => {
+                panel2.BorderStyle = selectedBorderStyle;
+            };
+            panel2.MouseLeave += (s, e) => {
+                panel2.BorderStyle = orgBordderStyle;
+            };
         }
         public void LoadStringResources()
         {
@@ -83,12 +95,6 @@ namespace xyRESTTest
                 Edited?.Invoke(this, new EventArgs());
                 isNew = false;
             }
-        }
-
-        private void btnDropDown_Click(object sender, EventArgs e)
-        {
-            Selected?.Invoke(this, new EventArgs());
-            showUhi();
         }
 
         private void lbInfo_Click(object sender, EventArgs e)
