@@ -73,10 +73,12 @@ namespace xyRESTTest
                 showUae();
             };
             panel2.MouseEnter += (s, e) => {
-                panel2.BorderStyle = selectedBorderStyle;
+                panel2.BorderStyle = BorderStyle.FixedSingle;
+                panel2.BackColor = Color.LightYellow;
             };
             panel2.MouseLeave += (s, e) => {
-                panel2.BorderStyle = orgBordderStyle;
+                panel2.BorderStyle = BorderStyle.None;
+                panel2.BackColor = Color.Transparent;
             };
         }
         public void LoadStringResources()

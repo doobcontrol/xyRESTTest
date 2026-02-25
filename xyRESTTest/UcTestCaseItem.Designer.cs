@@ -30,11 +30,7 @@
         {
             label1 = new Label();
             panel1 = new Panel();
-            toolStrip1 = new ToolStrip();
-            TsbRun = new ToolStripButton();
             panel2 = new Panel();
-            panel1.SuspendLayout();
-            toolStrip1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,39 +39,21 @@
             label1.Dock = DockStyle.Fill;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(107, 24);
+            label1.Size = new Size(111, 18);
             label1.TabIndex = 0;
             label1.Text = "label1";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
-            panel1.Controls.Add(toolStrip1);
+            panel1.BackgroundImage = Properties.Resources.Run;
+            panel1.BackgroundImageLayout = ImageLayout.Center;
             panel1.Dock = DockStyle.Right;
-            panel1.Location = new Point(107, 0);
+            panel1.Location = new Point(111, 0);
             panel1.Margin = new Padding(3, 0, 3, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(43, 24);
+            panel1.Size = new Size(20, 18);
             panel1.TabIndex = 1;
-            // 
-            // toolStrip1
-            // 
-            toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbRun });
-            toolStrip1.Location = new Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(43, 27);
-            toolStrip1.TabIndex = 0;
-            toolStrip1.Text = "toolStrip1";
-            // 
-            // TsbRun
-            // 
-            TsbRun.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbRun.Image = Properties.Resources.Run;
-            TsbRun.ImageTransparentColor = Color.Magenta;
-            TsbRun.Name = "TsbRun";
-            TsbRun.Size = new Size(29, 24);
-            TsbRun.Text = "Run this test case";
             // 
             // panel2
             // 
@@ -84,24 +62,20 @@
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(3, 0, 3, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(107, 24);
+            panel2.Size = new Size(111, 18);
             panel2.TabIndex = 2;
             // 
             // UcTestCaseItem
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Controls.Add(panel2);
             Controls.Add(panel1);
             Margin = new Padding(3, 0, 3, 0);
-            MinimumSize = new Size(100, 24);
+            MinimumSize = new Size(88, 18);
             Name = "UcTestCaseItem";
-            Size = new Size(150, 24);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            Size = new Size(131, 18);
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -110,8 +84,6 @@
 
         private Label label1;
         private Panel panel1;
-        private ToolStrip toolStrip1;
-        private ToolStripButton TsbRun;
         private Panel panel2;
     }
 }

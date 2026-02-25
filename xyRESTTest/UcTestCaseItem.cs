@@ -31,9 +31,16 @@ namespace xyRESTTest
             this.testTask = testTask;
             label1.Text = testTask.name;
 
-            TsbRun.Click += (s, e)  =>
-            {
+            panel1.Click += (s, e) => {
                 Run?.Invoke(this, new EventArgs());
+            };
+            panel1.MouseEnter += (s, e) => {
+                panel1.BorderStyle = BorderStyle.FixedSingle;
+                panel1.BackColor = Color.LightYellow;
+            };
+            panel1.MouseLeave += (s, e) => {
+                panel1.BorderStyle = BorderStyle.None;
+                panel1.BackColor = Color.Transparent;
             };
         }
 
@@ -93,7 +100,8 @@ namespace xyRESTTest
         }
         public void LoadStringResources()
         {
-            TsbRun.Text = Resources.strRunThisTestCase;
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(panel1, Resources.strRunThisTestCase);
         }
 
     }
