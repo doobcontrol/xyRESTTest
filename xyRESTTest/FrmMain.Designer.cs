@@ -65,8 +65,9 @@
             panel1.Controls.Add(PnPrj);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(226, 339);
+            panel1.Size = new Size(198, 361);
             panel1.TabIndex = 2;
             // 
             // PnTestcases
@@ -76,11 +77,12 @@
             PnTestcases.ColumnCount = 1;
             PnTestcases.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             PnTestcases.Dock = DockStyle.Fill;
-            PnTestcases.Location = new Point(0, 59);
+            PnTestcases.Location = new Point(0, 47);
+            PnTestcases.Margin = new Padding(3, 2, 3, 2);
             PnTestcases.Name = "PnTestcases";
             PnTestcases.RowCount = 1;
             PnTestcases.RowStyles.Add(new RowStyle());
-            PnTestcases.Size = new Size(224, 278);
+            PnTestcases.Size = new Size(196, 312);
             PnTestcases.TabIndex = 2;
             // 
             // PnPrj
@@ -92,18 +94,20 @@
             PnPrj.Controls.Add(LbPrjName);
             PnPrj.Dock = DockStyle.Top;
             PnPrj.Location = new Point(0, 0);
-            PnPrj.MinimumSize = new Size(0, 27);
+            PnPrj.Margin = new Padding(3, 2, 3, 2);
+            PnPrj.MinimumSize = new Size(2, 21);
             PnPrj.Name = "PnPrj";
-            PnPrj.Padding = new Padding(0, 3, 0, 0);
-            PnPrj.Size = new Size(224, 59);
+            PnPrj.Padding = new Padding(0, 2, 0, 0);
+            PnPrj.Size = new Size(196, 47);
             PnPrj.TabIndex = 1;
             // 
             // TxtPrjName
             // 
             TxtPrjName.Dock = DockStyle.Top;
-            TxtPrjName.Location = new Point(0, 30);
+            TxtPrjName.Location = new Point(0, 22);
+            TxtPrjName.Margin = new Padding(3, 2, 3, 2);
             TxtPrjName.Name = "TxtPrjName";
-            TxtPrjName.Size = new Size(222, 27);
+            TxtPrjName.Size = new Size(194, 23);
             TxtPrjName.TabIndex = 1;
             TxtPrjName.Visible = false;
             // 
@@ -111,9 +115,9 @@
             // 
             LbPrjName.Dock = DockStyle.Top;
             LbPrjName.Font = new Font("Segoe UI", 9F);
-            LbPrjName.Location = new Point(0, 3);
+            LbPrjName.Location = new Point(0, 2);
             LbPrjName.Name = "LbPrjName";
-            LbPrjName.Size = new Size(222, 27);
+            LbPrjName.Size = new Size(194, 20);
             LbPrjName.TabIndex = 0;
             LbPrjName.Text = "New Test";
             // 
@@ -121,9 +125,10 @@
             // 
             PnlTestCase.BorderStyle = BorderStyle.FixedSingle;
             PnlTestCase.Dock = DockStyle.Fill;
-            PnlTestCase.Location = new Point(226, 0);
+            PnlTestCase.Location = new Point(198, 0);
+            PnlTestCase.Margin = new Padding(3, 2, 3, 2);
             PnlTestCase.Name = "PnlTestCase";
-            PnlTestCase.Size = new Size(574, 339);
+            PnlTestCase.Size = new Size(602, 361);
             PnlTestCase.TabIndex = 3;
             // 
             // PnlWork
@@ -131,9 +136,10 @@
             PnlWork.Controls.Add(PnlTestCase);
             PnlWork.Controls.Add(panel1);
             PnlWork.Dock = DockStyle.Fill;
-            PnlWork.Location = new Point(0, 28);
+            PnlWork.Location = new Point(0, 27);
+            PnlWork.Margin = new Padding(3, 2, 3, 2);
             PnlWork.Name = "PnlWork";
-            PnlWork.Size = new Size(800, 339);
+            PnlWork.Size = new Size(800, 361);
             PnlWork.TabIndex = 4;
             // 
             // PnlRun
@@ -141,17 +147,18 @@
             PnlRun.Controls.Add(lbRunningInfo);
             PnlRun.Controls.Add(panel3);
             PnlRun.Dock = DockStyle.Bottom;
-            PnlRun.Location = new Point(0, 371);
+            PnlRun.Location = new Point(0, 391);
+            PnlRun.Margin = new Padding(3, 2, 3, 2);
             PnlRun.Name = "PnlRun";
-            PnlRun.Size = new Size(800, 79);
+            PnlRun.Size = new Size(800, 59);
             PnlRun.TabIndex = 5;
             // 
             // lbRunningInfo
             // 
             lbRunningInfo.Dock = DockStyle.Fill;
-            lbRunningInfo.Location = new Point(0, 20);
+            lbRunningInfo.Location = new Point(0, 16);
             lbRunningInfo.Name = "lbRunningInfo";
-            lbRunningInfo.Size = new Size(800, 59);
+            lbRunningInfo.Size = new Size(800, 43);
             lbRunningInfo.TabIndex = 0;
             lbRunningInfo.Text = "Running test ...";
             lbRunningInfo.TextAlign = ContentAlignment.MiddleCenter;
@@ -163,17 +170,19 @@
             panel3.Controls.Add(btnHideRunWindow);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(800, 20);
+            panel3.Size = new Size(800, 16);
             panel3.TabIndex = 1;
             // 
             // btnHideRunWindow
             // 
             btnHideRunWindow.Dock = DockStyle.Right;
             btnHideRunWindow.Image = Properties.Resources.Close;
-            btnHideRunWindow.Location = new Point(778, 0);
+            btnHideRunWindow.Location = new Point(780, 0);
+            btnHideRunWindow.Margin = new Padding(3, 2, 3, 2);
             btnHideRunWindow.Name = "btnHideRunWindow";
-            btnHideRunWindow.Size = new Size(20, 18);
+            btnHideRunWindow.Size = new Size(18, 14);
             btnHideRunWindow.TabIndex = 0;
             btnHideRunWindow.UseVisualStyleBackColor = true;
             btnHideRunWindow.Click += btnHideRunWindow_Click;
@@ -181,9 +190,10 @@
             // splitter1
             // 
             splitter1.Dock = DockStyle.Bottom;
-            splitter1.Location = new Point(0, 367);
+            splitter1.Location = new Point(0, 388);
+            splitter1.Margin = new Padding(3, 2, 3, 2);
             splitter1.Name = "splitter1";
-            splitter1.Size = new Size(800, 4);
+            splitter1.Size = new Size(800, 3);
             splitter1.TabIndex = 6;
             splitter1.TabStop = false;
             // 
@@ -193,7 +203,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, toolStripSeparator2, TsbRun, TscbLang });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 28);
+            toolStrip1.Size = new Size(800, 27);
             toolStrip1.TabIndex = 7;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -203,7 +213,7 @@
             TsbNewProject.Image = Properties.Resources.New;
             TsbNewProject.ImageTransparentColor = Color.Magenta;
             TsbNewProject.Name = "TsbNewProject";
-            TsbNewProject.Size = new Size(29, 25);
+            TsbNewProject.Size = new Size(24, 24);
             TsbNewProject.Text = "New test";
             TsbNewProject.Click += TsbNewProject_Click;
             // 
@@ -213,14 +223,14 @@
             TsbOpenProject.Image = Properties.Resources.Open;
             TsbOpenProject.ImageTransparentColor = Color.Magenta;
             TsbOpenProject.Name = "TsbOpenProject";
-            TsbOpenProject.Size = new Size(29, 25);
+            TsbOpenProject.Size = new Size(24, 24);
             TsbOpenProject.Text = "Open a test";
             TsbOpenProject.Click += TsbOpenProject_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 28);
+            toolStripSeparator1.Size = new Size(6, 27);
             // 
             // TsbAddCase
             // 
@@ -228,7 +238,7 @@
             TsbAddCase.Image = Properties.Resources.Add;
             TsbAddCase.ImageTransparentColor = Color.Magenta;
             TsbAddCase.Name = "TsbAddCase";
-            TsbAddCase.Size = new Size(29, 25);
+            TsbAddCase.Size = new Size(24, 24);
             TsbAddCase.Text = "Add a test case";
             TsbAddCase.Click += TsbAddCase_Click;
             // 
@@ -238,13 +248,13 @@
             TsbDelCase.Image = Properties.Resources.Delete;
             TsbDelCase.ImageTransparentColor = Color.Magenta;
             TsbDelCase.Name = "TsbDelCase";
-            TsbDelCase.Size = new Size(29, 25);
+            TsbDelCase.Size = new Size(24, 24);
             TsbDelCase.Click += TsbDelCase_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 28);
+            toolStripSeparator2.Size = new Size(6, 27);
             // 
             // TsbRun
             // 
@@ -252,7 +262,7 @@
             TsbRun.Image = Properties.Resources.Run;
             TsbRun.ImageTransparentColor = Color.Magenta;
             TsbRun.Name = "TsbRun";
-            TsbRun.Size = new Size(29, 25);
+            TsbRun.Size = new Size(24, 24);
             TsbRun.Text = "toolStripButton1";
             TsbRun.Click += TsbRun_Click;
             // 
@@ -261,12 +271,12 @@
             TscbLang.Alignment = ToolStripItemAlignment.Right;
             TscbLang.DropDownStyle = ComboBoxStyle.DropDownList;
             TscbLang.Name = "TscbLang";
-            TscbLang.Size = new Size(121, 28);
+            TscbLang.Size = new Size(106, 27);
             TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
             // 
             // FrmMain
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(PnlWork);
@@ -274,6 +284,7 @@
             Controls.Add(splitter1);
             Controls.Add(PnlRun);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FrmMain";
             Text = "FrmMain";
             panel1.ResumeLayout(false);

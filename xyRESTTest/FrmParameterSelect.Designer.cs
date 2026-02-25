@@ -31,22 +31,29 @@
             listBox1 = new ListBox();
             BtnCancel = new Button();
             BtnOk = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // listBox1
             // 
-            listBox1.Dock = DockStyle.Top;
+            listBox1.Dock = DockStyle.Fill;
             listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
             listBox1.Location = new Point(0, 0);
+            listBox1.Margin = new Padding(3, 2, 3, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(283, 144);
+            listBox1.Size = new Size(246, 138);
             listBox1.TabIndex = 0;
             // 
             // BtnCancel
             // 
-            BtnCancel.Location = new Point(139, 150);
+            BtnCancel.Location = new Point(17, 4);
+            BtnCancel.Margin = new Padding(3, 2, 3, 2);
             BtnCancel.Name = "BtnCancel";
-            BtnCancel.Size = new Size(63, 29);
+            BtnCancel.Size = new Size(75, 23);
             BtnCancel.TabIndex = 4;
             BtnCancel.Text = "Cancel";
             BtnCancel.UseVisualStyleBackColor = true;
@@ -54,27 +61,50 @@
             // 
             // BtnOk
             // 
-            BtnOk.Location = new Point(208, 150);
+            BtnOk.Location = new Point(98, 4);
+            BtnOk.Margin = new Padding(3, 2, 3, 2);
             BtnOk.Name = "BtnOk";
-            BtnOk.Size = new Size(63, 29);
+            BtnOk.Size = new Size(75, 23);
             BtnOk.TabIndex = 3;
             BtnOk.Text = "Ok";
             BtnOk.UseVisualStyleBackColor = true;
             BtnOk.Click += BtnOk_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(panel2);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 138);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(246, 29);
+            panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(BtnCancel);
+            panel2.Controls.Add(BtnOk);
+            panel2.Dock = DockStyle.Right;
+            panel2.Location = new Point(61, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(185, 29);
+            panel2.TabIndex = 0;
+            // 
             // FrmParameterSelect
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(283, 187);
+            ClientSize = new Size(246, 167);
             ControlBox = false;
             Controls.Add(listBox1);
-            Controls.Add(BtnCancel);
-            Controls.Add(BtnOk);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 2, 3, 2);
+            MaximizeBox = false;
             Name = "FrmParameterSelect";
             ShowInTaskbar = false;
             Text = "Parameter Select";
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -83,5 +113,7 @@
         private ListBox listBox1;
         private Button BtnCancel;
         private Button BtnOk;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

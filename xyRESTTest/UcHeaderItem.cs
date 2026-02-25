@@ -27,6 +27,8 @@ namespace xyRESTTest
 
         Color orgBackColor;
         Color selectedBackColor = Color.LightBlue;
+        BorderStyle orgBordderStyle;
+        BorderStyle selectedBorderStyle = BorderStyle.FixedSingle;
 
         bool isNew = false;
         public bool IsNew { get => isNew; }
@@ -41,6 +43,7 @@ namespace xyRESTTest
             InitializeComponent();
             this.contextMenuStrip = contextMenuStrip;
             orgBackColor = lbInfo.BackColor;
+            orgBordderStyle = this.BorderStyle;
             this.uhiContainer = uhiContainer;
             if (this.uhiContainer == null)
             {
@@ -116,11 +119,13 @@ namespace xyRESTTest
         {
             if (selected)
             {
-                lbInfo.BackColor = selectedBackColor;
+                this.BackColor = selectedBackColor;
+                this.BorderStyle = selectedBorderStyle;
             }
             else
             {
-                lbInfo.BackColor = orgBackColor;
+                this.BackColor = orgBackColor;
+                this.BorderStyle = orgBordderStyle;
             }
         }
 
