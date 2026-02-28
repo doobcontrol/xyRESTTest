@@ -135,6 +135,7 @@ namespace xyRESTTest
                         (Dictionary<string, string>)DgvRecords.SelectedRows[0].Tag);
                 }
                 DgvRecords.Rows.Remove(DgvRecords.SelectedRows[0]);
+                SaveDataRecords();
             }
         }
 
