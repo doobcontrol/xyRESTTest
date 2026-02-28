@@ -50,6 +50,8 @@
             toolStripSeparator2 = new ToolStripSeparator();
             TsbRun = new ToolStripButton();
             TscbLang = new ToolStripComboBox();
+            TsbMoveUp = new ToolStripButton();
+            TsbMoveDown = new ToolStripButton();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
             PnlWork.SuspendLayout();
@@ -200,7 +202,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, toolStripSeparator2, TsbRun, TscbLang });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { TsbNewProject, TsbOpenProject, toolStripSeparator1, TsbAddCase, TsbDelCase, TsbMoveUp, TsbMoveDown, toolStripSeparator2, TsbRun, TscbLang });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 27);
@@ -274,6 +276,26 @@
             TscbLang.Size = new Size(106, 27);
             TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
             // 
+            // TsbMoveUp
+            // 
+            TsbMoveUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbMoveUp.Image = Properties.Resources.Upload;
+            TsbMoveUp.ImageTransparentColor = Color.Magenta;
+            TsbMoveUp.Name = "TsbMoveUp";
+            TsbMoveUp.Size = new Size(24, 24);
+            TsbMoveUp.Text = "toolStripButton1";
+            TsbMoveUp.Click += TsbMoveUp_Click;
+            // 
+            // TsbMoveDown
+            // 
+            TsbMoveDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbMoveDown.Image = Properties.Resources.Download;
+            TsbMoveDown.ImageTransparentColor = Color.Magenta;
+            TsbMoveDown.Name = "TsbMoveDown";
+            TsbMoveDown.Size = new Size(24, 24);
+            TsbMoveDown.Text = "toolStripButton2";
+            TsbMoveDown.Click += TsbMoveDown_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -322,5 +344,7 @@
         private ToolStripButton TsbRun;
         private ToolStripComboBox TscbLang;
         private TextBox TxtPrjName;
+        private ToolStripButton TsbMoveUp;
+        private ToolStripButton TsbMoveDown;
     }
 }

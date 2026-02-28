@@ -117,9 +117,78 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strRunTestProject" xml:space="preserve">
+    <value>Run whole test project</value>
+  </data>
+  <data name="strLoginName" xml:space="preserve">
+    <value>Login Name</value>
+  </data>
+  <data name="strRunFinished" xml:space="preserve">
+    <value>Finished.</value>
+  </data>
+  <data name="strTsbAddFormData" xml:space="preserve">
+    <value>Add one form data</value>
+  </data>
+  <data name="strNewTestProject" xml:space="preserve">
+    <value>New test project</value>
+  </data>
+  <data name="strTslFiles" xml:space="preserve">
+    <value>Upload Files</value>
+  </data>
+  <data name="strAddTestDataDecord" xml:space="preserve">
+    <value>Add a test data record</value>
+  </data>
+  <data name="strReadDataList" xml:space="preserve">
+    <value>Read Data List</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="New" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="OpenFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OpenFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strParameterSelectorTitle_Case" xml:space="preserve">
+    <value>Case Parameter Selector</value>
+  </data>
+  <data name="Upload" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Upload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strAddHeader" xml:space="preserve">
+    <value>Add a header</value>
+  </data>
+  <data name="strOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="strAssertionList" xml:space="preserve">
+    <value>Assertion List</value>
+  </data>
+  <data name="strLbUploadFileKeyName" xml:space="preserve">
+    <value>Key Name:</value>
+  </data>
+  <data name="strTsbDelFormData" xml:space="preserve">
+    <value>Delete selected form data</value>
+  </data>
+  <data name="strSetTestDataFile" xml:space="preserve">
+    <value>Set test data file: {0}</value>
+  </data>
+  <data name="strDeleteTestCase" xml:space="preserve">
+    <value>Delete selected test case</value>
+  </data>
+  <data name="strJSONPath" xml:space="preserve">
+    <value>JSON Path</value>
+  </data>
+  <data name="strDoubleClickToEdit" xml:space="preserve">
+    <value>Double-click to edit</value>
+  </data>
+  <data name="strDeleteAssertion" xml:space="preserve">
+    <value>Delete selected assertion</value>
+  </data>
+  <data name="strParameterName" xml:space="preserve">
+    <value>Parameter Name</value>
+  </data>
+  <data name="strAddAssertion" xml:space="preserve">
+    <value>Add an assertion</value>
+  </data>
+  <data name="strNoProjectLoaded" xml:space="preserve">
+    <value>No Project Loaded</value>
   </data>
   <data name="Run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Run.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -127,208 +196,151 @@
   <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="drop_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\drop_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="OpenFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OpenFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="strAppTitle" xml:space="preserve">
-    <value>REST API Test Tool</value>
-  </data>
-  <data name="strNoProjectLoaded" xml:space="preserve">
-    <value>No Project Loaded</value>
-  </data>
-  <data name="strNewTestProject" xml:space="preserve">
-    <value>New test project</value>
-  </data>
-  <data name="strOpenTestProject" xml:space="preserve">
-    <value>Open a test project</value>
-  </data>
-  <data name="strAddTestCase" xml:space="preserve">
-    <value>Add a test case</value>
-  </data>
-  <data name="strDeleteTestCase" xml:space="preserve">
-    <value>Delete selected test case</value>
-  </data>
-  <data name="strRunTestProject" xml:space="preserve">
-    <value>Run whole test project</value>
-  </data>
-  <data name="strRunThisTestCase" xml:space="preserve">
-    <value>Run this test case</value>
-  </data>
-  <data name="strDoubleClickToEdit" xml:space="preserve">
-    <value>Double-click to edit</value>
-  </data>
-  <data name="strRequestInformation" xml:space="preserve">
-    <value>Request Information</value>
-  </data>
-  <data name="strAssertionInformation" xml:space="preserve">
-    <value>Assertion Information</value>
-  </data>
-  <data name="strDataGenerator" xml:space="preserve">
-    <value>Data Generator</value>
-  </data>
-  <data name="strAddHeader" xml:space="preserve">
-    <value>Add a header</value>
-  </data>
   <data name="strDeleteHeader" xml:space="preserve">
     <value>Delete selected header</value>
-  </data>
-  <data name="strAddAssertion" xml:space="preserve">
-    <value>Add an assertion</value>
-  </data>
-  <data name="strDeleteAssertion" xml:space="preserve">
-    <value>Delete selected assertion</value>
-  </data>
-  <data name="strOk" xml:space="preserve">
-    <value>Ok</value>
-  </data>
-  <data name="strCancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="strUnfefined" xml:space="preserve">
-    <value>&lt;Unfefined&gt;</value>
-  </data>
-  <data name="strLoginName" xml:space="preserve">
-    <value>Login Name</value>
-  </data>
-  <data name="strPassword" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="strExpectedValue" xml:space="preserve">
-    <value>Expected value</value>
-  </data>
-  <data name="strJSONPath" xml:space="preserve">
-    <value>JSON Path</value>
-  </data>
-  <data name="strParameterName" xml:space="preserve">
-    <value>Parameter Name</value>
-  </data>
-  <data name="strAssertionList" xml:space="preserve">
-    <value>Assertion List</value>
-  </data>
-  <data name="strReadDataList" xml:space="preserve">
-    <value>Read Data List</value>
-  </data>
-  <data name="strAddReadItem" xml:space="preserve">
-    <value>Add a read data item</value>
-  </data>
-  <data name="strDeleteReadItem" xml:space="preserve">
-    <value>Delete selected read data item</value>
-  </data>
-  <data name="strContentType" xml:space="preserve">
-    <value>Content Type</value>
-  </data>
-  <data name="strKey" xml:space="preserve">
-    <value>Key</value>
-  </data>
-  <data name="strValue" xml:space="preserve">
-    <value>Value</value>
-  </data>
-  <data name="strAddJSONValue" xml:space="preserve">
-    <value>Add a JSON value</value>
-  </data>
-  <data name="strDeleteJSONValue" xml:space="preserve">
-    <value>Delete selected JSON value</value>
-  </data>
-  <data name="strDynamicallyGenerateTestCase" xml:space="preserve">
-    <value>Dynamically generate test case</value>
-  </data>
-  <data name="strParameters" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="strAddParameter" xml:space="preserve">
-    <value>Add a parameter</value>
-  </data>
-  <data name="strDeleteParameter" xml:space="preserve">
-    <value>Delete selected parameter</value>
   </data>
   <data name="strTestDataRecords" xml:space="preserve">
     <value>Test Data Records</value>
   </data>
-  <data name="strAddTestDataDecord" xml:space="preserve">
-    <value>Add a test data record</value>
+  <data name="strFileAlreadyAdded" xml:space="preserve">
+    <value>File Already Added</value>
   </data>
-  <data name="strDeleteTestDataRecord" xml:space="preserve">
-    <value>Delete selected data record</value>
+  <data name="New" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="strSetTestDataFile" xml:space="preserve">
-    <value>Set test data file: {0}</value>
+  <data name="strDataGenerator" xml:space="preserve">
+    <value>Data Generator</value>
   </data>
-  <data name="strRunning" xml:space="preserve">
-    <value>Running...</value>
+  <data name="strAssertionInformation" xml:space="preserve">
+    <value>Assertion Information</value>
   </data>
-  <data name="strRunFinished" xml:space="preserve">
-    <value>Finished.</value>
+  <data name="strParameters" xml:space="preserve">
+    <value>Parameters</value>
   </data>
-  <data name="strLoadProjectFlashInfo" xml:space="preserve">
-    <value>Loading ...</value>
-  </data>
-  <data name="strProjectOpenError" xml:space="preserve">
-    <value>Error: Could not read file from disk. Original error: {0}</value>
-  </data>
-  <data name="strNewProjectName" xml:space="preserve">
-    <value>Project Name:</value>
+  <data name="strValue" xml:space="preserve">
+    <value>Value</value>
   </data>
   <data name="strNewProjectSaveFolder" xml:space="preserve">
     <value>Project Save Folder:</value>
   </data>
-  <data name="strNewProjectSaveName" xml:space="preserve">
-    <value>Project Save Name:</value>
-  </data>
-  <data name="strMenuInsertProjectParameter" xml:space="preserve">
-    <value>Insert Project Parameter</value>
-  </data>
-  <data name="strMenuInsertCaseParameter" xml:space="preserve">
-    <value>Insert Case Parameter</value>
-  </data>
-  <data name="strParameterSelectorTitle_Project" xml:space="preserve">
-    <value>Project Parameter Selector</value>
-  </data>
-  <data name="strParameterSelectorTitle_Case" xml:space="preserve">
-    <value>Case Parameter Selector</value>
+  <data name="strExpectedValue" xml:space="preserve">
+    <value>Expected value</value>
   </data>
   <data name="strAssertCount" xml:space="preserve">
     <value>{0} Asserts</value>
   </data>
+  <data name="strAddReadItem" xml:space="preserve">
+    <value>Add a read data item</value>
+  </data>
+  <data name="strMenuInsertProjectParameter" xml:space="preserve">
+    <value>Insert Project Parameter</value>
+  </data>
+  <data name="strDeleteJSONValue" xml:space="preserve">
+    <value>Delete selected JSON value</value>
+  </data>
+  <data name="strDeleteParameter" xml:space="preserve">
+    <value>Delete selected parameter</value>
+  </data>
+  <data name="strAddJSONValue" xml:space="preserve">
+    <value>Add a JSON value</value>
+  </data>
+  <data name="Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strMenuInsertCaseParameter" xml:space="preserve">
+    <value>Insert Case Parameter</value>
+  </data>
+  <data name="strRunThisTestCase" xml:space="preserve">
+    <value>Run this test case</value>
+  </data>
+  <data name="Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="drop_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\drop_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="strReadDataCount" xml:space="preserve">
     <value>{0} read data items</value>
   </data>
-  <data name="strTsbAddFile" xml:space="preserve">
-    <value>Add one upload file</value>
+  <data name="strUnfefined" xml:space="preserve">
+    <value>&lt;Unfefined&gt;</value>
   </data>
-  <data name="strTsbDelFile" xml:space="preserve">
-    <value>Delete selected upload file</value>
+  <data name="strDynamicallyGenerateTestCase" xml:space="preserve">
+    <value>Dynamically generate test case</value>
   </data>
-  <data name="strTsbAddFormData" xml:space="preserve">
-    <value>Add one form data</value>
-  </data>
-  <data name="strTsbDelFormData" xml:space="preserve">
-    <value>Delete selected form data</value>
-  </data>
-  <data name="strLbUploadFileKeyName" xml:space="preserve">
-    <value>Key Name:</value>
-  </data>
-  <data name="strTslFiles" xml:space="preserve">
-    <value>Upload Files</value>
+  <data name="strContentType" xml:space="preserve">
+    <value>Content Type</value>
   </data>
   <data name="strTslFormData" xml:space="preserve">
     <value>Form Datas</value>
   </data>
-  <data name="strFileAlreadyAdded" xml:space="preserve">
-    <value>File Already Added</value>
+  <data name="strOpenTestProject" xml:space="preserve">
+    <value>Open a test project</value>
+  </data>
+  <data name="strDeleteTestDataRecord" xml:space="preserve">
+    <value>Delete selected data record</value>
+  </data>
+  <data name="strAppTitle" xml:space="preserve">
+    <value>REST API Test Tool</value>
+  </data>
+  <data name="strRequestInformation" xml:space="preserve">
+    <value>Request Information</value>
+  </data>
+  <data name="strTsbAddFile" xml:space="preserve">
+    <value>Add one upload file</value>
+  </data>
+  <data name="strKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="strLoadProjectFlashInfo" xml:space="preserve">
+    <value>Loading ...</value>
+  </data>
+  <data name="strParameterSelectorTitle_Project" xml:space="preserve">
+    <value>Project Parameter Selector</value>
+  </data>
+  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strTsbDelFile" xml:space="preserve">
+    <value>Delete selected upload file</value>
+  </data>
+  <data name="strDeleteReadItem" xml:space="preserve">
+    <value>Delete selected read data item</value>
+  </data>
+  <data name="strAddParameter" xml:space="preserve">
+    <value>Add a parameter</value>
+  </data>
+  <data name="strPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="strNewProjectName" xml:space="preserve">
+    <value>Project Name:</value>
+  </data>
+  <data name="strAddTestCase" xml:space="preserve">
+    <value>Add a test case</value>
+  </data>
+  <data name="strCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="strNewProjectSaveName" xml:space="preserve">
+    <value>Project Save Name:</value>
   </data>
   <data name="strFormDataAlreadyAdded" xml:space="preserve">
     <value>Form Data Already Added</value>
+  </data>
+  <data name="strProjectOpenError" xml:space="preserve">
+    <value>Error: Could not read file from disk. Original error: {0}</value>
+  </data>
+  <data name="strRunning" xml:space="preserve">
+    <value>Running...</value>
+  </data>
+  <data name="Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>Move Down</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>Move Up</value>
   </data>
 </root>

@@ -37,6 +37,8 @@ namespace xyRESTTest
 
             TsbAddCase.Visible = false;
             TsbDelCase.Visible = false;
+            TsbMoveDown.Visible = false;
+            TsbMoveUp.Visible = false;
             toolStripSeparator1.Visible = false;
             TsbRun.Visible = false;
             toolStripSeparator2.Visible = false;
@@ -46,7 +48,7 @@ namespace xyRESTTest
 
             LbPrjName.DoubleClick += (s, e) =>
             {
-                if(testProject != null)
+                if (testProject != null)
                 {
                     EditProjectName(true);
                 }
@@ -142,6 +144,38 @@ namespace xyRESTTest
             }
         }
 
+        private void TsbMoveUp_Click(object sender, EventArgs e)
+        {
+            if(selectedItem != null)
+            {
+                int index = PnTestcases.Controls.GetChildIndex(selectedItem);
+                if (index > 0)
+                {
+                    PnTestcases.Controls.SetChildIndex(selectedItem, index - 1);
+                    var task = selectedItem.TestTask;
+                    testProject.tasks.Remove(task);
+                    testProject.tasks.Insert(index - 1, task);
+                    xyTest.saveTestProject(testProject);
+                }
+            }
+        }
+
+        private void TsbMoveDown_Click(object sender, EventArgs e)
+        {
+            if(selectedItem != null)
+            {
+                int index = PnTestcases.Controls.GetChildIndex(selectedItem);
+                if (index < PnTestcases.Controls.Count - 1)
+                {
+                    PnTestcases.Controls.SetChildIndex(selectedItem, index + 1);
+                    var task = selectedItem.TestTask;
+                    testProject.tasks.Remove(task);
+                    testProject.tasks.Insert(index + 1, task);
+                    xyTest.saveTestProject(testProject);
+                }
+            }
+        }
+
         #endregion
 
         #region Project
@@ -176,6 +210,8 @@ namespace xyRESTTest
                 LbPrjName.Text = testProject.name;
                 TsbAddCase.Visible = true;
                 TsbDelCase.Visible = true;
+                TsbMoveDown.Visible = true;
+                TsbMoveUp.Visible = true;
                 toolStripSeparator1.Visible = true;
                 TsbRun.Visible = true;
                 toolStripSeparator2.Visible = true;
@@ -217,6 +253,8 @@ namespace xyRESTTest
                     LbPrjName.Text = testProject.name;
                     TsbAddCase.Visible = true;
                     TsbDelCase.Visible = true;
+                    TsbMoveDown.Visible = true;
+                    TsbMoveUp.Visible = true;
                     toolStripSeparator1.Visible = true;
                     TsbRun.Visible = true;
                     toolStripSeparator2.Visible = true;
@@ -351,6 +389,8 @@ namespace xyRESTTest
             TsbOpenProject.Text = Resources.strOpenTestProject;
             TsbAddCase.Text = Resources.strAddTestCase;
             TsbDelCase.Text = Resources.strDeleteTestCase;
+            TsbMoveDown.Text = Resources.strMoveDown;
+            TsbMoveUp.Text = Resources.strMoveUp;
             TsbRun.Text = Resources.strRunTestProject;
             foreach (Control control in PnTestcases.Controls)
             {
@@ -394,13 +434,13 @@ namespace xyRESTTest
         private void CreateContextMenu()
         {
             contextMenuStrip.Items.Clear();
-            var InsertProjectParameterItem = 
+            var InsertProjectParameterItem =
                 new ToolStripMenuItem(Resources.strMenuInsertProjectParameter);
             InsertProjectParameterItem.Click += (s, e) =>
             {
                 if (selectedItem != null)
                 {
-                    Control sourceControl = 
+                    Control sourceControl =
                         (((ToolStripMenuItem)s).Owner as ContextMenuStrip).SourceControl;
                     var fps = new FrmParameterSelect(
                         testProject, selectedItem.TestTask, true);
@@ -408,13 +448,13 @@ namespace xyRESTTest
                     {
                         if (sourceControl is TextBox tb)
                         {
-                            InsertTextAtCursor(tb, "${"+ fps.SelectedParameter + "}");
+                            InsertTextAtCursor(tb, "${" + fps.SelectedParameter + "}");
                         }
                     }
                 }
             };
             contextMenuStrip.Items.Add(InsertProjectParameterItem);
-            var InsertCaseParameterItem = 
+            var InsertCaseParameterItem =
                 new ToolStripMenuItem(Resources.strMenuInsertCaseParameter);
             InsertCaseParameterItem.Click += async (s, e) =>
             {

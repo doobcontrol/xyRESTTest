@@ -93,6 +93,16 @@ namespace xyRESTTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Download {
+            get {
+                object obj = ResourceManager.GetObject("Download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap drop_down {
             get {
                 object obj = ResourceManager.GetObject("drop_down", resourceCulture);
@@ -438,6 +448,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move Down.
+        /// </summary>
+        internal static string strMoveDown {
+            get {
+                return ResourceManager.GetString("strMoveDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move Up.
+        /// </summary>
+        internal static string strMoveUp {
+            get {
+                return ResourceManager.GetString("strMoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project Name:.
         /// </summary>
         internal static string strNewProjectName {
@@ -704,6 +732,16 @@ namespace xyRESTTest.Properties {
         internal static string strValue {
             get {
                 return ResourceManager.GetString("strValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Upload {
+            get {
+                object obj = ResourceManager.GetObject("Upload", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
