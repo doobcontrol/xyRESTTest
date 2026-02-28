@@ -272,6 +272,14 @@ namespace xyRESTTestLib
 
         // Content Type
         public const string CT_app_json = "application/json";
+        public const string CT_multipart_form_data = "multipart/form-data";
+        public const string CT_application_octet_stream = "application/octet-stream";
+        public static List<string> ContentTypeList = new List<string>()
+        {
+            CT_app_json,
+            CT_multipart_form_data,
+            CT_application_octet_stream
+        };
 
         // Data Generator Type
         public const string DGT_Basic_File = "DataFile";

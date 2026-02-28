@@ -304,4 +304,31 @@
   <data name="strReadDataCount" xml:space="preserve">
     <value>{0} 个读取项</value>
   </data>
+  <data name="strTsbAddFile" xml:space="preserve">
+    <value>添加一个上传文件</value>
+  </data>
+  <data name="strTsbDelFile" xml:space="preserve">
+    <value>删除选中的上传文件</value>
+  </data>
+  <data name="strTsbAddFormData" xml:space="preserve">
+    <value>添加一项表单数据</value>
+  </data>
+  <data name="strTsbDelFormData" xml:space="preserve">
+    <value>删除选中的表单数据</value>
+  </data>
+  <data name="strLbUploadFileKeyName" xml:space="preserve">
+    <value>文件项键名:</value>
+  </data>
+  <data name="strTslFiles" xml:space="preserve">
+    <value>上传文件列表</value>
+  </data>
+  <data name="strTslFormData" xml:space="preserve">
+    <value>表单数据列表</value>
+  </data>
+  <data name="strFileAlreadyAdded" xml:space="preserve">
+    <value>此文件已经在列表里</value>
+  </data>
+  <data name="strFormDataAlreadyAdded" xml:space="preserve">
+    <value>此表单项已经在列表里</value>
+  </data>
 </root>

@@ -16,7 +16,17 @@ namespace xyRESTTest
                 cb.Items.Add(name);
             });
         }
-
+        public static void FormatDgv(DataGridView dgv)
+        {
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.AllCells;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.RowHeadersVisible = false;
+        }
         public static string WorkDir { 
             get {
                 var workDir = Path.Combine(

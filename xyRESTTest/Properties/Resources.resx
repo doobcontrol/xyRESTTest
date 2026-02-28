@@ -304,4 +304,31 @@
   <data name="strReadDataCount" xml:space="preserve">
     <value>{0} read data items</value>
   </data>
+  <data name="strTsbAddFile" xml:space="preserve">
+    <value>Add one upload file</value>
+  </data>
+  <data name="strTsbDelFile" xml:space="preserve">
+    <value>Delete selected upload file</value>
+  </data>
+  <data name="strTsbAddFormData" xml:space="preserve">
+    <value>Add one form data</value>
+  </data>
+  <data name="strTsbDelFormData" xml:space="preserve">
+    <value>Delete selected form data</value>
+  </data>
+  <data name="strLbUploadFileKeyName" xml:space="preserve">
+    <value>Key Name:</value>
+  </data>
+  <data name="strTslFiles" xml:space="preserve">
+    <value>Upload Files</value>
+  </data>
+  <data name="strTslFormData" xml:space="preserve">
+    <value>Form Datas</value>
+  </data>
+  <data name="strFileAlreadyAdded" xml:space="preserve">
+    <value>File Already Added</value>
+  </data>
+  <data name="strFormDataAlreadyAdded" xml:space="preserve">
+    <value>Form Data Already Added</value>
+  </data>
 </root>

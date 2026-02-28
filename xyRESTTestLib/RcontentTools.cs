@@ -28,10 +28,21 @@ namespace xyRESTTestLib
 
     public class ContentInfo
     {
-        public string type { get; set; } = "SimpleJson"; // e.g., "SimpleJson"
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? type { get; set; } = "SimpleJson"; // e.g., "SimpleJson"
+
         public string ctype { get; set; } = "application/json"; // e.g., "application/json"
-        public string encoding { get; set; } = "UTF-8"; // e.g., "UTF-8"
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? encoding { get; set; } = "UTF-8"; // e.g., "UTF-8"
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, string>? recordData { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? fileDatas { get; set; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? fileKeyName { get; set; }
     }
 }

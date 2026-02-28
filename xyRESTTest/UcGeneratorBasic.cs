@@ -26,15 +26,8 @@ namespace xyRESTTest
             InitializeComponent();
             this.dataGenerator = dataGenerator;
             LoadStringResources();
-            
-            DgvRecords.AllowUserToAddRows = false;
-            DgvRecords.AllowUserToDeleteRows = false;
-            DgvRecords.AllowUserToResizeRows = false;
-            DgvRecords.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.AllCells;
-            DgvRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvRecords.MultiSelect = false;
-            DgvRecords.RowHeadersVisible = false;
+
+            UiTools.FormatDgv(DgvRecords);
 
             InitParamList(dataGenerator.ParamList);
 

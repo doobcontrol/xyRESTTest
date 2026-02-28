@@ -213,19 +213,49 @@ namespace xyRESTTestLib
                 return null;
             }
             HttpContent? bodyContent = null;
-            switch (contentInfo.type)
+            switch (contentInfo.ctype)
             {
-                case nameof(JCType.SimpleJson):
-                    var bodyString = RcontentTools.SimpleJson(
-                        contentInfo.recordData);
-                    if (bodyString != null)
+                case xyTest.CT_app_json:
+                    switch (contentInfo.type)
                     {
-                        bodyContent = new StringContent(
-                            bodyString,
-                            Encoding.GetEncoding(contentInfo.encoding),
-                            contentInfo.ctype
-                            );
+                        case nameof(JCType.SimpleJson):
+                            var bodyString = RcontentTools.SimpleJson(
+                                contentInfo.recordData);
+                            if (bodyString != null)
+                            {
+                                bodyContent = new StringContent(
+                                    bodyString,
+                                    Encoding.GetEncoding(contentInfo.encoding),
+                                    contentInfo.ctype
+                                    );
+                            }
+                            break;
+                        default:
+                            break;
                     }
+                    break;
+                case xyTest.CT_multipart_form_data:
+                    var formData = new MultipartFormDataContent();
+                    foreach(var record in contentInfo.recordData)
+                    {
+                        formData.Add(new StringContent(record.Value), record.Key);
+                    }
+                    foreach (var filePath in contentInfo.fileDatas)
+                    {
+                        if (File.Exists(filePath))
+                        {
+                            // Open the file stream
+                            var streamContent = new StreamContent(File.OpenRead(filePath));
+
+                            // Add the file to the form data
+                            // The server-side parameter name is often "files" or similar
+                            formData.Add(
+                                streamContent, 
+                                contentInfo.fileKeyName, 
+                                Path.GetFileName(filePath));
+                        }
+                    }
+                    bodyContent = formData;
                     break;
                 default:
                     break;

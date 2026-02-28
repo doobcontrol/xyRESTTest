@@ -357,6 +357,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Already Added.
+        /// </summary>
+        internal static string strFileAlreadyAdded {
+            get {
+                return ResourceManager.GetString("strFileAlreadyAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Data Already Added.
+        /// </summary>
+        internal static string strFormDataAlreadyAdded {
+            get {
+                return ResourceManager.GetString("strFormDataAlreadyAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JSON Path.
         /// </summary>
         internal static string strJSONPath {
@@ -371,6 +389,15 @@ namespace xyRESTTest.Properties {
         internal static string strKey {
             get {
                 return ResourceManager.GetString("strKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key Name:.
+        /// </summary>
+        internal static string strLbUploadFileKeyName {
+            get {
+                return ResourceManager.GetString("strLbUploadFileKeyName", resourceCulture);
             }
         }
         
@@ -605,6 +632,60 @@ namespace xyRESTTest.Properties {
         internal static string strTestDataRecords {
             get {
                 return ResourceManager.GetString("strTestDataRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add one upload file.
+        /// </summary>
+        internal static string strTsbAddFile {
+            get {
+                return ResourceManager.GetString("strTsbAddFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add one form data.
+        /// </summary>
+        internal static string strTsbAddFormData {
+            get {
+                return ResourceManager.GetString("strTsbAddFormData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected upload file.
+        /// </summary>
+        internal static string strTsbDelFile {
+            get {
+                return ResourceManager.GetString("strTsbDelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected form data.
+        /// </summary>
+        internal static string strTsbDelFormData {
+            get {
+                return ResourceManager.GetString("strTsbDelFormData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Files.
+        /// </summary>
+        internal static string strTslFiles {
+            get {
+                return ResourceManager.GetString("strTslFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Datas.
+        /// </summary>
+        internal static string strTslFormData {
+            get {
+                return ResourceManager.GetString("strTslFormData", resourceCulture);
             }
         }
         

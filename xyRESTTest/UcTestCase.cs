@@ -74,7 +74,10 @@ namespace xyRESTTest
             };
 
             CmbBodyType.Items.Clear();
-            CmbBodyType.Items.Add(xyTest.CT_app_json);
+            foreach (var ctype in xyTest.ContentTypeList)
+            {
+                CmbBodyType.Items.Add(ctype);
+            }
 
             UiTools.FillCbWithEnum(CbGeneratorType, typeof(GeneratorType));
             DgvParameters.AllowUserToAddRows = false;
@@ -133,6 +136,10 @@ namespace xyRESTTest
                 if (PnlBody.Controls[0] is UcJsonBody ujb)
                 {
                     ujb.LoadStringResources();
+                }
+                else if (PnlBody.Controls[0] is UcMpfdBody umb)
+                {
+                    umb.LoadStringResources();
                 }
             }
             CbDataGenerator.Text = Resources.strDynamicallyGenerateTestCase;
@@ -302,9 +309,15 @@ namespace xyRESTTest
         #endregion
 
         #region Body
+        
+        string? selectedBodyType = null;
 
         private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(CmbBodyType.Text == selectedBodyType)
+            {
+                return;
+            }
             switch (CmbBodyType.Text)
             {
                 case xyTest.CT_app_json:
@@ -326,8 +339,41 @@ namespace xyRESTTest
                     PnlBody.Controls.Clear();
                     PnlBody.Controls.Add(ujb);
                     ujb.Visible = true;
+                    selectedBodyType = xyTest.CT_app_json;
+                    break;
+                case xyTest.CT_multipart_form_data:
+                    if (testTask.requestInfo.body == null)
+                    {
+                        testTask.requestInfo.body = new ContentInfo()
+                        {
+                            recordData = new Dictionary<string, string>(),
+                            fileDatas = new List<string>(),
+                            ctype = CmbBodyType.Text,
+                            fileKeyName = "files"
+                        };
+                    }
+                    var umb = new UcMpfdBody(testTask.requestInfo.body, contextMenuStrip);
+                    umb.Visible = false;
+                    umb.Edited += (s, ev) =>
+                    {
+                        Edited?.Invoke(this, new EventArgs());
+                    };
+                    umb.Dock = DockStyle.Fill;
+                    PnlBody.Controls.Clear();
+                    PnlBody.Controls.Add(umb);
+                    umb.Visible = true;
+                    selectedBodyType = xyTest.CT_multipart_form_data;
                     break;
                 default:
+                    if(selectedBodyType != null)
+                    {
+                        CmbBodyType.Text = selectedBodyType;
+                    }
+                    else
+                    {
+                        testTask.requestInfo.body = null;
+                        PnlBody.Controls.Clear();
+                    }
                     break;
             }
         }
