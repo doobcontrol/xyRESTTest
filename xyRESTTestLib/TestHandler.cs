@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -245,17 +246,24 @@ namespace xyRESTTestLib
                         if (File.Exists(filePath))
                         {
                             // Open the file stream
-                            var streamContent = new StreamContent(File.OpenRead(filePath));
+                            var mpfdStreamContent = new StreamContent(File.OpenRead(filePath));
 
                             // Add the file to the form data
                             // The server-side parameter name is often "files" or similar
                             formData.Add(
-                                streamContent, 
+                                mpfdStreamContent, 
                                 contentInfo.fileKeyName, 
                                 Path.GetFileName(filePath));
                         }
                     }
                     bodyContent = formData;
+                    break;
+                case xyTest.CT_application_octet_stream:
+                    var fileStream = File.OpenRead(contentInfo.fileDatas[0]);
+                    var osStreamContent = new StreamContent(fileStream);
+                    osStreamContent.Headers.ContentType = 
+                        new MediaTypeHeaderValue("application/octet-stream");
+                    bodyContent = osStreamContent;
                     break;
                 default:
                     break;

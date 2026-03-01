@@ -364,6 +364,28 @@ namespace xyRESTTest
                     umb.Visible = true;
                     selectedBodyType = xyTest.CT_multipart_form_data;
                     break;
+                case xyTest.CT_application_octet_stream:
+                    if (testTask.requestInfo.body == null)
+                    {
+                        testTask.requestInfo.body = new ContentInfo()
+                        {
+                            fileDatas = new List<string>() { "" },
+                            ctype = CmbBodyType.Text
+                        };
+                    }
+                    var uosb = new UcOctetStreamBody(
+                        testTask.requestInfo.body, contextMenuStrip);
+                    uosb.Visible = false;
+                    uosb.Edited += (s, ev) =>
+                    {
+                        Edited?.Invoke(this, new EventArgs());
+                    };
+                    uosb.Dock = DockStyle.Top;
+                    PnlBody.Controls.Clear();
+                    PnlBody.Controls.Add(uosb);
+                    uosb.Visible = true;
+                    selectedBodyType = xyTest.CT_application_octet_stream;
+                    break;
                 default:
                     if(selectedBodyType != null)
                     {
