@@ -172,6 +172,9 @@ namespace xyRESTTest
                             + string.Format(Resources.strReadDataCount, assertInfo.readList.Count);
                     }
                     break;
+                case nameof(AssertType.ContentType):
+                    assertInfoText += $": {assertInfo.expected}";
+                    break;
                 default:
                     return assertInfo.assertType;
             }

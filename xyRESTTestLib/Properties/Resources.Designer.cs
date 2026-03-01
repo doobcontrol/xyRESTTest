@@ -70,6 +70,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assert Failed: Expected content type {0}, but got &quot;{1}.
+        /// </summary>
+        internal static string strAssertFailedContentType {
+            get {
+                return ResourceManager.GetString("strAssertFailedContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assert Failed: JSON path {jsonPath} vot found in response..
         /// </summary>
         internal static string strAssertFailedJSONPathNotFound {

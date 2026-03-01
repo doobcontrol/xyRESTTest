@@ -80,6 +80,14 @@ namespace xyRESTTest
                 panel3.Controls.Add(assertValueEdit);
                 this.Refresh();
             }
+            else if (comboBox1.Text == nameof(AssertType.ContentType))
+            {
+                assertValueEdit = new UcAssertContentType(assertInfo, contextMenuStrip)
+                { Dock = DockStyle.Fill };
+                panel3.Controls.Clear();
+                panel3.Controls.Add(assertValueEdit);
+                this.Refresh();
+            }
         }
     }
 }

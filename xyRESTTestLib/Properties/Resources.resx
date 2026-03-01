@@ -153,6 +153,9 @@
   <data name="strAssertFailedStatusCode" xml:space="preserve">
     <value>Assert Failed: Expected status code {0}, but got "{1}</value>
   </data>
+  <data name="strAssertFailedContentType" xml:space="preserve">
+    <value>Assert Failed: Expected content type {0}, but got "{1}</value>
+  </data>
   <data name="strAssertFailedNotJSON" xml:space="preserve">
     <value>Assert Failed: Expected content type application/json, but got {0}</value>
   </data>

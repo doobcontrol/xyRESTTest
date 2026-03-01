@@ -52,6 +52,19 @@ namespace xyRESTTestLib
                         return false;
                     }
                     break;
+                case nameof(AssertType.ContentType):
+                    if (response.Content.Headers.ContentType.MediaType 
+                        != assertInfo.expected)
+                    {
+                        rw.WriteLine(
+                            string.Format(
+                                Resources.strAssertFailedContentType,
+                                assertInfo.expected, 
+                                response.Content.Headers.ContentType.MediaType)
+                        );
+                        return false;
+                    }
+                    break;
                 case nameof(AssertType.JsonContent):
                     string responseBody =
                         await response.Content.ReadAsStringAsync();

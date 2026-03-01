@@ -280,6 +280,34 @@ namespace xyRESTTestLib
             CT_multipart_form_data,
             CT_application_octet_stream
         };
+        public const string CT_app_pdf = "application/pdf";
+        public const string CT_app_zip = "application/zip";
+        public const string CT_app_gzip = "application/gzip";
+        public const string CT_image_jpeg = "image/jpeg";
+        public const string CT_image_png = "image/png";
+        public const string CT_image_gif = "image/gif";
+        public const string CT_image_webp = "image/webp";
+        public const string CT_image_bmp = "image/bmp";
+        public const string CT_audio_mpeg = "audio/mpeg";
+        public const string CT_audio_wav = "audio/wav";
+        public const string CT_video_mp4 = "video/mp4";
+        public const string CT_video_webm = "video/webm";
+        public static List<string> BinaryContentTypeList = new List<string>()
+        {
+            CT_application_octet_stream,
+            CT_app_pdf,
+            CT_app_zip,
+            CT_app_gzip,
+            CT_image_jpeg,
+            CT_image_png,
+            CT_image_gif,
+            CT_image_webp,
+            CT_image_bmp,
+            CT_audio_mpeg,
+            CT_audio_wav,
+            CT_video_mp4,
+            CT_video_webm
+        };
 
         // Data Generator Type
         public const string DGT_Basic_File = "DataFile";
@@ -357,7 +385,8 @@ namespace xyRESTTestLib
     public enum AssertType
     {
         StatusCode,
-        JsonContent
+        JsonContent,
+        ContentType
     }
     public enum GeneratorType
     {
