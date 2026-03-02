@@ -19,6 +19,9 @@ namespace xyRESTTest
         public TestTask TestTask { get => testTask; }
         ContextMenuStrip contextMenuStrip;
 
+        public event EventHandler<EventArgs>? Edited;
+        public event EventHandler<EditPermitCheckEventArgs>? PrepareEdited;
+
         public UcTestCase(
             TestTask testTask, ContextMenuStrip contextMenuStrip)
         {
@@ -203,6 +206,16 @@ namespace xyRESTTest
             {
                 if (TxtCaseName.Text != testTask.name)
                 {
+                    var cea= new EditPermitCheckEventArgs(
+                        EditPermitCheck.CaseNameDuplicate,
+                        TxtCaseName.Text
+                        ) ;
+                    PrepareEdited?.Invoke(this, cea);
+                    if (cea.Cancel)
+                    {
+                        TxtCaseName.Text = testTask.name;
+                        return;
+                    }
                     testTask.name = TxtCaseName.Text;
                     LbCaseName.Text = TxtCaseName.Text;
                     Edited?.Invoke(this, new EventArgs());
@@ -261,7 +274,6 @@ namespace xyRESTTest
             TlpHeaders.Controls.Add(uhi);
             TsbAddHeader.Visible = false;
         }
-        public event EventHandler<EventArgs>? Edited;
         private void Header_edited(object? sender, EventArgs e)
         {
             if (sender is UcHeaderItem uhi)

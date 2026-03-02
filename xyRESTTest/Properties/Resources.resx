@@ -353,4 +353,10 @@ Continue?</value>
   <data name="strWarning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="strCaseNameDuplicate" xml:space="preserve">
+    <value>Case Name Duplicate</value>
+  </data>
+  <data name="strError" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

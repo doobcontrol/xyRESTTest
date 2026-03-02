@@ -115,6 +115,7 @@ namespace xyRESTTest
                 var utc = new UcTestCase(selected.TestTask, contextMenuStrip);
                 utc.Visible = false;
                 utc.Edited += TestCase_edited;
+                utc.PrepareEdited += TestCase_PrepareEdited;
                 utc.Dock = DockStyle.Fill;
                 PnlTestCase.Controls.Add(utc);
                 utc.Visible = true;
@@ -126,6 +127,32 @@ namespace xyRESTTest
             {
                 selectedItem?.UpdateDisplay();
                 xyTest.saveTestProject(testProject);
+            }
+        }
+        private void TestCase_PrepareEdited(object? sender, EditPermitCheckEventArgs e)
+        {
+            switch(e.CheckType)
+            {
+                case EditPermitCheck.CaseNameDuplicate:
+                    var newProjectName = e.DataToBeEdited as string;
+                    newProjectName = newProjectName?.Replace(" ","").ToLower();
+                    foreach (var task in testProject.tasks)
+                    {
+                        if(task.name.Replace(" ", "").ToLower() == newProjectName)
+                        {
+                            MessageBox.Show(
+                                Resources.strCaseNameDuplicate,
+                                Resources.strError,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            e.Cancel = true;
+                            return;
+                        }
+                    }
+                    break;
+                default:
+                    e.Cancel = true;
+                    break;
             }
         }
 

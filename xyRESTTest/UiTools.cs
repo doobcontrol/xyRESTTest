@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,5 +40,18 @@ namespace xyRESTTest
                 return workDir;
             }
         }
+    }
+    public class EditPermitCheckEventArgs: CancelEventArgs
+    {
+        public EditPermitCheckEventArgs(EditPermitCheck checkType, object dataToBeEdited)
+        {
+            CheckType = checkType;
+            DataToBeEdited = dataToBeEdited;
+        }
+        public EditPermitCheck CheckType { get; }
+        public object DataToBeEdited { get; }
+    }
+    public enum EditPermitCheck {         
+        CaseNameDuplicate,
     }
 }

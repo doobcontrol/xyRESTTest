@@ -259,6 +259,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Name Duplicate.
+        /// </summary>
+        internal static string strCaseNameDuplicate {
+            get {
+                return ResourceManager.GetString("strCaseNameDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content Type.
         /// </summary>
         internal static string strContentType {
@@ -354,6 +363,15 @@ namespace xyRESTTest.Properties {
         internal static string strDynamicallyGenerateTestCase {
             get {
                 return ResourceManager.GetString("strDynamicallyGenerateTestCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string strError {
+            get {
+                return ResourceManager.GetString("strError", resourceCulture);
             }
         }
         
