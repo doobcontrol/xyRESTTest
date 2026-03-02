@@ -46,7 +46,7 @@ namespace xyRESTTest
         {
             var projectName = TxtProjectName.Text.Trim().Replace(" ", "");
             var projectFolder = TxtProjectFolder.Text.Trim();
-            TxtProjectSaveName.Text = $"{projectFolder}\\{projectName}.resttest";
+            TxtProjectSaveName.Text = $"{projectFolder}\\{projectName}\\{projectName}.resttest";
             BtnOk.Enabled = !string.IsNullOrEmpty(projectName)
                 && !string.IsNullOrEmpty(projectFolder);
         }
@@ -59,6 +59,27 @@ namespace xyRESTTest
                 projectFile = TxtProjectSaveName.Text.Trim(),
                 tasks = new List<TestTask>()
             };
+
+            var projectName = TxtProjectName.Text.Trim().Replace(" ", "");
+            var projectFolder = TxtProjectFolder.Text.Trim();
+            var projectDir = Path.GetDirectoryName(TestProject.projectFile);// $"{projectFolder}\\{projectName}";
+            if(Directory.Exists(projectDir))
+            {
+                if(
+                    MessageBox.Show(
+                        Resources.strProjectFolderExist, 
+                        Resources.strWarning, 
+                        MessageBoxButtons.OKCancel, 
+                        MessageBoxIcon.Warning) == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(projectDir);
+            }
+
             //save
             xyTest.saveTestProject(testProject);
             DialogResult = DialogResult.OK;

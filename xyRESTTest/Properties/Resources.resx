@@ -346,4 +346,11 @@
   <data name="strSaveToFile" xml:space="preserve">
     <value>Save To File</value>
   </data>
+  <data name="strProjectFolderExist" xml:space="preserve">
+    <value>The project folder already exists; creating a new project may overwrite its contents.
+Continue?</value>
+  </data>
+  <data name="strWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
 </root>

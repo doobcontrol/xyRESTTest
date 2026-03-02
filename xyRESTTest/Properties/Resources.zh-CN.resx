@@ -346,4 +346,11 @@
   <data name="strSaveToFile" xml:space="preserve">
     <value>保存到文件</value>
   </data>
+  <data name="strProjectFolderExist" xml:space="preserve">
+    <value>项目目录已经存在, 在此目录生成新项目可能会覆盖原有内容. 
+继续?</value>
+  </data>
+  <data name="strWarning" xml:space="preserve">
+    <value>警告</value>
+  </data>
 </root>

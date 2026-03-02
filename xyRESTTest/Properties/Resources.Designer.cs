@@ -574,6 +574,16 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The project folder already exists; creating a new project may overwrite its contents.
+        ///Continue?.
+        /// </summary>
+        internal static string strProjectFolderExist {
+            get {
+                return ResourceManager.GetString("strProjectFolderExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: Could not read file from disk. Original error: {0}.
         /// </summary>
         internal static string strProjectOpenError {
@@ -741,6 +751,15 @@ namespace xyRESTTest.Properties {
         internal static string strValue {
             get {
                 return ResourceManager.GetString("strValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        internal static string strWarning {
+            get {
+                return ResourceManager.GetString("strWarning", resourceCulture);
             }
         }
         
