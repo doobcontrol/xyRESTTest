@@ -64,6 +64,22 @@ namespace xyRESTTestLib
                         );
                         return false;
                     }
+                    if (assertInfo.saveFilePath != null)
+                    {
+                        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff_");
+                        string saveDir = Path.GetDirectoryName(assertInfo.saveFilePath);
+                        string fileName = timestamp + Path.GetFileName(assertInfo.saveFilePath);
+                        string saveFile = Path.Combine(saveDir, fileName);
+                        using var fs = new FileStream(
+                            saveFile, FileMode.Create, FileAccess.Write);
+                        using var contentStream = response.Content.ReadAsStream();
+                        await contentStream.CopyToAsync(fs);
+                        rw.WriteLine(
+                            string.Format(
+                                Resources.strSavedResponseBodyTo,
+                                saveFile)
+                        );
+                    }
                     break;
                 case nameof(AssertType.JsonContent):
                     string responseBody =

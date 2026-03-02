@@ -343,4 +343,7 @@
   <data name="strMoveUp" xml:space="preserve">
     <value>Move Up</value>
   </data>
+  <data name="strSaveToFile" xml:space="preserve">
+    <value>Save To File</value>
+  </data>
 </root>

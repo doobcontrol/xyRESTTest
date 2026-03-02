@@ -171,4 +171,7 @@
   <data name="strRequestMethod" xml:space="preserve">
     <value>Request Method: {0}</value>
   </data>
+  <data name="strSavedResponseBodyTo" xml:space="preserve">
+    <value>Response file saved to {0}</value>
+  </data>
 </root>

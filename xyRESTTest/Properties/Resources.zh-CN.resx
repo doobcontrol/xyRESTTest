@@ -343,4 +343,7 @@
   <data name="strMoveUp" xml:space="preserve">
     <value>上移</value>
   </data>
+  <data name="strSaveToFile" xml:space="preserve">
+    <value>保存到文件</value>
+  </data>
 </root>

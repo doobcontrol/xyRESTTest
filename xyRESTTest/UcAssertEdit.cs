@@ -46,6 +46,10 @@ namespace xyRESTTest
                 {
                     uajc.LoadStringResources();
                 }
+                else if (assertEdit is UcAssertContentType uact)
+                {
+                    uact.LoadStringResources();
+                }
             }
         }
 

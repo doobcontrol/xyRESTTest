@@ -44,7 +44,7 @@ namespace xyRESTTest
             {
                 this.uaeContainer = Parent;
             }
-
+            lbInfo.AutoEllipsis = true;
             if (assertInfo != null)
             {
                 this.assertInfo = assertInfo;
@@ -174,6 +174,11 @@ namespace xyRESTTest
                     break;
                 case nameof(AssertType.ContentType):
                     assertInfoText += $": {assertInfo.expected}";
+                    if(assertInfo.saveFilePath != null)
+                    {
+                        assertInfoText += ", "
+                            + Resources.strSaveToFile + ": " + assertInfo.saveFilePath;
+                    }
                     break;
                 default:
                     return assertInfo.assertType;

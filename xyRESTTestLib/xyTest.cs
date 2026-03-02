@@ -359,6 +359,12 @@ namespace xyRESTTestLib
         // value is the expected value to assert
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Dictionary<string, string>? assertList { get; set; }
+
+        // If assertType is ContentType,
+        // saveFilePath is the file path to save the response content(the downloaded file),
+        // for later check
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? saveFilePath { get; set; }
     }
 
     public enum JCType

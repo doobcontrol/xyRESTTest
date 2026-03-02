@@ -169,6 +169,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Response file saved to {0}.
+        /// </summary>
+        internal static string strSavedResponseBodyTo {
+            get {
+                return ResourceManager.GetString("strSavedResponseBodyTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start test....
         /// </summary>
         internal static string strStartTest {

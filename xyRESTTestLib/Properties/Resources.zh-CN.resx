@@ -171,4 +171,7 @@
   <data name="strRequestMethod" xml:space="preserve">
     <value>HTTP请求方法: {0}</value>
   </data>
+  <data name="strSavedResponseBodyTo" xml:space="preserve">
+    <value>下载文件已保存到 {0}</value>
+  </data>
 </root>

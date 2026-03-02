@@ -646,6 +646,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save To File.
+        /// </summary>
+        internal static string strSaveToFile {
+            get {
+                return ResourceManager.GetString("strSaveToFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set test data file: {0}.
         /// </summary>
         internal static string strSetTestDataFile {
