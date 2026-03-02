@@ -219,6 +219,7 @@ namespace xyRESTTest
                 PnTestcases.Controls.Clear();
                 PnlTestCase.Controls.Clear();
                 hasProjectLoaded = true;
+                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
             }
         }
 
@@ -269,6 +270,7 @@ namespace xyRESTTest
                     PnPrj.ResumeLayout();
                     PnTestcases.ResumeLayout();
                     toolStrip1.ResumeLayout();
+                    toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
 
                     LoadProjectMask(false);
                 }
@@ -384,6 +386,10 @@ namespace xyRESTTest
             if (!hasProjectLoaded)
             {
                 LbPrjName.Text = Resources.strNoProjectLoaded;
+            }
+            else
+            {
+                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
             }
             TsbNewProject.Text = Resources.strNewTestProject;
             TsbOpenProject.Text = Resources.strOpenTestProject;

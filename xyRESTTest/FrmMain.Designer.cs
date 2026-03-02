@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             panel1 = new Panel();
             PnTestcases = new TableLayoutPanel();
@@ -47,11 +48,12 @@
             toolStripSeparator1 = new ToolStripSeparator();
             TsbAddCase = new ToolStripButton();
             TsbDelCase = new ToolStripButton();
+            TsbMoveUp = new ToolStripButton();
+            TsbMoveDown = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             TsbRun = new ToolStripButton();
             TscbLang = new ToolStripComboBox();
-            TsbMoveUp = new ToolStripButton();
-            TsbMoveDown = new ToolStripButton();
+            toolTip1 = new ToolTip(components);
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
             PnlWork.SuspendLayout();
@@ -253,6 +255,26 @@
             TsbDelCase.Size = new Size(24, 24);
             TsbDelCase.Click += TsbDelCase_Click;
             // 
+            // TsbMoveUp
+            // 
+            TsbMoveUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbMoveUp.Image = Properties.Resources.Upload;
+            TsbMoveUp.ImageTransparentColor = Color.Magenta;
+            TsbMoveUp.Name = "TsbMoveUp";
+            TsbMoveUp.Size = new Size(24, 24);
+            TsbMoveUp.Text = "toolStripButton1";
+            TsbMoveUp.Click += TsbMoveUp_Click;
+            // 
+            // TsbMoveDown
+            // 
+            TsbMoveDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbMoveDown.Image = Properties.Resources.Download;
+            TsbMoveDown.ImageTransparentColor = Color.Magenta;
+            TsbMoveDown.Name = "TsbMoveDown";
+            TsbMoveDown.Size = new Size(24, 24);
+            TsbMoveDown.Text = "toolStripButton2";
+            TsbMoveDown.Click += TsbMoveDown_Click;
+            // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
@@ -275,26 +297,6 @@
             TscbLang.Name = "TscbLang";
             TscbLang.Size = new Size(106, 27);
             TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
-            // 
-            // TsbMoveUp
-            // 
-            TsbMoveUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbMoveUp.Image = Properties.Resources.Upload;
-            TsbMoveUp.ImageTransparentColor = Color.Magenta;
-            TsbMoveUp.Name = "TsbMoveUp";
-            TsbMoveUp.Size = new Size(24, 24);
-            TsbMoveUp.Text = "toolStripButton1";
-            TsbMoveUp.Click += TsbMoveUp_Click;
-            // 
-            // TsbMoveDown
-            // 
-            TsbMoveDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbMoveDown.Image = Properties.Resources.Download;
-            TsbMoveDown.ImageTransparentColor = Color.Magenta;
-            TsbMoveDown.Name = "TsbMoveDown";
-            TsbMoveDown.Size = new Size(24, 24);
-            TsbMoveDown.Text = "toolStripButton2";
-            TsbMoveDown.Click += TsbMoveDown_Click;
             // 
             // FrmMain
             // 
@@ -346,5 +348,6 @@
         private TextBox TxtPrjName;
         private ToolStripButton TsbMoveUp;
         private ToolStripButton TsbMoveDown;
+        private ToolTip toolTip1;
     }
 }
