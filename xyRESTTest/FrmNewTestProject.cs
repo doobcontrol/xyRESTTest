@@ -60,9 +60,7 @@ namespace xyRESTTest
                 tasks = new List<TestTask>()
             };
 
-            var projectName = TxtProjectName.Text.Trim().Replace(" ", "");
-            var projectFolder = TxtProjectFolder.Text.Trim();
-            var projectDir = Path.GetDirectoryName(TestProject.projectFile);// $"{projectFolder}\\{projectName}";
+            var projectDir = Path.GetDirectoryName(TestProject.projectFile);
             if(Directory.Exists(projectDir))
             {
                 if(
