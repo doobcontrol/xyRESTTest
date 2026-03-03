@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using xyRESTTest.Properties;
 using xyRESTTestLib;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace xyRESTTest
 {
@@ -38,12 +39,27 @@ namespace xyRESTTest
         public AuthHeaderInfo AuthHeader
         {
             get {
+
+                string scheme = comboBox1.Text;
+                string? username = TxtUsername.Text;
+                string? password = TxtPassword.Text;
+                string? authToken = TxtToken.Text;
+                switch (comboBox1.Text)
+                {
+                    case nameof(AuthType.Basic):
+                        authToken = null;
+                        break;
+                    case nameof(AuthType.Bearer):
+                        username = null;
+                        password = null;
+                        break;
+                }
                 return new AuthHeaderInfo()
                 {
-                    scheme = comboBox1.Text,
-                    username = TxtUsername.Text,
-                    password = TxtPassword.Text,
-                    authToken = TxtToken.Text
+                    scheme = scheme,
+                    username = username,
+                    password = password,
+                    authToken = authToken
                 };
             }
         }

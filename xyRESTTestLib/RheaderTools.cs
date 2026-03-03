@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace xyRESTTestLib
@@ -41,10 +42,13 @@ namespace xyRESTTestLib
 
     public class AuthHeaderInfo
     {
-        public string scheme { get; set; } // e.g., "Basic", "Bearer"
-        public string username { get; set; }
-        public string password { get; set; }
-        public string authToken { get; set; }
+        public required string scheme { get; set; } // e.g., "Basic", "Bearer"
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? username { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? password { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? authToken { get; set; }
         public override string ToString()
         {
             if (scheme == "Basic")

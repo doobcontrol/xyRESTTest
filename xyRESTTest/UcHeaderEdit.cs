@@ -117,7 +117,10 @@ namespace xyRESTTest
                 }
                 if (headerValue == null)
                 {
-                    headerValue = new AuthHeaderInfo();
+                    headerValue = new AuthHeaderInfo()
+                    {
+                        scheme = nameof(AuthType.Basic)
+                    };
                 }
 
                 headerValueEdit = new UcAuthHeader((AuthHeaderInfo)headerValue, contextMenuStrip)
