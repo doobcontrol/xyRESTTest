@@ -407,11 +407,13 @@ namespace xyRESTTest
         #endregion
 
         #region i18n
+       
+        string cfgFile = "xyCfg.json";
         private void LangConfig()
         {
             xyCfg.init(new Dictionary<string, string>() {
                 {LangParName, CultureInfo.InstalledUICulture.Name}
-            });
+            }, Path.Combine(Directory.GetCurrentDirectory(), cfgFile));
             lang = xyCfg.get(LangParName);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
