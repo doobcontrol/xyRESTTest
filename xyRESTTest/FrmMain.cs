@@ -254,6 +254,7 @@ namespace xyRESTTest
                 PnlTestCase.Controls.Clear();
                 hasProjectLoaded = true;
                 toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
+                ShowTitle();
             }
         }
 
@@ -306,6 +307,7 @@ namespace xyRESTTest
                     PnTestcases.ResumeLayout();
                     toolStrip1.ResumeLayout();
                     toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
+                    ShowTitle();
                 }
                 catch (Exception ex)
                 {
@@ -419,7 +421,8 @@ namespace xyRESTTest
         }
         private void LoadStringResources()
         {
-            Text = Resources.strAppTitle;
+            ShowTitle();
+
             if (!hasProjectLoaded)
             {
                 LbPrjName.Text = Resources.strNoProjectLoaded;
@@ -461,6 +464,15 @@ namespace xyRESTTest
 
             contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;
             contextMenuStrip.Items[1].Text = Resources.strMenuInsertCaseParameter;
+        }
+        private void ShowTitle()
+        {
+            string projectFile = testProject?.projectFile ?? "";
+            string projectDir = testProject?.projectDir ?? "";
+            string projectFileName = 
+                (string.IsNullOrEmpty(projectFile) ? "" :
+                " - " + Path.Combine(projectDir, projectFile));
+            Text = Resources.strAppTitle + projectFileName;
         }
         private void TscbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
