@@ -239,6 +239,12 @@ namespace xyRESTTest
             {
                 EditCaseName(false);
             }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                TxtCaseName.Text = LbCaseName.Text;
+                LbCaseName.Visible = true;
+                TxtCaseName.Visible = false;
+            }
         }
 
         #endregion

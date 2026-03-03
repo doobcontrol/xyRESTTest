@@ -65,6 +65,12 @@ namespace xyRESTTest
                 {
                     EditProjectName(false);
                 }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    TxtPrjName.Text = LbPrjName.Text;
+                    LbPrjName.Visible = true;
+                    TxtPrjName.Visible = false;
+                }
             };
         }
 
