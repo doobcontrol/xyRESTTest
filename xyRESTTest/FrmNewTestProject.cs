@@ -53,14 +53,14 @@ namespace xyRESTTest
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
-            testProject = new TestProject()
+            var projectDir = Path.GetDirectoryName(TxtProjectSaveName.Text);
+            var projectFile = Path.GetFileName(TxtProjectSaveName.Text);
+            testProject = new TestProject(projectDir, projectFile)
             {
                 name = TxtProjectName.Text.Trim(),
-                projectFile = TxtProjectSaveName.Text.Trim(),
                 tasks = new List<TestTask>()
             };
 
-            var projectDir = Path.GetDirectoryName(TestProject.projectFile);
             if(Directory.Exists(projectDir))
             {
                 if(

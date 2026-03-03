@@ -176,12 +176,28 @@ namespace xyRESTTestLib
         public static void saveTestProject(TestProject testProject)
         {
             var json = JsonSerializer.Serialize(testProject);
-            File.WriteAllText(testProject.projectFile, json);
+            File.WriteAllText(
+                Path.Combine(testProject.projectDir, testProject.projectFile), 
+                json);
         }
         public static TestProject loadTestProject(string projectFile)
         {
             var json = File.ReadAllText(projectFile);
-            var testProject = JsonSerializer.Deserialize<TestProject>(json);
+
+            var projectDataDic = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+            var projectName = projectDataDic["name"].ToString() ?? "";
+            var tasksString = projectDataDic["tasks"].ToString() ?? "[]";
+            var tasksList = 
+                JsonSerializer.Deserialize<List<TestTask>>(tasksString) ?? new List<TestTask>();
+
+            var projectDir = Path.GetDirectoryName(projectFile);
+            var projectFileName = Path.GetFileName(projectFile);
+
+            var testProject = new TestProject(projectDir ?? "", projectFileName ?? "")
+            {
+                    name = projectName,
+                    tasks = tasksList
+            };
 
             foreach (var task in testProject.tasks)
             {
@@ -324,8 +340,17 @@ namespace xyRESTTestLib
     public class TestProject
     {
         public required string name { get; set; }
-        public required string projectFile { get; set; }
         public required List<TestTask> tasks { get; set; }
+
+        [JsonIgnore]
+        public string projectDir { get; }
+        [JsonIgnore]
+        public string projectFile { get; }
+        public TestProject(string projectDir, string projectFile)
+        {
+            this.projectDir = projectDir;
+            this.projectFile = projectFile;
+        }
     }
 
     public class RequestInfo
