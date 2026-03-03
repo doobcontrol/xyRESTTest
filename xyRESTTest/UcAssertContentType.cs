@@ -45,13 +45,27 @@ namespace xyRESTTest
             cbSaveFile.Text = Resources.strSaveToFile;
         }
 
+        string downloadFolderName = "downloads";
         private void BtnBrowseFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            string downloadFolder = 
+                Path.Combine(Directory.GetCurrentDirectory(), downloadFolderName);
+            if (!Directory.Exists(downloadFolder)) { 
+                Directory.CreateDirectory(downloadFolder);
+            }
+            sfd.InitialDirectory = downloadFolder;
             if(sfd.ShowDialog() == DialogResult.OK)
             {
-                LbFile.Text = sfd.FileName;
-                assertInfo.saveFilePath = sfd.FileName;
+                string fileName = sfd.FileName;
+                string projectDir = Directory.GetCurrentDirectory();
+                if(UiTools.IsSubdirectoryOf(projectDir, fileName))
+                {
+                    fileName = Path.GetRelativePath(projectDir, fileName);
+                }
+
+                LbFile.Text = fileName;
+                assertInfo.saveFilePath = fileName;
             }
         }
 

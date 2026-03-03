@@ -166,9 +166,6 @@
   <data name="strTsbDelFormData" xml:space="preserve">
     <value>Delete selected form data</value>
   </data>
-  <data name="strSetTestDataFile" xml:space="preserve">
-    <value>Set test data file: {0}</value>
-  </data>
   <data name="strDeleteTestCase" xml:space="preserve">
     <value>Delete selected test case</value>
   </data>

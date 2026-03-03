@@ -166,9 +166,6 @@
   <data name="strTsbDelFormData" xml:space="preserve">
     <value>删除选中的表单数据</value>
   </data>
-  <data name="strSetTestDataFile" xml:space="preserve">
-    <value>设置测试数据文件: {0}</value>
-  </data>
   <data name="strDeleteTestCase" xml:space="preserve">
     <value>删除选中的测试项</value>
   </data>

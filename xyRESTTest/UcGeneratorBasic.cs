@@ -40,9 +40,6 @@ namespace xyRESTTest
             LbTableTitle.Text = Resources.strTestDataRecords;
             TsbAddRecord.ToolTipText = Resources.strAddTestDataDecord;
             TsbDelRecord.ToolTipText = Resources.strDeleteTestDataRecord;
-            TsbDataFile.ToolTipText = string.Format(
-                Resources.strSetTestDataFile, 
-                dataGenerator.GeneratorInfo[xyTest.DGT_Basic_File]);
         }
         private void InitParamList(List<string> ParamNames)
         {
@@ -154,11 +151,6 @@ namespace xyRESTTest
                 ((Dictionary<string, string>)row.Tag)[columnName] = cell.Value?.ToString() ?? "";
                 SaveDataRecords();
             }
-        }
-
-        private void TsbDataFile_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

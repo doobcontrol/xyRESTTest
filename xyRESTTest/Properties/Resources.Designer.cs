@@ -683,15 +683,6 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set test data file: {0}.
-        /// </summary>
-        internal static string strSetTestDataFile {
-            get {
-                return ResourceManager.GetString("strSetTestDataFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Test Data Records.
         /// </summary>
         internal static string strTestDataRecords {

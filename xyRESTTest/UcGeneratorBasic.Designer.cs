@@ -33,7 +33,6 @@
             toolStrip4 = new ToolStrip();
             TsbAddRecord = new ToolStripButton();
             TsbDelRecord = new ToolStripButton();
-            TsbDataFile = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)DgvRecords).BeginInit();
             toolStrip4.SuspendLayout();
             SuspendLayout();
@@ -42,10 +41,11 @@
             // 
             DgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvRecords.Dock = DockStyle.Fill;
-            DgvRecords.Location = new Point(0, 50);
+            DgvRecords.Location = new Point(0, 44);
+            DgvRecords.Margin = new Padding(3, 2, 3, 2);
             DgvRecords.Name = "DgvRecords";
             DgvRecords.RowHeadersWidth = 51;
-            DgvRecords.Size = new Size(345, 100);
+            DgvRecords.Size = new Size(302, 68);
             DgvRecords.TabIndex = 9;
             DgvRecords.CellEndEdit += DgvRecords_CellEndEdit;
             // 
@@ -54,7 +54,7 @@
             LbTableTitle.Dock = DockStyle.Top;
             LbTableTitle.Location = new Point(0, 27);
             LbTableTitle.Name = "LbTableTitle";
-            LbTableTitle.Size = new Size(345, 23);
+            LbTableTitle.Size = new Size(302, 17);
             LbTableTitle.TabIndex = 8;
             LbTableTitle.Text = "Test Data Records";
             LbTableTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -62,10 +62,10 @@
             // toolStrip4
             // 
             toolStrip4.ImageScalingSize = new Size(20, 20);
-            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord, TsbDataFile });
+            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord });
             toolStrip4.Location = new Point(0, 0);
             toolStrip4.Name = "toolStrip4";
-            toolStrip4.Size = new Size(345, 27);
+            toolStrip4.Size = new Size(302, 27);
             toolStrip4.Stretch = true;
             toolStrip4.TabIndex = 7;
             toolStrip4.Text = "toolStrip4";
@@ -76,7 +76,7 @@
             TsbAddRecord.Image = Properties.Resources.Add;
             TsbAddRecord.ImageTransparentColor = Color.Magenta;
             TsbAddRecord.Name = "TsbAddRecord";
-            TsbAddRecord.Size = new Size(29, 24);
+            TsbAddRecord.Size = new Size(24, 24);
             TsbAddRecord.Text = "Add a test data record";
             TsbAddRecord.Click += TsbAddRecord_Click;
             // 
@@ -86,29 +86,20 @@
             TsbDelRecord.Image = Properties.Resources.Delete;
             TsbDelRecord.ImageTransparentColor = Color.Magenta;
             TsbDelRecord.Name = "TsbDelRecord";
-            TsbDelRecord.Size = new Size(29, 24);
+            TsbDelRecord.Size = new Size(24, 24);
             TsbDelRecord.Text = "Delete selected data record";
             TsbDelRecord.Click += TsbDelRecord_Click;
             // 
-            // TsbDataFile
-            // 
-            TsbDataFile.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbDataFile.Image = Properties.Resources.OpenFile;
-            TsbDataFile.ImageTransparentColor = Color.Magenta;
-            TsbDataFile.Name = "TsbDataFile";
-            TsbDataFile.Size = new Size(29, 24);
-            TsbDataFile.Text = "Set test data file";
-            TsbDataFile.Click += TsbDataFile_Click;
-            // 
             // UcGeneratorBasic
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(DgvRecords);
             Controls.Add(LbTableTitle);
             Controls.Add(toolStrip4);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UcGeneratorBasic";
-            Size = new Size(345, 150);
+            Size = new Size(302, 112);
             ((System.ComponentModel.ISupportInitialize)DgvRecords).EndInit();
             toolStrip4.ResumeLayout(false);
             toolStrip4.PerformLayout();
@@ -123,6 +114,5 @@
         private ToolStrip toolStrip4;
         private ToolStripButton TsbAddRecord;
         private ToolStripButton TsbDelRecord;
-        private ToolStripButton TsbDataFile;
     }
 }

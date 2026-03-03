@@ -240,6 +240,7 @@ namespace xyRESTTest
             if (fntp.ShowDialog() == DialogResult.OK)
             {
                 testProject = fntp.TestProject;
+                Directory.SetCurrentDirectory(testProject.projectDir);
                 LbPrjName.Text = testProject.name;
                 TsbAddCase.Visible = true;
                 TsbDelCase.Visible = true;
@@ -284,6 +285,7 @@ namespace xyRESTTest
                     PnTestcases.SuspendLayout();
                     PnPrj.SuspendLayout();
                     testProject = xyTest.loadTestProject(filePath);
+                    Directory.SetCurrentDirectory(testProject.projectDir);
                     LbPrjName.Text = testProject.name;
                     TsbAddCase.Visible = true;
                     TsbDelCase.Visible = true;
