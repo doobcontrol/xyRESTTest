@@ -68,6 +68,15 @@ namespace xyRESTTestLib
                     {
                         string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff_");
                         string saveDir = Path.GetDirectoryName(assertInfo.saveFilePath);
+                        if(!Directory.Exists(saveDir))
+                        {
+                            rw.WriteLine(
+                                string.Format(
+                                    Resources.strDownloadFileSavePathNotExist,
+                                    saveDir)
+                            );
+                            return false;
+                        }
                         string fileName = timestamp + Path.GetFileName(assertInfo.saveFilePath);
                         string saveFile = Path.Combine(saveDir, fileName);
                         using var fs = new FileStream(

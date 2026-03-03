@@ -174,4 +174,7 @@
   <data name="strSavedResponseBodyTo" xml:space="preserve">
     <value>下载文件已保存到 {0}</value>
   </data>
+  <data name="strDownloadFileSavePathNotExist" xml:space="preserve">
+    <value>下载文件保存路径不存在: {0}</value>
+  </data>
 </root>

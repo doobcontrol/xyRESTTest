@@ -133,6 +133,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download file save path not exists: {0}.
+        /// </summary>
+        internal static string strDownloadFileSavePathNotExist {
+            get {
+                return ResourceManager.GetString("strDownloadFileSavePathNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error when sending request: {0}.
         /// </summary>
         internal static string strErrorWhenSendingRequest_ {
