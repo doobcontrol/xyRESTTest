@@ -304,8 +304,6 @@ namespace xyRESTTest
                     PnTestcases.ResumeLayout();
                     toolStrip1.ResumeLayout();
                     toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
-
-                    LoadProjectMask(false);
                 }
                 catch (Exception ex)
                 {
@@ -315,6 +313,10 @@ namespace xyRESTTest
                             Resources.strProjectOpenError,
                             ex.Message)
                     );
+                }
+                finally
+                {
+                    LoadProjectMask(false);
                 }
             }
         }
