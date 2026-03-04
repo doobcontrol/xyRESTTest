@@ -124,7 +124,7 @@
     <value>登陆名</value>
   </data>
   <data name="strRunFinished" xml:space="preserve">
-    <value>测试运行结束</value>
+    <value>测试运行结束, 测试结果: {0}</value>
   </data>
   <data name="strTsbAddFormData" xml:space="preserve">
     <value>添加一项表单数据</value>
@@ -366,5 +366,11 @@
   </data>
   <data name="strProjectFileNotExists" xml:space="preserve">
     <value>项目文件不存在</value>
+  </data>
+  <data name="strSucceed" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="strFailed" xml:space="preserve">
+    <value>失败</value>
   </data>
 </root>

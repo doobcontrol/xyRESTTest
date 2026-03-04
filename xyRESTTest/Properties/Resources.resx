@@ -124,7 +124,7 @@
     <value>Login Name</value>
   </data>
   <data name="strRunFinished" xml:space="preserve">
-    <value>Finished.</value>
+    <value>Testing Finished, Result: {0}</value>
   </data>
   <data name="strTsbAddFormData" xml:space="preserve">
     <value>Add one form data</value>
@@ -366,5 +366,11 @@ The missing parameters are:
   </data>
   <data name="strProjectFileNotExists" xml:space="preserve">
     <value>Project file not exists</value>
+  </data>
+  <data name="strSucceed" xml:space="preserve">
+    <value>Succeed</value>
+  </data>
+  <data name="strFailed" xml:space="preserve">
+    <value>Failed</value>
   </data>
 </root>

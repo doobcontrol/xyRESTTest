@@ -438,6 +438,7 @@ namespace xyRESTTest
 
         #region Run test
 
+        bool testResult;
         private async void UcTestCaseItem_Run(object? sender, EventArgs e)
         {
             if (sender is UcTestCaseItem utci)
@@ -466,11 +467,12 @@ namespace xyRESTTest
                 {
                     if(utci.TestTask.dataGenerator == null)
                     {
-                        await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
+                        testResult = await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
                     }
                     else
                     {
-                        await xyTest.oneAutoGenerateTestAsync(utci.TestTask, contextPars, sw);
+                        testResult = 
+                            await xyTest.oneAutoGenerateTestAsync(utci.TestTask, contextPars, sw);
                     }
                 }
                 setRunnningState(false);
@@ -481,8 +483,8 @@ namespace xyRESTTest
         {
             setRunnningState(true);
             var newContextPars = new Dictionary<string, string>();
-            bool succeed = await xyTest.runProjectAsync(testProject, newContextPars);
-            if(succeed)
+            testResult = await xyTest.runProjectAsync(testProject, newContextPars);
+            if(testResult)
             {
                 contextPars = newContextPars;
             }
@@ -500,7 +502,8 @@ namespace xyRESTTest
             }
             else
             {
-                lbRunningInfo.Text = Resources.strRunFinished;
+                var resultStr = testResult ? Resources.strSucceed : Resources.strFailed;
+                lbRunningInfo.Text = string.Format(Resources.strRunFinished, resultStr);
             }
             testRunning = isRunning;
             this.ControlBox = !isRunning;
@@ -575,7 +578,8 @@ namespace xyRESTTest
             }
             else
             {
-                lbRunningInfo.Text = Resources.strRunFinished;
+                var resultStr = testResult ? Resources.strSucceed : Resources.strFailed;
+                lbRunningInfo.Text = string.Format(Resources.strRunFinished, resultStr);
             }
 
             contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;

@@ -396,6 +396,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        internal static string strFailed {
+            get {
+                return ResourceManager.GetString("strFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File Already Added.
         /// </summary>
         internal static string strFileAlreadyAdded {
@@ -667,7 +676,7 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finished..
+        ///   Looks up a localized string similar to Testing Finished, Result: {0}.
         /// </summary>
         internal static string strRunFinished {
             get {
@@ -708,6 +717,15 @@ namespace xyRESTTest.Properties {
         internal static string strSaveToFile {
             get {
                 return ResourceManager.GetString("strSaveToFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeed.
+        /// </summary>
+        internal static string strSucceed {
+            get {
+                return ResourceManager.GetString("strSucceed", resourceCulture);
             }
         }
         
