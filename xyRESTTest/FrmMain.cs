@@ -167,6 +167,26 @@ namespace xyRESTTest
         {
             if (selectedItem != null)
             {
+                // delete data files
+                if(selectedItem.TestTask.dataGenerator != null
+                    && selectedItem.TestTask.dataGenerator.GeneratorType 
+                    == nameof(GeneratorType.Basic))
+                {
+                    var filePath = selectedItem.TestTask.dataGenerator
+                        .GeneratorInfo[xyTest.DGT_Basic_File] as string;
+                    if (File.Exists(filePath))
+                    {
+                        try
+                        {
+                            File.Delete(filePath);
+                        }
+                        catch
+                        {
+                            // ignore delete file error
+                        }
+                    }
+                }
+
                 testProject.tasks.Remove(selectedItem.TestTask);
                 xyTest.saveTestProject(testProject);
 
