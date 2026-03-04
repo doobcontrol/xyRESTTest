@@ -361,4 +361,10 @@ Continue?</value>
 The missing parameters are:
 {0}</value>
   </data>
+  <data name="strRecentOpenList" xml:space="preserve">
+    <value>Recent Open Projects List</value>
+  </data>
+  <data name="strProjectFileNotExists" xml:space="preserve">
+    <value>Project file not exists</value>
+  </data>
 </root>

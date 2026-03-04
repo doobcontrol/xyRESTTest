@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,15 +22,47 @@ namespace xyRESTTest
         string LangParName = "LangCode";
         string LangDefault = "en-US";
         string LangChinese = "zh-CN";
+        string RecentOpenListName = "RecentOpenList";
         bool hasProjectLoaded = false;
         string lang;
         bool testRunning = false;
         ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
         Dictionary<string, string> contextPars;
-
+        List<string> recentOpenList;
         public FrmMain()
         {
+            xyCfg.init(
+                new Dictionary<string, object>() 
+                {
+                    {LangParName, CultureInfo.InstalledUICulture.Name},
+                    {RecentOpenListName, new List<string>() }
+                }, 
+                Path.Combine(Directory.GetCurrentDirectory(), cfgFile)
+            );
+
             InitializeComponent();
+
+            recentOpenList = xyCfg.get(RecentOpenListName) as List<string> ?? new List<string>();
+            if(recentOpenList.Count > 0)
+            {
+                var recentOpenListControl = new UcRecentOpenList(recentOpenList);
+                recentOpenListControl.Dock = DockStyle.Fill;
+                recentOpenListControl.Selected += (s, e) =>
+                {
+                    string filePath = (s as UcRecentOpenList).SelectedProject;
+                    OpenProject(filePath);
+                };
+                recentOpenListControl.DeleteNotExistProject += (s, e) =>
+                {
+                    string filePath = (s as UcRecentOpenList).SelectedProject;
+                    recentOpenList.Remove(filePath);
+                    xyCfg.set(RecentOpenListName, recentOpenList);
+                };
+
+                PnlTestCase.Controls.Clear();
+                PnlTestCase.Controls.Add(recentOpenListControl);
+            }
+
             CreateContextMenu();
             LangConfig();
             LoadStringResources();
@@ -276,7 +309,15 @@ namespace xyRESTTest
                 hasProjectLoaded = true;
                 toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
                 contextPars = new Dictionary<string, string>();
+
                 ShowTitle();
+                recentOpenList.Insert(0, 
+                    Path.Combine(testProject.projectDir, testProject.projectFile));
+                while (recentOpenList.Count > 10)
+                {
+                    recentOpenList.RemoveAt(recentOpenList.Count - 1);
+                }
+                xyCfg.set(RecentOpenListName, recentOpenList);
             }
         }
 
@@ -298,53 +339,72 @@ namespace xyRESTTest
             // Show the dialog and check if the user clicked "OK"
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                try
+                string filePath = ofd.FileName;
+                OpenProject(filePath);
+            }
+        }
+        private void OpenProject(string filePath)
+        {
+            try
+            {
+                LoadProjectMask(true);
+
+                toolStrip1.SuspendLayout();
+                PnTestcases.SuspendLayout();
+                PnPrj.SuspendLayout();
+                testProject = xyTest.loadTestProject(filePath);
+                Directory.SetCurrentDirectory(testProject.projectDir);
+                LbPrjName.Text = testProject.name;
+                TsbAddCase.Visible = true;
+                TsbDelCase.Visible = true;
+                TsbMoveDown.Visible = true;
+                TsbMoveUp.Visible = true;
+                toolStripSeparator1.Visible = true;
+                TsbRun.Visible = true;
+                toolStripSeparator2.Visible = true;
+
+                PnTestcases.Controls.Clear();
+                PnlTestCase.Controls.Clear();
+                foreach (var task in testProject.tasks)
                 {
-                    LoadProjectMask(true);
+                    AddTestCaseItem(task);
+                }
+                hasProjectLoaded = true;
+                PnPrj.ResumeLayout();
+                PnTestcases.ResumeLayout();
+                toolStrip1.ResumeLayout();
+                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
+                contextPars = new Dictionary<string, string>();
 
-                    // Get the path of the specified file
-                    string filePath = ofd.FileName;
-                    toolStrip1.SuspendLayout();
-                    PnTestcases.SuspendLayout();
-                    PnPrj.SuspendLayout();
-                    testProject = xyTest.loadTestProject(filePath);
-                    Directory.SetCurrentDirectory(testProject.projectDir);
-                    LbPrjName.Text = testProject.name;
-                    TsbAddCase.Visible = true;
-                    TsbDelCase.Visible = true;
-                    TsbMoveDown.Visible = true;
-                    TsbMoveUp.Visible = true;
-                    toolStripSeparator1.Visible = true;
-                    TsbRun.Visible = true;
-                    toolStripSeparator2.Visible = true;
-
-                    PnTestcases.Controls.Clear();
-                    PnlTestCase.Controls.Clear();
-                    foreach (var task in testProject.tasks)
+                ShowTitle();
+                if (!recentOpenList.Contains(filePath))
+                {
+                    recentOpenList.Insert(0, filePath);
+                    while (recentOpenList.Count > 10)
                     {
-                        AddTestCaseItem(task);
+                        recentOpenList.RemoveAt(recentOpenList.Count - 1);
                     }
-                    hasProjectLoaded = true;
-                    PnPrj.ResumeLayout();
-                    PnTestcases.ResumeLayout();
-                    toolStrip1.ResumeLayout();
-                    toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
-                    contextPars = new Dictionary<string, string>();
-                    ShowTitle();
+                    xyCfg.set(RecentOpenListName, recentOpenList);
                 }
-                catch (Exception ex)
+                else if (recentOpenList.IndexOf(filePath) != 0)
                 {
-                    // Handle any errors that might occur
-                    MessageBox.Show(
-                        string.Format(
-                            Resources.strProjectOpenError,
-                            ex.Message)
-                    );
+                    recentOpenList.Remove(filePath);
+                    recentOpenList.Insert(0, filePath);
+                    xyCfg.set(RecentOpenListName, recentOpenList);
                 }
-                finally
-                {
-                    LoadProjectMask(false);
-                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors that might occur
+                MessageBox.Show(
+                    string.Format(
+                        Resources.strProjectOpenError,
+                        ex.Message)
+                );
+            }
+            finally
+            {
+                LoadProjectMask(false);
             }
         }
 
@@ -459,10 +519,7 @@ namespace xyRESTTest
         string cfgFile = "xyCfg.json";
         private void LangConfig()
         {
-            xyCfg.init(new Dictionary<string, string>() {
-                {LangParName, CultureInfo.InstalledUICulture.Name}
-            }, Path.Combine(Directory.GetCurrentDirectory(), cfgFile));
-            lang = xyCfg.get(LangParName);
+            lang = xyCfg.get(LangParName) as string;
             Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
             TscbLang.Items.Add(LangDefault);
@@ -476,11 +533,20 @@ namespace xyRESTTest
             if (!hasProjectLoaded)
             {
                 LbPrjName.Text = Resources.strNoProjectLoaded;
+                if(PnlTestCase.Controls.Count > 0)
+                {
+                    var control = PnlTestCase.Controls[0];
+                    if (control is UcRecentOpenList)
+                    {
+                        (control as UcRecentOpenList).LoadStringResources();
+                    }
+                }
             }
             else
             {
                 toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
             }
+
             TsbNewProject.Text = Resources.strNewTestProject;
             TsbOpenProject.Text = Resources.strOpenTestProject;
             TsbAddCase.Text = Resources.strAddTestCase;

@@ -603,6 +603,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project file not exists.
+        /// </summary>
+        internal static string strProjectFileNotExists {
+            get {
+                return ResourceManager.GetString("strProjectFileNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The project folder already exists; creating a new project may overwrite its contents.
         ///Continue?.
         /// </summary>
@@ -636,6 +645,15 @@ namespace xyRESTTest.Properties {
         internal static string strReadDataList {
             get {
                 return ResourceManager.GetString("strReadDataList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Open Projects List.
+        /// </summary>
+        internal static string strRecentOpenList {
+            get {
+                return ResourceManager.GetString("strRecentOpenList", resourceCulture);
             }
         }
         

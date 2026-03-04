@@ -361,4 +361,10 @@
 缺失的参数:
 {0}</value>
   </data>
+  <data name="strRecentOpenList" xml:space="preserve">
+    <value>最近打开过的项目</value>
+  </data>
+  <data name="strProjectFileNotExists" xml:space="preserve">
+    <value>项目文件不存在</value>
+  </data>
 </root>
