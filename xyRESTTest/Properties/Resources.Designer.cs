@@ -259,6 +259,17 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The context parameters required for this test case are missing. Please first run the test case that provides these parameters. 
+        ///The missing parameters are:
+        ///{0}.
+        /// </summary>
+        internal static string strCaseContextParamMissing {
+            get {
+                return ResourceManager.GetString("strCaseContextParamMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Case Name Duplicate.
         /// </summary>
         internal static string strCaseNameDuplicate {

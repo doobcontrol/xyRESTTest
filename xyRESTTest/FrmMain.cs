@@ -25,6 +25,7 @@ namespace xyRESTTest
         string lang;
         bool testRunning = false;
         ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+        Dictionary<string, string> contextPars;
 
         public FrmMain()
         {
@@ -254,6 +255,7 @@ namespace xyRESTTest
                 PnlTestCase.Controls.Clear();
                 hasProjectLoaded = true;
                 toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
+                contextPars = new Dictionary<string, string>();
                 ShowTitle();
             }
         }
@@ -307,6 +309,7 @@ namespace xyRESTTest
                     PnTestcases.ResumeLayout();
                     toolStrip1.ResumeLayout();
                     toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
+                    contextPars = new Dictionary<string, string>();
                     ShowTitle();
                 }
                 catch (Exception ex)
@@ -359,16 +362,36 @@ namespace xyRESTTest
         {
             if (sender is UcTestCaseItem utci)
             {
+                var missngParams = new List<string>();
+                if (!xyTest.CheckCaseContextParams(
+                    contextPars, missngParams, utci.TestTask))
+                {
+                    MessageBox.Show(
+                        string.Format(
+                            Resources.strCaseContextParamMissing, string.Join(",",missngParams)
+                            ),
+                        Resources.strError,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
                 var path = Path.GetDirectoryName(testProject.projectFile);
                 var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
                 outputfile = Path.Combine(
                     path ?? "", $"{outputfile}_output.txt");
 
-                var contextPars = new Dictionary<string, string>();
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
                 {
-                    await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
+                    if(utci.TestTask.dataGenerator == null)
+                    {
+                        await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
+                    }
+                    else
+                    {
+                        await xyTest.oneAutoGenerateTestAsync(utci.TestTask, contextPars, sw);
+                    }
                 }
                 setRunnningState(false);
             }
@@ -377,7 +400,12 @@ namespace xyRESTTest
         private async void TsbRun_Click(object sender, EventArgs e)
         {
             setRunnningState(true);
-            await xyTest.runProjectAsync(testProject);
+            var newContextPars = new Dictionary<string, string>();
+            bool succeed = await xyTest.runProjectAsync(testProject, newContextPars);
+            if(succeed)
+            {
+                contextPars = newContextPars;
+            }
             setRunnningState(false);
         }
         private void setRunnningState(bool isRunning)

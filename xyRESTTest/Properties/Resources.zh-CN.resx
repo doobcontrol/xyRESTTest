@@ -356,4 +356,9 @@
   <data name="strError" xml:space="preserve">
     <value>错误</value>
   </data>
+  <data name="strCaseContextParamMissing" xml:space="preserve">
+    <value>运行本测试项所需环境参数不存在, 请先运行获取这些参数的测试项.
+缺失的参数:
+{0}</value>
+  </data>
 </root>

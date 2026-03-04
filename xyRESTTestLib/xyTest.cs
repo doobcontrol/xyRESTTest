@@ -100,15 +100,38 @@ namespace xyRESTTestLib
 
             return assert;
         }
-
+        public static async Task<bool> oneAutoGenerateTestAsync(
+            TestTask testTask,
+            Dictionary<string, string> contextPars,
+            StreamWriter rw
+            )
+        {
+            var testDataList = TestHandler.GenerateTestDatas(testTask.dataGenerator);
+            foreach (var testData in testDataList)
+            {
+                var newTask = TestHandler.ApplyLocalPars(testTask, testData);
+                rw.WriteLine(
+                    string.Format(
+                        Resources.strTestData,
+                        string.Join(", ", testData))
+                    );
+                if (!await oneTestAsync(newTask, contextPars, rw))
+                {
+                    rw.WriteLine(Resources.strFailed);
+                    rw.WriteLine();
+                    return false;
+                }
+                rw.WriteLine(Resources.strSucceed);
+            }
+            return true;
+        }
         public static async Task<bool> batchTestAsync(
-            List<TestTask> tasks, StreamWriter sw
+            List<TestTask> tasks, StreamWriter sw, Dictionary<string, string> contextPars
             )
         {
             DateTime startTime = DateTime.Now;
             sw.WriteLine(Resources.strStartTest);
             sw.WriteLine();
-            var contextPars = new Dictionary<string, string>();
             foreach (var task in tasks)
             {
                 sw.WriteLine(string.Format(Resources.strTestCaseName, task.name));
@@ -126,22 +149,9 @@ namespace xyRESTTestLib
                 }
                 else
                 {
-                    var testDataList = TestHandler.GenerateTestDatas(task.dataGenerator);
-                    foreach (var testData in testDataList)
+                    if(!await oneAutoGenerateTestAsync(task, contextPars, sw))
                     {
-                        var newTask = TestHandler.ApplyLocalPars(task, testData);
-                        sw.WriteLine(
-                            string.Format(
-                                Resources.strTestData,
-                                string.Join(", ", testData))
-                            );
-                        if (!await oneTestAsync(newTask, contextPars, sw))
-                        {
-                            sw.WriteLine(Resources.strFailed);
-                            sw.WriteLine();
-                            return false;
-                        }
-                        sw.WriteLine(Resources.strSucceed);
+                        return false;
                     }
                 }
                 sw.WriteLine(Resources.strSucceed);
@@ -157,7 +167,8 @@ namespace xyRESTTestLib
 
             return true;
         }
-        public static async Task<bool> runProjectAsync(TestProject testProject)
+        public static async Task<bool> runProjectAsync(
+            TestProject testProject, Dictionary<string, string> contextPars)
         {
             var path = Path.GetDirectoryName(testProject.projectFile);
             var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
@@ -167,7 +178,7 @@ namespace xyRESTTestLib
             bool retB;
             using (StreamWriter sw = new StreamWriter(outputfile, true))
             {
-                retB = await batchTestAsync(testProject.tasks, sw);
+                retB = await batchTestAsync(testProject.tasks, sw, contextPars);
             }
 
             return retB;
@@ -232,6 +243,29 @@ namespace xyRESTTestLib
                     parsDic[match.Groups["parName"].Value]);
             }
             return returnStr;
+        }
+        public static bool CheckCaseContextParams(
+            Dictionary<string, string> parsDic, List<string> missngParams, TestTask testTask)
+        {
+            var inputStr = JsonSerializer.Serialize(testTask);
+            string pattern = @"\$\{(?<parName>\w+)\}";
+            MatchCollection matches = Regex.Matches(inputStr, pattern);
+            foreach (Match match in matches)
+            {
+                if (!parsDic.ContainsKey(match.Groups["parName"].Value))
+                {
+                    missngParams.Add(match.Groups["parName"].Value);
+                    
+                }
+            }
+            if (missngParams.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public static string HandleCaseParams(
             Dictionary<string, string> parsDic, string inputStr)

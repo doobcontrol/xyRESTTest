@@ -356,4 +356,9 @@ Continue?</value>
   <data name="strError" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="strCaseContextParamMissing" xml:space="preserve">
+    <value>The context parameters required for this test case are missing. Please first run the test case that provides these parameters. 
+The missing parameters are:
+{0}</value>
+  </data>
 </root>
