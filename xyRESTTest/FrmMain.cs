@@ -41,6 +41,7 @@ namespace xyRESTTest
             );
 
             InitializeComponent();
+            SetFormResume();
 
             recentOpenList = xyCfg.get(RecentOpenListName) as List<string> ?? new List<string>();
             if(recentOpenList.Count > 0)
@@ -104,6 +105,98 @@ namespace xyRESTTest
                     TxtPrjName.Text = LbPrjName.Text;
                     LbPrjName.Visible = true;
                     TxtPrjName.Visible = false;
+                }
+            };
+        }
+
+        const string cfgName_FormMaximized = "FormMaximized";
+        const string cfgName_FormLocation_x = "FormLocation_x";
+        const string cfgName_FormLocation_y = "FormLocation_y";
+        const string cfgName_FormSize_h = "FormSize_h";
+        const string cfgName_FormSize_w = "FormSize_w";
+        private FormWindowState LastWindowState;
+        private int LastX;
+        private int LastY;
+        private int LastWidth;
+        private int LastHeight;
+        private void SetFormResume()
+        {
+            bool formMaximized;
+            object maxObj = xyCfg.get(cfgName_FormMaximized);
+            if (maxObj != null)
+            {
+                formMaximized = bool.Parse(maxObj as string);
+                if (formMaximized)
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else
+                {
+                    this.Size = new Size(
+                        int.Parse(xyCfg.get(cfgName_FormSize_w) as string),
+                        int.Parse(xyCfg.get(cfgName_FormSize_h) as string)
+                        );
+                    this.WindowState = FormWindowState.Normal;
+                }
+            }
+            this.FormClosing += (s, e) =>
+            {
+                bool formMaximized;
+                if (this.WindowState == FormWindowState.Maximized)
+                {
+                    formMaximized = true;
+                }
+                else
+                {
+                    formMaximized = false;
+                }
+                xyCfg.set(cfgName_FormMaximized, formMaximized.ToString());
+                xyCfg.set(cfgName_FormLocation_x, LastX.ToString());
+                xyCfg.set(cfgName_FormLocation_y, LastY.ToString());
+                xyCfg.set(cfgName_FormSize_w, LastWidth.ToString());
+                xyCfg.set(cfgName_FormSize_h, LastHeight.ToString());
+            };
+            this.Load += (s, e) =>
+            {
+                this.Location = new Point(
+                    int.Parse(xyCfg.get(cfgName_FormLocation_x) as string),
+                    int.Parse(xyCfg.get(cfgName_FormLocation_y) as string)
+                    );
+                LastWindowState = this.WindowState;
+                LastX = this.Location.X;
+                LastY = this.Location.Y;
+                LastWidth = this.Size.Width;
+                LastHeight = this.Size.Height;
+            };
+            this.Resize += (s, e) =>
+            {
+                if(this.WindowState == FormWindowState.Normal)
+                {
+                    if(LastWindowState == FormWindowState.Maximized)
+                    {
+                        this.Location = new Point(
+                            int.Parse(xyCfg.get(cfgName_FormLocation_x) as string),
+                            int.Parse(xyCfg.get(cfgName_FormLocation_y) as string)
+                            );
+                        this.Size = new Size(
+                            int.Parse(xyCfg.get(cfgName_FormSize_w) as string),
+                            int.Parse(xyCfg.get(cfgName_FormSize_h) as string)
+                            );
+                        //make this event handler execute only once
+                        LastWindowState = FormWindowState.Minimized;
+                    }
+                    LastX = this.Location.X;
+                    LastY = this.Location.Y;
+                    LastWidth = this.Size.Width;
+                    LastHeight = this.Size.Height;
+                }
+            };
+            this.Move += (s, e) =>
+            {
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    LastX = this.Location.X;
+                    LastY = this.Location.Y;
                 }
             };
         }
