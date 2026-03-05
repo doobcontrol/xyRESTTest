@@ -131,7 +131,7 @@ namespace xyRESTTestLib
                                     {
                                     rw.WriteLine(
                                         string.Format(
-                                            Resources.strAssertFailedStatusCode,
+                                            Resources.strAssertFailedJSONValueError,
                                             jsonPath, expectedValue, node.GetValue<string>())
                                     );
                                     ret = false;
