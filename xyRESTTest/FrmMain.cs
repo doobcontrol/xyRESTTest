@@ -558,15 +558,7 @@ namespace xyRESTTest
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
                 {
-                    if(utci.TestTask.dataGenerator == null)
-                    {
-                        testResult = await xyTest.oneTestAsync(utci.TestTask, contextPars, sw);
-                    }
-                    else
-                    {
-                        testResult = 
-                            await xyTest.oneAutoGenerateTestAsync(utci.TestTask, contextPars, sw);
-                    }
+                    testResult = await xyTest.oneTaskAsync(utci.TestTask, sw, contextPars);
                 }
                 setRunnningState(false);
             }

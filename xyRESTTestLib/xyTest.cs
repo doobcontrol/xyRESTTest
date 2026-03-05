@@ -125,6 +125,34 @@ namespace xyRESTTestLib
             }
             return true;
         }
+        public static async Task<bool> oneTaskAsync(
+            TestTask task, StreamWriter sw, Dictionary<string, string> contextPars
+            )
+        {
+            sw.WriteLine(string.Format(Resources.strTestCaseName, task.name));
+            sw.WriteLine(string.Format(Resources.strTargetApi, task.requestInfo.url));
+            sw.WriteLine(string.Format(Resources.strRequestMethod, task.requestInfo.method));
+
+            if (task.dataGenerator == null)
+            {
+                if (!await oneTestAsync(task, contextPars, sw))
+                {
+                    sw.WriteLine(Resources.strFailed);
+                    sw.WriteLine();
+                    return false;
+                }
+            }
+            else
+            {
+                if (!await oneAutoGenerateTestAsync(task, contextPars, sw))
+                {
+                    return false;
+                }
+            }
+            sw.WriteLine(Resources.strSucceed);
+            sw.WriteLine();
+            return true;
+        }
         public static async Task<bool> batchTestAsync(
             List<TestTask> tasks, StreamWriter sw, Dictionary<string, string> contextPars
             )
@@ -134,28 +162,11 @@ namespace xyRESTTestLib
             sw.WriteLine();
             foreach (var task in tasks)
             {
-                sw.WriteLine(string.Format(Resources.strTestCaseName, task.name));
-                sw.WriteLine(string.Format(Resources.strTargetApi, task.requestInfo.url));
-                sw.WriteLine(string.Format(Resources.strRequestMethod, task.requestInfo.method));
-
-                if (task.dataGenerator == null)
+                bool taskSucced = await oneTaskAsync(task, sw, contextPars);
+                if (!taskSucced)
                 {
-                    if (!await oneTestAsync(task, contextPars, sw))
-                    {
-                        sw.WriteLine(Resources.strFailed);
-                        sw.WriteLine();
-                        return false;
-                    }
+                    return false;
                 }
-                else
-                {
-                    if(!await oneAutoGenerateTestAsync(task, contextPars, sw))
-                    {
-                        return false;
-                    }
-                }
-                sw.WriteLine(Resources.strSucceed);
-                sw.WriteLine();
             }
             sw.WriteLine(Resources.strAllTestFinishedSucceed);
             sw.WriteLine(
