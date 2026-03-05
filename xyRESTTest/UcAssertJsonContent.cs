@@ -216,6 +216,10 @@ namespace xyRESTTest
 
             var keyCell = dgv.Rows[e.RowIndex].Cells[0];
             var valueCell = dgv.Rows[e.RowIndex].Cells[1];
+            if (keyCell.Value == null || valueCell.Value == null)
+            {
+                return;
+            }
             if (e.ColumnIndex == 0
                 && keyCell.Value.ToString() != dgv.Rows[e.RowIndex].Tag
                 && list.ContainsKey(keyCell.Value.ToString()))
@@ -223,10 +227,6 @@ namespace xyRESTTest
                 // Key already exists: 
                 keyCell.Value = dgv.Rows[e.RowIndex].Tag;
                 toolTip1.Show("Key already exists!", TsAssert, 0, 0, 3000);
-                return;
-            }
-            if (keyCell.Value == null || valueCell.Value == null)
-            {
                 return;
             }
 
