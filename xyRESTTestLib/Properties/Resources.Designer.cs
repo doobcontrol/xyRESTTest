@@ -239,5 +239,14 @@ namespace xyRESTTestLib.Properties {
                 return ResourceManager.GetString("strTestTime", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown JSON value GetType: {0}.
+        /// </summary>
+        internal static string strUnknownJSONValueGetType {
+            get {
+                return ResourceManager.GetString("strUnknownJSONValueGetType", resourceCulture);
+            }
+        }
     }
 }

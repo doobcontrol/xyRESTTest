@@ -31,6 +31,9 @@ namespace xyRESTTestLib
             return newTask;
         }
 
+        public const string jsonGetValueTypeSplitter = "..";
+        public const string jsonGetValueType_Value = "value";
+        public const string jsonGetValueType_Count = "count";
         public async Task<bool> AssertResponse(
             ResponseInfo responseInfo,
             AssertInfo assertInfo,
@@ -108,6 +111,18 @@ namespace xyRESTTestLib
                         {
                             string jsonPath = al.Key;
                             string expectedValue = al.Value;
+
+                            string[] pathArr = jsonPath.Split(jsonGetValueTypeSplitter);
+                            string getValueType = null;
+                            if (pathArr.Length == 2)
+                            {
+                                getValueType = pathArr[1];
+                            }
+                            else
+                            {
+                                getValueType = jsonGetValueType_Value;
+                            }
+                            jsonPath = pathArr[0];
                             // Here you would use a JSON parsing library to extract the value
                             // from the response body using the jsonPath and compare it to expectedValue.
                             // This is a placeholder for that logic.
@@ -123,12 +138,37 @@ namespace xyRESTTestLib
                             }
                             else
                             {
-                                if (node.GetValue<string>() != expectedValue)
+                                if(getValueType == jsonGetValueType_Value)
+                                {
+                                    if (node.GetValue<string>() != expectedValue)
                                     {
+                                        rw.WriteLine(
+                                            string.Format(
+                                                Resources.strAssertFailedJSONValueError,
+                                                al.Key, expectedValue, node.GetValue<string>())
+                                        );
+                                        ret = false;
+                                    }
+                                }
+                                else if (getValueType == jsonGetValueType_Count)
+                                {
+                                    if (node.AsArray().Count
+                                        != int.Parse(expectedValue))
+                                    {
+                                        rw.WriteLine(
+                                            string.Format(
+                                                Resources.strAssertFailedJSONValueError,
+                                                al.Key, expectedValue, node.AsArray().Count)
+                                        );
+                                        ret = false;
+                                    }
+                                }
+                                else
+                                {
                                     rw.WriteLine(
                                         string.Format(
-                                            Resources.strAssertFailedJSONValueError,
-                                            jsonPath, expectedValue, node.GetValue<string>())
+                                            Resources.strUnknownJSONValueGetType,
+                                            getValueType)
                                     );
                                     ret = false;
                                 }
@@ -142,6 +182,18 @@ namespace xyRESTTestLib
                         {
                             string varName = rl.Key;
                             string jsonPath = rl.Value;
+
+                            string[] pathArr = jsonPath.Split(jsonGetValueTypeSplitter);
+                            string getValueType = null;
+                            if (pathArr.Length == 2)
+                            {
+                                getValueType = pathArr[1];
+                            }
+                            else
+                            {
+                                getValueType = jsonGetValueType_Value;
+                            }
+                            jsonPath = pathArr[0];
                             // Here you would use a JSON parsing library to extract the value
                             // from the response body using the jsonPath and store it in contextPars
                             // for use in later tests. This is a placeholder for that logic.
@@ -158,7 +210,23 @@ namespace xyRESTTestLib
                             }
                             else
                             {
-                                contextPars[varName] = node.GetValue<string>();
+                                if (getValueType == jsonGetValueType_Value)
+                                {
+                                    contextPars[varName] = node.GetValue<string>();
+                                }
+                                else if (getValueType == jsonGetValueType_Count)
+                                {
+                                    contextPars[varName] = node.AsArray().Count.ToString();
+                                }
+                                else
+                                {
+                                    rw.WriteLine(
+                                        string.Format(
+                                            Resources.strUnknownJSONValueGetType,
+                                            getValueType)
+                                    );
+                                    ret = false;
+                                }
                             }
                         }
                     }

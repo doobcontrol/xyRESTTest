@@ -177,4 +177,7 @@
   <data name="strDownloadFileSavePathNotExist" xml:space="preserve">
     <value>下载文件保存路径不存在: {0}</value>
   </data>
+  <data name="strUnknownJSONValueGetType" xml:space="preserve">
+    <value>未知的JSON取值类型: {0}</value>
+  </data>
 </root>

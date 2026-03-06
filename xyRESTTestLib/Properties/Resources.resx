@@ -177,4 +177,7 @@
   <data name="strDownloadFileSavePathNotExist" xml:space="preserve">
     <value>Download file save path not exists: {0}</value>
   </data>
+  <data name="strUnknownJSONValueGetType" xml:space="preserve">
+    <value>Unknown JSON value GetType: {0}</value>
+  </data>
 </root>
