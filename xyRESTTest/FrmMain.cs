@@ -550,10 +550,15 @@ namespace xyRESTTest
                     return;
                 }
 
-                var path = Path.GetDirectoryName(testProject.projectFile);
-                var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
-                outputfile = Path.Combine(
-                    path ?? "", $"{outputfile}_output.txt");
+                string timestamp = DateTime.Now.ToString("_yyyyMMdd_HHmmss_fff");
+                var outputfile = Path.Combine(
+                    xyTest.Report_file_dir, 
+                    $"{xyTest.Testreport_file_name}_{
+                        utci.TestTask.name.Replace(" ", "")}{timestamp}.txt");
+                if (!Directory.Exists(xyTest.Report_file_dir))
+                {
+                    Directory.CreateDirectory(xyTest.Report_file_dir);
+                }
 
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
@@ -577,8 +582,16 @@ namespace xyRESTTest
         private async void TsbRun_Click(object sender, EventArgs e)
         {
             setRunnningState(true);
+            string timestamp = DateTime.Now.ToString("_yyyyMMdd_HHmmss_fff");
+            var outputfile = Path.Combine(
+                xyTest.Report_file_dir,
+                $"{xyTest.Testreport_file_name}{timestamp}.txt");
+            if (!Directory.Exists(xyTest.Report_file_dir))
+            {
+                Directory.CreateDirectory(xyTest.Report_file_dir);
+            }
             var newContextPars = new Dictionary<string, string>();
-            testResult = await xyTest.runProjectAsync(testProject, newContextPars);
+            testResult = await xyTest.runProjectAsync(testProject, newContextPars, outputfile);
             if(testResult)
             {
                 contextPars = newContextPars;

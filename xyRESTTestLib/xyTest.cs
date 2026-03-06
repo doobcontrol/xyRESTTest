@@ -195,13 +195,10 @@ namespace xyRESTTestLib
             return true;
         }
         public static async Task<bool> runProjectAsync(
-            TestProject testProject, Dictionary<string, string> contextPars)
+            TestProject testProject, 
+            Dictionary<string, string> contextPars,
+            string outputfile)
         {
-            var path = Path.GetDirectoryName(testProject.projectFile);
-            var outputfile = Path.GetFileNameWithoutExtension(testProject.projectFile);
-            outputfile = Path.Combine(
-                path ?? "", $"{outputfile}_testReport.txt");
-
             bool retB;
             using (StreamWriter sw = new StreamWriter(outputfile, true))
             {
@@ -439,6 +436,9 @@ namespace xyRESTTestLib
         public const string Report_file_dir = "reports";
         public const string Download_file_dir = "downloads";
         public const string Testdata_file_dir = "testdata";
+
+        // Test report file name
+        public const string Testreport_file_name = "report";
     }
     public class TestTask
     {
