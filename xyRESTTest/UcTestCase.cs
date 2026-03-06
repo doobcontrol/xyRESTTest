@@ -156,6 +156,11 @@ namespace xyRESTTest
                     ugb.LoadStringResources();
                 }
             }
+
+            if(responsePage != null)
+            {
+                responsePage.Text = Resources.strTestResponseResult;
+            }
         }
 
         private void deployData()
@@ -611,6 +616,35 @@ namespace xyRESTTest
                 DgvParameters.ResumeLayout();
             }
         }
+        #endregion
+
+        #region Test response result
+
+        TabPage? responsePage;
+        public void ShowResponse(List<ResponseInfo> responseInfos)
+        {
+            if(responsePage == null)
+            {
+                responsePage = new TabPage()
+                {
+                    Text = Resources.strTestResponseResult
+                };
+                tabControl1.TabPages.Add(responsePage);
+                tabControl1.SelectedTab = responsePage;
+                responsePage.Controls.Add(
+                    new UcResponseInfo(responseInfos)
+                    {
+                        Dock = DockStyle.Fill
+                    }
+                );
+            }
+            else
+            {
+                var uri = responsePage.Controls[0] as UcResponseInfo;
+                uri.setResponseInfos(responseInfos);
+            }
+        }
+
         #endregion
     }
 }

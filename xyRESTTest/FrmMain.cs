@@ -562,7 +562,13 @@ namespace xyRESTTest
                         taskResult = await xyTest.oneTaskAsync(utci.TestTask, sw, contextPars);
                     testResult = taskResult.result;
                     // show taskResult.responseInfo to test case details panel
-
+                    if (PnlTestCase.Controls.Count > 0)
+                    {
+                        if (PnlTestCase.Controls[0] is UcTestCase utc)
+                        {
+                            utc.ShowResponse(taskResult.responseInfo);
+                        }
+                    }
                 }
                 setRunnningState(false);
             }

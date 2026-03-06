@@ -373,4 +373,7 @@
   <data name="strFailed" xml:space="preserve">
     <value>失败</value>
   </data>
+  <data name="strTestResponseResult" xml:space="preserve">
+    <value>测试响应结果</value>
+  </data>
 </root>

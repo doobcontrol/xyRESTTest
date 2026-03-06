@@ -739,6 +739,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Response Result.
+        /// </summary>
+        internal static string strTestResponseResult {
+            get {
+                return ResourceManager.GetString("strTestResponseResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add one upload file.
         /// </summary>
         internal static string strTsbAddFile {
