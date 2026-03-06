@@ -15,7 +15,7 @@ namespace xyRESTTestLib
             ContentInfo? contentInfo,
             Dictionary<string, string> contextPars);
         Task<bool> AssertResponse(
-            HttpResponseMessage response,
+            ResponseInfo responseInfo,
             AssertInfo assertInfo,
             Dictionary<string, string> contextPars,
             StreamWriter rw);

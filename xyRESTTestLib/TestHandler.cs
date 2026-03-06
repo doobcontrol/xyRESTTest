@@ -32,7 +32,7 @@ namespace xyRESTTestLib
         }
 
         public async Task<bool> AssertResponse(
-            HttpResponseMessage response,
+            ResponseInfo responseInfo,
             AssertInfo assertInfo,
             Dictionary<string, string> contextPars,
             StreamWriter rw)
@@ -42,25 +42,25 @@ namespace xyRESTTestLib
             {
                 case nameof(AssertType.StatusCode):
                     int expectedCode = int.Parse(assertInfo.expected);
-                    if ((int)response.StatusCode != expectedCode)
+                    if (responseInfo.StatusCode != expectedCode)
                     {
                         rw.WriteLine(
                             string.Format(
                                 Resources.strAssertFailedStatusCode,
-                                expectedCode, (int)response.StatusCode)
+                                expectedCode, responseInfo.StatusCode)
                         );
                         return false;
                     }
                     break;
                 case nameof(AssertType.ContentType):
-                    if (response.Content.Headers.ContentType.MediaType 
+                    if (responseInfo.MediaType 
                         != assertInfo.expected)
                     {
                         rw.WriteLine(
                             string.Format(
                                 Resources.strAssertFailedContentType,
-                                assertInfo.expected, 
-                                response.Content.Headers.ContentType.MediaType)
+                                assertInfo.expected,
+                                responseInfo.MediaType)
                         );
                         return false;
                     }
@@ -79,10 +79,7 @@ namespace xyRESTTestLib
                         }
                         string fileName = timestamp + Path.GetFileName(assertInfo.saveFilePath);
                         string saveFile = Path.Combine(saveDir, fileName);
-                        using var fs = new FileStream(
-                            saveFile, FileMode.Create, FileAccess.Write);
-                        using var contentStream = response.Content.ReadAsStream();
-                        await contentStream.CopyToAsync(fs);
+                        File.Copy(responseInfo.Content, saveFile);
                         rw.WriteLine(
                             string.Format(
                                 Resources.strSavedResponseBodyTo,
@@ -91,20 +88,19 @@ namespace xyRESTTestLib
                     }
                     break;
                 case nameof(AssertType.JsonContent):
-                    string responseBody =
-                        await response.Content.ReadAsStringAsync();
+                    string responseBody = responseInfo.Content;
 
                     if (assertInfo.assertList != null)
                     {
                         //assert content type
-                        if (response.Content.Headers.ContentType == null
-                            || !response.Content.Headers.ContentType.MediaType
+                        if (responseInfo.MediaType == null
+                            || !responseInfo.MediaType
                                 .Contains(xyTest.CT_app_json))
                         {
                             rw.WriteLine(
                                 string.Format(
                                     Resources.strAssertFailedNotJSON,
-                                    response.Content.Headers.ContentType)
+                                    responseInfo.MediaType)
                             );
                             return false;
                         }

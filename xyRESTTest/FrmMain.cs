@@ -558,7 +558,11 @@ namespace xyRESTTest
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
                 {
-                    testResult = await xyTest.oneTaskAsync(utci.TestTask, sw, contextPars);
+                    (bool result, List<ResponseInfo> responseInfo)
+                        taskResult = await xyTest.oneTaskAsync(utci.TestTask, sw, contextPars);
+                    testResult = taskResult.result;
+                    // show taskResult.responseInfo to test case details panel
+
                 }
                 setRunnningState(false);
             }

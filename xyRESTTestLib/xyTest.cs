@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Mime;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -63,7 +66,7 @@ namespace xyRESTTestLib
             return rMsg;
         }
 
-        public static async Task<bool> oneTestAsync(
+        public static async Task<(bool result, ResponseInfo responseInfo)> oneTestAsync(
             TestTask testTask,
             Dictionary<string, string> contextPars,
             StreamWriter rw
@@ -81,8 +84,10 @@ namespace xyRESTTestLib
                 rw.WriteLine(
                     string.Format(Resources.strErrorWhenSendingRequest_, e.Message)
                     );
-                return false;
+                return (false, null);
             }
+
+            ResponseInfo responseInfo = await GetResponseInfoAsync(response);
 
             // Assert response (And get data to contextPars)
             bool assert = true;
@@ -91,22 +96,25 @@ namespace xyRESTTestLib
                 rw.WriteLine(string.Format(Resources.strAssertType, assertInfo.assertType));
                 rw.WriteLine(string.Format(Resources.strExpectedValue, assertInfo.expected));
                 var assertResult = await TestHandler.AssertResponse(
-                    response, assertInfo, contextPars, rw);
+                    responseInfo, assertInfo, contextPars, rw);
                 if (!assertResult)
                 {
                     assert = false;
                 }
             }
 
-            return assert;
+            return (assert, responseInfo);
         }
-        public static async Task<bool> oneAutoGenerateTestAsync(
+        public static async Task<(bool result,
+            List<ResponseInfo> responseInfo)> oneAutoGenerateTestAsync(
             TestTask testTask,
             Dictionary<string, string> contextPars,
             StreamWriter rw
             )
         {
             var testDataList = TestHandler.GenerateTestDatas(testTask.dataGenerator);
+            (bool result, ResponseInfo? responseInfo) testResult;
+            var responseInfos = new List<ResponseInfo>();
             foreach (var testData in testDataList)
             {
                 var newTask = TestHandler.ApplyLocalPars(testTask, testData);
@@ -115,17 +123,20 @@ namespace xyRESTTestLib
                         Resources.strTestData,
                         string.Join(", ", testData))
                     );
-                if (!await oneTestAsync(newTask, contextPars, rw))
+                testResult = await oneTestAsync(newTask, contextPars, rw);
+                responseInfos.Add(testResult.responseInfo);
+                if (!testResult.result)
                 {
                     rw.WriteLine(Resources.strFailed);
                     rw.WriteLine();
-                    return false;
+                    return (false, responseInfos);
                 }
                 rw.WriteLine(Resources.strSucceed);
             }
-            return true;
+            return (true, responseInfos);
         }
-        public static async Task<bool> oneTaskAsync(
+        public static async Task<(bool result,
+            List<ResponseInfo> responseInfo)> oneTaskAsync(
             TestTask task, StreamWriter sw, Dictionary<string, string> contextPars
             )
         {
@@ -133,25 +144,29 @@ namespace xyRESTTestLib
             sw.WriteLine(string.Format(Resources.strTargetApi, task.requestInfo.url));
             sw.WriteLine(string.Format(Resources.strRequestMethod, task.requestInfo.method));
 
+            (bool result, List<ResponseInfo> responseInfo) testResult;
             if (task.dataGenerator == null)
             {
-                if (!await oneTestAsync(task, contextPars, sw))
+                var oneResult = await oneTestAsync(task, contextPars, sw);
+                if (!oneResult.result)
                 {
                     sw.WriteLine(Resources.strFailed);
                     sw.WriteLine();
-                    return false;
+                    return (false, new List<ResponseInfo> { oneResult.responseInfo });
                 }
+                testResult = (true, new List<ResponseInfo> { oneResult.responseInfo });
             }
             else
             {
-                if (!await oneAutoGenerateTestAsync(task, contextPars, sw))
+                testResult = await oneAutoGenerateTestAsync(task, contextPars, sw);
+                if (!testResult.result)
                 {
-                    return false;
+                    return (false, testResult.responseInfo);
                 }
             }
             sw.WriteLine(Resources.strSucceed);
             sw.WriteLine();
-            return true;
+            return testResult;
         }
         public static async Task<bool> batchTestAsync(
             List<TestTask> tasks, StreamWriter sw, Dictionary<string, string> contextPars
@@ -162,8 +177,9 @@ namespace xyRESTTestLib
             sw.WriteLine();
             foreach (var task in tasks)
             {
-                bool taskSucced = await oneTaskAsync(task, sw, contextPars);
-                if (!taskSucced)
+                (bool result, List<ResponseInfo> responseInfo) taskSucced = 
+                    await oneTaskAsync(task, sw, contextPars);
+                if (!taskSucced.result)
                 {
                     return false;
                 }
@@ -330,6 +346,51 @@ namespace xyRESTTestLib
             }
             return parsList;
         }
+        private static async Task<ResponseInfo> GetResponseInfoAsync(HttpResponseMessage response)
+        {
+            int statusCode = (int)response.StatusCode;
+            Dictionary<string, List<string>> headers = new Dictionary<string, List<string>>();
+            foreach(var header in response.Headers)
+            {
+                headers.Add(header.Key, header.Value.ToList());
+            }
+            string? mediaType = response.Content.Headers.ContentType?.MediaType;
+
+            string? content;
+            bool contentIsBinary;
+            if (mediaType != null && (mediaType.StartsWith("text/") 
+                || mediaType.Contains("json") || mediaType.Contains("xml")))
+            {
+                // Content is likely text
+                content = await response.Content.ReadAsStringAsync();
+                contentIsBinary = false;
+            }
+            else
+            {
+                // Content is likely binary
+                string timestamp = DateTime.Now.ToString("_yyyyMMdd_HHmmss_fffff");
+                string fileName = timestamp;
+                if (!Directory.Exists(Temp_file_dir))
+                {
+                    Directory.CreateDirectory(Temp_file_dir);
+                }
+                string saveFile = Path.Combine(Temp_file_dir, fileName);
+                using var fs = new FileStream(
+                    saveFile, FileMode.Create, FileAccess.Write);
+                using var contentStream = response.Content.ReadAsStream();
+                await contentStream.CopyToAsync(fs);
+                content = saveFile;
+                contentIsBinary = true;
+            }
+
+            return new ResponseInfo(
+                statusCode,
+                contentIsBinary = contentIsBinary,
+                content = content,
+                headers = headers,
+                mediaType = mediaType
+                );
+        }
 
         // Content Type
         public const string CT_app_json = "application/json";
@@ -372,6 +433,9 @@ namespace xyRESTTestLib
 
         // Data Generator Type
         public const string DGT_Basic_File = "DataFile";
+
+        // Temp file Dir
+        public const string Temp_file_dir = "temp";
     }
     public class TestTask
     {
@@ -435,6 +499,28 @@ namespace xyRESTTestLib
         // for later check
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? saveFilePath { get; set; }
+    }
+    public class ResponseInfo
+    {
+        public ResponseInfo(
+            int statusCode,
+            bool contentIsBinary = false,
+            string? content = null, 
+            Dictionary<string, List<string>>? headers = null,
+            string? mediaType = null) {
+            StatusCode = statusCode;
+            ContentIsBinary = contentIsBinary;
+            Content = content;
+            Headers = headers;
+            MediaType = mediaType;
+        }
+        public int StatusCode { get; }
+        // When ContentIsBinary is true, the Content property contains the file path where
+        // the downloaded file is saved.
+        public bool ContentIsBinary { get; }
+        public string? Content { get; }
+        public Dictionary<string, List<string>>? Headers { get; }
+        public string? MediaType { get; }
     }
 
     public enum JCType
