@@ -94,7 +94,6 @@ namespace xyRESTTestLib
             foreach (var assertInfo in testTask.assertInfos)
             {
                 rw.WriteLine(string.Format(Resources.strAssertType, assertInfo.assertType));
-                rw.WriteLine(string.Format(Resources.strExpectedValue, assertInfo.expected));
                 var assertResult = await TestHandler.AssertResponse(
                     responseInfo, assertInfo, contextPars, rw);
                 if (!assertResult)

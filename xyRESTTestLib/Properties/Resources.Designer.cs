@@ -133,6 +133,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Path: {0}.
+        /// </summary>
+        internal static string strDataPath {
+            get {
+                return ResourceManager.GetString("strDataPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download file save path not exists: {0}.
         /// </summary>
         internal static string strDownloadFileSavePathNotExist {
@@ -165,6 +174,42 @@ namespace xyRESTTestLib.Properties {
         internal static string strFailed {
             get {
                 return ResourceManager.GetString("strFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON Content Assert:.
+        /// </summary>
+        internal static string strJSONContentAssert {
+            get {
+                return ResourceManager.GetString("strJSONContentAssert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON Content Read:.
+        /// </summary>
+        internal static string strJSONContentRead {
+            get {
+                return ResourceManager.GetString("strJSONContentRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Data Value: {0}.
+        /// </summary>
+        internal static string strReadDataValue {
+            get {
+                return ResourceManager.GetString("strReadDataValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read Data Parameter Name: {0}.
+        /// </summary>
+        internal static string strReadVarName {
+            get {
+                return ResourceManager.GetString("strReadVarName", resourceCulture);
             }
         }
         

@@ -180,4 +180,19 @@
   <data name="strUnknownJSONValueGetType" xml:space="preserve">
     <value>未知的JSON取值类型: {0}</value>
   </data>
+  <data name="strJSONContentAssert" xml:space="preserve">
+    <value>JSON内容判断:</value>
+  </data>
+  <data name="strDataPath" xml:space="preserve">
+    <value>数据路径: {0}</value>
+  </data>
+  <data name="strJSONContentRead" xml:space="preserve">
+    <value>JSON内容读取:</value>
+  </data>
+  <data name="strReadVarName" xml:space="preserve">
+    <value>读取数据参数名: {0}</value>
+  </data>
+  <data name="strReadDataValue" xml:space="preserve">
+    <value>读取数据值: {0}</value>
+  </data>
 </root>

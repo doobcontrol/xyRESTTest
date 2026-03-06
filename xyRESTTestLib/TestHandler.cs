@@ -44,6 +44,7 @@ namespace xyRESTTestLib
             switch (assertInfo.assertType)
             {
                 case nameof(AssertType.StatusCode):
+                    rw.WriteLine(string.Format(Resources.strExpectedValue, assertInfo.expected));
                     int expectedCode = int.Parse(assertInfo.expected);
                     if (responseInfo.StatusCode != expectedCode)
                     {
@@ -56,6 +57,7 @@ namespace xyRESTTestLib
                     }
                     break;
                 case nameof(AssertType.ContentType):
+                    rw.WriteLine(string.Format(Resources.strExpectedValue, assertInfo.expected));
                     if (responseInfo.MediaType 
                         != assertInfo.expected)
                     {
@@ -93,7 +95,7 @@ namespace xyRESTTestLib
                 case nameof(AssertType.JsonContent):
                     string responseBody = responseInfo.Content;
 
-                    if (assertInfo.assertList != null)
+                    if (assertInfo.assertList != null && assertInfo.assertList.Count > 0)
                     {
                         //assert content type
                         if (responseInfo.MediaType == null
@@ -107,11 +109,18 @@ namespace xyRESTTestLib
                             );
                             return false;
                         }
+
+                        rw.WriteLine(Resources.strJSONContentAssert);
                         foreach (var al in assertInfo.assertList)
                         {
                             string jsonPath = al.Key;
                             string expectedValue = al.Value;
 
+                            rw.WriteLine(
+                                string.Format(Resources.strDataPath, al.Key));
+                            rw.WriteLine(
+                                string.Format(Resources.strExpectedValue, al.Value));
+                            
                             string[] pathArr = jsonPath.Split(jsonGetValueTypeSplitter);
                             string getValueType = null;
                             if (pathArr.Length == 2)
@@ -175,13 +184,19 @@ namespace xyRESTTestLib
                             }
                         }
                     }
-                    if (assertInfo.readList != null)
+                    if (assertInfo.readList != null && assertInfo.readList.Count > 0)
                     {
+                        rw.WriteLine(Resources.strJSONContentRead);
                         var readList = assertInfo.readList;
                         foreach (var rl in readList)
                         {
                             string varName = rl.Key;
                             string jsonPath = rl.Value;
+
+                            rw.WriteLine(
+                                string.Format(Resources.strReadVarName, rl.Key));
+                            rw.WriteLine(
+                                string.Format(Resources.strDataPath, rl.Value));
 
                             string[] pathArr = jsonPath.Split(jsonGetValueTypeSplitter);
                             string getValueType = null;
@@ -213,10 +228,16 @@ namespace xyRESTTestLib
                                 if (getValueType == jsonGetValueType_Value)
                                 {
                                     contextPars[varName] = node.GetValue<string>();
+                                    rw.WriteLine(
+                                        string.Format(Resources.strReadDataValue, 
+                                        contextPars[varName]));
                                 }
                                 else if (getValueType == jsonGetValueType_Count)
                                 {
                                     contextPars[varName] = node.AsArray().Count.ToString();
+                                    rw.WriteLine(
+                                        string.Format(Resources.strReadDataValue, 
+                                        contextPars[varName]));
                                 }
                                 else
                                 {

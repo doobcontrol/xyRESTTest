@@ -180,4 +180,19 @@
   <data name="strUnknownJSONValueGetType" xml:space="preserve">
     <value>Unknown JSON value GetType: {0}</value>
   </data>
+  <data name="strJSONContentAssert" xml:space="preserve">
+    <value>JSON Content Assert:</value>
+  </data>
+  <data name="strDataPath" xml:space="preserve">
+    <value>Data Path: {0}</value>
+  </data>
+  <data name="strJSONContentRead" xml:space="preserve">
+    <value>JSON Content Read:</value>
+  </data>
+  <data name="strReadVarName" xml:space="preserve">
+    <value>Read Data Parameter Name: {0}</value>
+  </data>
+  <data name="strReadDataValue" xml:space="preserve">
+    <value>Read Data Value: {0}</value>
+  </data>
 </root>
