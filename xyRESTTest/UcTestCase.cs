@@ -526,7 +526,6 @@ namespace xyRESTTest
             void UpdateAParam(string newName, string oldName);
         }
         IGeneratorConfigControl generatorConfigControl;
-        string testDataDir = "testdata";
         private void CbGeneratorType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CbGeneratorType.Text != null
@@ -542,7 +541,7 @@ namespace xyRESTTest
                         {
                             testTask.dataGenerator.GeneratorInfo.Add(
                                 xyTest.DGT_Basic_File,
-                                Path.Combine(testDataDir, TestTask.name.Replace(" ", ""))
+                                Path.Combine(xyTest.Testdata_file_dir, TestTask.name.Replace(" ", ""))
                                 );
                         }
                         var ugb = new UcGeneratorBasic(testTask.dataGenerator);

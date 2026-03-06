@@ -434,8 +434,11 @@ namespace xyRESTTestLib
         // Data Generator Type
         public const string DGT_Basic_File = "DataFile";
 
-        // Temp file Dir
+        // Sub work file Dirs
         public const string Temp_file_dir = "temp";
+        public const string Report_file_dir = "reports";
+        public const string Download_file_dir = "downloads";
+        public const string Testdata_file_dir = "testdata";
     }
     public class TestTask
     {

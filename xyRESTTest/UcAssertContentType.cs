@@ -44,13 +44,11 @@ namespace xyRESTTest
         {
             cbSaveFile.Text = Resources.strSaveToFile;
         }
-
-        string downloadFolderName = "downloads";
         private void BtnBrowseFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             string downloadFolder = 
-                Path.Combine(Directory.GetCurrentDirectory(), downloadFolderName);
+                Path.Combine(Directory.GetCurrentDirectory(), xyTest.Download_file_dir);
             if (!Directory.Exists(downloadFolder)) { 
                 Directory.CreateDirectory(downloadFolder);
             }
