@@ -102,6 +102,18 @@ namespace xyRESTTestLib
                 }
             }
 
+            // Human Intervention
+            if(testTask.HumanInterventions != null 
+                && testTask.HumanInterventions.Count > 0
+                && humanIntervention != null) {
+                foreach(var hi in testTask.HumanInterventions)
+                {
+                    humanIntervention(
+                        (HumanInterventionType)Enum.Parse(typeof(HumanInterventionType), hi), 
+                        contextPars);
+                }
+            }
+
             return (assert, responseInfo);
         }
         public static async Task<(bool result,
@@ -329,6 +341,11 @@ namespace xyRESTTestLib
                         }
                     }
                 }
+                if (task.HumanInterventions != null)
+                {
+                    parsList.Add(captchaCode);
+                    parsList.Remove(captchaImg);
+                }
             }
 
             return parsList;
@@ -438,15 +455,22 @@ namespace xyRESTTestLib
 
         // Test report file name
         public const string Testreport_file_name = "report";
+
+        // Captcha context parameters name
+        public const string captchaCode = "captchaCode";
+        public const string captchaImg = "captchaImg";
+
+        public static HumanIntervention humanIntervention;
     }
     public class TestTask
     {
         public required string name { get; set; }
         public required RequestInfo requestInfo { get; set; }
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public required List<AssertInfo> assertInfos { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DataGenerator? dataGenerator { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public List<string>? HumanInterventions { get; set; }
     }
     public class TestProject
     {
@@ -556,4 +580,10 @@ namespace xyRESTTestLib
     {
         Basic
     }
+    public enum HumanInterventionType
+    {
+        SimpleImageCaptcha,
+    }
+    public delegate void HumanIntervention(
+        HumanInterventionType hi, Dictionary<string, string> contextPars);
 }

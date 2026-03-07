@@ -39,6 +39,7 @@ namespace xyRESTTest
                 }, 
                 Path.Combine(Directory.GetCurrentDirectory(), cfgFile)
             );
+            xyTest.humanIntervention = HumanIntervention;
 
             InitializeComponent();
             SetFormResume();
@@ -107,6 +108,14 @@ namespace xyRESTTest
                     TxtPrjName.Visible = false;
                 }
             };
+        }
+        private void HumanIntervention(
+            HumanInterventionType hi, Dictionary<string, string> contextPars)
+        {
+            if(hi == HumanInterventionType.SimpleImageCaptcha)
+            {
+                new FrmSimpleImageCaptcha(contextPars).ShowDialog();
+            }
         }
 
         const string cfgName_FormMaximized = "FormMaximized";
@@ -214,7 +223,7 @@ namespace xyRESTTest
                     url = "",
                     headers = new Dictionary<string, object>(),
                 },
-                assertInfos = new List<AssertInfo>(),
+                assertInfos = new List<AssertInfo>()
             };
             testProject.tasks.Add(newTesk);
             xyTest.saveTestProject(testProject);

@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using xyRESTTestLib.Properties;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace xyRESTTestLib
 {
@@ -366,6 +365,7 @@ namespace xyRESTTestLib
                         }
                         break;
                     default:
+                        headers[hd.Key] = hd.Value.ToString();
                         break;
                 }
             }
@@ -392,6 +392,7 @@ namespace xyRESTTestLib
                                 contentInfo.recordData);
                             if (bodyString != null)
                             {
+                                bodyString = xyTest.HandleProjectParams(contextPars, bodyString);
                                 bodyContent = new StringContent(
                                     bodyString,
                                     Encoding.GetEncoding(contentInfo.encoding),
@@ -407,7 +408,11 @@ namespace xyRESTTestLib
                     var formData = new MultipartFormDataContent();
                     foreach(var record in contentInfo.recordData)
                     {
-                        formData.Add(new StringContent(record.Value), record.Key);
+                        formData.Add(
+                            new StringContent(
+                                xyTest.HandleProjectParams(contextPars, record.Value)
+                                ), 
+                            record.Key);
                     }
                     foreach (var filePath in contentInfo.fileDatas)
                     {

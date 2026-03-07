@@ -15,7 +15,7 @@ namespace xyRESTTestLib
             sb.Append("{");
             foreach(var kv in data)
             {
-                sb.Append($"\"{kv.Key}\": \"{kv.Value}\",");
+                sb.Append($"\"{kv.Key}\":\"{kv.Value}\",");
             }
             if (data.Count > 0)
             {

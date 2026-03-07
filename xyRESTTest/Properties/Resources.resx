@@ -376,4 +376,10 @@ The missing parameters are:
   <data name="strTestResponseResult" xml:space="preserve">
     <value>Test Response Result</value>
   </data>
+  <data name="strHumanIntervention" xml:space="preserve">
+    <value>Human Intervention</value>
+  </data>
+  <data name="strSimpleImageCaptcha" xml:space="preserve">
+    <value>Simple Image Captcha</value>
+  </data>
 </root>

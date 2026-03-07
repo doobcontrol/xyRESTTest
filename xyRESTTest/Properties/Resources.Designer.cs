@@ -423,6 +423,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Human Intervention.
+        /// </summary>
+        internal static string strHumanIntervention {
+            get {
+                return ResourceManager.GetString("strHumanIntervention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to JSON Path.
         /// </summary>
         internal static string strJSONPath {
@@ -717,6 +726,15 @@ namespace xyRESTTest.Properties {
         internal static string strSaveToFile {
             get {
                 return ResourceManager.GetString("strSaveToFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple Image Captcha.
+        /// </summary>
+        internal static string strSimpleImageCaptcha {
+            get {
+                return ResourceManager.GetString("strSimpleImageCaptcha", resourceCulture);
             }
         }
         

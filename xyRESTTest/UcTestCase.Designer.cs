@@ -54,6 +54,7 @@
             toolStrip2 = new ToolStrip();
             TsbAddAssert = new ToolStripButton();
             TsbDelAssert = new ToolStripButton();
+            tabHuman = new TabPage();
             tabData = new TabPage();
             PnlGenerator = new Panel();
             PnlRecords = new Panel();
@@ -69,6 +70,9 @@
             CbDataGenerator = new CheckBox();
             panel1 = new Panel();
             toolTip1 = new ToolTip(components);
+            panel5 = new Panel();
+            CbHumanIntervention = new CheckBox();
+            PnlHumanInterventionSelector = new Panel();
             tabControl1.SuspendLayout();
             tabRequest.SuspendLayout();
             GbBody.SuspendLayout();
@@ -78,6 +82,7 @@
             panel2.SuspendLayout();
             tabAssert.SuspendLayout();
             toolStrip2.SuspendLayout();
+            tabHuman.SuspendLayout();
             tabData.SuspendLayout();
             PnlGenerator.SuspendLayout();
             PnlParameters.SuspendLayout();
@@ -85,6 +90,7 @@
             toolStrip3.SuspendLayout();
             panel4.SuspendLayout();
             panel1.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // LbCaseName
@@ -133,6 +139,7 @@
             // 
             tabControl1.Controls.Add(tabRequest);
             tabControl1.Controls.Add(tabAssert);
+            tabControl1.Controls.Add(tabHuman);
             tabControl1.Controls.Add(tabData);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 47);
@@ -323,7 +330,7 @@
             tabAssert.Margin = new Padding(3, 2, 3, 2);
             tabAssert.Name = "tabAssert";
             tabAssert.Padding = new Padding(3, 2, 3, 2);
-            tabAssert.Size = new Size(599, 232);
+            tabAssert.Size = new Size(599, 229);
             tabAssert.TabIndex = 1;
             tabAssert.Text = "Assertion Information";
             tabAssert.UseVisualStyleBackColor = true;
@@ -334,7 +341,7 @@
             PnlAssertItems.Location = new Point(3, 29);
             PnlAssertItems.Margin = new Padding(3, 2, 3, 2);
             PnlAssertItems.Name = "PnlAssertItems";
-            PnlAssertItems.Size = new Size(593, 201);
+            PnlAssertItems.Size = new Size(593, 198);
             PnlAssertItems.TabIndex = 3;
             // 
             // toolStrip2
@@ -367,6 +374,17 @@
             TsbDelAssert.Text = "Delete selected assertion";
             TsbDelAssert.Click += TsbDelAssert_Click;
             // 
+            // tabHuman
+            // 
+            tabHuman.Controls.Add(PnlHumanInterventionSelector);
+            tabHuman.Controls.Add(panel5);
+            tabHuman.Location = new Point(4, 24);
+            tabHuman.Name = "tabHuman";
+            tabHuman.Size = new Size(599, 229);
+            tabHuman.TabIndex = 3;
+            tabHuman.Text = "Human intervention";
+            tabHuman.UseVisualStyleBackColor = true;
+            // 
             // tabData
             // 
             tabData.Controls.Add(PnlGenerator);
@@ -374,7 +392,7 @@
             tabData.Location = new Point(4, 24);
             tabData.Margin = new Padding(3, 2, 3, 2);
             tabData.Name = "tabData";
-            tabData.Size = new Size(599, 232);
+            tabData.Size = new Size(599, 229);
             tabData.TabIndex = 2;
             tabData.Text = "Data Generator";
             tabData.UseVisualStyleBackColor = true;
@@ -388,7 +406,7 @@
             PnlGenerator.Location = new Point(0, 34);
             PnlGenerator.Margin = new Padding(3, 2, 3, 2);
             PnlGenerator.Name = "PnlGenerator";
-            PnlGenerator.Size = new Size(599, 198);
+            PnlGenerator.Size = new Size(599, 195);
             PnlGenerator.TabIndex = 1;
             PnlGenerator.Visible = false;
             // 
@@ -399,7 +417,7 @@
             PnlRecords.Location = new Point(178, 0);
             PnlRecords.Margin = new Padding(3, 2, 3, 2);
             PnlRecords.Name = "PnlRecords";
-            PnlRecords.Size = new Size(421, 198);
+            PnlRecords.Size = new Size(421, 195);
             PnlRecords.TabIndex = 3;
             // 
             // splitter2
@@ -407,7 +425,7 @@
             splitter2.Location = new Point(174, 0);
             splitter2.Margin = new Padding(3, 2, 3, 2);
             splitter2.Name = "splitter2";
-            splitter2.Size = new Size(4, 198);
+            splitter2.Size = new Size(4, 195);
             splitter2.TabIndex = 2;
             splitter2.TabStop = false;
             // 
@@ -421,7 +439,7 @@
             PnlParameters.Location = new Point(0, 0);
             PnlParameters.Margin = new Padding(3, 2, 3, 2);
             PnlParameters.Name = "PnlParameters";
-            PnlParameters.Size = new Size(174, 198);
+            PnlParameters.Size = new Size(174, 195);
             PnlParameters.TabIndex = 1;
             // 
             // DgvParameters
@@ -432,7 +450,7 @@
             DgvParameters.Margin = new Padding(3, 2, 3, 2);
             DgvParameters.Name = "DgvParameters";
             DgvParameters.RowHeadersWidth = 51;
-            DgvParameters.Size = new Size(172, 152);
+            DgvParameters.Size = new Size(172, 149);
             DgvParameters.TabIndex = 3;
             DgvParameters.CellEndEdit += DgvParameters_CellEndEdit;
             // 
@@ -524,6 +542,34 @@
             panel1.Size = new Size(607, 47);
             panel1.TabIndex = 6;
             // 
+            // panel5
+            // 
+            panel5.Controls.Add(CbHumanIntervention);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(0, 0);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(599, 25);
+            panel5.TabIndex = 0;
+            // 
+            // CbHumanIntervention
+            // 
+            CbHumanIntervention.AutoSize = true;
+            CbHumanIntervention.Location = new Point(3, 3);
+            CbHumanIntervention.Name = "CbHumanIntervention";
+            CbHumanIntervention.Size = new Size(82, 19);
+            CbHumanIntervention.TabIndex = 0;
+            CbHumanIntervention.Text = "checkBox1";
+            CbHumanIntervention.UseVisualStyleBackColor = true;
+            // 
+            // PnlHumanInterventionSelector
+            // 
+            PnlHumanInterventionSelector.Dock = DockStyle.Fill;
+            PnlHumanInterventionSelector.Location = new Point(0, 25);
+            PnlHumanInterventionSelector.Name = "PnlHumanInterventionSelector";
+            PnlHumanInterventionSelector.Size = new Size(599, 204);
+            PnlHumanInterventionSelector.TabIndex = 1;
+            PnlHumanInterventionSelector.Visible = false;
+            // 
             // UcTestCase
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -549,6 +595,7 @@
             tabAssert.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            tabHuman.ResumeLayout(false);
             tabData.ResumeLayout(false);
             PnlGenerator.ResumeLayout(false);
             PnlParameters.ResumeLayout(false);
@@ -560,6 +607,8 @@
             panel4.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -606,5 +655,9 @@
         private Panel PnlRecords;
         private Panel panel4;
         private ComboBox CbGeneratorType;
+        private TabPage tabHuman;
+        private Panel PnlHumanInterventionSelector;
+        private Panel panel5;
+        private CheckBox CbHumanIntervention;
     }
 }

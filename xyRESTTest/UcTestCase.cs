@@ -103,6 +103,57 @@ namespace xyRESTTest
             this.contextMenuStrip = contextMenuStrip;
             TxtUrl.ContextMenuStrip = contextMenuStrip;
 
+            CbHumanIntervention.CheckedChanged += (s, e) =>
+            {
+                PnlHumanInterventionSelector.Visible = CbHumanIntervention.Checked;
+                if (CbHumanIntervention.Checked)
+                {
+                    if(testTask.HumanInterventions == null)
+                    {
+                        testTask.HumanInterventions = new List<string>();
+                        Edited?.Invoke(this, new EventArgs());
+                    }
+                }
+                else
+                {
+                    if (testTask.HumanInterventions != null)
+                    {
+                        testTask.HumanInterventions = null;
+                        Edited?.Invoke(this, new EventArgs());
+                    }
+                }
+            };
+            PnlHumanInterventionSelector.Controls.Clear();
+            Enum.GetNames(typeof(HumanInterventionType)).ToList().ForEach(name =>
+            {
+                var cb = new CheckBox()
+                {
+                    Text = name,
+                    AutoSize = true,
+                };
+                cb.CheckedChanged += (s, e) =>
+                {
+                    var senderCb = s as CheckBox;
+                    if (senderCb.Checked)
+                    {
+                        if (!testTask.HumanInterventions.Contains(name))
+                        {
+                            testTask.HumanInterventions.Add(senderCb.Text);
+                            Edited?.Invoke(this, new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        if (testTask.HumanInterventions.Contains(name))
+                        {
+                            testTask.HumanInterventions.Remove(senderCb.Text);
+                            Edited?.Invoke(this, new EventArgs());
+                        }
+                    }
+                };
+                PnlHumanInterventionSelector.Controls.Add(cb);
+            });
+
             deployData();
             this.ResumeLayout();
         }
@@ -110,9 +161,12 @@ namespace xyRESTTest
         {
             toolTip1.SetToolTip(LbCaseName, Resources.strDoubleClickToEdit);
             toolTip1.ShowAlways = true;
-            tabControl1.TabPages[0].Text = Resources.strRequestInformation;
-            tabControl1.TabPages[1].Text = Resources.strAssertionInformation;
-            tabControl1.TabPages[2].Text = Resources.strDataGenerator;
+
+            tabRequest.Text = Resources.strRequestInformation;
+            tabAssert.Text = Resources.strAssertionInformation;
+            tabHuman.Text = Resources.strHumanIntervention;
+            tabData.Text = Resources.strDataGenerator;
+
             TsbAddHeader.ToolTipText = Resources.strAddHeader;
             TsbDelHeader.ToolTipText = Resources.strDeleteHeader;
             TsbAddAssert.ToolTipText = Resources.strAddAssertion;
@@ -161,6 +215,8 @@ namespace xyRESTTest
             {
                 responsePage.Text = Resources.strTestResponseResult;
             }
+
+            CbHumanIntervention.Text = Resources.strHumanIntervention;
         }
 
         private void deployData()
@@ -188,6 +244,26 @@ namespace xyRESTTest
             if (testTask.requestInfo.body != null)
             {
                 CmbBodyType.Text = testTask.requestInfo.body.ctype;
+            }
+
+            CbHumanIntervention.Checked = testTask.HumanInterventions != null;
+            if (CbHumanIntervention.Checked)
+            {
+                var hicbEditDic = new Dictionary<CheckBox, bool>();
+                foreach(var hi in testTask.HumanInterventions)
+                {
+                    foreach(var cb in PnlHumanInterventionSelector.Controls)
+                    {
+                        if(cb is CheckBox cbhi)
+                        {
+                            hicbEditDic[cbhi] = cbhi.Text == hi;
+                        }
+                    }
+                }
+                foreach(var hichEdit in hicbEditDic)
+                {
+                    hichEdit.Key.Checked = hichEdit.Value;
+                }
             }
 
             deployAssertData();

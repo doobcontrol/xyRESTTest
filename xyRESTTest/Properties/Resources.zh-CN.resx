@@ -376,4 +376,10 @@
   <data name="strTestResponseResult" xml:space="preserve">
     <value>测试响应结果</value>
   </data>
+  <data name="strHumanIntervention" xml:space="preserve">
+    <value>人工介入</value>
+  </data>
+  <data name="strSimpleImageCaptcha" xml:space="preserve">
+    <value>简单图片验证码</value>
+  </data>
 </root>
