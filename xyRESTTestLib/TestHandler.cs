@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using xyRESTTestLib.Properties;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace xyRESTTestLib
 {
@@ -143,20 +144,42 @@ namespace xyRESTTestLib
                                         Resources.strAssertFailedJSONPathNotFound,
                                         jsonPath)
                                 );
-                                ret = false;
+                                return false;
                             }
                             else
                             {
                                 if(getValueType == jsonGetValueType_Value)
                                 {
-                                    if (node.GetValue<string>() != expectedValue)
+                                    var vKind = node.GetValueKind();
+                                    string nodeString;
+                                    switch (vKind)
+                                    {
+                                        case JsonValueKind.String:
+                                            nodeString = node.GetValue<string>();
+                                            break;
+                                        case JsonValueKind.Number:
+                                            nodeString = node.GetValue<int>().ToString();
+                                            break;
+                                        case JsonValueKind.False:
+                                        case JsonValueKind.True:
+                                            nodeString = node.GetValue<bool>().ToString();
+                                            break;
+                                        default:
+                                            rw.WriteLine(
+                                                string.Format(
+                                                    Resources.strAssertFailedJSONNotSupportedValueKind,
+                                                    al.Value + ":" + vKind)
+                                            );
+                                            return false;
+                                    }
+                                    if (nodeString != expectedValue)
                                     {
                                         rw.WriteLine(
                                             string.Format(
                                                 Resources.strAssertFailedJSONValueError,
-                                                al.Key, expectedValue, node.GetValue<string>())
+                                                al.Key, expectedValue, nodeString)
                                         );
-                                        ret = false;
+                                        return false;
                                     }
                                 }
                                 else if (getValueType == jsonGetValueType_Count)
@@ -227,7 +250,29 @@ namespace xyRESTTestLib
                             {
                                 if (getValueType == jsonGetValueType_Value)
                                 {
-                                    contextPars[varName] = node.GetValue<string>();
+                                    var vKind = node.GetValueKind();
+                                    string nodeString;
+                                    switch (vKind)
+                                    {
+                                        case JsonValueKind.String:
+                                            nodeString = node.GetValue<string>();
+                                            break;
+                                        case JsonValueKind.Number:
+                                            nodeString = node.GetValue<int>().ToString();
+                                            break;
+                                        case JsonValueKind.False:
+                                        case JsonValueKind.True:
+                                            nodeString = node.GetValue<bool>().ToString();
+                                            break;
+                                        default:
+                                            rw.WriteLine(
+                                                string.Format(
+                                                    Resources.strAssertFailedJSONNotSupportedValueKind,
+                                                    rl.Value + ":" + vKind)
+                                            );
+                                            return false;
+                                    }
+                                    contextPars[varName] = nodeString;
                                     rw.WriteLine(
                                         string.Format(Resources.strReadDataValue, 
                                         contextPars[varName]));

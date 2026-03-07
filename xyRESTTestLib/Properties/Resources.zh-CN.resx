@@ -195,4 +195,7 @@
   <data name="strReadDataValue" xml:space="preserve">
     <value>读取数据值: {0}</value>
   </data>
+  <data name="strAssertFailedJSONNotSupportedValueKind" xml:space="preserve">
+    <value>判断失败: 不支持此JSON数据类型</value>
+  </data>
 </root>

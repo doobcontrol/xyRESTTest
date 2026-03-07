@@ -79,6 +79,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assert Failed : Not Supported JSON Value Kind.
+        /// </summary>
+        internal static string strAssertFailedJSONNotSupportedValueKind {
+            get {
+                return ResourceManager.GetString("strAssertFailedJSONNotSupportedValueKind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assert Failed: JSON path {jsonPath} vot found in response..
         /// </summary>
         internal static string strAssertFailedJSONPathNotFound {

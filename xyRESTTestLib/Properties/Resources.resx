@@ -195,4 +195,7 @@
   <data name="strReadDataValue" xml:space="preserve">
     <value>Read Data Value: {0}</value>
   </data>
+  <data name="strAssertFailedJSONNotSupportedValueKind" xml:space="preserve">
+    <value>Assert Failed : Not Supported JSON Value Kind</value>
+  </data>
 </root>
