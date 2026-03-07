@@ -66,7 +66,8 @@ namespace xyRESTTest
                     Text = ri.Content,
                     Dock = DockStyle.Fill,
                     Multiline = true,
-                    ReadOnly = true
+                    ReadOnly = true,
+                    ScrollBars = ScrollBars.Both                    
                 };
             }
             TlpResponse.Controls.Add(contentControl);
