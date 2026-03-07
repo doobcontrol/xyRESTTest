@@ -48,7 +48,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { TsbAddPar, TsbDelPar });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(300, 27);
+            toolStrip1.Size = new Size(262, 27);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -58,7 +58,7 @@
             TsbAddPar.Image = Properties.Resources.Add;
             TsbAddPar.ImageTransparentColor = Color.Magenta;
             TsbAddPar.Name = "TsbAddPar";
-            TsbAddPar.Size = new Size(29, 24);
+            TsbAddPar.Size = new Size(24, 24);
             TsbAddPar.Text = "Add a JSON value";
             TsbAddPar.Click += TsbAddPar_Click;
             // 
@@ -68,7 +68,7 @@
             TsbDelPar.Image = Properties.Resources.Delete;
             TsbDelPar.ImageTransparentColor = Color.Magenta;
             TsbDelPar.Name = "TsbDelPar";
-            TsbDelPar.Size = new Size(29, 24);
+            TsbDelPar.Size = new Size(24, 24);
             TsbDelPar.Text = "Delete selected JSON value";
             TsbDelPar.Click += TsbDelPar_Click;
             // 
@@ -76,6 +76,7 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 27);
+            splitContainer1.Margin = new Padding(3, 2, 3, 2);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -86,7 +87,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(TxtContent);
-            splitContainer1.Size = new Size(300, 123);
+            splitContainer1.Size = new Size(262, 85);
             splitContainer1.SplitterDistance = 150;
             splitContainer1.TabIndex = 1;
             // 
@@ -95,38 +96,42 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(150, 123);
+            dataGridView1.Size = new Size(150, 85);
             dataGridView1.TabIndex = 0;
             // 
             // TxtContent
             // 
             TxtContent.Dock = DockStyle.Fill;
             TxtContent.Location = new Point(0, 0);
+            TxtContent.Margin = new Padding(3, 2, 3, 2);
             TxtContent.Multiline = true;
             TxtContent.Name = "TxtContent";
             TxtContent.ReadOnly = true;
-            TxtContent.Size = new Size(146, 123);
+            TxtContent.Size = new Size(108, 85);
             TxtContent.TabIndex = 0;
             // 
             // UcJsonBodySimple
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             Controls.Add(splitContainer1);
             Controls.Add(toolStrip1);
-            MinimumSize = new Size(300, 150);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(262, 112);
             Name = "UcJsonBodySimple";
-            Size = new Size(300, 150);
+            Size = new Size(262, 112);
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
