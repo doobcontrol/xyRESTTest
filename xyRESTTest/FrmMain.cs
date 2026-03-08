@@ -397,6 +397,15 @@ namespace xyRESTTest
             {
                 LbPrjName.Text = testProject.name;
             }
+            if (testProject.rootUrl != null && testProject.rootUrl != ""
+                && xyTest.getBaseAddress() != testProject.rootUrl)
+            {
+                try
+                {
+                    xyTest.setBaseAddress(testProject.rootUrl);
+                }
+                catch { }
+            }
             xyTest.saveTestProject(testProject);
         }
 
@@ -503,6 +512,10 @@ namespace xyRESTTest
                     recentOpenList.Remove(filePath);
                     recentOpenList.Insert(0, filePath);
                     xyCfg.set(RecentOpenListName, recentOpenList);
+                }
+                if(testProject.rootUrl != null && testProject.rootUrl != "")
+                {
+                    xyTest.setBaseAddress(testProject.rootUrl);
                 }
             }
             catch (Exception ex)

@@ -201,4 +201,10 @@
   <data name="strTestStartTime" xml:space="preserve">
     <value>Start Time: {0}</value>
   </data>
+  <data name="strTestProjectName" xml:space="preserve">
+    <value>Test Project Name: {0}</value>
+  </data>
+  <data name="strTestProjectRootUrl" xml:space="preserve">
+    <value>Test Project Root Url: {0}</value>
+  </data>
 </root>

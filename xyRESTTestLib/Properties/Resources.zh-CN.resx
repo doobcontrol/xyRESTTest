@@ -201,4 +201,10 @@
   <data name="strTestStartTime" xml:space="preserve">
     <value>开始时间: {0}</value>
   </data>
+  <data name="strTestProjectName" xml:space="preserve">
+    <value>测试项目名称: {0}</value>
+  </data>
+  <data name="strTestProjectRootUrl" xml:space="preserve">
+    <value>测试根地址: {0}</value>
+  </data>
 </root>

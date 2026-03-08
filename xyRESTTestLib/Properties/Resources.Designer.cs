@@ -286,6 +286,24 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Project Name: {0}.
+        /// </summary>
+        internal static string strTestProjectName {
+            get {
+                return ResourceManager.GetString("strTestProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Project Root Url: {0}.
+        /// </summary>
+        internal static string strTestProjectRootUrl {
+            get {
+                return ResourceManager.GetString("strTestProjectRootUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Time: {0}.
         /// </summary>
         internal static string strTestStartTime {

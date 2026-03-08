@@ -13,7 +13,14 @@ namespace xyRESTTestLib
     public class xyTest
     {
         private static readonly HttpClient sharedClient = new HttpClient();
-
+        public static void setBaseAddress(string rootUrl)
+        {
+            sharedClient.BaseAddress = new Uri(rootUrl);
+        }
+        public static string getBaseAddress()
+        {
+            return sharedClient.BaseAddress.AbsoluteUri;
+        }
         public static string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
@@ -38,10 +45,9 @@ namespace xyRESTTestLib
         {
             var requestInfo = testTask.requestInfo;
             var testHandler = TestHandler;
-            var rMsg = new HttpRequestMessage();
+            var rMsg = new HttpRequestMessage(
+                methodMap[requestInfo.method], requestInfo.url);
 
-            rMsg.RequestUri = new Uri(requestInfo.url);
-            rMsg.Method = methodMap[requestInfo.method];
             if (requestInfo.headers != null)
             {
                 var headers = testHandler.ParseHeaders(
@@ -197,9 +203,6 @@ namespace xyRESTTestLib
             List<TestTask> tasks, StreamWriter sw, Dictionary<string, string> contextPars
             )
         {
-            DateTime startTime = DateTime.Now;
-            sw.WriteLine(Resources.strStartTest);
-            sw.WriteLine();
             foreach (var task in tasks)
             {
                 (bool result, List<ResponseInfo> responseInfo) taskSucced = 
@@ -209,14 +212,6 @@ namespace xyRESTTestLib
                     return false;
                 }
             }
-            sw.WriteLine(Resources.strAllTestFinishedSucceed);
-            sw.WriteLine(
-                string.Format(
-                    Resources.strTestTime,
-                    (DateTime.Now - startTime).TotalSeconds)
-                );
-            sw.WriteLine();
-
             return true;
         }
         public static async Task<bool> runProjectAsync(
@@ -227,7 +222,31 @@ namespace xyRESTTestLib
             bool retB;
             using (StreamWriter sw = new StreamWriter(outputfile, true))
             {
+                DateTime startTime = DateTime.Now;
+                sw.WriteLine(string.Format(
+                        Resources.strTestProjectName,
+                        testProject.name));
+                sw.WriteLine(string.Format(
+                        Resources.strTestProjectRootUrl,
+                        testProject.rootUrl));
+                sw.WriteLine();
+
+                sw.WriteLine(Resources.strStartTest);
+                sw.WriteLine();
+
                 retB = await batchTestAsync(testProject.tasks, sw, contextPars);
+
+                if (retB)
+                {
+                    sw.WriteLine(Resources.strAllTestFinishedSucceed);
+                }
+
+                sw.WriteLine(
+                    string.Format(
+                        Resources.strTestTime,
+                        (DateTime.Now - startTime).TotalSeconds)
+                    );
+                sw.WriteLine();
             }
 
             return retB;
