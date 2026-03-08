@@ -382,4 +382,10 @@
   <data name="strSimpleImageCaptcha" xml:space="preserve">
     <value>简单图片验证码</value>
   </data>
+  <data name="strLbPrjName" xml:space="preserve">
+    <value>项目名称</value>
+  </data>
+  <data name="strLbRootUrl" xml:space="preserve">
+    <value>根地址</value>
+  </data>
 </root>

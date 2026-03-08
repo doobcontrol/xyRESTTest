@@ -33,10 +33,10 @@
             panel1 = new Panel();
             PnTestcases = new TableLayoutPanel();
             PnPrj = new Panel();
-            TxtPrjName = new TextBox();
             LbPrjName = new Label();
             PnlTestCase = new Panel();
             PnlWork = new Panel();
+            splitter2 = new Splitter();
             PnlRun = new Panel();
             lbRunningInfo = new Label();
             panel3 = new Panel();
@@ -54,7 +54,6 @@
             TsbRun = new ToolStripButton();
             TscbLang = new ToolStripComboBox();
             toolTip1 = new ToolTip(components);
-            splitter2 = new Splitter();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
             PnlWork.SuspendLayout();
@@ -72,6 +71,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
+            panel1.Padding = new Padding(0, 2, 0, 0);
             panel1.Size = new Size(198, 361);
             panel1.TabIndex = 2;
             // 
@@ -82,12 +82,12 @@
             PnTestcases.ColumnCount = 1;
             PnTestcases.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             PnTestcases.Dock = DockStyle.Fill;
-            PnTestcases.Location = new Point(0, 47);
+            PnTestcases.Location = new Point(0, 24);
             PnTestcases.Margin = new Padding(3, 2, 3, 2);
             PnTestcases.Name = "PnTestcases";
             PnTestcases.RowCount = 1;
             PnTestcases.RowStyles.Add(new RowStyle());
-            PnTestcases.Size = new Size(196, 312);
+            PnTestcases.Size = new Size(196, 335);
             PnTestcases.TabIndex = 2;
             // 
             // PnPrj
@@ -95,36 +95,25 @@
             PnPrj.AutoSize = true;
             PnPrj.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             PnPrj.BorderStyle = BorderStyle.FixedSingle;
-            PnPrj.Controls.Add(TxtPrjName);
             PnPrj.Controls.Add(LbPrjName);
             PnPrj.Dock = DockStyle.Top;
-            PnPrj.Location = new Point(0, 0);
+            PnPrj.Location = new Point(0, 2);
             PnPrj.Margin = new Padding(3, 2, 3, 2);
             PnPrj.MinimumSize = new Size(2, 21);
             PnPrj.Name = "PnPrj";
-            PnPrj.Padding = new Padding(0, 2, 0, 0);
-            PnPrj.Size = new Size(196, 47);
+            PnPrj.Size = new Size(196, 22);
             PnPrj.TabIndex = 1;
-            // 
-            // TxtPrjName
-            // 
-            TxtPrjName.Dock = DockStyle.Top;
-            TxtPrjName.Location = new Point(0, 22);
-            TxtPrjName.Margin = new Padding(3, 2, 3, 2);
-            TxtPrjName.Name = "TxtPrjName";
-            TxtPrjName.Size = new Size(194, 23);
-            TxtPrjName.TabIndex = 1;
-            TxtPrjName.Visible = false;
             // 
             // LbPrjName
             // 
             LbPrjName.Dock = DockStyle.Top;
             LbPrjName.Font = new Font("Segoe UI", 9F);
-            LbPrjName.Location = new Point(0, 2);
+            LbPrjName.Location = new Point(0, 0);
             LbPrjName.Name = "LbPrjName";
             LbPrjName.Size = new Size(194, 20);
             LbPrjName.TabIndex = 0;
             LbPrjName.Text = "New Test";
+            LbPrjName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // PnlTestCase
             // 
@@ -147,6 +136,14 @@
             PnlWork.Name = "PnlWork";
             PnlWork.Size = new Size(800, 361);
             PnlWork.TabIndex = 4;
+            // 
+            // splitter2
+            // 
+            splitter2.Location = new Point(198, 0);
+            splitter2.Name = "splitter2";
+            splitter2.Size = new Size(4, 361);
+            splitter2.TabIndex = 4;
+            splitter2.TabStop = false;
             // 
             // PnlRun
             // 
@@ -300,14 +297,6 @@
             TscbLang.Size = new Size(106, 27);
             TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
             // 
-            // splitter2
-            // 
-            splitter2.Location = new Point(198, 0);
-            splitter2.Name = "splitter2";
-            splitter2.Size = new Size(4, 361);
-            splitter2.TabIndex = 4;
-            splitter2.TabStop = false;
-            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -324,7 +313,6 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             PnPrj.ResumeLayout(false);
-            PnPrj.PerformLayout();
             PnlWork.ResumeLayout(false);
             PnlRun.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -355,7 +343,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton TsbRun;
         private ToolStripComboBox TscbLang;
-        private TextBox TxtPrjName;
         private ToolStripButton TsbMoveUp;
         private ToolStripButton TsbMoveDown;
         private ToolTip toolTip1;

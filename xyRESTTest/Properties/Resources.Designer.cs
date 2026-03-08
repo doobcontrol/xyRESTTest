@@ -450,6 +450,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project Name.
+        /// </summary>
+        internal static string strLbPrjName {
+            get {
+                return ResourceManager.GetString("strLbPrjName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root URL.
+        /// </summary>
+        internal static string strLbRootUrl {
+            get {
+                return ResourceManager.GetString("strLbRootUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key Name:.
         /// </summary>
         internal static string strLbUploadFileKeyName {

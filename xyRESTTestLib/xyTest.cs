@@ -246,6 +246,7 @@ namespace xyRESTTestLib
 
             var projectDataDic = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
             var projectName = projectDataDic["name"].ToString() ?? "";
+            var rootUrl = projectDataDic["rootUrl"].ToString() ?? "";
             var tasksString = projectDataDic["tasks"].ToString() ?? "[]";
             var tasksList = 
                 JsonSerializer.Deserialize<List<TestTask>>(tasksString) ?? new List<TestTask>();
@@ -255,8 +256,9 @@ namespace xyRESTTestLib
 
             var testProject = new TestProject(projectDir ?? "", projectFileName ?? "")
             {
-                    name = projectName,
-                    tasks = tasksList
+                name = projectName,
+                rootUrl = rootUrl,
+                tasks = tasksList
             };
 
             foreach (var task in testProject.tasks)
@@ -489,6 +491,8 @@ namespace xyRESTTestLib
     public class TestProject
     {
         public required string name { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? rootUrl { get; set; }
         public required List<TestTask> tasks { get; set; }
 
         [JsonIgnore]

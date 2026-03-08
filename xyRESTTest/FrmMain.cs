@@ -82,30 +82,39 @@ namespace xyRESTTest
             PnlRun.Visible = false;
             splitter1.Visible = false;
 
-            LbPrjName.DoubleClick += (s, e) =>
+            LbPrjName.Click += (s, e) =>
             {
-                if (testProject != null)
+                if(testProject == null)
                 {
-                    EditProjectName(true);
+                    return;
+                }
+                if(PnlTestCase.Controls.Count>0 && PnlTestCase.Controls[0] is UcProjectInfo)
+                {
+                    return;
+                }
+
+                PnlTestCase.Controls.Clear();
+                var upi = new UcProjectInfo(testProject);
+                upi.Visible = false;
+                upi.Edited += ProjectInfo_Edited;
+                upi.Dock = DockStyle.Fill;
+                PnlTestCase.Controls.Add(upi);
+                upi.Visible = true;
+            };
+            LbPrjName.Click += UcTestCaseItemOrPrlectLabel_Selected;
+
+            LbPrjName.MouseEnter += (s, e) => {
+                if (PnPrj.BackColor != UcTestCaseItem.selectedBackColor
+                    && testProject != null)
+                {
+                    PnPrj.BackColor = Color.LightYellow;
                 }
             };
-
-            TxtPrjName.Leave += (s, e) =>
-            {
-                EditProjectName(false);
-            };
-
-            TxtPrjName.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Enter)
+            LbPrjName.MouseLeave += (s, e) => {
+                if (PnPrj.BackColor != UcTestCaseItem.selectedBackColor
+                    && testProject != null)
                 {
-                    EditProjectName(false);
-                }
-                else if (e.KeyCode == Keys.Escape)
-                {
-                    TxtPrjName.Text = LbPrjName.Text;
-                    LbPrjName.Visible = true;
-                    TxtPrjName.Visible = false;
+                    PnPrj.BackColor = Color.Transparent;
                 }
             };
         }
@@ -234,33 +243,46 @@ namespace xyRESTTest
         {
             var newItem = new UcTestCaseItem(tTask);
             newItem.Dock = DockStyle.Top;
-            newItem.Selected += UcTestCaseItem_Selected;
+            newItem.Selected += UcTestCaseItemOrPrlectLabel_Selected;
             newItem.Run += UcTestCaseItem_Run;
             PnTestcases.Controls.Add(newItem);
         }
 
         UcTestCaseItem? selectedItem;
-        private void UcTestCaseItem_Selected(object? sender, EventArgs e)
+        private void UcTestCaseItemOrPrlectLabel_Selected(object? sender, EventArgs e)
         {
+            if (sender is Label projectLabel)
+            {
+                if (testProject == null)
+                {
+                    return;
+                }
+                LbPrjName.BackColor = UcTestCaseItem.selectedBackColor;
+                selectedItem = null;
+            }
+            else
+            {
+                LbPrjName.BackColor = Color.Transparent;
+                if (sender is UcTestCaseItem selected)
+                {
+                    selectedItem = selected;
+
+                    PnlTestCase.Controls.Clear();
+                    var utc = new UcTestCase(selected.TestTask, contextMenuStrip);
+                    utc.Visible = false;
+                    utc.Edited += TestCase_edited;
+                    utc.PrepareEdited += TestCase_PrepareEdited;
+                    utc.Dock = DockStyle.Fill;
+                    PnlTestCase.Controls.Add(utc);
+                    utc.Visible = true;
+                }
+            }
             foreach (Control control in PnTestcases.Controls)
             {
                 if (control is UcTestCaseItem item)
                 {
                     item.SetSelected(item == sender);
                 }
-            }
-            if (sender is UcTestCaseItem selected)
-            {
-                selectedItem = selected;
-
-                PnlTestCase.Controls.Clear();
-                var utc = new UcTestCase(selected.TestTask, contextMenuStrip);
-                utc.Visible = false;
-                utc.Edited += TestCase_edited;
-                utc.PrepareEdited += TestCase_PrepareEdited;
-                utc.Dock = DockStyle.Fill;
-                PnlTestCase.Controls.Add(utc);
-                utc.Visible = true;
             }
         }
         private void TestCase_edited(object? sender, EventArgs e)
@@ -369,25 +391,13 @@ namespace xyRESTTest
 
         #region Project
 
-        private void EditProjectName(bool startEdit)
+        private void ProjectInfo_Edited(object? sender, EventArgs e)
         {
-            LbPrjName.Visible = !startEdit;
-            TxtPrjName.Visible = startEdit;
-            if (startEdit)
+            if (LbPrjName.Text != testProject.name)
             {
-                TxtPrjName.Text = LbPrjName.Text;
-                TxtPrjName.Focus();
-                TxtPrjName.SelectAll();
+                LbPrjName.Text = testProject.name;
             }
-            else
-            {
-                if (TxtPrjName.Text != testProject.name)
-                {
-                    testProject.name = TxtPrjName.Text;
-                    LbPrjName.Text = TxtPrjName.Text;
-                    xyTest.saveTestProject(testProject);
-                }
-            }
+            xyTest.saveTestProject(testProject);
         }
 
         private void TsbNewProject_Click(object sender, EventArgs e)
@@ -409,7 +419,6 @@ namespace xyRESTTest
                 PnTestcases.Controls.Clear();
                 PnlTestCase.Controls.Clear();
                 hasProjectLoaded = true;
-                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
                 contextPars = new Dictionary<string, string>();
 
                 ShowTitle();
@@ -419,6 +428,7 @@ namespace xyRESTTest
                 {
                     recentOpenList.RemoveAt(recentOpenList.Count - 1);
                 }
+                LbPrjName.BackColor = Color.Transparent;
                 xyCfg.set(RecentOpenListName, recentOpenList);
             }
         }
@@ -475,10 +485,10 @@ namespace xyRESTTest
                 PnPrj.ResumeLayout();
                 PnTestcases.ResumeLayout();
                 toolStrip1.ResumeLayout();
-                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
                 contextPars = new Dictionary<string, string>();
 
                 ShowTitle();
+                LbPrjName.BackColor = Color.Transparent;
                 if (!recentOpenList.Contains(filePath))
                 {
                     recentOpenList.Insert(0, filePath);
@@ -655,16 +665,11 @@ namespace xyRESTTest
                 LbPrjName.Text = Resources.strNoProjectLoaded;
                 if(PnlTestCase.Controls.Count > 0)
                 {
-                    var control = PnlTestCase.Controls[0];
-                    if (control is UcRecentOpenList)
+                    if (PnlTestCase.Controls[0] is UcRecentOpenList uro)
                     {
-                        (control as UcRecentOpenList).LoadStringResources();
+                        uro.LoadStringResources();
                     }
                 }
-            }
-            else
-            {
-                toolTip1.SetToolTip(LbPrjName, Resources.strDoubleClickToEdit);
             }
 
             TsbNewProject.Text = Resources.strNewTestProject;
@@ -687,6 +692,10 @@ namespace xyRESTTest
                 if (control is UcTestCase utc)
                 {
                     utc.LoadStringResources();
+                }
+                else if (control is UcProjectInfo upi)
+                {
+                    upi.LoadStringResources();
                 }
             }
             if (testRunning)

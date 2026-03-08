@@ -382,4 +382,10 @@ The missing parameters are:
   <data name="strSimpleImageCaptcha" xml:space="preserve">
     <value>Simple Image Captcha</value>
   </data>
+  <data name="strLbPrjName" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
+  <data name="strLbRootUrl" xml:space="preserve">
+    <value>Root URL</value>
+  </data>
 </root>
