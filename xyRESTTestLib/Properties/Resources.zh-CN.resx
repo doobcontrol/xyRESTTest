@@ -198,4 +198,7 @@
   <data name="strAssertFailedJSONNotSupportedValueKind" xml:space="preserve">
     <value>判断失败: 不支持此JSON数据类型</value>
   </data>
+  <data name="strTestStartTime" xml:space="preserve">
+    <value>开始时间: {0}</value>
+  </data>
 </root>

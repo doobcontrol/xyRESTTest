@@ -286,6 +286,15 @@ namespace xyRESTTestLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Time: {0}.
+        /// </summary>
+        internal static string strTestStartTime {
+            get {
+                return ResourceManager.GetString("strTestStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time used: {0} seconds.
         /// </summary>
         internal static string strTestTime {

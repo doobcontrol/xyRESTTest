@@ -72,6 +72,10 @@ namespace xyRESTTestLib
             StreamWriter rw
             )
         {
+            DateTime startTime = DateTime.Now;
+            rw.WriteLine(
+                string.Format(Resources.strTestStartTime, startTime)
+                );
             // Prepare request
             var rMsg = makeHttpRequestMessage(testTask, contextPars);
             HttpResponseMessage response;
@@ -83,6 +87,11 @@ namespace xyRESTTestLib
             {
                 rw.WriteLine(
                     string.Format(Resources.strErrorWhenSendingRequest_, e.Message)
+                    );
+                rw.WriteLine(
+                    string.Format(
+                        Resources.strTestTime,
+                        (DateTime.Now - startTime).TotalSeconds)
                     );
                 return (false, null);
             }
@@ -114,6 +123,11 @@ namespace xyRESTTestLib
                 }
             }
 
+            rw.WriteLine(
+                string.Format(
+                    Resources.strTestTime,
+                    (DateTime.Now - startTime).TotalSeconds)
+                );
             return (assert, responseInfo);
         }
         public static async Task<(bool result,

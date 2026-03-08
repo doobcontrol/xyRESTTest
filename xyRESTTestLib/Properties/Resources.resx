@@ -198,4 +198,7 @@
   <data name="strAssertFailedJSONNotSupportedValueKind" xml:space="preserve">
     <value>Assert Failed : Not Supported JSON Value Kind</value>
   </data>
+  <data name="strTestStartTime" xml:space="preserve">
+    <value>Start Time: {0}</value>
+  </data>
 </root>
