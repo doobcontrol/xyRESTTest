@@ -42,6 +42,21 @@ namespace xyRESTTest
                 panel1.BorderStyle = BorderStyle.None;
                 panel1.BackColor = Color.Transparent;
             };
+
+            label1.MouseEnter += (s, e) => {
+                if (!selected)
+                {
+                    this.BorderStyle = BorderStyle.FixedSingle;
+                    this.BackColor = Color.LightYellow;
+                }
+            };
+            label1.MouseLeave += (s, e) => {
+                if (!selected)
+                {
+                    this.BorderStyle = BorderStyle.None;
+                    this.BackColor = Color.Transparent;
+                }
+            };
         }
 
         // A single event handler for all controls
