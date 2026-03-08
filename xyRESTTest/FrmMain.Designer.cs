@@ -54,6 +54,7 @@
             TsbRun = new ToolStripButton();
             TscbLang = new ToolStripComboBox();
             toolTip1 = new ToolTip(components);
+            splitter2 = new Splitter();
             panel1.SuspendLayout();
             PnPrj.SuspendLayout();
             PnlWork.SuspendLayout();
@@ -129,15 +130,16 @@
             // 
             PnlTestCase.BorderStyle = BorderStyle.FixedSingle;
             PnlTestCase.Dock = DockStyle.Fill;
-            PnlTestCase.Location = new Point(198, 0);
+            PnlTestCase.Location = new Point(202, 0);
             PnlTestCase.Margin = new Padding(3, 2, 3, 2);
             PnlTestCase.Name = "PnlTestCase";
-            PnlTestCase.Size = new Size(602, 361);
+            PnlTestCase.Size = new Size(598, 361);
             PnlTestCase.TabIndex = 3;
             // 
             // PnlWork
             // 
             PnlWork.Controls.Add(PnlTestCase);
+            PnlWork.Controls.Add(splitter2);
             PnlWork.Controls.Add(panel1);
             PnlWork.Dock = DockStyle.Fill;
             PnlWork.Location = new Point(0, 27);
@@ -298,6 +300,14 @@
             TscbLang.Size = new Size(106, 27);
             TscbLang.SelectedIndexChanged += TscbLang_SelectedIndexChanged;
             // 
+            // splitter2
+            // 
+            splitter2.Location = new Point(198, 0);
+            splitter2.Name = "splitter2";
+            splitter2.Size = new Size(4, 361);
+            splitter2.TabIndex = 4;
+            splitter2.TabStop = false;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -349,5 +359,6 @@
         private ToolStripButton TsbMoveUp;
         private ToolStripButton TsbMoveDown;
         private ToolTip toolTip1;
+        private Splitter splitter2;
     }
 }
