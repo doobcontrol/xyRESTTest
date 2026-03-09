@@ -155,7 +155,10 @@ namespace xyRESTTestLib
                         string.Join(", ", testData))
                     );
                 testResult = await oneTestAsync(newTask, contextPars, rw);
-                responseInfos.Add(testResult.responseInfo);
+                if (testResult.responseInfo != null)
+                {
+                    responseInfos.Add(testResult.responseInfo);
+                }
                 if (!testResult.result)
                 {
                     rw.WriteLine(Resources.strFailed);
@@ -179,13 +182,18 @@ namespace xyRESTTestLib
             if (task.dataGenerator == null)
             {
                 var oneResult = await oneTestAsync(task, contextPars, sw);
+                var retList = new List<ResponseInfo>();
+                if(oneResult.responseInfo != null)
+                {
+                    retList.Add(oneResult.responseInfo);
+                }
                 if (!oneResult.result)
                 {
                     sw.WriteLine(Resources.strFailed);
                     sw.WriteLine();
-                    return (false, new List<ResponseInfo> { oneResult.responseInfo });
+                    return (false, retList);
                 }
-                testResult = (true, new List<ResponseInfo> { oneResult.responseInfo });
+                testResult = (true, retList);
             }
             else
             {
