@@ -228,7 +228,7 @@ namespace xyRESTTest
                 name = $"Test Task {PnTestcases.Controls.Count + 1}",
                 requestInfo = new RequestInfo
                 {
-                    method = "",
+                    method = nameof(ReqMethod.GET),
                     url = "",
                     headers = new Dictionary<string, object>(),
                 },
