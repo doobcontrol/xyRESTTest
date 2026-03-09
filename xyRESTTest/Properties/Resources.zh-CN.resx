@@ -388,4 +388,7 @@
   <data name="strLbRootUrl" xml:space="preserve">
     <value>根地址</value>
   </data>
+  <data name="strTestTaskUrlInvalid" xml:space="preserve">
+    <value>测试项目标地址无效: {0}</value>
+  </data>
 </root>

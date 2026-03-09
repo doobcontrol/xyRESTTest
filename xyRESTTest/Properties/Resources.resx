@@ -388,4 +388,7 @@ The missing parameters are:
   <data name="strLbRootUrl" xml:space="preserve">
     <value>Root URL</value>
   </data>
+  <data name="strTestTaskUrlInvalid" xml:space="preserve">
+    <value>Test task Url invalid: {0}</value>
+  </data>
 </root>

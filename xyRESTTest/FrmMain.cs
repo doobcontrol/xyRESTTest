@@ -397,15 +397,6 @@ namespace xyRESTTest
             {
                 LbPrjName.Text = testProject.name;
             }
-            if (testProject.rootUrl != null && testProject.rootUrl != ""
-                && xyTest.getBaseAddress() != testProject.rootUrl)
-            {
-                try
-                {
-                    xyTest.setBaseAddress(testProject.rootUrl);
-                }
-                catch { }
-            }
             xyTest.saveTestProject(testProject);
         }
 
@@ -439,6 +430,7 @@ namespace xyRESTTest
                 }
                 LbPrjName.BackColor = Color.Transparent;
                 xyCfg.set(RecentOpenListName, recentOpenList);
+                xyTest.setBaseAddress(null);
             }
         }
 
@@ -515,7 +507,19 @@ namespace xyRESTTest
                 }
                 if(testProject.rootUrl != null && testProject.rootUrl != "")
                 {
-                    xyTest.setBaseAddress(testProject.rootUrl);
+                    Uri? newUri;
+                    if (Uri.TryCreate(testProject.rootUrl, UriKind.Absolute, out newUri))
+                    {
+                        xyTest.setBaseAddress(newUri);
+                    }
+                    else
+                    {
+                        xyTest.setBaseAddress(null);
+                    }
+                }
+                else
+                {
+                    xyTest.setBaseAddress(null);
                 }
             }
             catch (Exception ex)
@@ -568,6 +572,17 @@ namespace xyRESTTest
         {
             if (sender is UcTestCaseItem utci)
             {
+                if (!CheckTestTaskUrl(utci.TestTask))
+                {
+                    MessageBox.Show(
+                        string.Format(
+                            Resources.strTestTaskUrlInvalid, utci.TestTask.name
+                            ),
+                        Resources.strError,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
                 var missngParams = new List<string>();
                 if (!xyTest.CheckCaseContextParams(
                     contextPars, missngParams, utci.TestTask))
@@ -616,6 +631,19 @@ namespace xyRESTTest
 
         private async void TsbRun_Click(object sender, EventArgs e)
         {
+            var invaldTask = CheckProjectUrls();
+            if (invaldTask != null)
+            {
+                MessageBox.Show(
+                    string.Format(
+                        Resources.strTestTaskUrlInvalid, invaldTask.name
+                        ),
+                    Resources.strError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
             setRunnningState(true);
             string timestamp = DateTime.Now.ToString("_yyyyMMdd_HHmmss_fff");
             var outputfile = Path.Combine(
@@ -685,10 +713,38 @@ namespace xyRESTTest
             splitter1.Visible = false;
         }
 
+        private bool CheckTestTaskUrl(TestTask testTask)
+        {
+            if(testProject.rootUrl != null && testProject.rootUrl != "")
+            {
+                return true;
+            }
+            if(testTask.requestInfo.url != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private TestTask? CheckProjectUrls()
+        {
+            if (testProject.rootUrl != null && testProject.rootUrl != "")
+            {
+                return null;
+            }
+            foreach(var tt in testProject.tasks)
+            {
+                if (!CheckTestTaskUrl(tt)) return tt;
+            }
+            return null;
+        }
+
         #endregion
 
         #region i18n
-       
+
         string cfgFile = "xyCfg.json";
         private void LangConfig()
         {

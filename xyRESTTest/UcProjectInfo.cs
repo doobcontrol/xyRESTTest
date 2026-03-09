@@ -25,6 +25,20 @@ namespace xyRESTTest
 
             TxtPrjName.Leave += TextBox_textchanged;
             TxtRootUrl.Leave += TextBox_textchanged;
+            TxtPrjName.KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    TextBox_textchanged(s, e);
+                }
+            };
+            TxtRootUrl.KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    TextBox_textchanged(s, e);
+                }
+            };
         }
         public void LoadStringResources()
         {
@@ -52,8 +66,17 @@ namespace xyRESTTest
                 {
                     if (tb.Text != testProject.rootUrl)
                     {
-                        testProject.rootUrl = tb.Text;
-                        Edited?.Invoke(this, new EventArgs());
+                        Uri? newUri;
+                        if (Uri.TryCreate(TxtRootUrl.Text, UriKind.Absolute, out newUri))
+                        {
+                            testProject.rootUrl = TxtRootUrl.Text;
+                            Edited?.Invoke(this, new EventArgs());
+                            xyTest.setBaseAddress(newUri);
+                        }
+                        else
+                        {
+                            TxtRootUrl.Text = testProject.rootUrl;
+                        }
                     }
                 }
             }

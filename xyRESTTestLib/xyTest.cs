@@ -13,13 +13,14 @@ namespace xyRESTTestLib
     public class xyTest
     {
         private static readonly HttpClient sharedClient = new HttpClient();
-        public static void setBaseAddress(string rootUrl)
+        private static Uri? rootUri;
+        public static void setBaseAddress(Uri? uri)
         {
-            sharedClient.BaseAddress = new Uri(rootUrl);
+            rootUri = uri;
         }
         public static string getBaseAddress()
         {
-            return sharedClient.BaseAddress.AbsoluteUri;
+            return rootUri.ToString();
         }
         public static string Base64Encode(string plainText)
         {
@@ -36,7 +37,6 @@ namespace xyRESTTestLib
             {nameof(ReqMethod.DELETE), HttpMethod.Delete },
         };
 
-
         public static ITestHandler TestHandler;
         public static HttpRequestMessage makeHttpRequestMessage(
             TestTask testTask,
@@ -45,8 +45,19 @@ namespace xyRESTTestLib
         {
             var requestInfo = testTask.requestInfo;
             var testHandler = TestHandler;
+            Uri workUri = null;
+            if (testTask.requestInfo.url.StartsWith("http://")
+                || testTask.requestInfo.url.StartsWith("https://")
+                )
+            {
+                workUri = new Uri(testTask.requestInfo.url);
+            }
+            else if (rootUri != null)
+            {
+                workUri = new Uri(rootUri, testTask.requestInfo.url);
+            }
             var rMsg = new HttpRequestMessage(
-                methodMap[requestInfo.method], requestInfo.url);
+                methodMap[requestInfo.method], workUri);
 
             if (requestInfo.headers != null)
             {

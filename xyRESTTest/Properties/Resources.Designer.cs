@@ -784,6 +784,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test task Url invalid: {0}.
+        /// </summary>
+        internal static string strTestTaskUrlInvalid {
+            get {
+                return ResourceManager.GetString("strTestTaskUrlInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add one upload file.
         /// </summary>
         internal static string strTsbAddFile {
