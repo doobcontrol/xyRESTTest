@@ -592,6 +592,9 @@ namespace xyRESTTest
                     Directory.CreateDirectory(xyTest.Report_file_dir);
                 }
 
+                //clean temprary files
+                CleanTemporaryFiles();
+
                 setRunnningState(true);
                 using (var sw = new StreamWriter(outputfile, true))
                 {
@@ -628,7 +631,34 @@ namespace xyRESTTest
             {
                 contextPars = newContextPars;
             }
+            //clean temporary files
+            if (PnlTestCase.Controls.Count == 0 || PnlTestCase.Controls[0] is not UcTestCase)
+            {
+                CleanTemporaryFiles();
+            }
+
             setRunnningState(false);
+        }
+
+        bool inCleanTemporaryFiles = false;
+        private void CleanTemporaryFiles()
+        {
+            if (!inCleanTemporaryFiles && Directory.Exists(xyTest.Temp_file_dir))
+            {
+                Task.Run(() => {
+                    inCleanTemporaryFiles = true;
+                    string[] files = Directory.GetFiles(xyTest.Temp_file_dir, "*.*");
+                    foreach (string file in files)
+                    {
+                        try
+                        {
+                            File.Delete(file);
+                        }
+                        catch { }
+                    }
+                    inCleanTemporaryFiles = false;
+                });
+            }
         }
         private void setRunnningState(bool isRunning)
         {
