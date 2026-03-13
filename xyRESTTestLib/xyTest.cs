@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Mime;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -66,6 +67,10 @@ namespace xyRESTTestLib
                 foreach (var header in headers)
                 {
                     rMsg.Headers.Add(header.Key, header.Value);
+                }
+                if (!rMsg.Headers.Contains("User-Agent"))
+                {
+                    rMsg.Headers.Add("User-Agent", http_User_Agent_header);
                 }
             }
             if (requestInfo.body != null
@@ -513,6 +518,9 @@ namespace xyRESTTestLib
         // Captcha context parameters name
         public const string captchaCode = "captchaCode";
         public const string captchaImg = "captchaImg";
+
+        // "User-Agent" for this application
+        public const string http_User_Agent_header = "xyRESTTest/1.0";
 
         public static HumanIntervention humanIntervention;
     }
