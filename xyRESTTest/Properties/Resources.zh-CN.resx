@@ -415,4 +415,10 @@
   <data name="strGeneratingTestData" xml:space="preserve">
     <value>正在生成测试数据 ...</value>
   </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>拷贝</value>
+  </data>
+  <data name="strMenuPaste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
 </root>

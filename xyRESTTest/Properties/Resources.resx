@@ -415,4 +415,10 @@ Continue?</value>
   <data name="strGeneratingTestData" xml:space="preserve">
     <value>Generating test data ...</value>
   </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="strMenuPaste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
 </root>

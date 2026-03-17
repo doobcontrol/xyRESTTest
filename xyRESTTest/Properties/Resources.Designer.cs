@@ -559,6 +559,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string strMenuCopy {
+            get {
+                return ResourceManager.GetString("strMenuCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert Case Parameter.
         /// </summary>
         internal static string strMenuInsertCaseParameter {
@@ -573,6 +582,15 @@ namespace xyRESTTest.Properties {
         internal static string strMenuInsertProjectParameter {
             get {
                 return ResourceManager.GetString("strMenuInsertProjectParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        internal static string strMenuPaste {
+            get {
+                return ResourceManager.GetString("strMenuPaste", resourceCulture);
             }
         }
         

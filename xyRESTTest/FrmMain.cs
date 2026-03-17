@@ -809,6 +809,8 @@ namespace xyRESTTest
 
             contextMenuStrip.Items[0].Text = Resources.strMenuInsertProjectParameter;
             contextMenuStrip.Items[1].Text = Resources.strMenuInsertCaseParameter;
+            contextMenuStrip.Items[3].Text = Resources.strMenuCopy;
+            contextMenuStrip.Items[4].Text = Resources.strMenuPaste;
         }
         private void ShowTitle()
         {
@@ -874,6 +876,54 @@ namespace xyRESTTest
                 }
             };
             contextMenuStrip.Items.Add(InsertCaseParameterItem);
+
+            contextMenuStrip.Items.Add(new ToolStripSeparator());
+
+            var CopyItem =
+                new ToolStripMenuItem(Resources.strMenuCopy);
+            CopyItem.Click += (s, e) =>
+            {
+                if (selectedItem != null)
+                {
+                    Control sourceControl =
+                        (((ToolStripMenuItem)s).Owner as ContextMenuStrip).SourceControl;
+                    if(sourceControl is TextBox tb)
+                    {
+                        tb.Copy();
+                    }
+                }
+            };
+            contextMenuStrip.Items.Add(CopyItem);
+
+            var PasteItem =
+                new ToolStripMenuItem(Resources.strMenuPaste);
+            PasteItem.Click += (s, e) =>
+            {
+                if (selectedItem != null)
+                {
+                    Control sourceControl =
+                        (((ToolStripMenuItem)s).Owner as ContextMenuStrip).SourceControl;
+                    if (sourceControl is TextBox tb)
+                    {
+                        tb.Paste();
+                    }
+                }
+            };
+            contextMenuStrip.Items.Add(PasteItem);
+
+            contextMenuStrip.Opening+= (s, e) =>
+            {
+                if (selectedItem != null)
+                {
+                    Control sourceControl =
+                        (s as ContextMenuStrip).SourceControl;
+                    if (sourceControl is TextBox tb)
+                    {
+                        CopyItem.Enabled = tb.SelectionLength > 0;
+                        PasteItem.Enabled = Clipboard.ContainsText();
+                    }
+                }
+            };
         }
         private void InsertTextAtCursor(TextBox myTextBox, string textToInsert)
         {
