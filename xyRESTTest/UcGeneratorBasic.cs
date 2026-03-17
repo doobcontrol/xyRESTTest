@@ -52,11 +52,12 @@ namespace xyRESTTest
         }
         private void RefreshDataRecords()
         {
-            DgvRecords.Rows.Clear();
+            var rowList = new List<DataGridViewRow>();
             foreach (Dictionary<string, string> dataRecord in dataRecords)
             {
-                int rowIndex = DgvRecords.Rows.Add();
-                DataGridViewRow row = DgvRecords.Rows[rowIndex];
+                var row = new DataGridViewRow();
+                row.CreateCells(DgvRecords);
+                rowList.Add(row);
                 foreach (DataGridViewColumn column in DgvRecords.Columns)
                 {
                     if (dataRecord.ContainsKey(column.Name))
@@ -65,6 +66,8 @@ namespace xyRESTTest
                     }
                 }
             }
+            DgvRecords.Rows.Clear();
+            DgvRecords.Rows.AddRange(rowList.ToArray());
         }
         private void LoadDataRecords()
         {
