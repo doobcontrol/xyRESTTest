@@ -612,6 +612,10 @@ namespace xyRESTTest
                 {
                     case nameof(GeneratorType.Basic):
                         PnlRecords.Controls.Clear();
+                        if (!Directory.Exists(xyTest.Testdata_file_dir))
+                        {
+                            Directory.CreateDirectory(xyTest.Testdata_file_dir);
+                        }
                         if (!testTask.dataGenerator.GeneratorInfo.ContainsKey(
                             xyTest.DGT_Basic_File))
                         {
