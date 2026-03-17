@@ -839,6 +839,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Number.
+        /// </summary>
+        internal static string strStartNumber {
+            get {
+                return ResourceManager.GetString("strStartNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String Length.
+        /// </summary>
+        internal static string strStringLength {
+            get {
+                return ResourceManager.GetString("strStringLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Succeed.
         /// </summary>
         internal static string strSucceed {

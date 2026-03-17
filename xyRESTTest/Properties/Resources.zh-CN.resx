@@ -421,4 +421,10 @@
   <data name="strMenuPaste" xml:space="preserve">
     <value>粘贴</value>
   </data>
+  <data name="strStartNumber" xml:space="preserve">
+    <value>起始数</value>
+  </data>
+  <data name="strStringLength" xml:space="preserve">
+    <value>字符串长度</value>
+  </data>
 </root>

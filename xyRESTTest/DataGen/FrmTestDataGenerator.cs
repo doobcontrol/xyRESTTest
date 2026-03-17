@@ -19,6 +19,7 @@ namespace xyRESTTest.DataGen
         private Dictionary<string, Dictionary<string, string?>?> DataGeneratePars = new();
         private string columnsName_ParName = "ParName";
         private string columnsName_ParValue = "ParValue";
+        private Dictionary<string, string> parShowNames = new();
         public FrmTestDataGenerator(List<string> parameters)
         {
             InitializeComponent();
@@ -51,6 +52,9 @@ namespace xyRESTTest.DataGen
             LbQuantityToGenerate.Text = Resources.strLbQuantityToGenerate;
             BtnOk.Text = Resources.strOk;
             BtnCancel.Text = Resources.strCancel;
+
+            parShowNames.Add(OrdinalPar_StartNumber, Resources.strStartNumber);
+            parShowNames.Add(OrdinalPar_StringLength, Resources.strStringLength);
         }
 
         Label selectedParLabel;
@@ -152,8 +156,11 @@ namespace xyRESTTest.DataGen
                         if(par.Key != nameof(DataGenerateType))
                         {
                             int index = DgvParsEditor.Rows.Add();
-                            DgvParsEditor.Rows[index].Cells[columnsName_ParName].Value = par.Key;
-                            DgvParsEditor.Rows[index].Cells[columnsName_ParValue].Value = par.Value;
+                            DgvParsEditor.Rows[index].Tag = par.Key;
+                            DgvParsEditor.Rows[index].Cells[columnsName_ParName].Value 
+                                = parShowNames[par.Key];
+                            DgvParsEditor.Rows[index].Cells[columnsName_ParValue].Value 
+                                = par.Value;
                         }
                     }
                     DgvParsEditor.Visible = true;
@@ -233,7 +240,7 @@ namespace xyRESTTest.DataGen
             return ordinal.ToString("D" + Pars[OrdinalPar_StringLength]);
         }
 
-        private const string RandomStringPar_StringLength = "StringLength";
+        private const string RandomStringPar_StringLength = OrdinalPar_StringLength;
         private string GenerateRandomString(int index, Dictionary<string, string> Pars)
         {
             string AllowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -262,7 +269,7 @@ namespace xyRESTTest.DataGen
                 string newValue = 
                     DgvParsEditor.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 var selectPars = DgvParsEditor.Tag as Dictionary<string, string?>;
-                selectPars[DgvParsEditor.Rows[e.RowIndex].Cells[0].Value.ToString()]
+                selectPars[DgvParsEditor.Rows[e.RowIndex].Tag.ToString()]
                     = newValue;
             }
         }
