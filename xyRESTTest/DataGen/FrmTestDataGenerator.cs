@@ -149,9 +149,12 @@ namespace xyRESTTest.DataGen
                     DgvParsEditor.Tag = DataGeneratePars[selectedParLabel.Text];
                     foreach (var par in DataGeneratePars[selectedParLabel.Text])
                     {
-                        int index = DgvParsEditor.Rows.Add();
-                        DgvParsEditor.Rows[index].Cells[columnsName_ParName].Value = par.Key;
-                        DgvParsEditor.Rows[index].Cells[columnsName_ParValue].Value = par.Value;
+                        if(par.Key != nameof(DataGenerateType))
+                        {
+                            int index = DgvParsEditor.Rows.Add();
+                            DgvParsEditor.Rows[index].Cells[columnsName_ParName].Value = par.Key;
+                            DgvParsEditor.Rows[index].Cells[columnsName_ParValue].Value = par.Value;
+                        }
                     }
                     DgvParsEditor.Visible = true;
                 }
