@@ -33,6 +33,7 @@
             toolStrip4 = new ToolStrip();
             TsbAddRecord = new ToolStripButton();
             TsbDelRecord = new ToolStripButton();
+            TsbAutoData = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)DgvRecords).BeginInit();
             toolStrip4.SuspendLayout();
             SuspendLayout();
@@ -62,7 +63,7 @@
             // toolStrip4
             // 
             toolStrip4.ImageScalingSize = new Size(20, 20);
-            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord });
+            toolStrip4.Items.AddRange(new ToolStripItem[] { TsbAddRecord, TsbDelRecord, TsbAutoData });
             toolStrip4.Location = new Point(0, 0);
             toolStrip4.Name = "toolStrip4";
             toolStrip4.Size = new Size(302, 27);
@@ -90,6 +91,16 @@
             TsbDelRecord.Text = "Delete selected data record";
             TsbDelRecord.Click += TsbDelRecord_Click;
             // 
+            // TsbAutoData
+            // 
+            TsbAutoData.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            TsbAutoData.Image = Properties.Resources.DatabaseScript;
+            TsbAutoData.ImageTransparentColor = Color.Magenta;
+            TsbAutoData.Name = "TsbAutoData";
+            TsbAutoData.Size = new Size(24, 24);
+            TsbAutoData.Text = "toolStripButton1";
+            TsbAutoData.Click += TsbAutoData_Click;
+            // 
             // UcGeneratorBasic
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -114,5 +125,6 @@
         private ToolStrip toolStrip4;
         private ToolStripButton TsbAddRecord;
         private ToolStripButton TsbDelRecord;
+        private ToolStripButton TsbAutoData;
     }
 }

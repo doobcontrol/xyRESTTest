@@ -123,17 +123,37 @@
   <data name="strLoginName" xml:space="preserve">
     <value>Login Name</value>
   </data>
+  <data name="strProjectFileNotExists" xml:space="preserve">
+    <value>Project file not exists</value>
+  </data>
+  <data name="strAppTitle" xml:space="preserve">
+    <value>REST API Test Tool</value>
+  </data>
   <data name="strRunFinished" xml:space="preserve">
     <value>Testing Finished, Result: {0}</value>
   </data>
   <data name="strTsbAddFormData" xml:space="preserve">
     <value>Add one form data</value>
   </data>
+  <data name="strCaseContextParamMissing" xml:space="preserve">
+    <value>The context parameters required for this test case are missing. Please first run the test case that provides these parameters. 
+The missing parameters are:
+{0}</value>
+  </data>
+  <data name="strDeleteReadItem" xml:space="preserve">
+    <value>Delete selected read data item</value>
+  </data>
   <data name="strNewTestProject" xml:space="preserve">
     <value>New test project</value>
   </data>
+  <data name="strTestTaskUrlInvalid" xml:space="preserve">
+    <value>Test task Url invalid: {0}</value>
+  </data>
   <data name="strTslFiles" xml:space="preserve">
     <value>Upload Files</value>
+  </data>
+  <data name="strFailed" xml:space="preserve">
+    <value>Failed</value>
   </data>
   <data name="strAddTestDataDecord" xml:space="preserve">
     <value>Add a test data record</value>
@@ -148,23 +168,29 @@
   <data name="strParameterSelectorTitle_Case" xml:space="preserve">
     <value>Case Parameter Selector</value>
   </data>
+  <data name="strError" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="Upload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Upload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strAddHeader" xml:space="preserve">
     <value>Add a header</value>
   </data>
+  <data name="strTestResponseResult" xml:space="preserve">
+    <value>Test Response Result</value>
+  </data>
   <data name="strOk" xml:space="preserve">
     <value>Ok</value>
-  </data>
-  <data name="strAssertionList" xml:space="preserve">
-    <value>Assertion List</value>
   </data>
   <data name="strLbUploadFileKeyName" xml:space="preserve">
     <value>Key Name:</value>
   </data>
   <data name="strTsbDelFormData" xml:space="preserve">
     <value>Delete selected form data</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>Move Up</value>
   </data>
   <data name="strDeleteTestCase" xml:space="preserve">
     <value>Delete selected test case</value>
@@ -178,14 +204,8 @@
   <data name="strDeleteAssertion" xml:space="preserve">
     <value>Delete selected assertion</value>
   </data>
-  <data name="strParameterName" xml:space="preserve">
-    <value>Parameter Name</value>
-  </data>
   <data name="strAddAssertion" xml:space="preserve">
     <value>Add an assertion</value>
-  </data>
-  <data name="strNoProjectLoaded" xml:space="preserve">
-    <value>No Project Loaded</value>
   </data>
   <data name="Run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Run.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -198,6 +218,9 @@
   </data>
   <data name="strTestDataRecords" xml:space="preserve">
     <value>Test Data Records</value>
+  </data>
+  <data name="strLbPrjName" xml:space="preserve">
+    <value>Project Name</value>
   </data>
   <data name="strFileAlreadyAdded" xml:space="preserve">
     <value>File Already Added</value>
@@ -214,14 +237,30 @@
   <data name="strParameters" xml:space="preserve">
     <value>Parameters</value>
   </data>
+  <data name="strSaveToFile" xml:space="preserve">
+    <value>Save To File</value>
+  </data>
+  <data name="strSimpleImageCaptcha" xml:space="preserve">
+    <value>Simple Image Captcha</value>
+  </data>
   <data name="strValue" xml:space="preserve">
     <value>Value</value>
+  </data>
+  <data name="strProjectOpenError" xml:space="preserve">
+    <value>Error: Could not read file from disk. Original error: {0}</value>
+  </data>
+  <data name="strSucceed" xml:space="preserve">
+    <value>Succeed</value>
   </data>
   <data name="strNewProjectSaveFolder" xml:space="preserve">
     <value>Project Save Folder:</value>
   </data>
   <data name="strExpectedValue" xml:space="preserve">
     <value>Expected value</value>
+  </data>
+  <data name="strProjectFolderExist" xml:space="preserve">
+    <value>The project folder already exists; creating a new project may overwrite its contents.
+Continue?</value>
   </data>
   <data name="strAssertCount" xml:space="preserve">
     <value>{0} Asserts</value>
@@ -244,6 +283,9 @@
   <data name="Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="strCaseNameDuplicate" xml:space="preserve">
+    <value>Case Name Duplicate</value>
+  </data>
   <data name="strMenuInsertCaseParameter" xml:space="preserve">
     <value>Insert Case Parameter</value>
   </data>
@@ -262,6 +304,9 @@
   <data name="strUnfefined" xml:space="preserve">
     <value>&lt;Unfefined&gt;</value>
   </data>
+  <data name="strHumanIntervention" xml:space="preserve">
+    <value>Human Intervention</value>
+  </data>
   <data name="strDynamicallyGenerateTestCase" xml:space="preserve">
     <value>Dynamically generate test case</value>
   </data>
@@ -277,11 +322,17 @@
   <data name="strDeleteTestDataRecord" xml:space="preserve">
     <value>Delete selected data record</value>
   </data>
-  <data name="strAppTitle" xml:space="preserve">
-    <value>REST API Test Tool</value>
+  <data name="strAssertionList" xml:space="preserve">
+    <value>Assertion List</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>Move Down</value>
   </data>
   <data name="strRequestInformation" xml:space="preserve">
     <value>Request Information</value>
+  </data>
+  <data name="strLbRootUrl" xml:space="preserve">
+    <value>Root URL</value>
   </data>
   <data name="strTsbAddFile" xml:space="preserve">
     <value>Add one upload file</value>
@@ -295,17 +346,23 @@
   <data name="strParameterSelectorTitle_Project" xml:space="preserve">
     <value>Project Parameter Selector</value>
   </data>
+  <data name="strWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strTsbDelFile" xml:space="preserve">
     <value>Delete selected upload file</value>
   </data>
-  <data name="strDeleteReadItem" xml:space="preserve">
-    <value>Delete selected read data item</value>
+  <data name="strNoProjectLoaded" xml:space="preserve">
+    <value>No Project Loaded</value>
   </data>
   <data name="strAddParameter" xml:space="preserve">
     <value>Add a parameter</value>
+  </data>
+  <data name="strRecentOpenList" xml:space="preserve">
+    <value>Recent Open Projects List</value>
   </data>
   <data name="strPassword" xml:space="preserve">
     <value>Password</value>
@@ -325,8 +382,8 @@
   <data name="strFormDataAlreadyAdded" xml:space="preserve">
     <value>Form Data Already Added</value>
   </data>
-  <data name="strProjectOpenError" xml:space="preserve">
-    <value>Error: Could not read file from disk. Original error: {0}</value>
+  <data name="strParameterName" xml:space="preserve">
+    <value>Parameter Name</value>
   </data>
   <data name="strRunning" xml:space="preserve">
     <value>Running...</value>
@@ -334,61 +391,28 @@
   <data name="Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="strMoveDown" xml:space="preserve">
-    <value>Move Down</value>
+  <data name="DatabaseScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DatabaseScript.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="strMoveUp" xml:space="preserve">
-    <value>Move Up</value>
+  <data name="strTsbAutoData" xml:space="preserve">
+    <value>Automatically generate test data</value>
   </data>
-  <data name="strSaveToFile" xml:space="preserve">
-    <value>Save To File</value>
+  <data name="strLbQuantityToGenerate" xml:space="preserve">
+    <value>Quantity To Generate</value>
   </data>
-  <data name="strProjectFolderExist" xml:space="preserve">
-    <value>The project folder already exists; creating a new project may overwrite its contents.
-Continue?</value>
+  <data name="strFrmTestDataGeneratorTitle" xml:space="preserve">
+    <value>Batch Generate Test Data</value>
   </data>
-  <data name="strWarning" xml:space="preserve">
-    <value>Warning</value>
+  <data name="strDataGenerateTypeOrdinal" xml:space="preserve">
+    <value>Ordinal</value>
   </data>
-  <data name="strCaseNameDuplicate" xml:space="preserve">
-    <value>Case Name Duplicate</value>
+  <data name="strDataGenerateTypeRandomString" xml:space="preserve">
+    <value>Random String</value>
   </data>
-  <data name="strError" xml:space="preserve">
-    <value>Error</value>
+  <data name="strError_ParameterDataGenerationRulesNotDefine" xml:space="preserve">
+    <value>Parameter '{0}' data generation rules not define</value>
   </data>
-  <data name="strCaseContextParamMissing" xml:space="preserve">
-    <value>The context parameters required for this test case are missing. Please first run the test case that provides these parameters. 
-The missing parameters are:
-{0}</value>
-  </data>
-  <data name="strRecentOpenList" xml:space="preserve">
-    <value>Recent Open Projects List</value>
-  </data>
-  <data name="strProjectFileNotExists" xml:space="preserve">
-    <value>Project file not exists</value>
-  </data>
-  <data name="strSucceed" xml:space="preserve">
-    <value>Succeed</value>
-  </data>
-  <data name="strFailed" xml:space="preserve">
-    <value>Failed</value>
-  </data>
-  <data name="strTestResponseResult" xml:space="preserve">
-    <value>Test Response Result</value>
-  </data>
-  <data name="strHumanIntervention" xml:space="preserve">
-    <value>Human Intervention</value>
-  </data>
-  <data name="strSimpleImageCaptcha" xml:space="preserve">
-    <value>Simple Image Captcha</value>
-  </data>
-  <data name="strLbPrjName" xml:space="preserve">
-    <value>Project Name</value>
-  </data>
-  <data name="strLbRootUrl" xml:space="preserve">
-    <value>Root URL</value>
-  </data>
-  <data name="strTestTaskUrlInvalid" xml:space="preserve">
-    <value>Test task Url invalid: {0}</value>
+  <data name="strGeneratingTestData" xml:space="preserve">
+    <value>Generating test data ...</value>
   </data>
 </root>

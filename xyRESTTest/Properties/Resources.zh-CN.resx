@@ -123,17 +123,37 @@
   <data name="strLoginName" xml:space="preserve">
     <value>登陆名</value>
   </data>
+  <data name="strProjectFileNotExists" xml:space="preserve">
+    <value>项目文件不存在</value>
+  </data>
+  <data name="strAppTitle" xml:space="preserve">
+    <value>REST API 测试工具</value>
+  </data>
   <data name="strRunFinished" xml:space="preserve">
     <value>测试运行结束, 测试结果: {0}</value>
   </data>
   <data name="strTsbAddFormData" xml:space="preserve">
     <value>添加一项表单数据</value>
   </data>
+  <data name="strCaseContextParamMissing" xml:space="preserve">
+    <value>运行本测试项所需环境参数不存在, 请先运行获取这些参数的测试项.
+缺失的参数:
+{0}</value>
+  </data>
+  <data name="strDeleteReadItem" xml:space="preserve">
+    <value>删除选中的读取项</value>
+  </data>
   <data name="strNewTestProject" xml:space="preserve">
     <value>新建测试项目</value>
   </data>
+  <data name="strTestTaskUrlInvalid" xml:space="preserve">
+    <value>测试项目标地址无效: {0}</value>
+  </data>
   <data name="strTslFiles" xml:space="preserve">
     <value>上传文件列表</value>
+  </data>
+  <data name="strFailed" xml:space="preserve">
+    <value>失败</value>
   </data>
   <data name="strAddTestDataDecord" xml:space="preserve">
     <value>添加一条测试数据</value>
@@ -148,23 +168,29 @@
   <data name="strParameterSelectorTitle_Case" xml:space="preserve">
     <value>测试项参数选择</value>
   </data>
+  <data name="strError" xml:space="preserve">
+    <value>错误</value>
+  </data>
   <data name="Upload" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Upload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strAddHeader" xml:space="preserve">
     <value>添加一个 header</value>
   </data>
+  <data name="strTestResponseResult" xml:space="preserve">
+    <value>测试响应结果</value>
+  </data>
   <data name="strOk" xml:space="preserve">
     <value>确定</value>
-  </data>
-  <data name="strAssertionList" xml:space="preserve">
-    <value>判断项列表</value>
   </data>
   <data name="strLbUploadFileKeyName" xml:space="preserve">
     <value>文件项键名:</value>
   </data>
   <data name="strTsbDelFormData" xml:space="preserve">
     <value>删除选中的表单数据</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>上移</value>
   </data>
   <data name="strDeleteTestCase" xml:space="preserve">
     <value>删除选中的测试项</value>
@@ -178,14 +204,8 @@
   <data name="strDeleteAssertion" xml:space="preserve">
     <value>删除选中的判断项</value>
   </data>
-  <data name="strParameterName" xml:space="preserve">
-    <value>参数名称</value>
-  </data>
   <data name="strAddAssertion" xml:space="preserve">
     <value>添加一项判断</value>
-  </data>
-  <data name="strNoProjectLoaded" xml:space="preserve">
-    <value>无测试项目</value>
   </data>
   <data name="Run" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Run.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -198,6 +218,9 @@
   </data>
   <data name="strTestDataRecords" xml:space="preserve">
     <value>测试数据集</value>
+  </data>
+  <data name="strLbPrjName" xml:space="preserve">
+    <value>项目名称</value>
   </data>
   <data name="strFileAlreadyAdded" xml:space="preserve">
     <value>此文件已经在列表里</value>
@@ -214,14 +237,30 @@
   <data name="strParameters" xml:space="preserve">
     <value>参数表</value>
   </data>
+  <data name="strSaveToFile" xml:space="preserve">
+    <value>保存到文件</value>
+  </data>
+  <data name="strSimpleImageCaptcha" xml:space="preserve">
+    <value>简单图片验证码</value>
+  </data>
   <data name="strValue" xml:space="preserve">
     <value>值</value>
+  </data>
+  <data name="strProjectOpenError" xml:space="preserve">
+    <value>出错: 读项目文件失败. 错误信息: {0}</value>
+  </data>
+  <data name="strSucceed" xml:space="preserve">
+    <value>成功</value>
   </data>
   <data name="strNewProjectSaveFolder" xml:space="preserve">
     <value>保存位置:</value>
   </data>
   <data name="strExpectedValue" xml:space="preserve">
     <value>期待值</value>
+  </data>
+  <data name="strProjectFolderExist" xml:space="preserve">
+    <value>项目目录已经存在, 在此目录生成新项目可能会覆盖原有内容. 
+继续?</value>
   </data>
   <data name="strAssertCount" xml:space="preserve">
     <value>{0} 个判断项</value>
@@ -244,6 +283,9 @@
   <data name="Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="strCaseNameDuplicate" xml:space="preserve">
+    <value>重复的测试项名称</value>
+  </data>
   <data name="strMenuInsertCaseParameter" xml:space="preserve">
     <value>插入测试项参数</value>
   </data>
@@ -262,6 +304,9 @@
   <data name="strUnfefined" xml:space="preserve">
     <value>&lt;未定义&gt;</value>
   </data>
+  <data name="strHumanIntervention" xml:space="preserve">
+    <value>人工介入</value>
+  </data>
   <data name="strDynamicallyGenerateTestCase" xml:space="preserve">
     <value>动态生成测试项</value>
   </data>
@@ -277,11 +322,17 @@
   <data name="strDeleteTestDataRecord" xml:space="preserve">
     <value>删除选中的测试数据</value>
   </data>
-  <data name="strAppTitle" xml:space="preserve">
-    <value>REST API 测试工具</value>
+  <data name="strAssertionList" xml:space="preserve">
+    <value>判断项列表</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>下移</value>
   </data>
   <data name="strRequestInformation" xml:space="preserve">
     <value>Request 配置</value>
+  </data>
+  <data name="strLbRootUrl" xml:space="preserve">
+    <value>根地址</value>
   </data>
   <data name="strTsbAddFile" xml:space="preserve">
     <value>添加一个上传文件</value>
@@ -295,17 +346,23 @@
   <data name="strParameterSelectorTitle_Project" xml:space="preserve">
     <value>项目参数选择</value>
   </data>
+  <data name="strWarning" xml:space="preserve">
+    <value>警告</value>
+  </data>
   <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="strTsbDelFile" xml:space="preserve">
     <value>删除选中的上传文件</value>
   </data>
-  <data name="strDeleteReadItem" xml:space="preserve">
-    <value>删除选中的读取项</value>
+  <data name="strNoProjectLoaded" xml:space="preserve">
+    <value>无测试项目</value>
   </data>
   <data name="strAddParameter" xml:space="preserve">
     <value>添加一个参数</value>
+  </data>
+  <data name="strRecentOpenList" xml:space="preserve">
+    <value>最近打开过的项目</value>
   </data>
   <data name="strPassword" xml:space="preserve">
     <value>密码</value>
@@ -325,8 +382,8 @@
   <data name="strFormDataAlreadyAdded" xml:space="preserve">
     <value>此表单项已经在列表里</value>
   </data>
-  <data name="strProjectOpenError" xml:space="preserve">
-    <value>出错: 读项目文件失败. 错误信息: {0}</value>
+  <data name="strParameterName" xml:space="preserve">
+    <value>参数名称</value>
   </data>
   <data name="strRunning" xml:space="preserve">
     <value>测试运行中...</value>
@@ -334,61 +391,28 @@
   <data name="Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="strMoveDown" xml:space="preserve">
-    <value>下移</value>
+  <data name="DatabaseScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DatabaseScript.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="strMoveUp" xml:space="preserve">
-    <value>上移</value>
+  <data name="strTsbAutoData" xml:space="preserve">
+    <value>自动生成测试数据</value>
   </data>
-  <data name="strSaveToFile" xml:space="preserve">
-    <value>保存到文件</value>
+  <data name="strLbQuantityToGenerate" xml:space="preserve">
+    <value>生成数量</value>
   </data>
-  <data name="strProjectFolderExist" xml:space="preserve">
-    <value>项目目录已经存在, 在此目录生成新项目可能会覆盖原有内容. 
-继续?</value>
+  <data name="strFrmTestDataGeneratorTitle" xml:space="preserve">
+    <value>批量生成测试数据</value>
   </data>
-  <data name="strWarning" xml:space="preserve">
-    <value>警告</value>
+  <data name="strDataGenerateTypeOrdinal" xml:space="preserve">
+    <value>顺序数</value>
   </data>
-  <data name="strCaseNameDuplicate" xml:space="preserve">
-    <value>重复的测试项名称</value>
+  <data name="strDataGenerateTypeRandomString" xml:space="preserve">
+    <value>随机字符串</value>
   </data>
-  <data name="strError" xml:space="preserve">
-    <value>错误</value>
+  <data name="strError_ParameterDataGenerationRulesNotDefine" xml:space="preserve">
+    <value>参数 '{0}' 的数据生成规则未定义</value>
   </data>
-  <data name="strCaseContextParamMissing" xml:space="preserve">
-    <value>运行本测试项所需环境参数不存在, 请先运行获取这些参数的测试项.
-缺失的参数:
-{0}</value>
-  </data>
-  <data name="strRecentOpenList" xml:space="preserve">
-    <value>最近打开过的项目</value>
-  </data>
-  <data name="strProjectFileNotExists" xml:space="preserve">
-    <value>项目文件不存在</value>
-  </data>
-  <data name="strSucceed" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="strFailed" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="strTestResponseResult" xml:space="preserve">
-    <value>测试响应结果</value>
-  </data>
-  <data name="strHumanIntervention" xml:space="preserve">
-    <value>人工介入</value>
-  </data>
-  <data name="strSimpleImageCaptcha" xml:space="preserve">
-    <value>简单图片验证码</value>
-  </data>
-  <data name="strLbPrjName" xml:space="preserve">
-    <value>项目名称</value>
-  </data>
-  <data name="strLbRootUrl" xml:space="preserve">
-    <value>根地址</value>
-  </data>
-  <data name="strTestTaskUrlInvalid" xml:space="preserve">
-    <value>测试项目标地址无效: {0}</value>
+  <data name="strGeneratingTestData" xml:space="preserve">
+    <value>正在生成测试数据 ...</value>
   </data>
 </root>

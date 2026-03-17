@@ -83,6 +83,16 @@ namespace xyRESTTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DatabaseScript {
+            get {
+                object obj = ResourceManager.GetObject("DatabaseScript", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Delete {
             get {
                 object obj = ResourceManager.GetObject("Delete", resourceCulture);
@@ -288,6 +298,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ordinal.
+        /// </summary>
+        internal static string strDataGenerateTypeOrdinal {
+            get {
+                return ResourceManager.GetString("strDataGenerateTypeOrdinal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Random String.
+        /// </summary>
+        internal static string strDataGenerateTypeRandomString {
+            get {
+                return ResourceManager.GetString("strDataGenerateTypeRandomString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Generator.
         /// </summary>
         internal static string strDataGenerator {
@@ -387,6 +415,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; data generation rules not define.
+        /// </summary>
+        internal static string strError_ParameterDataGenerationRulesNotDefine {
+            get {
+                return ResourceManager.GetString("strError_ParameterDataGenerationRulesNotDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expected value.
         /// </summary>
         internal static string strExpectedValue {
@@ -423,6 +460,24 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch Generate Test Data.
+        /// </summary>
+        internal static string strFrmTestDataGeneratorTitle {
+            get {
+                return ResourceManager.GetString("strFrmTestDataGeneratorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating test data ....
+        /// </summary>
+        internal static string strGeneratingTestData {
+            get {
+                return ResourceManager.GetString("strGeneratingTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Intervention.
         /// </summary>
         internal static string strHumanIntervention {
@@ -455,6 +510,15 @@ namespace xyRESTTest.Properties {
         internal static string strLbPrjName {
             get {
                 return ResourceManager.GetString("strLbPrjName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity To Generate.
+        /// </summary>
+        internal static string strLbQuantityToGenerate {
+            get {
+                return ResourceManager.GetString("strLbQuantityToGenerate", resourceCulture);
             }
         }
         
@@ -807,6 +871,15 @@ namespace xyRESTTest.Properties {
         internal static string strTsbAddFormData {
             get {
                 return ResourceManager.GetString("strTsbAddFormData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically generate test data.
+        /// </summary>
+        internal static string strTsbAutoData {
+            get {
+                return ResourceManager.GetString("strTsbAutoData", resourceCulture);
             }
         }
         

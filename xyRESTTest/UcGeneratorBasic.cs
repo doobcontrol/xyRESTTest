@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xyRESTTest.DataGen;
 using xyRESTTest.Properties;
 using xyRESTTestLib;
 using static xyRESTTest.UcTestCase;
@@ -20,7 +21,7 @@ namespace xyRESTTest
         DataGenerator dataGenerator;
         public event EventHandler<EventArgs>? Edited;
 
-        List<Dictionary<string,string>> dataRecords = new List<Dictionary<string, string>>();
+        List<Dictionary<string, string>> dataRecords = new List<Dictionary<string, string>>();
         public UcGeneratorBasic(DataGenerator dataGenerator)
         {
             InitializeComponent();
@@ -40,6 +41,7 @@ namespace xyRESTTest
             LbTableTitle.Text = Resources.strTestDataRecords;
             TsbAddRecord.ToolTipText = Resources.strAddTestDataDecord;
             TsbDelRecord.ToolTipText = Resources.strDeleteTestDataRecord;
+            TsbAutoData.ToolTipText = Resources.strTsbAutoData;
         }
         private void InitParamList(List<string> ParamNames)
         {
@@ -71,14 +73,14 @@ namespace xyRESTTest
             {
                 dataRecords.Clear();
                 string[] lines = File.ReadAllLines(dataFile);
-                if(lines.Length > 0)
+                if (lines.Length > 0)
                 {
                     string[] headers = lines[0].Split(',');
-                    for(int i = 1; i < lines.Length; i++)
+                    for (int i = 1; i < lines.Length; i++)
                     {
                         string[] values = lines[i].Split(',');
                         Dictionary<string, string> dataRecord = new Dictionary<string, string>();
-                        for(int j = 0; j < headers.Length && j < values.Length; j++)
+                        for (int j = 0; j < headers.Length && j < values.Length; j++)
                         {
                             dataRecord[headers[j]] = values[j];
                         }
@@ -149,6 +151,22 @@ namespace xyRESTTest
                     dataRecords.Add((Dictionary<string, string>)row.Tag);
                 }
                 ((Dictionary<string, string>)row.Tag)[columnName] = cell.Value?.ToString() ?? "";
+                SaveDataRecords();
+            }
+        }
+
+        private void TsbAutoData_Click(object sender, EventArgs e)
+        {
+            List<string> parameters = new List<string>();
+            foreach(DataGridViewColumn col in DgvRecords.Columns)
+            {
+                parameters.Add(col.Name);
+            }
+            var ftdg = new FrmTestDataGenerator(parameters);
+            if(ftdg.ShowDialog() == DialogResult.OK)
+            {
+                dataRecords = ftdg.TestDatas;
+                RefreshDataRecords();
                 SaveDataRecords();
             }
         }
