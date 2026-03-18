@@ -127,6 +127,7 @@ namespace xyRESTTest.DataGen
             var dgtSource = new Dictionary<DataGenerateType, string>();
             dgtSource.Add(DataGenerateType.Ordinal, Resources.strDataGenerateTypeOrdinal);
             dgtSource.Add(DataGenerateType.RandomString, Resources.strDataGenerateTypeRandomString);
+            dgtSource.Add(DataGenerateType.RandomHumanName, Resources.strDataGenerateTypeRandomHumanName);
 
             CbDataGenerateType.DataSource = new BindingSource(dgtSource, null);
             CbDataGenerateType.DisplayMember = "value";
@@ -181,6 +182,9 @@ namespace xyRESTTest.DataGen
                     newPars.Add(nameof(DataGenerateType), nameof(DataGenerateType.RandomString));
                     newPars.Add(RandomStringPar_StringLength, null);
                     break;
+                case DataGenerateType.RandomHumanName:
+                    newPars.Add(nameof(DataGenerateType), nameof(DataGenerateType.RandomHumanName));
+                    break;
             }
             return newPars;
         }
@@ -222,6 +226,9 @@ namespace xyRESTTest.DataGen
                             case DataGenerateType.RandomString:
                                 dataRecord.Add(par.Key, GenerateRandomString(i, par.Value));
                                 break;
+                            case DataGenerateType.RandomHumanName:
+                                dataRecord.Add(par.Key, GenerateRandomHumanName(i, par.Value));
+                                break;
                         }
                     }
                     TestDatas.Add(dataRecord);
@@ -255,6 +262,27 @@ namespace xyRESTTest.DataGen
             }
             return result.ToString();
         }
+        private string GenerateRandomHumanName(int index, Dictionary<string, string> Pars)
+        {
+            var FirstNameList = Resources.strName_FirstNameList.Split(",");
+            var LastNameList = Resources.strName_LastNameList.Split(",");
+            Random random = new Random();
+            string firstName = FirstNameList[random.Next(FirstNameList.Length)];
+            string lastName = LastNameList[random.Next(LastNameList.Length)];
+
+            string retNae = "";
+            string culName = Thread.CurrentThread.CurrentCulture.Name;
+            if (culName == "en-US")
+            {
+                retNae = firstName + " " + lastName;
+            }
+            else if (culName == "zh-CN")
+            {
+                retNae = lastName + firstName;
+            }
+
+            return retNae;
+        }
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
@@ -278,6 +306,7 @@ namespace xyRESTTest.DataGen
     public enum DataGenerateType
     {
         Ordinal,
-        RandomString
+        RandomString,
+        RandomHumanName
     }
 }

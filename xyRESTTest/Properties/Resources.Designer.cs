@@ -307,6 +307,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Random Person Name.
+        /// </summary>
+        internal static string strDataGenerateTypeRandomHumanName {
+            get {
+                return ResourceManager.GetString("strDataGenerateTypeRandomHumanName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Random String.
         /// </summary>
         internal static string strDataGenerateTypeRandomString {
@@ -609,6 +618,24 @@ namespace xyRESTTest.Properties {
         internal static string strMoveUp {
             get {
                 return ResourceManager.GetString("strMoveUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to James,Michael,John,Robert,David,William,Richard,Joseph,Thomas,Christopher,Charles,Daniel,Matthew,Anthony,Mark,Steven,Donald,Andrew,Joshua,Paul,Kenneth,Kevin,Brian,Timothy,Ronald,Jason,George,Edward,Jeffrey,Ryan,Jacob,Nicholas,Gary,Eric,Jonathan,Stephen,Larry,Justin,Benjamin,Scott,Brandon,Samuel,Gregory,Alexander,Patrick,Frank,Jack,Raymond,Dennis,Tyler,Aaron,Jerry,Jose,Nathan,Adam,Henry,Zachary,Douglas,Peter,Noah,Kyle,Ethan,Christian,Jeremy,Keith,Austin,Sean,Roger,Terry,Walter,Dylan,Gerald,Carl,Jordan,Bryan, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string strName_FirstNameList {
+            get {
+                return ResourceManager.GetString("strName_FirstNameList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smith,Jones,Williams,Taylor,Brown,Davies,Evans,Wilson,Thomas,Johnson,Roberts,Robinson,Thompson,Wright,Walker,White,Edwards,Hughes,Green,Hall,Lewis,Harris,Clarke,Patel,Jackson,Wood,Turner,Martin,Cooper,Hill,Ward,Morris,Moore,Clark,Lee,King,Baker,Harrison,Morgan,Allen,James,Scott,Phillips,Watson,Davis,Parker,Price,Bennett,Young,Griffiths,Mitchell,Kelly,Cook,Carter,Richardson,Bailey,Collins,Bell,Shaw,Murphy,Miller,Cox,Richards,Khan,Marshall,Anderson,Simpson,Ellis,Adams,Singh,Begum,Wilkinson,Foster,Chapman,Powe [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string strName_LastNameList {
+            get {
+                return ResourceManager.GetString("strName_LastNameList", resourceCulture);
             }
         }
         
