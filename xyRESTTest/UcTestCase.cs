@@ -414,6 +414,7 @@ namespace xyRESTTest
         #region Body
         
         string? selectedBodyType = null;
+        Dictionary<string, ContentInfo> bufferedContentInfos = new();
 
         private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -424,14 +425,29 @@ namespace xyRESTTest
             switch (CmbBodyType.Text)
             {
                 case xyTest.CT_app_json:
-                    if (testTask.requestInfo.body == null)
+                    if(testTask.requestInfo.body == null 
+                        || testTask.requestInfo.body.ctype != CmbBodyType.Text)
                     {
-                        testTask.requestInfo.body = new ContentInfo()
+                        if (bufferedContentInfos.ContainsKey(CmbBodyType.Text))
                         {
-                            recordData = new Dictionary<string, string>(),
-                            ctype = CmbBodyType.Text
-                        };
+                            testTask.requestInfo.body = bufferedContentInfos[CmbBodyType.Text];
+                        }
+                        else
+                        {
+                            testTask.requestInfo.body = new ContentInfo()
+                            {
+                                recordData = new Dictionary<string, string>(),
+                                ctype = CmbBodyType.Text
+                            };
+                            bufferedContentInfos[CmbBodyType.Text] = testTask.requestInfo.body;
+                        }
                     }
+                    else if (testTask.requestInfo.body != null)
+                    {
+                        bufferedContentInfos[testTask.requestInfo.body.ctype] =
+                            testTask.requestInfo.body;
+                    }
+
                     var ujb = new UcJsonBody(testTask.requestInfo.body, contextMenuStrip);
                     ujb.Visible = false;
                     ujb.Edited += (s, ev) =>
@@ -445,16 +461,33 @@ namespace xyRESTTest
                     selectedBodyType = xyTest.CT_app_json;
                     break;
                 case xyTest.CT_multipart_form_data:
-                    if (testTask.requestInfo.body == null)
+                    if (testTask.requestInfo.body == null
+                        || testTask.requestInfo.body.ctype != CmbBodyType.Text)
                     {
-                        testTask.requestInfo.body = new ContentInfo()
+                        if (bufferedContentInfos.ContainsKey(CmbBodyType.Text))
                         {
-                            recordData = new Dictionary<string, string>(),
-                            fileDatas = new List<string>(),
-                            ctype = CmbBodyType.Text,
-                            fileKeyName = "files"
-                        };
+                            testTask.requestInfo.body =
+                                bufferedContentInfos[CmbBodyType.Text];
+                        }
+                        else
+                        {
+                            testTask.requestInfo.body = new ContentInfo()
+                            {
+                                recordData = new Dictionary<string, string>(),
+                                fileDatas = new List<string>(),
+                                ctype = CmbBodyType.Text,
+                                fileKeyName = "files"
+                            };
+                            bufferedContentInfos[CmbBodyType.Text] =
+                                testTask.requestInfo.body;
+                        }
                     }
+                    else if (testTask.requestInfo.body != null)
+                    {
+                        bufferedContentInfos[testTask.requestInfo.body.ctype] =
+                            testTask.requestInfo.body;
+                    }
+
                     var umb = new UcMpfdBody(testTask.requestInfo.body, contextMenuStrip);
                     umb.Visible = false;
                     umb.Edited += (s, ev) =>
@@ -468,14 +501,31 @@ namespace xyRESTTest
                     selectedBodyType = xyTest.CT_multipart_form_data;
                     break;
                 case xyTest.CT_application_octet_stream:
-                    if (testTask.requestInfo.body == null)
+                    if (testTask.requestInfo.body == null
+                        || testTask.requestInfo.body.ctype != CmbBodyType.Text)
                     {
-                        testTask.requestInfo.body = new ContentInfo()
+                        if (bufferedContentInfos.ContainsKey(CmbBodyType.Text))
                         {
-                            fileDatas = new List<string>() { "" },
-                            ctype = CmbBodyType.Text
-                        };
+                            testTask.requestInfo.body =
+                                bufferedContentInfos[CmbBodyType.Text];
+                        }
+                        else
+                        {
+                            testTask.requestInfo.body = new ContentInfo()
+                            {
+                                fileDatas = new List<string>(),
+                                ctype = CmbBodyType.Text
+                            };
+                            bufferedContentInfos[CmbBodyType.Text] =
+                                testTask.requestInfo.body;
+                        }
                     }
+                    else if (testTask.requestInfo.body != null)
+                    {
+                        bufferedContentInfos[testTask.requestInfo.body.ctype] =
+                            testTask.requestInfo.body;
+                    }
+
                     var uosb = new UcOctetStreamBody(
                         testTask.requestInfo.body, contextMenuStrip);
                     uosb.Visible = false;
