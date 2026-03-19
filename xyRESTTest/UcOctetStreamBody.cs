@@ -34,6 +34,14 @@ namespace xyRESTTest
             {
                 this.contentInfo.fileDatas = new List<string>();
             }
+            LoadStringResources();
+        }
+        public void LoadStringResources()
+        {
+            if (this.contentInfo.fileDatas.Count == 0)
+            {
+                LbFile.Text = Resources.strSelectedFile;
+            }
         }
 
         private void BtnBrowseFile_Click(object sender, EventArgs e)

@@ -436,4 +436,7 @@
   <data name="strDataGenerateTypeRandomHumanName" xml:space="preserve">
     <value>随机姓名</value>
   </data>
+  <data name="strSelectedFile" xml:space="preserve">
+    <value>点击此按钮选择文件</value>
+  </data>
 </root>

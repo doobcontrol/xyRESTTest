@@ -436,4 +436,7 @@ Continue?</value>
   <data name="strDataGenerateTypeRandomHumanName" xml:space="preserve">
     <value>Random Person Name</value>
   </data>
+  <data name="strSelectedFile" xml:space="preserve">
+    <value>Click the button to select file</value>
+  </data>
 </root>

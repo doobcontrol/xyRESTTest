@@ -857,6 +857,15 @@ namespace xyRESTTest.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click the button to select file.
+        /// </summary>
+        internal static string strSelectedFile {
+            get {
+                return ResourceManager.GetString("strSelectedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Simple Image Captcha.
         /// </summary>
         internal static string strSimpleImageCaptcha {

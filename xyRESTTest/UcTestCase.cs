@@ -198,6 +198,10 @@ namespace xyRESTTest
                 {
                     umb.LoadStringResources();
                 }
+                else if (PnlBody.Controls[0] is UcOctetStreamBody uosb)
+                {
+                    uosb.LoadStringResources();
+                }
             }
             CbDataGenerator.Text = Resources.strDynamicallyGenerateTestCase;
             LbParameters.Text = Resources.strParameters;
