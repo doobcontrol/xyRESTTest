@@ -56,7 +56,8 @@ namespace xyRESTTest
                     return;
                 }
 
-                contentInfo.fileDatas[0] = filePath;
+                contentInfo.fileDatas.Clear();
+                contentInfo.fileDatas.Add(filePath);
                 LbFile.Text = filePath;
 
                 Edited?.Invoke(this, EventArgs.Empty);
