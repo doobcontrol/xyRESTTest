@@ -60,14 +60,24 @@ namespace xyRESTTest
                     || CmbMethod.Text == nameof(ReqMethod.DELETE))
                 {
                     PnlBody.Controls.Clear();
-                    testTask.requestInfo.body = null;
+                    if(testTask.requestInfo.body != null)
+                    {
+                        butteredBodyType = testTask.requestInfo.body.ctype;
+                        testTask.requestInfo.body = null;
+                    }
                     splitter1.Visible = false;
                     GbBody.Visible = false;
+                    CmbBodyType.SelectedIndex = -1; 
+                    selectedBodyType = null;
                 }
                 else
                 {
                     splitter1.Visible = true;
-                    GbBody.Visible = true;
+                    GbBody.Visible = true; 
+                    if(butteredBodyType != null)
+                    {
+                        CmbBodyType.Text = butteredBodyType;
+                    }
                 }
                 if (CmbMethod.Text != testTask.requestInfo.method)
                 {
@@ -415,6 +425,7 @@ namespace xyRESTTest
         
         string? selectedBodyType = null;
         Dictionary<string, ContentInfo> bufferedContentInfos = new();
+        string? butteredBodyType = null;
 
         private void CmbBodyType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -431,6 +442,7 @@ namespace xyRESTTest
                         if (bufferedContentInfos.ContainsKey(CmbBodyType.Text))
                         {
                             testTask.requestInfo.body = bufferedContentInfos[CmbBodyType.Text];
+                            Edited?.Invoke(this, new EventArgs());
                         }
                         else
                         {
@@ -468,6 +480,7 @@ namespace xyRESTTest
                         {
                             testTask.requestInfo.body =
                                 bufferedContentInfos[CmbBodyType.Text];
+                            Edited?.Invoke(this, new EventArgs());
                         }
                         else
                         {
@@ -508,6 +521,7 @@ namespace xyRESTTest
                         {
                             testTask.requestInfo.body =
                                 bufferedContentInfos[CmbBodyType.Text];
+                            Edited?.Invoke(this, new EventArgs());
                         }
                         else
                         {
@@ -540,15 +554,6 @@ namespace xyRESTTest
                     selectedBodyType = xyTest.CT_application_octet_stream;
                     break;
                 default:
-                    if(selectedBodyType != null)
-                    {
-                        CmbBodyType.Text = selectedBodyType;
-                    }
-                    else
-                    {
-                        testTask.requestInfo.body = null;
-                        PnlBody.Controls.Clear();
-                    }
                     break;
             }
         }
