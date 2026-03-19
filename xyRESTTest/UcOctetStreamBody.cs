@@ -22,8 +22,18 @@ namespace xyRESTTest
             InitializeComponent();
 
             this.contextMenuStrip = contextMenuStrip;
-            this.contentInfo = contentInfo ?? new ContentInfo();
-            LbFile.Text = this.contentInfo.fileDatas[0];
+            this.contentInfo = contentInfo ?? new ContentInfo() { fileDatas = new List<string>() };
+            if(this.contentInfo.fileDatas != null)
+            {
+                if (this.contentInfo.fileDatas.Count > 0)
+                {
+                    LbFile.Text = this.contentInfo.fileDatas[0];
+                }
+            }
+            else
+            {
+                this.contentInfo.fileDatas = new List<string>();
+            }
         }
 
         private void BtnBrowseFile_Click(object sender, EventArgs e)
