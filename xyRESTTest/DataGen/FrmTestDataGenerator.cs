@@ -23,6 +23,10 @@ namespace xyRESTTest.DataGen
         public FrmTestDataGenerator(List<string> parameters)
         {
             InitializeComponent();
+            this.ControlBox = false;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = FormStartPosition.CenterParent;
 
             ShowParameters(parameters);
